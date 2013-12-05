@@ -1,0 +1,211 @@
+[
+    {
+        "concept": "Introduction to Week 2",
+        "lecture": "C-3vZ8nB7fQ"
+    },
+    {
+        "concept": "CRUD and the Mongo Shell",
+        "lecture": "4KtdCMSKx84",
+        "answer": "lqhzCtKuJ7c"
+    },
+    {
+        "concept": "Secrets of the Mongo Shell",
+        "lecture": "hJy10xgZXzc",
+        "answer": "a6TFwpCoLoY"
+    },
+    {
+        "concept": "BSON Introduced",
+        "lecture": "K3J6WvDW-Hc",
+        "answer": "4hsTQrMs-xY"
+    },
+    {
+        "concept": "Mongo shell, inserting docs",
+        "lecture": "RbRRvBLl7Qo",
+        "answer": "4eqpL7ETQZQ"
+    },
+    {
+        "concept": "Mongo shell, introduction to findOne",
+        "lecture": "w9V0fJsDwbQ",
+        "answer": "uN_wf5a3BE4"
+    },
+    {
+        "concept": "Mongo shell, introduction to find",
+        "lecture": "8kKfFK6a0Ak"
+    },
+    {
+        "concept": "Mongo shell, querying using field selection",
+        "lecture": "UIg86QjSoyY",
+        "answer": "ouHFZgtEAuU"
+    },
+    {
+        "concept": "Querying using $gt and $lt",
+        "lecture": "FHLrz4VGzkg",
+        "answer": "tY7I1l8JdDI"
+    },
+    {
+        "concept": "Inequalities on strings",
+        "lecture": "imCCKOevU3c",
+        "answer": "ZRWT0lcHsoU"
+    },
+    {
+        "concept": "Using regexes, $exists, $type",
+        "lecture": "lI-jhqYf1JY",
+        "answer": "yMi7PwOoqXY"
+    },
+    {
+        "concept": "Using $or",
+        "lecture": "BW5ElNCRZps",
+        "answer": "diimYkvr374"
+    },
+    {
+        "concept": "Using $and",
+        "lecture": "hYk7pjgjjzc",
+        "answer": "oIkSajy8NLw"
+    },
+    {
+        "concept": "Querying inside arrays",
+        "lecture": "jvEqwW75Bus",
+        "answer": "gwECaa4N9Xc"
+    },
+    {
+        "concept": "Using $in and $all",
+        "lecture": "QU2NrkviORE",
+        "answer": "6O1UGHwuEww"
+    },
+    {
+        "concept": "Queries with dot notation",
+        "lecture": "NrjFECIfwqk",
+        "answer": "yiEjK_V008s"
+    },
+    {
+        "concept": "Querying, cursors",
+        "lecture": "3jA6iFSEJOI",
+        "answer": "djzpK7UIO94"
+    },
+    {
+        "concept": "Counting results",
+        "lecture": "eKD5bVmNQMI",
+        "answer": "Uozp0diXOc8"
+    },
+    {
+        "concept": "Whosale Updating of a Document",
+        "lecture": "EBCk6W7x-OY",
+        "answer": "pwnRUdtI8lY"
+    },
+    {
+        "concept": "Using the $set command",
+        "lecture": "9iMX2KxYAd8",
+        "answer": "F6ZY_VVAXZ8"
+    },
+    {
+        "concept": "Using the $unset command",
+        "lecture": "Kxd4MXBEx-I",
+        "answer": "edqDAKMQTv4"
+    },
+    {
+        "concept": "Using $push, $pop, $pull, $pushAll, $pullAll, $addToSet",
+        "lecture": "iHSwyr7bfQs",
+        "answer": "bGbiIGEM0FY"
+    },
+    {
+        "concept": "Multi-update",
+        "lecture": "8uNNDduO09w",
+        "answer": "B1DqIls06Tc"
+    },
+    {
+        "concept": "Removing data",
+        "lecture": "PMhGgc3HCn4",
+        "answer": "T3wcuZHm6Ac"
+    },
+    {
+        "concept": "getLastError",
+        "lecture": "kUulkJQvH_A"
+    },
+    {
+        "concept": "Java driver: representing documents",
+        "lecture": "rAArRbxw0xI",
+        "answer": "3_b5ybZpero"
+    },
+    {
+        "concept": "Java driver: insert",
+        "lecture": "wAGixFmneRI",
+        "answer": "v4I5ijidFGk"
+    },
+    {
+        "concept": "Java driver: find, findOne, count",
+        "lecture": "wgTeReQW7zI",
+        "answer": "zGdqBUZYeP0"
+    },
+    {
+        "concept": "Java driver: query criteria",
+        "lecture": "5UtrLdHD06I",
+        "answer": "_Zxiwo3lo28"
+    },
+    {
+        "concept": "Java driver: field selection",
+        "lecture": "oW-0h-Ux3hQ",
+        "answer": "F8kAQ88a3Bg"
+    },
+    {
+        "concept": "Java driver: dot notation",
+        "lecture": "b8HWPdz9u38",
+        "answer": "hWL1otPB51w"
+    },
+    {
+        "concept": "Java driver: sort, skip and limit",
+        "lecture": "sYPs9PlBxrs",
+        "answer": "0IAeF5iN0Dw"
+    },
+    {
+        "concept": "Java driver: update and remove",
+        "lecture": "6n9rN6vzRyg",
+        "answer": "B-w8VAvTVqE"
+    },
+    {
+        "concept": "Java driver: findAndModify",
+        "lecture": "PWZMQTsJFGs"
+    },
+    {
+        "concept": "Blog, User Interface",
+        "lecture": "cKLfVZDs9FU"
+    },
+    {
+        "concept": "Blog, Session Management",
+        "lecture": "JeyNWgk6FJc"
+    },
+    {
+        "concept": "Blog, Internals",
+        "lecture": "VdEJQPsf7gg"
+    },
+    {
+        "concept": "Python Eats Java",
+        "lecture": "AXlFWtLDZp8"
+    },
+    {
+        "concept": "Installing Python on Windows",
+        "lecture": "lK4L2l0q0vA"
+    },
+    {
+        "concept": "Installing Pymongo, Windows",
+        "lecture": "HhgFjhJxsOI"
+    },
+    {
+        "concept": "Installing Pymongo, Mac",
+        "lecture": "ywuf9uD5dks"
+    },
+    {
+        "concept": "Homework 2.1",
+        "lecture": "",
+        "answer": ""
+    },
+    {
+        "concept": "Homework 2.2",
+        "lecture": "",
+        "answer": ""
+    },
+    {
+        "concept": "Homework 2.3",
+        "lecture": "",
+        "answer": ""
+    }
+]

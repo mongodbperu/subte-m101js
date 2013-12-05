@@ -1,0 +1,136 @@
+[
+    {
+        "concept": "Welcome to M101J",
+        "lecture": "Bda7InTfESQ",
+        "answer": "ysg0vfgg6fI"
+    },
+    {
+        "concept": "What is MongoDB",
+        "lecture": "q2iLKZ1LgjI",
+        "answer": "CAR42sMkXEo"
+    },
+    {
+        "concept": "Mongo Relative to Relational",
+        "lecture": "-KIC1LXxcGM",
+        "answer": "IAvnMgvHuLw"
+    },
+    {
+        "concept": "Overwiew of Building an app with Mongo",
+        "lecture": "swhH4q_2Ttc"
+    },
+    {
+        "concept": "Quick Introduction to the Mongo Shell",
+        "lecture": "f-lyGAMnNY4",
+        "answer": "YQTqdLe3W4M"
+    },
+    {
+        "concept": "JSON Introduced",
+        "lecture": "2jsJeH8q6YM",
+        "answer": "uWcOsdV4Iz4"
+    },
+    {
+        "concept": "System Requirements",
+        "lecture": "_vYz3CZwyK0"
+    },
+    {
+        "concept": "Installing MongoDB (mac)",
+        "lecture": "6VFukRETCTg"
+    },
+    {
+        "concept": "Installing MongoDB (windows)",
+        "lecture": "hX5louVryOQ"
+    },
+    {
+        "concept": "Installing and Using Maven",
+        "lecture": "72vejAmaypM"
+    },
+    {
+        "concept": "The MongoDB Java Driver",
+        "lecture": "FtyaK3pMHxw"
+    },
+    {
+        "concept": "Intro to the Spark Web Application Framework",
+        "lecture": "UH-VD_ypal8"
+    },
+    {
+        "concept": "Intro to the Freemarker Templating Engine",
+        "lecture": "_8-3K2Ds-Ok"
+    },
+    {
+        "concept": "Spark and Freemarker together",
+        "lecture": "7fdtf9aLc2w"
+    },
+    {
+        "concept": "All together now: MongoDB, Spark, and Freemarker",
+        "lecture": "8S5tvJAOYzg"
+    },
+    {
+        "concept": "Spark framework: handling GET requests",
+        "lecture": "7t1IafamuVs"
+    },
+    {
+        "concept": "Spark framework: handling POST requests",
+        "lecture": "jZDuxesy5cc"
+    },
+    {
+        "concept": "Mongo is Schemaless",
+        "lecture": "K6dlBbH_XHI"
+    },
+    {
+        "concept": "JSON Revisited",
+        "lecture": "zbYCcMWJGNY"
+    },
+    {
+        "concept": "JSON Arrays",
+        "lecture": "JkK9n6_ahVk",
+        "answer": "ciuq7XPqHKI"
+    },
+    {
+        "concept": "JSON Subdocuments",
+        "lecture": "vrYAEH3g13M",
+        "answer": "NGp_y6BaEMw"
+    },
+    {
+        "concept": "JSON Spec",
+        "lecture": "kOrsT94-A28"
+    },
+    {
+        "concept": "Introduction to our class project, the blog",
+        "lecture": "ePi3kDoexoM"
+    },
+    {
+        "concept": "Blog in Relational Tables",
+        "lecture": "boR2y9MHCa0",
+        "answer": "vB-4AbbLKeg"
+    },
+    {
+        "concept": "Blog in Documents",
+        "lecture": "ZjwCzyqKVdY",
+        "answer": "WJblHPsp1p4"
+    },
+    {
+        "concept": "Intro to Schema Design",
+        "lecture": "6XE3wZCPiZ8",
+        "answer": "wiwOEG_6ojs"
+    },
+    {
+        "concept": "Homework 1.1",
+        "lecture": "r48N7GcDqVI",
+        "answer": ""
+    },
+    {
+        "concept": "Homework 1.2",
+        "lecture": "",
+        "answer": ""
+    },
+    {
+        "concept": "Homework 1.3",
+        "lecture": "",
+        "answer": ""
+    },
+    {
+        "concept": "Homework 1.4",
+        "lecture": "",
+        "answer": ""
+    }
+]
