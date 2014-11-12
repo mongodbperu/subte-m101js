@@ -1,0 +1,93 @@
+1
+00:00:00,000 --> 00:00:00,110
+
+2
+00:00:00,110 --> 00:00:03,550
+All right, so this is the
+solution for Homework 3.3, and
+
+3
+00:00:03,550 --> 00:00:07,240
+our goal was to add a
+comment to a post.
+
+4
+00:00:07,240 --> 00:00:09,130
+So if you remember,
+the post actually
+
+5
+00:00:09,130 --> 00:00:10,830
+has an array of comments.
+
+6
+00:00:10,830 --> 00:00:13,120
+So the way we add a comment to
+the post is we actually have
+
+7
+00:00:13,120 --> 00:00:15,650
+to push it on the end
+of the array.
+
+8
+00:00:15,650 --> 00:00:17,010
+So for this we use an update.
+
+9
+00:00:17,010 --> 00:00:19,120
+And this is actually an in-place
+update because we're
+
+10
+00:00:19,120 --> 00:00:22,130
+actually using this
+$push operator.
+
+11
+00:00:22,130 --> 00:00:25,270
+So what we do is we do a query
+based on the permalink of the
+
+12
+00:00:25,270 --> 00:00:28,830
+post we're trying to comment
+on and then use $push to
+
+13
+00:00:28,830 --> 00:00:31,740
+actually push on the end
+of this comments array.
+
+14
+00:00:31,740 --> 00:00:34,980
+And then we pass in a callback,
+takes an error, and
+
+15
+00:00:34,980 --> 00:00:37,300
+the number of documents
+or modified.
+
+16
+00:00:37,300 --> 00:00:39,760
+So if we have an error, we
+actually call back with the
+
+17
+00:00:39,760 --> 00:00:41,320
+error and no result.
+
+18
+00:00:41,320 --> 00:00:44,200
+If we've succeeded in doing our
+update, we just call the
+
+19
+00:00:44,200 --> 00:00:45,590
+original callback.
+
+20
+00:00:45,590 --> 00:00:48,980
+So this is the solution
+to Homework 3.3.
