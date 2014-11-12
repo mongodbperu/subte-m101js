@@ -1,0 +1,1307 @@
+1
+00:00:00,000 --> 00:00:00,090
+
+2
+00:00:00,090 --> 00:00:00,400
+All right.
+
+3
+00:00:00,400 --> 00:00:03,400
+So this is the solution
+for homework 4.3.
+
+4
+00:00:03,400 --> 00:00:06,600
+So let's look at our posts.js
+file again.
+
+5
+00:00:06,600 --> 00:00:08,410
+So if you remember, we have
+these three functions.
+
+6
+00:00:08,410 --> 00:00:12,250
+We have getPosts, getPostsByTag,
+and then down
+
+7
+00:00:12,250 --> 00:00:14,560
+here we have
+getPostsByPermaLink.
+
+8
+00:00:14,560 --> 00:00:17,640
+So these three functions are
+what we want to optimize.
+
+9
+00:00:17,640 --> 00:00:19,360
+So we actually want
+to optimize this
+
+10
+00:00:19,360 --> 00:00:21,160
+query sorting by date.
+
+11
+00:00:21,160 --> 00:00:24,845
+We want to optimize this query
+looking for the given tag and
+
+12
+00:00:24,845 --> 00:00:26,290
+then sorting by date.
+
+13
+00:00:26,290 --> 00:00:30,450
+And then we want to optimize
+this query, which is doing a
+
+14
+00:00:30,450 --> 00:00:32,420
+look up by PermaLink.
+
+15
+00:00:32,420 --> 00:00:34,230
+So for this example, we're just
+going to use the mongo
+
+16
+00:00:34,230 --> 00:00:36,960
+Shell to show how to make
+these queries fast.
+
+17
+00:00:36,960 --> 00:00:39,770
+So if we open mongo blog--
+
+18
+00:00:39,770 --> 00:00:42,950
+so what this is doing is it's
+telling MongoDB that we want
+
+19
+00:00:42,950 --> 00:00:45,140
+to connect to the
+blog database.
+
+20
+00:00:45,140 --> 00:00:47,990
+And first let's do
+show tables--
+
+21
+00:00:47,990 --> 00:00:49,490
+see what connections we
+have in our blog.
+
+22
+00:00:49,490 --> 00:00:52,600
+So we have posts, we have
+system.indexes.
+
+23
+00:00:52,600 --> 00:00:55,620
+So we haven't actually made any
+users, so we don't have a
+
+24
+00:00:55,620 --> 00:00:58,090
+users collection or a sessions
+collection yet.
+
+25
+00:00:58,090 --> 00:01:01,060
+But if I had created a user
+before showing this example,
+
+26
+00:01:01,060 --> 00:01:03,480
+we would see the users
+collection and then the
+
+27
+00:01:03,480 --> 00:01:04,930
+sessions collection here.
+
+28
+00:01:04,930 --> 00:01:07,450
+But right now we just see
+the posts collection.
+
+29
+00:01:07,450 --> 00:01:11,580
+So the first thing we want to
+do is try the query for our
+
+30
+00:01:11,580 --> 00:01:14,840
+front page, where we show the
+10 most recent blog posts.
+
+31
+00:01:14,840 --> 00:01:15,950
+So let's do that.
+
+32
+00:01:15,950 --> 00:01:16,690
+All right.
+
+33
+00:01:16,690 --> 00:01:21,650
+So this is the query to find the
+10 most recent blog posts.
+
+34
+00:01:21,650 --> 00:01:25,400
+So we're not filtering on
+anything, we are sorting by
+
+35
+00:01:25,400 --> 00:01:28,640
+date decreasing, and limiting
+to 10 documents.
+
+36
+00:01:28,640 --> 00:01:30,990
+So let's see what
+that looks like.
+
+37
+00:01:30,990 --> 00:01:31,200
+All right.
+
+38
+00:01:31,200 --> 00:01:33,630
+So these are our 10 most
+recent blog posts.
+
+39
+00:01:33,630 --> 00:01:36,090
+So our query worked, but
+let's actually find
+
+40
+00:01:36,090 --> 00:01:38,120
+out how fast it was.
+
+41
+00:01:38,120 --> 00:01:40,760
+So if we go back and run the
+scan, we can do .explain on
+
+42
+00:01:40,760 --> 00:01:44,790
+the end and see how fast
+our query was.
+
+43
+00:01:44,790 --> 00:01:51,250
+So notice here that n is 10, but
+nscannedObjects is 1,000.
+
+44
+00:01:51,250 --> 00:01:53,590
+So we have to scan 1,000
+documents before we could
+
+45
+00:01:53,590 --> 00:01:57,270
+return just our latest
+10 posts.
+
+46
+00:01:57,270 --> 00:01:59,360
+So how can we make
+this faster?
+
+47
+00:01:59,360 --> 00:02:03,010
+So the key here is that
+an index is sorted.
+
+48
+00:02:03,010 --> 00:02:06,540
+So we can actually just create
+an index on date, and we could
+
+49
+00:02:06,540 --> 00:02:08,729
+create an index that's either
+increasing or decreasing--
+
+50
+00:02:08,729 --> 00:02:10,110
+it doesn't actually matter--
+
+51
+00:02:10,110 --> 00:02:14,830
+and MongoDB will know to use
+that index to find only the 10
+
+52
+00:02:14,830 --> 00:02:16,410
+documents it needs.
+
+53
+00:02:16,410 --> 00:02:19,510
+So the key to this is that an
+index is sorted, and we're
+
+54
+00:02:19,510 --> 00:02:22,180
+trying to sort on date, so if
+we have an index on date,
+
+55
+00:02:22,180 --> 00:02:24,780
+MongoDB can just start iterating
+our index from the
+
+56
+00:02:24,780 --> 00:02:27,385
+very beginning or from the very
+end, depending on whether
+
+57
+00:02:27,385 --> 00:02:30,790
+our index is increasing or
+decreasing, and get all the
+
+58
+00:02:30,790 --> 00:02:33,200
+posts back in the
+correct order.
+
+59
+00:02:33,200 --> 00:02:33,830
+So let's do that.
+
+60
+00:02:33,830 --> 00:02:35,690
+Let's create our new index,
+and then look at the new
+
+61
+00:02:35,690 --> 00:02:37,700
+explain output.
+
+62
+00:02:37,700 --> 00:02:40,990
+So here we're going to create
+an index on date decreasing
+
+63
+00:02:40,990 --> 00:02:44,310
+for our query where we're
+looking for all posts and
+
+64
+00:02:44,310 --> 00:02:46,080
+sorting on date.
+
+65
+00:02:46,080 --> 00:02:46,420
+All right.
+
+66
+00:02:46,420 --> 00:02:48,570
+So we just created our index.
+
+67
+00:02:48,570 --> 00:02:51,340
+So now let's go back to our
+query, and run the explain and
+
+68
+00:02:51,340 --> 00:02:53,560
+see what the result is.
+
+69
+00:02:53,560 --> 00:02:56,570
+So this is a much
+better result.
+
+70
+00:02:56,570 --> 00:02:59,780
+You see we have n is 10,
+nscannedObjects is 10,
+
+71
+00:02:59,780 --> 00:03:03,470
+nscanned is 10, and we're using
+the BtreeCursor instead
+
+72
+00:03:03,470 --> 00:03:05,050
+of the BasicCursor.
+
+73
+00:03:05,050 --> 00:03:07,650
+So this is much, much faster.
+
+74
+00:03:07,650 --> 00:03:11,340
+We have basically sped up this
+query by 100 times, which is
+
+75
+00:03:11,340 --> 00:03:12,640
+pretty significant.
+
+76
+00:03:12,640 --> 00:03:15,490
+So that's how to make the front
+page of the blog fast.
+
+77
+00:03:15,490 --> 00:03:19,090
+We need the index on date
+decreasing or increasing-- it
+
+78
+00:03:19,090 --> 00:03:19,860
+doesn't matter--
+
+79
+00:03:19,860 --> 00:03:22,290
+If you made it increasing,
+MongoDB would know to start
+
+80
+00:03:22,290 --> 00:03:24,330
+from the end, as opposed
+to the beginning.
+
+81
+00:03:24,330 --> 00:03:27,650
+But I just showed decreasing
+for this example.
+
+82
+00:03:27,650 --> 00:03:31,370
+So now the next thing we want
+to do is make the page with
+
+83
+00:03:31,370 --> 00:03:32,960
+the tags fast.
+
+84
+00:03:32,960 --> 00:03:36,130
+So for this we're going to use
+our same query, but instead of
+
+85
+00:03:36,130 --> 00:03:38,520
+getting all the documents and
+getting the 10 most recent
+
+86
+00:03:38,520 --> 00:03:40,660
+documents, we're just going to
+get the documents for a given
+
+87
+00:03:40,660 --> 00:03:43,620
+tag, and then get the 10
+most recent documents.
+
+88
+00:03:43,620 --> 00:03:47,880
+So let's actually look for
+tags 'freon.' All right.
+
+89
+00:03:47,880 --> 00:03:49,200
+So this is interesting.
+
+90
+00:03:49,200 --> 00:03:52,560
+So we've wrote our query
+filtering by the tags, and
+
+91
+00:03:52,560 --> 00:03:55,630
+then sorting by date decreasing,
+and it seems like
+
+92
+00:03:55,630 --> 00:03:59,230
+we've used a BtreeCursor,
+which shows that we've
+
+93
+00:03:59,230 --> 00:04:01,700
+actually used an index
+for this query--
+
+94
+00:04:01,700 --> 00:04:03,320
+which at first seems good.
+
+95
+00:04:03,320 --> 00:04:05,710
+But then we look at the detail,
+and we see that we
+
+96
+00:04:05,710 --> 00:04:07,870
+only returned seven objects
+but still had
+
+97
+00:04:07,870 --> 00:04:10,240
+to scan 1,000 objects.
+
+98
+00:04:10,240 --> 00:04:11,780
+So this is kind of a problem.
+
+99
+00:04:11,780 --> 00:04:14,300
+We're still using the cursor,
+but it's not actually giving
+
+100
+00:04:14,300 --> 00:04:16,700
+us the advantage we're
+looking for.
+
+101
+00:04:16,700 --> 00:04:18,760
+So why is that the case?
+
+102
+00:04:18,760 --> 00:04:21,480
+Why did we have to scan 1,000
+documents before we could
+
+103
+00:04:21,480 --> 00:04:22,960
+return our seven?
+
+104
+00:04:22,960 --> 00:04:26,350
+So the key is that, even though
+we're iterating the
+
+105
+00:04:26,350 --> 00:04:29,930
+index and getting these dates
+back in a sorted order, we
+
+106
+00:04:29,930 --> 00:04:33,080
+don't actually know until we've
+looked at every document
+
+107
+00:04:33,080 --> 00:04:36,550
+that we found all the documents
+with a tag of
+
+108
+00:04:36,550 --> 00:04:39,570
+'freon.' And in this case, we're
+returning 10 documents,
+
+109
+00:04:39,570 --> 00:04:40,990
+and there were only seven.
+
+110
+00:04:40,990 --> 00:04:43,750
+So we had to look through every
+document before we could
+
+111
+00:04:43,750 --> 00:04:47,090
+be sure that we have found all
+documents with a tag of
+
+112
+00:04:47,090 --> 00:04:51,040
+'freon.' So how do we
+solve this problem?
+
+113
+00:04:51,040 --> 00:04:53,810
+Well, what we really need to
+do is we need to create an
+
+114
+00:04:53,810 --> 00:04:58,790
+index on tags, so that MongoDB
+can actually use the index and
+
+115
+00:04:58,790 --> 00:05:01,130
+eliminate parts of
+the results set.
+
+116
+00:05:01,130 --> 00:05:04,210
+So again, it's the fact that the
+index is sorted, and when
+
+117
+00:05:04,210 --> 00:05:07,320
+MongoDB looks at an index, it
+can say, I'm looking for the
+
+118
+00:05:07,320 --> 00:05:10,660
+tag of 'freon,' everything past
+this point is later in
+
+119
+00:05:10,660 --> 00:05:15,010
+the alphabet than g, so I can
+eliminate that, and just focus
+
+120
+00:05:15,010 --> 00:05:17,770
+on this part, and then repeat
+that process until it gets all
+
+121
+00:05:17,770 --> 00:05:18,870
+the way to the bottom.
+
+122
+00:05:18,870 --> 00:05:22,510
+So basically we need to create
+an index on tags to make sure
+
+123
+00:05:22,510 --> 00:05:26,020
+that MongoDB can actually
+efficiently look up tags, in
+
+124
+00:05:26,020 --> 00:05:27,710
+addition to sorting on date.
+
+125
+00:05:27,710 --> 00:05:29,760
+But we can't just create
+an index on tags.
+
+126
+00:05:29,760 --> 00:05:32,890
+We actually should include date
+in the index as well, so
+
+127
+00:05:32,890 --> 00:05:35,890
+that every time we find a
+section of the index with the
+
+128
+00:05:35,890 --> 00:05:39,190
+tag we're looking for, we know
+that that's already sorted.
+
+129
+00:05:39,190 --> 00:05:42,720
+But let's actually just try
+creating an index just on tags
+
+130
+00:05:42,720 --> 00:05:44,900
+and see what happens.
+
+131
+00:05:44,900 --> 00:05:45,240
+All right.
+
+132
+00:05:45,240 --> 00:05:47,170
+So now we're creating
+an index on tags.
+
+133
+00:05:47,170 --> 00:05:49,040
+So we've created our index.
+
+134
+00:05:49,040 --> 00:05:52,440
+And now we can go back and run
+this query again looking for
+
+135
+00:05:52,440 --> 00:05:55,990
+the tags of 'freon' and
+sorting by the date
+
+136
+00:05:55,990 --> 00:05:57,190
+decreasing.
+
+137
+00:05:57,190 --> 00:06:00,560
+So we run this query, and we
+see that we have n is 7,
+
+138
+00:06:00,560 --> 00:06:03,770
+nscannedObjects is 7,
+and this looks good.
+
+139
+00:06:03,770 --> 00:06:07,630
+We've actually used our tags
+index to efficiently find just
+
+140
+00:06:07,630 --> 00:06:08,950
+the documents we're
+looking for.
+
+141
+00:06:08,950 --> 00:06:11,730
+And then afterwards we can
+just sort by date.
+
+142
+00:06:11,730 --> 00:06:14,230
+So I was mentioning before that
+we should include the
+
+143
+00:06:14,230 --> 00:06:16,900
+date in the index, and
+the reason for
+
+144
+00:06:16,900 --> 00:06:18,330
+that isn't clear here.
+
+145
+00:06:18,330 --> 00:06:22,130
+In this case, we only returned
+seven documents, and there are
+
+146
+00:06:22,130 --> 00:06:24,980
+only seven documents with the
+tag of 'freon' in our whole
+
+147
+00:06:24,980 --> 00:06:25,880
+collection.
+
+148
+00:06:25,880 --> 00:06:28,990
+So it didn't really matter that
+it wasn't sorted, because
+
+149
+00:06:28,990 --> 00:06:30,800
+we only returned those
+documents.
+
+150
+00:06:30,800 --> 00:06:33,250
+And we are able to just get the
+full result set, and then
+
+151
+00:06:33,250 --> 00:06:35,720
+sort it, and then
+return it back.
+
+152
+00:06:35,720 --> 00:06:39,930
+So I want to show the issue here
+by limiting to something
+
+153
+00:06:39,930 --> 00:06:40,950
+less than 7.
+
+154
+00:06:40,950 --> 00:06:45,070
+So let's run this same query,
+but limit to 5,
+
+155
+00:06:45,070 --> 00:06:47,160
+and then call .explain.
+
+156
+00:06:47,160 --> 00:06:51,390
+So this shows why an index on
+just tags isn't quite the
+
+157
+00:06:51,390 --> 00:06:53,430
+optimal index for this query.
+
+158
+00:06:53,430 --> 00:06:56,490
+So in this case, we're only
+looking for five documents,
+
+159
+00:06:56,490 --> 00:06:58,840
+but there are seven documents
+in our whole collection with
+
+160
+00:06:58,840 --> 00:07:02,400
+the tag of 'freon.' So we
+see that n is 5 and
+
+161
+00:07:02,400 --> 00:07:04,830
+nscannedObjects is 7.
+
+162
+00:07:04,830 --> 00:07:09,150
+So the issue here is that we
+find all the documents that
+
+163
+00:07:09,150 --> 00:07:11,690
+have a tag of 'freon'
+very efficiently.
+
+164
+00:07:11,690 --> 00:07:14,290
+We can find all of those
+documents efficiently, but
+
+165
+00:07:14,290 --> 00:07:16,530
+when we find them, they're not
+actually already sorted,
+
+166
+00:07:16,530 --> 00:07:20,250
+because we don't have date
+included in the index.
+
+167
+00:07:20,250 --> 00:07:22,720
+So we find our documents with
+tags of 'freon,' and we
+
+168
+00:07:22,720 --> 00:07:26,560
+actually have to retrieve all of
+those documents, then sort
+
+169
+00:07:26,560 --> 00:07:29,940
+them, then return the five
+latest documents out of the
+
+170
+00:07:29,940 --> 00:07:32,130
+seven that we retrieved.
+
+171
+00:07:32,130 --> 00:07:35,070
+So this doesn't seem like a big
+problem now, but imagine
+
+172
+00:07:35,070 --> 00:07:38,880
+we had 500 documents with the
+tag of 'freon.' In that case,
+
+173
+00:07:38,880 --> 00:07:40,950
+we'd only be looking
+for five documents.
+
+174
+00:07:40,950 --> 00:07:43,590
+We'd have to get all 500
+documents with the tag of
+
+175
+00:07:43,590 --> 00:07:47,970
+'freon,' sort them all, just
+to return the five that are
+
+176
+00:07:47,970 --> 00:07:49,980
+the most recent documents.
+
+177
+00:07:49,980 --> 00:07:52,250
+So how can we improve this?
+
+178
+00:07:52,250 --> 00:07:54,860
+Well, the answer is that we want
+to include the date in
+
+179
+00:07:54,860 --> 00:07:58,480
+our index, so that not only
+does the index allow us to
+
+180
+00:07:58,480 --> 00:08:01,470
+efficiently look up the
+documents with tags of
+
+181
+00:08:01,470 --> 00:08:04,370
+'freon,' but when we find
+them, they're already in
+
+182
+00:08:04,370 --> 00:08:05,600
+sorted order.
+
+183
+00:08:05,600 --> 00:08:07,840
+So what we want to do is we
+want to edit this index,
+
+184
+00:08:07,840 --> 00:08:12,390
+making it a compound index, and
+include date in the index.
+
+185
+00:08:12,390 --> 00:08:15,100
+So we have an index on tags.
+
+186
+00:08:15,100 --> 00:08:18,820
+Now let's make it also
+on date decreasing.
+
+187
+00:08:18,820 --> 00:08:20,810
+So we've added our new index.
+
+188
+00:08:20,810 --> 00:08:24,240
+Now let's run that query that
+wasn't quite optimal.
+
+189
+00:08:24,240 --> 00:08:24,560
+All right.
+
+190
+00:08:24,560 --> 00:08:26,600
+So these are the results
+for our query.
+
+191
+00:08:26,600 --> 00:08:32,210
+And notice that before, n was
+5 and nscannedObjects was 7.
+
+192
+00:08:32,210 --> 00:08:35,360
+Now in this case, both of these
+are 5, because by the
+
+193
+00:08:35,360 --> 00:08:38,605
+time we found our documents with
+the tag of 'freon,' they
+
+194
+00:08:38,605 --> 00:08:41,490
+were already sorted, so we could
+just return the first
+
+195
+00:08:41,490 --> 00:08:43,380
+five that we found, because
+we know they're already
+
+196
+00:08:43,380 --> 00:08:45,280
+sorted in the index.
+
+197
+00:08:45,280 --> 00:08:49,350
+So that's the key is that the
+index basically is sorting on
+
+198
+00:08:49,350 --> 00:08:50,580
+the keys that we give it.
+
+199
+00:08:50,580 --> 00:08:55,060
+So that index that we had tags
+of 1 and the date of negative
+
+200
+00:08:55,060 --> 00:08:58,520
+1 basically gives us a structure
+that sorted first on
+
+201
+00:08:58,520 --> 00:09:01,460
+tags, and then when we
+have duplicate tags--
+
+202
+00:09:01,460 --> 00:09:03,530
+like the seven documents
+with 'freon'--
+
+203
+00:09:03,530 --> 00:09:06,630
+then we sort that section
+based on date.
+
+204
+00:09:06,630 --> 00:09:09,710
+So it's all about the sort
+order, and this is something
+
+205
+00:09:09,710 --> 00:09:10,950
+to think about.
+
+206
+00:09:10,950 --> 00:09:14,910
+But this is the most optimal
+index for the Tags page.
+
+207
+00:09:14,910 --> 00:09:18,310
+All right, so let's go to our
+last index, and that is
+
+208
+00:09:18,310 --> 00:09:20,640
+finding a single blog post.
+
+209
+00:09:20,640 --> 00:09:24,340
+So to find a single blog post,
+let's just get an example
+
+210
+00:09:24,340 --> 00:09:26,090
+document and get
+its permaLink.
+
+211
+00:09:26,090 --> 00:09:27,340
+So I'm going to do
+db.posts.findOne().permaLink.
+
+212
+00:09:27,340 --> 00:09:30,110
+
+213
+00:09:30,110 --> 00:09:34,590
+And let me just assign this to
+a variable, make it easier.
+
+214
+00:09:34,590 --> 00:09:39,940
+So now we do db.posts.findOne(),
+and we're
+
+215
+00:09:39,940 --> 00:09:44,580
+looking for a document with
+a permaLink of permaLink.
+
+216
+00:09:44,580 --> 00:09:47,460
+And note that neither of these
+have quotes around them.
+
+217
+00:09:47,460 --> 00:09:50,080
+This may seem a little strange
+at first, but key names with
+
+218
+00:09:50,080 --> 00:09:52,120
+no quotes are allowed
+in JavaScript--
+
+219
+00:09:52,120 --> 00:09:56,860
+and just mean the key name-- but
+the field name is actually
+
+220
+00:09:56,860 --> 00:09:58,030
+this variable here.
+
+221
+00:09:58,030 --> 00:10:00,160
+So this is a little confusing,
+because I use the same name
+
+222
+00:10:00,160 --> 00:10:02,640
+here, but this is
+the key name--
+
+223
+00:10:02,640 --> 00:10:04,770
+it's just allowed in JavaScript
+that the key name
+
+224
+00:10:04,770 --> 00:10:06,120
+is unquoted--
+
+225
+00:10:06,120 --> 00:10:08,630
+and this is the actual
+variable, permaLink.
+
+226
+00:10:08,630 --> 00:10:10,770
+So that's going to
+be this here--
+
+227
+00:10:10,770 --> 00:10:12,140
+it's going to be right here.
+
+228
+00:10:12,140 --> 00:10:14,900
+So if we do db.posts.findOne(),
+
+229
+00:10:14,900 --> 00:10:17,530
+let's just do .title.
+
+230
+00:10:17,530 --> 00:10:17,940
+All right.
+
+231
+00:10:17,940 --> 00:10:20,080
+We've found the title
+of our document.
+
+232
+00:10:20,080 --> 00:10:22,250
+So now let's see how
+fast this query is.
+
+233
+00:10:22,250 --> 00:10:24,232
+Let's run the explain output.
+
+234
+00:10:24,232 --> 00:10:24,930
+All right.
+
+235
+00:10:24,930 --> 00:10:26,500
+So this doesn't work,
+actually.
+
+236
+00:10:26,500 --> 00:10:29,620
+We do findOne() on permaLink,
+and then we try to do
+
+237
+00:10:29,620 --> 00:10:32,580
+.explain, and we see
+we get a TypeError.
+
+238
+00:10:32,580 --> 00:10:35,950
+So the reason for this is that
+the findOne() is actually a
+
+239
+00:10:35,950 --> 00:10:39,660
+nice wrapper that returns us an
+object instead of a cursor,
+
+240
+00:10:39,660 --> 00:10:43,130
+and the .explain method
+is actually a
+
+241
+00:10:43,130 --> 00:10:44,900
+method of the cursor.
+
+242
+00:10:44,900 --> 00:10:47,120
+So to fix this, let's
+actually do a
+
+243
+00:10:47,120 --> 00:10:49,020
+find, and then do .explain.
+
+244
+00:10:49,020 --> 00:10:51,560
+So this should also only find
+out one document, because
+
+245
+00:10:51,560 --> 00:10:54,340
+we're looking based
+on the permaLink.
+
+246
+00:10:54,340 --> 00:10:54,750
+All right.
+
+247
+00:10:54,750 --> 00:10:56,720
+So this is our explain output.
+
+248
+00:10:56,720 --> 00:11:00,030
+You see we're using a
+BasicCursor, and we're only
+
+249
+00:11:00,030 --> 00:11:03,290
+returning one document, but the
+number of objects we had
+
+250
+00:11:03,290 --> 00:11:05,920
+to scan is 1,000.
+
+251
+00:11:05,920 --> 00:11:08,140
+So we had to scan 1,000
+documents--
+
+252
+00:11:08,140 --> 00:11:10,140
+every single document
+in our collection--
+
+253
+00:11:10,140 --> 00:11:12,580
+before we could return
+a single blog post.
+
+254
+00:11:12,580 --> 00:11:15,800
+And this could completely take
+down your application.
+
+255
+00:11:15,800 --> 00:11:18,880
+So our query is actually
+scanning 1,000 times more
+
+256
+00:11:18,880 --> 00:11:22,970
+documents than it needs
+to to get the results.
+
+257
+00:11:22,970 --> 00:11:25,210
+So this one's pretty
+straightforward.
+
+258
+00:11:25,210 --> 00:11:29,370
+We're looking based on
+permaLink, so we want an index
+
+259
+00:11:29,370 --> 00:11:31,890
+on permaLink to make
+this query fast.
+
+260
+00:11:31,890 --> 00:11:33,900
+So let's just do that.
+
+261
+00:11:33,900 --> 00:11:34,410
+All right.
+
+262
+00:11:34,410 --> 00:11:36,610
+So we've made our index
+on permaLink.
+
+263
+00:11:36,610 --> 00:11:40,140
+So now let's run that query
+and see how fast it is.
+
+264
+00:11:40,140 --> 00:11:40,570
+All right.
+
+265
+00:11:40,570 --> 00:11:42,720
+So this looks like a
+big improvement.
+
+266
+00:11:42,720 --> 00:11:46,650
+So we're doing fine for this one
+document, and we see that
+
+267
+00:11:46,650 --> 00:11:48,730
+we're using a BtreeCursor
+here.
+
+268
+00:11:48,730 --> 00:11:50,810
+So we're actually
+using an index.
+
+269
+00:11:50,810 --> 00:11:53,510
+And n is 1, nscannedObjects
+is 1.
+
+270
+00:11:53,510 --> 00:11:55,370
+So we only had to look
+at one document to
+
+271
+00:11:55,370 --> 00:11:56,870
+return this blog page.
+
+272
+00:11:56,870 --> 00:12:00,660
+And so the blog is now much
+faster than it was before.
+
+273
+00:12:00,660 --> 00:12:01,020
+All right.
+
+274
+00:12:01,020 --> 00:12:03,980
+So that's the answer to homework
+4.3, and how to use
+
+275
+00:12:03,980 --> 00:12:07,640
+indexes to speed up queries
+for the blog application
+
+276
+00:12:07,640 --> 00:12:09,100
+you've been working with
+for this course.
+
+277
+00:12:09,100 --> 00:12:10,350

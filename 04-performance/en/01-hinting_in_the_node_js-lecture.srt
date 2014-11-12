@@ -1,0 +1,741 @@
+1
+00:00:00,000 --> 00:00:00,090
+
+2
+00:00:00,090 --> 00:00:03,520
+All right, so now we're going
+to talk about using hints in
+
+3
+00:00:03,520 --> 00:00:05,830
+the MongoDB Node.js driver.
+
+4
+00:00:05,830 --> 00:00:08,650
+So before we do that, we're
+actually going to cover using
+
+5
+00:00:08,650 --> 00:00:10,460
+Explain in the driver.
+
+6
+00:00:10,460 --> 00:00:13,250
+So this is a way to get
+information about what index
+
+7
+00:00:13,250 --> 00:00:17,250
+we used and information about
+our query and the performance
+
+8
+00:00:17,250 --> 00:00:18,350
+of the query.
+
+9
+00:00:18,350 --> 00:00:20,320
+So let's take a look
+at an example
+
+10
+00:00:20,320 --> 00:00:24,520
+All right, so this is our
+example of using Explain in
+
+11
+00:00:24,520 --> 00:00:26,780
+the MongoDB Node.js driver.
+
+12
+00:00:26,780 --> 00:00:31,920
+So what we have here is we have
+a find query looking for
+
+13
+00:00:31,920 --> 00:00:33,420
+x equals 2.
+
+14
+00:00:33,420 --> 00:00:35,490
+And we're making a cursor
+out of that.
+
+15
+00:00:35,490 --> 00:00:38,300
+And then we're calling
+cursor.explain.
+
+16
+00:00:38,300 --> 00:00:41,100
+So you remember that we would
+call cursor.each,
+
+17
+00:00:41,100 --> 00:00:44,750
+cursor.toArray, and then we'd
+get our documents back.
+
+18
+00:00:44,750 --> 00:00:47,200
+Instead, we're doing
+cursor.explain.
+
+19
+00:00:47,200 --> 00:00:49,500
+So remember that this
+line doesn't
+
+20
+00:00:49,500 --> 00:00:51,020
+actually run the query.
+
+21
+00:00:51,020 --> 00:00:54,810
+This line just sort of builds
+our cursor object, which
+
+22
+00:00:54,810 --> 00:00:57,610
+describes what our query is.
+
+23
+00:00:57,610 --> 00:01:00,420
+This line is actually
+running our query.
+
+24
+00:01:00,420 --> 00:01:04,319
+And we're choosing to run
+it in the explain mode.
+
+25
+00:01:04,319 --> 00:01:08,480
+So note that after this we can't
+actually do cursor.each.
+
+26
+00:01:08,480 --> 00:01:11,560
+We can't actually do
+cursor.toArray, because we've
+
+27
+00:01:11,560 --> 00:01:12,800
+already run the query.
+
+28
+00:01:12,800 --> 00:01:15,550
+So doing the explain actually
+runs the query, because it
+
+29
+00:01:15,550 --> 00:01:19,160
+really has to run it in order
+to get the actual statistics
+
+30
+00:01:19,160 --> 00:01:21,260
+about how the query was run.
+
+31
+00:01:21,260 --> 00:01:25,930
+So it takes one call back, which
+gets an error object and
+
+32
+00:01:25,930 --> 00:01:27,540
+the explain output.
+
+33
+00:01:27,540 --> 00:01:30,060
+So all we do in this function
+is we just log the explain
+
+34
+00:01:30,060 --> 00:01:33,390
+output and then close the
+database connection.
+
+35
+00:01:33,390 --> 00:01:36,680
+All right, so let's run our
+example using explain and
+
+36
+00:01:36,680 --> 00:01:39,280
+querying on x equals 2.
+
+37
+00:01:39,280 --> 00:01:42,930
+All right, so this is our output
+of our application.
+
+38
+00:01:42,930 --> 00:01:44,200
+Notice, we get a
+document back.
+
+39
+00:01:44,200 --> 00:01:45,900
+But this is not a
+document that is
+
+40
+00:01:45,900 --> 00:01:48,530
+actually in our database.
+
+41
+00:01:48,530 --> 00:01:52,260
+This is a document describing
+how the query was run.
+
+42
+00:01:52,260 --> 00:01:55,340
+And we can see up here
+that the cursor we
+
+43
+00:01:55,340 --> 00:01:58,890
+used BtreeCursor x_1.
+
+44
+00:01:58,890 --> 00:02:02,180
+So before this video, I inserted
+a few documents.
+
+45
+00:02:02,180 --> 00:02:05,460
+And I actually made
+an index on x.
+
+46
+00:02:05,460 --> 00:02:08,509
+So this says that we used
+our index on x.
+
+47
+00:02:08,509 --> 00:02:11,009
+And then this 1 specifies
+the sort order.
+
+48
+00:02:11,009 --> 00:02:15,540
+So this is actually a really
+good query, because n, which
+
+49
+00:02:15,540 --> 00:02:18,730
+is the number of documents that
+we actually got as the
+
+50
+00:02:18,730 --> 00:02:22,887
+result of our query, is equal
+to n scanned objects and n
+
+51
+00:02:22,887 --> 00:02:25,950
+scanned, which is just the
+number of documents and index
+
+52
+00:02:25,950 --> 00:02:28,110
+entries we actually
+had to look at.
+
+53
+00:02:28,110 --> 00:02:29,770
+So down here, we see some other
+
+54
+00:02:29,770 --> 00:02:31,600
+statistics about our query.
+
+55
+00:02:31,600 --> 00:02:35,910
+But for now, let's ignore that
+and move on to hinting in the
+
+56
+00:02:35,910 --> 00:02:37,890
+Node.js MongoDB driver.
+
+57
+00:02:37,890 --> 00:02:39,930
+So let's go back
+to our example.
+
+58
+00:02:39,930 --> 00:02:42,820
+All right, so here's
+our example again.
+
+59
+00:02:42,820 --> 00:02:44,110
+So I'm going to change
+a little bit.
+
+60
+00:02:44,110 --> 00:02:46,710
+I'm going to actually add some
+more parameters to Find.
+
+61
+00:02:46,710 --> 00:02:49,630
+And then we'll discuss that.
+
+62
+00:02:49,630 --> 00:02:53,155
+All right, so I added two more
+parameters to Find here.
+
+63
+00:02:53,155 --> 00:02:56,740
+I Actually added an empty
+projection operator.
+
+64
+00:02:56,740 --> 00:02:59,680
+So we don't actually want to
+project our documents.
+
+65
+00:02:59,680 --> 00:03:02,030
+And then I added this
+options object.
+
+66
+00:03:02,030 --> 00:03:04,770
+And in the options object,
+I added a hint.
+
+67
+00:03:04,770 --> 00:03:08,700
+And the hint value
+is $natural:1.
+
+68
+00:03:08,700 --> 00:03:13,060
+So what this is saying is, for
+this query, our hint is that
+
+69
+00:03:13,060 --> 00:03:14,980
+we want to not use an index.
+
+70
+00:03:14,980 --> 00:03:17,820
+$natural is actually
+a special keyword.
+
+71
+00:03:17,820 --> 00:03:20,550
+It just says, don't use an
+index for this query.
+
+72
+00:03:20,550 --> 00:03:23,270
+So this will actually construct
+our cursor.
+
+73
+00:03:23,270 --> 00:03:25,700
+And then when we call .explain,
+it's going to be
+
+74
+00:03:25,700 --> 00:03:27,450
+called with these options.
+
+75
+00:03:27,450 --> 00:03:31,090
+And we should see a difference
+in our explain output.
+
+76
+00:03:31,090 --> 00:03:33,210
+So let's actually run this
+and see what we get.
+
+77
+00:03:33,210 --> 00:03:36,420
+All right, so we're running our
+application with our hint
+
+78
+00:03:36,420 --> 00:03:37,720
+to not use an index.
+
+79
+00:03:37,720 --> 00:03:39,800
+So let's see what
+that looks like.
+
+80
+00:03:39,800 --> 00:03:44,150
+All right, so down here we
+have our explain output.
+
+81
+00:03:44,150 --> 00:03:46,720
+And we can see that the
+cursor changed.
+
+82
+00:03:46,720 --> 00:03:49,390
+So instead of what we saw
+before, which was the B-tree
+
+83
+00:03:49,390 --> 00:03:53,130
+cursor on x, we actually see
+we're using a Basic cursor.
+
+84
+00:03:53,130 --> 00:03:56,340
+So this is just the name for a
+cursor that scans the entire
+
+85
+00:03:56,340 --> 00:03:58,700
+collection and looks
+at every document.
+
+86
+00:03:58,700 --> 00:04:00,980
+So down here we can
+see that n is 1.
+
+87
+00:04:00,980 --> 00:04:02,820
+So our result set is
+still the same.
+
+88
+00:04:02,820 --> 00:04:04,260
+We still get one
+document back.
+
+89
+00:04:04,260 --> 00:04:06,590
+One document matches
+x equals 2.
+
+90
+00:04:06,590 --> 00:04:10,425
+But we actually see that we have
+an increase in number of
+
+91
+00:04:10,425 --> 00:04:12,170
+scanned objects and n scanned.
+
+92
+00:04:12,170 --> 00:04:15,520
+So we only actually have six
+documents in this collection.
+
+93
+00:04:15,520 --> 00:04:18,630
+So we actually had to look at
+every single document before
+
+94
+00:04:18,630 --> 00:04:22,500
+we could actually return the
+result of our query.
+
+95
+00:04:22,500 --> 00:04:24,970
+All right, so MongoDB actually
+listened to our hint.
+
+96
+00:04:24,970 --> 00:04:28,090
+And that's good for not
+using an index at all.
+
+97
+00:04:28,090 --> 00:04:32,110
+But let's actually talk about
+using a different index.
+
+98
+00:04:32,110 --> 00:04:34,220
+All right, so I'm going to
+change this a little bit so we
+
+99
+00:04:34,220 --> 00:04:37,050
+can use a different index.
+
+100
+00:04:37,050 --> 00:04:41,930
+All right, so here I changed the
+$natural to underscore ID.
+
+101
+00:04:41,930 --> 00:04:44,790
+So this is just saying, if
+there's an index on underscore
+
+102
+00:04:44,790 --> 00:04:48,270
+ID, use that for this query.
+
+103
+00:04:48,270 --> 00:04:49,320
+So you could put
+anything here.
+
+104
+00:04:49,320 --> 00:04:51,650
+You could put y, z.
+
+105
+00:04:51,650 --> 00:04:54,630
+If you have an index on y or
+z, MongoDB will use that
+
+106
+00:04:54,630 --> 00:04:58,690
+instead of trying to determine
+which index to use itself.
+
+107
+00:04:58,690 --> 00:05:02,010
+So let's run this and actually
+see what results we get.
+
+108
+00:05:02,010 --> 00:05:04,180
+All right, so this is
+hinting to use the
+
+109
+00:05:04,180 --> 00:05:06,560
+underscore ID index.
+
+110
+00:05:06,560 --> 00:05:09,200
+So we have some interesting
+results here.
+
+111
+00:05:09,200 --> 00:05:12,100
+So like the first query we
+ran, we see we're using a
+
+112
+00:05:12,100 --> 00:05:13,490
+B-tree cursor.
+
+113
+00:05:13,490 --> 00:05:16,830
+We're actually using a B-tree
+cursor on underscore ID.
+
+114
+00:05:16,830 --> 00:05:20,850
+So MongoDB listened to our hint,
+which is great, but we
+
+115
+00:05:20,850 --> 00:05:22,480
+have kind of a problem here.
+
+116
+00:05:22,480 --> 00:05:26,640
+So here we have n is 1, so our
+result is 1 as always.
+
+117
+00:05:26,640 --> 00:05:29,630
+But down here, we actually have
+n scanned and n-scanned
+
+118
+00:05:29,630 --> 00:05:32,120
+object is 6, just like
+when we weren't using
+
+119
+00:05:32,120 --> 00:05:33,320
+any index at all.
+
+120
+00:05:33,320 --> 00:05:36,090
+So because our query had nothing
+to do with underscore
+
+121
+00:05:36,090 --> 00:05:38,820
+ID, scanning doesn't
+help us at all.
+
+122
+00:05:38,820 --> 00:05:42,300
+The speed of an index lies in
+its ability to rule out ranges
+
+123
+00:05:42,300 --> 00:05:43,730
+of documents.
+
+124
+00:05:43,730 --> 00:05:46,660
+And if we're using an index
+underscore ID and looking for
+
+125
+00:05:46,660 --> 00:05:50,090
+a document that matches x equals
+2, we can't actually
+
+126
+00:05:50,090 --> 00:05:50,810
+rule out anything.
+
+127
+00:05:50,810 --> 00:05:53,750
+And we still have to look at
+every single document.
+
+128
+00:05:53,750 --> 00:05:53,950
+So
+
+129
+00:05:53,950 --> 00:05:57,190
+This is actually even worse,
+in some ways, than the
+
+130
+00:05:57,190 --> 00:06:01,320
+$natural, because we not only
+have to read all these
+
+131
+00:06:01,320 --> 00:06:03,390
+documents, but we actually
+have to bring in the
+
+132
+00:06:03,390 --> 00:06:06,750
+underscore ID index and
+scan the entire index.
+
+133
+00:06:06,750 --> 00:06:10,360
+So there's even an added layer
+of overhead there.
+
+134
+00:06:10,360 --> 00:06:13,400
+So this is just an example of
+why you need to be careful
+
+135
+00:06:13,400 --> 00:06:16,540
+when using the hint and why you
+need to really understand
+
+136
+00:06:16,540 --> 00:06:19,560
+when a query can efficiently
+use an index.
+
+137
+00:06:19,560 --> 00:06:21,500
+Because otherwise, you'll get in
+this situation where you're
+
+138
+00:06:21,500 --> 00:06:25,380
+trying to use an index and
+MongoDB faithfully listens but
+
+139
+00:06:25,380 --> 00:06:28,510
+performs a very inefficient
+query.
+
+140
+00:06:28,510 --> 00:06:31,380
+So this example seems very
+simple, because we're querying
+
+141
+00:06:31,380 --> 00:06:33,420
+on x and we're looking
+at underscore ID.
+
+142
+00:06:33,420 --> 00:06:36,110
+It's intuitive that we can't
+really use this index.
+
+143
+00:06:36,110 --> 00:06:39,250
+There may be situations where
+intuitively you'd think an
+
+144
+00:06:39,250 --> 00:06:42,660
+index would work well for a
+query, but because of the way
+
+145
+00:06:42,660 --> 00:06:44,500
+indexes are structured and
+because of the way they're
+
+146
+00:06:44,500 --> 00:06:47,030
+laid out, it might not actually
+be very efficient.
+
+147
+00:06:47,030 --> 00:06:50,480
+So it's important to be very
+aware, if you're hinting,
+
+148
+00:06:50,480 --> 00:06:53,780
+exactly how indexes work
+and whether it
+
+149
+00:06:53,780 --> 00:06:55,510
+will actually be faster.
+
+150
+00:06:55,510 --> 00:06:57,790
+And I would actually recommend,
+if you're planning
+
+151
+00:06:57,790 --> 00:07:00,420
+on using a hint in an
+application, to just run
+
+152
+00:07:00,420 --> 00:07:04,010
+Explain to make sure that the
+query is actually faster by
+
+153
+00:07:04,010 --> 00:07:06,255
+looking at n and n scanned.
+
+154
+00:07:06,255 --> 00:07:09,620
+All right, so that's hinting
+and Explain in the MongoDB
+
+155
+00:07:09,620 --> 00:07:10,870
+Node.js driver.
+
+156
+00:07:10,870 --> 00:07:11,380
