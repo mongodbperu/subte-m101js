@@ -1,0 +1,93 @@
+[
+    {
+        "concept": "Crud and the Mongo Shell",
+        "lecture": "C7LinMC2o5o",
+        "answer": "nWOt4VN6Y3g"
+    },
+    {
+        "concept": "Node.js driver, find, findOne, and cursors",
+        "lecture": "elGy_YOtn4Q",
+        "answer": "RfFQrjRL3RQ"
+    },
+    {
+        "concept": "Node.js driver, using field projection",
+        "lecture": "i-C8I5xrvn0",
+        "answer": "nMtZ1hmppVo"
+    },
+    {
+        "concept": "Node.js driver, using $gt and $lt",
+        "lecture": "jhqdI1xLVWg",
+        "answer": "qEOgkYB8r_k"
+    },
+    {
+        "concept": "Importing Reddit",
+        "lecture": "2pMtlTeJ8Ek"
+    },
+    {
+        "concept": "Node.js driver, using a regex",
+        "lecture": "gQVnirqZEbM",
+        "answer": "dBo4scpq_P4"
+    },
+    {
+        "concept": "Node.js driver, using dot notation",
+        "lecture": "YNA4EnxgdQY",
+        "answer": "6Iy7edNKl0Q"
+    },
+    {
+        "concept": "Node.js driver, skip, limit and sort",
+        "lecture": "GD78tbm_qvQ",
+        "answer": "t0runNOwPdY"
+    },
+    {
+        "concept": "Node.js driver, inserting, talk about _id",
+        "lecture": "zrDCLNYbKNU",
+        "answer": "y_qyqkNuZMQ"
+    },
+    {
+        "concept": "Node.js driver, updating",
+        "lecture": "hf85eZvYosY",
+        "answer": "MNLN8k57lf0"
+    },
+    {
+        "concept": "Node.js driver, upserts",
+        "lecture": "msse79yvaEo",
+        "answer": "atzwFFtqsjA"
+    },
+    {
+        "concept": "Node.js driver, findAndModify",
+        "lecture": "QnQxACsXrBk",
+        "answer": "BxBa3Oos_LQ"
+    },
+    {
+        "concept": "Node.js driver, remove",
+        "lecture": "9Rl2-gzLy20",
+        "answer": "U2OUHMc1JNA"
+    },
+    {
+        "concept": "Blog intro",
+        "lecture": "TcDqVQxYWZ0"
+    },
+    {
+        "concept": "Blog Application Architecture",
+        "lecture": "M8NCh6JqG8Q"
+    },
+    {
+        "concept": "Blog, Session Management",
+        "lecture": "C3CLiy5HkxE"
+    },
+    {
+        "concept": "HW 2.1",
+        "lecture": "SGIkso8KRhU",
+        "answer": "T3qpMqlpexY"
+    },
+    {
+        "concept": "HW 2.2",
+        "lecture": "44AJs4XIk6c",
+        "answer": "sSicXeEqVNY"
+    },
+    {
+        "concept": "HW 2.3",
+        "lecture": "KnxcMu6xIxc",
+        "answer": "ptMtmwArXE0"
+    }
+]

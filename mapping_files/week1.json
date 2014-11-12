@@ -1,0 +1,78 @@
+i[
+    {
+        "concept": "Welcome to M101JS",
+        "lecture": "t5bQQL9d3Dg",
+        "answer": "Ib-cFeUPIfw"
+    },
+    {
+        "concept": "Overview of Building an app with Mongo",
+        "lecture": "iIhgggzzeoA"
+    },
+    {
+        "concept": "System Requirements",
+        "lecture": "gUHV4dTl1p4"
+    },
+    {
+        "concept": "Quick introduction to the Mongo Shell",
+        "lecture": "j2v865GGS2A",
+        "answer": "11lpX9YmUb4"
+    },
+    {
+        "concept": "JSON Introduced",
+        "lecture": "vRgKPRrl2Ww",
+        "answer": "3qZnmjdgRrE"
+    },
+    {
+        "concept": "Installing Node.js (mac)",
+        "lecture": "3-u5Ih7kd0A"
+    },
+    {
+        "concept": "Asynchronous vs Synchronous",
+        "lecture": "ORKA9Ay9jfs"
+    },
+    {
+        "concept": "Hello World on Node.js",
+        "lecture": "Fv5Q_02BKrM"
+    },
+    {
+        "concept": "Introduction to npm",
+        "lecture": "KkWoaHOtGnk"
+    },
+    {
+        "concept": "Hello World MongoDB Style",
+        "lecture": "SgQv3KWEGDc"
+    },
+    {
+        "concept": "Hello World using Express",
+        "lecture": "wSAOfA-BMCM"
+    },
+    {
+        "concept": "Hello World using Express and Swig",
+        "lecture": "0aG8aBUP6nQ"
+    },
+    {
+        "concept": "Hello World using Express, Swig, and MongoDB",
+        "lecture": "KJMHteZRyXQ"
+    },
+    {
+        "concept": "Express: Handling GET Requests",
+        "lecture": "DZkLTikYqc4"
+    },
+    {
+        "concept": "Express: Handling POST Requests",
+        "lecture": "rGWwQE89reU"
+    },
+    {
+        "concept": "Homework 1.1",
+        "lecture": "sA-iH3IJ72o",
+        "answer": "buroXPV-I2k"
+    },
+    {
+        "concept": "Homework 1.2",
+        "answer": "OgeosfWxm5c"
+    },
+    {
+        "concept": "Homework 1.3",
+        "answer": "SiszJ2dw8NM"
+    }
+]

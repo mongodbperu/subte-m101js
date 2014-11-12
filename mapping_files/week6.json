@@ -1,0 +1,26 @@
+[
+    {
+        "concept": "Connecting to a Replica Set from Node.js Driver",
+        "lecture": "H1bzY0ktgEg",
+        "answer": "FUXB7GrDeA0"
+    },
+    {
+        "concept": "Failover in the Node.js Driver",
+        "lecture": "15jBQRolLV4",
+        "answer": "tnf5m6M9-Bo"
+    },
+    {
+        "concept": "Write Concern",
+        "lecture": "ucqgEUVISqM",
+        "answer": "HqtfMarARBQ"
+    },
+    {
+        "concept": "Read Preferences",
+        "lecture": "vpbs3SEgmvE",
+        "answer": "FheFRpktCcI"
+    },
+    {
+        "concept": "HW 6.5",
+        "answer": "L6vNpTmucYo"
+    }
+]
