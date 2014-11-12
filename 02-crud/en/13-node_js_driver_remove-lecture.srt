@@ -1,0 +1,206 @@
+1
+00:00:00,000 --> 00:00:00,190
+
+2
+00:00:00,190 --> 00:00:03,070
+All right, so we've talked about
+finding documents in
+
+3
+00:00:03,070 --> 00:00:04,320
+various combinations.
+
+4
+00:00:04,320 --> 00:00:07,040
+We've talked about updating
+documents.
+
+5
+00:00:07,040 --> 00:00:09,450
+We've talked about inserting
+documents.
+
+6
+00:00:09,450 --> 00:00:12,430
+So now let's talk about
+deleting documents.
+
+7
+00:00:12,430 --> 00:00:15,200
+So for that, we have
+a small example.
+
+8
+00:00:15,200 --> 00:00:18,680
+All right, so this is an example
+of using remove in
+
+9
+00:00:18,680 --> 00:00:20,180
+Node.js driver.
+
+10
+00:00:20,180 --> 00:00:22,300
+So here we have a query.
+
+11
+00:00:22,300 --> 00:00:24,110
+We're looking for all documents
+that have an
+
+12
+00:00:24,110 --> 00:00:25,920
+assignment of homework three.
+
+13
+00:00:25,920 --> 00:00:27,610
+And all we have to do
+is pass that as the
+
+14
+00:00:27,610 --> 00:00:29,640
+first argument to remove.
+
+15
+00:00:29,640 --> 00:00:32,950
+So what this will do is it will
+just delete all documents
+
+16
+00:00:32,950 --> 00:00:34,190
+that match this query.
+
+17
+00:00:34,190 --> 00:00:36,470
+So maybe homework three
+was a bad assignment.
+
+18
+00:00:36,470 --> 00:00:38,820
+We just want to delete
+all those documents.
+
+19
+00:00:38,820 --> 00:00:42,550
+And the second argument to
+remove is a call back that
+
+20
+00:00:42,550 --> 00:00:46,510
+takes an error and a number
+for how many documents we
+
+21
+00:00:46,510 --> 00:00:48,260
+actually removed.
+
+22
+00:00:48,260 --> 00:00:51,830
+So here we logged into the
+console, successfully removed,
+
+23
+00:00:51,830 --> 00:00:54,940
+and then the number of
+documents, documents.
+
+24
+00:00:54,940 --> 00:00:57,210
+All right, so let's run that.
+
+25
+00:00:57,210 --> 00:00:58,920
+So we actually get--
+successfully
+
+26
+00:00:58,920 --> 00:01:01,050
+removed four documents.
+
+27
+00:01:01,050 --> 00:01:03,870
+So if we run it again,
+we see successfully
+
+28
+00:01:03,870 --> 00:01:05,890
+removed zero documents.
+
+29
+00:01:05,890 --> 00:01:08,610
+So the first time we ran this,
+we matched all documents that
+
+30
+00:01:08,610 --> 00:01:11,080
+had an assignment of
+homework three.
+
+31
+00:01:11,080 --> 00:01:14,230
+We removed them so that when we
+ran it again, we actually
+
+32
+00:01:14,230 --> 00:01:17,680
+had no matches and removed
+no documents.
+
+33
+00:01:17,680 --> 00:01:20,940
+All right, so that's how you
+remove documents in MongoDB.
+
+34
+00:01:20,940 --> 00:01:24,430
+So now you know the complete set
+of CRUD operations using
+
+35
+00:01:24,430 --> 00:01:27,210
+the Node.js MongoDB driver.
+
+36
+00:01:27,210 --> 00:01:30,400
+All right, so this is the quiz
+about using remove in the
+
+37
+00:01:30,400 --> 00:01:31,890
+Node.js driver.
+
+38
+00:01:31,890 --> 00:01:34,800
+So the question is, which of
+the following remove calls
+
+39
+00:01:34,800 --> 00:01:37,020
+would definitely remove all
+the documents in the
+
+40
+00:01:37,020 --> 00:01:40,470
+collection "foo," regardless
+of its contents.
+
+41
+00:01:40,470 --> 00:01:41,750
+Check all that apply.
+
+42
+00:01:41,750 --> 00:01:44,200
+You can assume that call back
+is a function defined
+
+43
+00:01:44,200 --> 00:01:46,920
+elsewhere that we expect
+to be called when
+
+44
+00:01:46,920 --> 00:01:48,170
+the remove call completes.
+
+45
+00:01:48,170 --> 00:01:49,120

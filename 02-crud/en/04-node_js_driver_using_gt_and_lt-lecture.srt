@@ -1,0 +1,291 @@
+1
+00:00:00,000 --> 00:00:00,130
+
+2
+00:00:00,130 --> 00:00:03,010
+All right, so this is our first
+query operators using
+
+3
+00:00:03,010 --> 00:00:04,660
+the Node.js driver.
+
+4
+00:00:04,660 --> 00:00:06,270
+So we're going to talk
+about using less
+
+5
+00:00:06,270 --> 00:00:07,310
+than or greater than.
+
+6
+00:00:07,310 --> 00:00:09,180
+So, let's look at an example.
+
+7
+00:00:09,180 --> 00:00:12,670
+All right, so just like before
+we connect to MongoDB using
+
+8
+00:00:12,670 --> 00:00:14,080
+the connection string.
+
+9
+00:00:14,080 --> 00:00:16,190
+We have our callback here,
+gets a [? connect to ?]
+
+10
+00:00:16,190 --> 00:00:17,195
+database.
+
+11
+00:00:17,195 --> 00:00:21,120
+And we have our query, we have
+our find, here we're doing
+
+12
+00:00:21,120 --> 00:00:25,500
+.each over all the documents,
+and logging the documents to
+
+13
+00:00:25,500 --> 00:00:26,380
+the console.
+
+14
+00:00:26,380 --> 00:00:31,320
+So the thing that we're going
+to focus on here is this.
+
+15
+00:00:31,320 --> 00:00:35,960
+So dollar sign is actually
+reserved character in MongoDB,
+
+16
+00:00:35,960 --> 00:00:39,590
+and it tells MongoDB, hey,
+this is a query operator,
+
+17
+00:00:39,590 --> 00:00:41,070
+among other things.
+
+18
+00:00:41,070 --> 00:00:44,370
+So if you do dollar sign,
+greater than, you're saying,
+
+19
+00:00:44,370 --> 00:00:45,880
+OK, this is a query operator.
+
+20
+00:00:45,880 --> 00:00:48,130
+It means I'm looking
+for anything
+
+21
+00:00:48,130 --> 00:00:50,020
+greater than this value.
+
+22
+00:00:50,020 --> 00:00:54,360
+So here we have "grade." So
+before we were looking for all
+
+23
+00:00:54,360 --> 00:00:57,500
+the students that had
+grade of 100.
+
+24
+00:00:57,500 --> 00:01:00,530
+But what if you wanted to look
+for all the grades in a range,
+
+25
+00:01:00,530 --> 00:01:03,060
+or some other function
+of the grade.
+
+26
+00:01:03,060 --> 00:01:06,100
+So, that's what the greater
+than, less than operators
+
+27
+00:01:06,100 --> 00:01:07,330
+allow us to do.
+
+28
+00:01:07,330 --> 00:01:10,770
+So, here we have our grade,
+and instead of a value, we
+
+29
+00:01:10,770 --> 00:01:12,320
+actually gave it an object.
+
+30
+00:01:12,320 --> 00:01:14,700
+And in this object we have the
+greater than or less than
+
+31
+00:01:14,700 --> 00:01:17,330
+operators, so the object
+is actually
+
+32
+00:01:17,330 --> 00:01:19,650
+sort of a query specifier.
+
+33
+00:01:19,650 --> 00:01:22,690
+We have special requirements
+for this query, and the
+
+34
+00:01:22,690 --> 00:01:24,800
+requirement is that we're
+looking for anything greater
+
+35
+00:01:24,800 --> 00:01:27,890
+than 80 and less than 95.
+
+36
+00:01:27,890 --> 00:01:31,230
+And just to add a little more
+in here, we also have
+
+37
+00:01:31,230 --> 00:01:34,820
+'student' 'Joe,' just to show
+that we can specify more than
+
+38
+00:01:34,820 --> 00:01:36,840
+one field in our query.
+
+39
+00:01:36,840 --> 00:01:40,400
+Here we just say, 'student' has
+to exactly match 'Joe,'
+
+40
+00:01:40,400 --> 00:01:42,450
+and 'grade' can actually
+be a range.
+
+41
+00:01:42,450 --> 00:01:46,580
+So you can have really any
+combination of exact matches
+
+42
+00:01:46,580 --> 00:01:49,230
+and query operators when you're
+doing your query.
+
+43
+00:01:49,230 --> 00:01:53,140
+We could actually in here say
+'assignment' as well.
+
+44
+00:01:53,140 --> 00:01:56,440
+So, let's take a look
+at what we get back.
+
+45
+00:01:56,440 --> 00:01:58,230
+So let's run our application.
+
+46
+00:01:58,230 --> 00:02:01,400
+And we see, we get only
+documents back that have
+
+47
+00:02:01,400 --> 00:02:04,720
+'student' of 'Joe,' and we get
+all of his assignments that
+
+48
+00:02:04,720 --> 00:02:07,880
+had grades between 80 and 95.
+
+49
+00:02:07,880 --> 00:02:10,500
+So that's an example of using
+less than or greater in the
+
+50
+00:02:10,500 --> 00:02:12,360
+Node.js driver.
+
+51
+00:02:12,360 --> 00:02:14,260
+So here's a quiz.
+
+52
+00:02:14,260 --> 00:02:16,440
+This is just to see if you're
+paying attention.
+
+53
+00:02:16,440 --> 00:02:19,180
+This is a quiz about using the
+dollar sign greater than, and
+
+54
+00:02:19,180 --> 00:02:21,590
+dollar sign less
+than operators.
+
+55
+00:02:21,590 --> 00:02:25,470
+So here we just connect, we
+check our errors, and then we
+
+56
+00:02:25,470 --> 00:02:29,660
+do a find with our query and use
+each function, iterate the
+
+57
+00:02:29,660 --> 00:02:32,020
+documents and print them
+to the console.
+
+58
+00:02:32,020 --> 00:02:36,930
+So your job is to actually
+define this query object to
+
+59
+00:02:36,930 --> 00:02:40,300
+get all the documents with the
+grade between 69 and 80.
+
+60
+00:02:40,300 --> 00:02:44,690
+So we want to find all of
+the Cs in this class.
+
+61
+00:02:44,690 --> 00:02:47,520
+So when you figure that out,
+come down here and enter it
+
+62
+00:02:47,520 --> 00:02:48,770
+into the text box.
+
+63
+00:02:48,770 --> 00:02:49,470

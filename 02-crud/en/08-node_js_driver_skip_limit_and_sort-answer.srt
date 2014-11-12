@@ -1,0 +1,130 @@
+1
+00:00:00,000 --> 00:00:00,130
+
+2
+00:00:00,130 --> 00:00:02,780
+All right, so this is the answer
+to the quiz about skip
+
+3
+00:00:02,780 --> 00:00:03,800
+limit and sort.
+
+4
+00:00:03,800 --> 00:00:07,250
+So we can include skip limit
+and sort options in the
+
+5
+00:00:07,250 --> 00:00:10,180
+options object for
+find and findOne.
+
+6
+00:00:10,180 --> 00:00:13,650
+We can pass a sort order as an
+argument to find and modify.
+
+7
+00:00:13,650 --> 00:00:16,480
+We can call the skip limit and
+sort functions on a cursor
+
+8
+00:00:16,480 --> 00:00:18,560
+before retrieving
+any documents.
+
+9
+00:00:18,560 --> 00:00:21,210
+But we cannot call the skip
+limit and sort functions on a
+
+10
+00:00:21,210 --> 00:00:23,560
+cursor after retrieving
+some documents.
+
+11
+00:00:23,560 --> 00:00:25,930
+Now, the reason for this is
+that, once we've already
+
+12
+00:00:25,930 --> 00:00:27,450
+started our query,
+we've already
+
+13
+00:00:27,450 --> 00:00:28,890
+retrieved some documents.
+
+14
+00:00:28,890 --> 00:00:32,390
+And we've already made a
+commitment to the original
+
+15
+00:00:32,390 --> 00:00:34,150
+skip limit and sort.
+
+16
+00:00:34,150 --> 00:00:37,690
+So consider an example where you
+returned a few documents,
+
+17
+00:00:37,690 --> 00:00:39,370
+and then you called sort.
+
+18
+00:00:39,370 --> 00:00:41,800
+It would be kind of a problem
+because the first few
+
+19
+00:00:41,800 --> 00:00:44,830
+documents you got back may or
+may not have been sorted, and
+
+20
+00:00:44,830 --> 00:00:47,900
+you're asking MongoDB to sort
+the rest of the results set,
+
+21
+00:00:47,900 --> 00:00:50,690
+which is not actually supported
+and, really, isn't
+
+22
+00:00:50,690 --> 00:00:52,150
+usually what you would want.
+
+23
+00:00:52,150 --> 00:00:54,400
+And the same issue applies
+to skip and limit.
+
+24
+00:00:54,400 --> 00:00:57,190
+We may return some documents
+that we should have skipped,
+
+25
+00:00:57,190 --> 00:01:00,440
+or we may have returned more
+documents than the limit by
+
+26
+00:01:00,440 --> 00:01:03,620
+the time that we actually tried
+to set these parameters
+
+27
+00:01:03,620 --> 00:01:05,640
+on the cursor after retrieving
+the documents.
+
+28
+00:01:05,640 --> 00:01:06,890

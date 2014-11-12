@@ -1,0 +1,178 @@
+1
+00:00:00,000 --> 00:00:00,150
+
+2
+00:00:00,150 --> 00:00:03,350
+So now let's talk about
+homework 2-1.
+
+3
+00:00:03,350 --> 00:00:06,470
+So let's take a look at what's
+in this directory.
+
+4
+00:00:06,470 --> 00:00:08,600
+So we have a homework
+question here.
+
+5
+00:00:08,600 --> 00:00:11,000
+But when you extract, you'll
+see this file called
+
+6
+00:00:11,000 --> 00:00:13,240
+weather_data.csv.
+
+7
+00:00:13,240 --> 00:00:19,140
+And your assignment will be to
+import and analyze this file.
+
+8
+00:00:19,140 --> 00:00:21,050
+Let's actually take a
+look at this file.
+
+9
+00:00:21,050 --> 00:00:23,480
+So notice here that at
+the top, we have
+
+10
+00:00:23,480 --> 00:00:25,290
+all of these headers.
+
+11
+00:00:25,290 --> 00:00:27,570
+And then down here,
+we have our data.
+
+12
+00:00:27,570 --> 00:00:30,210
+So this is actually important
+and something you want to pay
+
+13
+00:00:30,210 --> 00:00:32,490
+attention to when you're
+using mongoimport.
+
+14
+00:00:32,490 --> 00:00:36,330
+So if we look at mongoimport,
+you can see there's this
+
+15
+00:00:36,330 --> 00:00:38,900
+option, --headerline.
+
+16
+00:00:38,900 --> 00:00:41,590
+And basically it says that
+the first line in
+
+17
+00:00:41,590 --> 00:00:43,180
+input file is a header.
+
+18
+00:00:43,180 --> 00:00:45,580
+So this is nice, because it'll
+make sure that we've set all
+
+19
+00:00:45,580 --> 00:00:49,020
+our fields correctly and put the
+values in with the correct
+
+20
+00:00:49,020 --> 00:00:50,240
+field names.
+
+21
+00:00:50,240 --> 00:00:55,180
+So just to repeat that, you want
+to add --headerline when
+
+22
+00:00:55,180 --> 00:00:59,180
+you import the CSV file
+using mongoimport.
+
+23
+00:00:59,180 --> 00:01:02,910
+And you also want to
+use --type.csv.
+
+24
+00:01:02,910 --> 00:01:07,140
+So to take a look at our
+homework question, part one is
+
+25
+00:01:07,140 --> 00:01:11,290
+to import weather_data.csv
+using mongoimport.
+
+26
+00:01:11,290 --> 00:01:14,980
+And then part two we ask you
+a data analysis question.
+
+27
+00:01:14,980 --> 00:01:17,340
+So this is just some background,
+so you kind of
+
+28
+00:01:17,340 --> 00:01:20,090
+know what the data is
+you're dealing with.
+
+29
+00:01:20,090 --> 00:01:23,440
+But the thing to focus on is
+that your assignment is to
+
+30
+00:01:23,440 --> 00:01:25,930
+figure out the state that
+recorded the lowest
+
+31
+00:01:25,930 --> 00:01:29,140
+temperature when the wind was
+coming from the west.
+
+32
+00:01:29,140 --> 00:01:32,690
+So what that means is the
+wind direction field is
+
+33
+00:01:32,690 --> 00:01:35,330
+between 180 and 360.
+
+34
+00:01:35,330 --> 00:01:39,980
+So just restate this, you want
+to find the state that had the
+
+35
+00:01:39,980 --> 00:01:44,360
+lowest recorded temperature in
+a document that had the wind
+
+36
+00:01:44,360 --> 00:01:48,580
+direction field between
+180 and 360.
+
+37
+00:01:48,580 --> 00:01:49,846
+So that's homework 2-1.
+
+38
+00:01:49,846 --> 00:01:51,096

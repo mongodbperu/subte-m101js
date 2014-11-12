@@ -1,0 +1,504 @@
+1
+00:00:00,000 --> 00:00:00,100
+
+2
+00:00:00,100 --> 00:00:03,530
+So I'm in the homework 2-3
+directory, and I'll show you
+
+3
+00:00:03,530 --> 00:00:06,330
+the code here because it
+actually doesn't include the
+
+4
+00:00:06,330 --> 00:00:08,630
+parts that you need to write
+for the assignment.
+
+5
+00:00:08,630 --> 00:00:13,180
+So if we go into our blog
+directory, look at the files
+
+6
+00:00:13,180 --> 00:00:17,210
+inside, notice we don't have
+a node modules directory.
+
+7
+00:00:17,210 --> 00:00:19,520
+So the first thing we actually
+want to do is just install the
+
+8
+00:00:19,520 --> 00:00:23,730
+dependencies, so let's just
+take care of that.
+
+9
+00:00:23,730 --> 00:00:24,040
+All right.
+
+10
+00:00:24,040 --> 00:00:27,600
+So now we've installed our
+modules, so next we'll try to
+
+11
+00:00:27,600 --> 00:00:29,960
+run it and see what happens.
+
+12
+00:00:29,960 --> 00:00:32,710
+So looks like we have our
+express server listening on
+
+13
+00:00:32,710 --> 00:00:35,200
+port 3,000 just like
+we did before.
+
+14
+00:00:35,200 --> 00:00:38,780
+Let's go to our blog, see if
+we notice anything wrong.
+
+15
+00:00:38,780 --> 00:00:43,060
+So the first thing we'll do is
+refresh the page, and notice
+
+16
+00:00:43,060 --> 00:00:44,960
+our old posts are still there.
+
+17
+00:00:44,960 --> 00:00:47,910
+And let's just try to login.
+
+18
+00:00:47,910 --> 00:00:48,470
+All right.
+
+19
+00:00:48,470 --> 00:00:50,380
+So it looks like we
+can't login--
+
+20
+00:00:50,380 --> 00:00:52,900
+validateLogin Not
+Yet Implemented.
+
+21
+00:00:52,900 --> 00:00:53,260
+All right.
+
+22
+00:00:53,260 --> 00:00:54,110
+So that's weird.
+
+23
+00:00:54,110 --> 00:00:58,410
+Well, let's see if we can sign
+up with a different user.
+
+24
+00:00:58,410 --> 00:00:58,810
+All right.
+
+25
+00:00:58,810 --> 00:00:59,850
+So that's weird--
+
+26
+00:00:59,850 --> 00:01:01,850
+addUser Not Yet Implemented.
+
+27
+00:01:01,850 --> 00:01:05,790
+So we actually can't login and
+can't sign up, and therefore,
+
+28
+00:01:05,790 --> 00:01:09,260
+we can't actually make posts,
+so it's not actually that
+
+29
+00:01:09,260 --> 00:01:10,670
+useful right now.
+
+30
+00:01:10,670 --> 00:01:13,210
+So that's actually going to be
+your assignment and I'll
+
+31
+00:01:13,210 --> 00:01:15,300
+actually go into the
+code and show you
+
+32
+00:01:15,300 --> 00:01:16,920
+exactly where that is.
+
+33
+00:01:16,920 --> 00:01:20,720
+And notice we have some scary
+looking stack choices here.
+
+34
+00:01:20,720 --> 00:01:22,920
+That's actually just part of our
+error handling code, which
+
+35
+00:01:22,920 --> 00:01:24,050
+I'll also talk about.
+
+36
+00:01:24,050 --> 00:01:25,610
+So finally, we'll get to the
+code that you have to
+
+37
+00:01:25,610 --> 00:01:27,690
+implement for the homework
+this week.
+
+38
+00:01:27,690 --> 00:01:30,440
+So this is in users.js.
+
+39
+00:01:30,440 --> 00:01:32,820
+So remember when we went to
+the blog, there were a few
+
+40
+00:01:32,820 --> 00:01:36,060
+pages that returned errors and
+said Not Yet Implemented.
+
+41
+00:01:36,060 --> 00:01:38,280
+So one of them was validate
+user and the
+
+42
+00:01:38,280 --> 00:01:39,680
+other one was add user.
+
+43
+00:01:39,680 --> 00:01:42,210
+So let's take a look
+at these functions.
+
+44
+00:01:42,210 --> 00:01:42,570
+All right.
+
+45
+00:01:42,570 --> 00:01:45,870
+So this is the addUser function
+of the user's data
+
+46
+00:01:45,870 --> 00:01:47,310
+access object.
+
+47
+00:01:47,310 --> 00:01:50,090
+So this takes a username,
+a password, email, and a
+
+48
+00:01:50,090 --> 00:01:54,440
+callback and actually creates a
+new user, so this is what's
+
+49
+00:01:54,440 --> 00:01:56,700
+going to be called from
+our sign up page.
+
+50
+00:01:56,700 --> 00:01:59,260
+So here we're doing some
+generation of the password
+
+51
+00:01:59,260 --> 00:02:02,370
+hash, we're creating a new
+document for this user with
+
+52
+00:02:02,370 --> 00:02:05,140
+username and the password hash,
+possibly adding the
+
+53
+00:02:05,140 --> 00:02:09,380
+email, but we're not actually
+doing anything with it yet, so
+
+54
+00:02:09,380 --> 00:02:13,050
+here's where we get our error
+addUser Not Yet implemented.
+
+55
+00:02:13,050 --> 00:02:17,080
+So notice we're following the
+Node.js convention of the
+
+56
+00:02:17,080 --> 00:02:20,280
+first argument to the callback
+being an error object and the
+
+57
+00:02:20,280 --> 00:02:23,170
+second argument being the actual
+data we're returning.
+
+58
+00:02:23,170 --> 00:02:26,930
+So when you implement this,
+you want actually callback
+
+59
+00:02:26,930 --> 00:02:30,350
+with an error here if some error
+occurred and callback
+
+60
+00:02:30,350 --> 00:02:32,600
+with potentially some value
+if you've succeeded
+
+61
+00:02:32,600 --> 00:02:34,240
+in adding the user.
+
+62
+00:02:34,240 --> 00:02:36,450
+So you're going to actually have
+to look a little bit in
+
+63
+00:02:36,450 --> 00:02:41,380
+the sessions.js file that uses
+the user data access object to
+
+64
+00:02:41,380 --> 00:02:45,120
+get a sense of how this is being
+used and what kind of
+
+65
+00:02:45,120 --> 00:02:46,770
+callback is passed in.
+
+66
+00:02:46,770 --> 00:02:51,160
+So your job is to fill in this
+code right here to add a user
+
+67
+00:02:51,160 --> 00:02:54,000
+when one tries to sign up.
+
+68
+00:02:54,000 --> 00:02:54,650
+All right.
+
+69
+00:02:54,650 --> 00:02:56,630
+So now let's look at
+the next function.
+
+70
+00:02:56,630 --> 00:02:56,960
+All right.
+
+71
+00:02:56,960 --> 00:02:59,950
+So this is the validate login
+function, and this one's a
+
+72
+00:02:59,950 --> 00:03:02,820
+little bit more complicated
+but most of the work is
+
+73
+00:03:02,820 --> 00:03:06,650
+actually factored out in this
+validateUserDoc function.
+
+74
+00:03:06,650 --> 00:03:09,950
+So we'll briefly go over that
+and see which parts of that
+
+75
+00:03:09,950 --> 00:03:11,370
+you have to implement.
+
+76
+00:03:11,370 --> 00:03:14,690
+So validate login function takes
+a username and password
+
+77
+00:03:14,690 --> 00:03:18,260
+and a callback, and the way the
+callback works is it will
+
+78
+00:03:18,260 --> 00:03:22,610
+either return a user if we found
+a user and our password
+
+79
+00:03:22,610 --> 00:03:25,750
+looks right or it will callback
+with an error if
+
+80
+00:03:25,750 --> 00:03:29,150
+we've had a database error or
+an invalid password or our
+
+81
+00:03:29,150 --> 00:03:31,070
+user doesn't exist.
+
+82
+00:03:31,070 --> 00:03:33,590
+So if we look down here, we
+can see that we're not
+
+83
+00:03:33,590 --> 00:03:35,910
+actually getting any document
+from MongoDB.
+
+84
+00:03:35,910 --> 00:03:38,980
+So this is what you need to do
+to make this function work for
+
+85
+00:03:38,980 --> 00:03:41,380
+homework 2-3 is actually
+get the user
+
+86
+00:03:41,380 --> 00:03:43,270
+document from MongoDB.
+
+87
+00:03:43,270 --> 00:03:45,620
+So this function's actually
+complete and kind of
+
+88
+00:03:45,620 --> 00:03:48,100
+encapsulates all the work you
+need to do after getting the
+
+89
+00:03:48,100 --> 00:03:50,940
+document, including checking
+the error object.
+
+90
+00:03:50,940 --> 00:03:54,180
+So once you actually make the
+call to MongoDB, you can just
+
+91
+00:03:54,180 --> 00:03:55,910
+use this function directly.
+
+92
+00:03:55,910 --> 00:03:59,200
+You can just pass the error
+object and the user document
+
+93
+00:03:59,200 --> 00:04:02,390
+straight to this function
+and it should hook up.
+
+94
+00:04:02,390 --> 00:04:02,700
+All right.
+
+95
+00:04:02,700 --> 00:04:06,180
+So that's the big crash course
+on how our blog project works
+
+96
+00:04:06,180 --> 00:04:08,840
+and an introduction
+to homework 2-3.
+
+97
+00:04:08,840 --> 00:04:12,340
+So just to recap, this is
+our main, these are
+
+98
+00:04:12,340 --> 00:04:14,480
+our routes for express--
+
+99
+00:04:14,480 --> 00:04:17,459
+they contain some helpers that
+describe the work we need to
+
+100
+00:04:17,459 --> 00:04:21,160
+do for each route and actually
+register the routes--
+
+101
+00:04:21,160 --> 00:04:23,710
+and these three files
+are our data
+
+102
+00:04:23,710 --> 00:04:26,100
+access objects to MongoDB.
+
+103
+00:04:26,100 --> 00:04:29,620
+So they have helper functions
+for accessing or modifying the
+
+104
+00:04:29,620 --> 00:04:31,160
+various collections.
+
+105
+00:04:31,160 --> 00:04:35,220
+So for homework 2-3, you'll
+be modifying the users.js
+
+106
+00:04:35,220 --> 00:04:38,500
+collection so that
+login and sign up
+
+107
+00:04:38,500 --> 00:04:39,750
+actually works correctly.
+
+108
+00:04:39,750 --> 00:04:40,990

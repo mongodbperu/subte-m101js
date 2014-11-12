@@ -1,0 +1,122 @@
+1
+00:00:00,000 --> 00:00:01,780
+All right, so this is the
+answer to the quiz
+
+2
+00:00:01,780 --> 00:00:04,040
+about using a $regex.
+
+3
+00:00:04,040 --> 00:00:07,050
+And it actually turns out that
+this is the only query
+
+4
+00:00:07,050 --> 00:00:10,020
+specifier that would actually
+match a document with
+
+5
+00:00:10,020 --> 00:00:12,380
+Microsoft anywhere
+in the title.
+
+6
+00:00:12,380 --> 00:00:16,590
+And the reason this matches is
+because, by default, $regex is
+
+7
+00:00:16,590 --> 00:00:20,520
+just saying, look for this
+pattern anywhere in the string
+
+8
+00:00:20,520 --> 00:00:22,280
+that we're matching against.
+
+9
+00:00:22,280 --> 00:00:25,400
+So this one doesn't match
+because we're using a $regex
+
+10
+00:00:25,400 --> 00:00:26,590
+at the top level.
+
+11
+00:00:26,590 --> 00:00:29,250
+We're not actually querying
+against the title field.
+
+12
+00:00:29,250 --> 00:00:32,140
+And this is actually an invalid
+query because we're
+
+13
+00:00:32,140 --> 00:00:35,390
+trying to use $regex at the
+top level and not actually
+
+14
+00:00:35,390 --> 00:00:39,640
+using it as a specifier for
+any particular field.
+
+15
+00:00:39,640 --> 00:00:41,970
+Down here, the reason this
+doesn't match is because we
+
+16
+00:00:41,970 --> 00:00:43,505
+have this carrot at the front.
+
+17
+00:00:43,505 --> 00:00:46,500
+And what that means is that
+this is anchored at the
+
+18
+00:00:46,500 --> 00:00:49,320
+beginning of the string, so this
+would only match titles
+
+19
+00:00:49,320 --> 00:00:51,960
+that have Microsoft
+at the beginning.
+
+20
+00:00:51,960 --> 00:00:54,260
+And this one doesn't match
+because we're not actually
+
+21
+00:00:54,260 --> 00:00:56,110
+using $regex.
+
+22
+00:00:56,110 --> 00:00:58,450
+We're just matching
+against Microsoft.
+
+23
+00:00:58,450 --> 00:01:00,670
+So this would only match
+documents that have a title
+
+24
+00:01:00,670 --> 00:01:03,110
+that exactly matches
+Microsoft.
+
+25
+00:01:03,110 --> 00:01:04,619
+All right, so that's the
+answer to the quiz.
+
+26
+00:01:04,619 --> 00:01:05,869
