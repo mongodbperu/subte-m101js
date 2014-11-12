@@ -1,0 +1,63 @@
+1
+00:00:00,000 --> 00:00:02,700
+All right, the answer is the
+missing node will be
+
+2
+00:00:02,700 --> 00:00:06,140
+discovered, as long as you list
+at least one valid node.
+
+3
+00:00:06,140 --> 00:00:09,020
+So the driver will actually
+automatically detect that the
+
+4
+00:00:09,020 --> 00:00:13,280
+node you listed is a Replica Set
+member and then detect all
+
+5
+00:00:13,280 --> 00:00:15,420
+the other ones, and
+connect to those.
+
+6
+00:00:15,420 --> 00:00:18,340
+But remember that if you have
+a Replica Set, and that node
+
+7
+00:00:18,340 --> 00:00:21,530
+happens to be down, you may
+have an actual primary and
+
+8
+00:00:21,530 --> 00:00:24,150
+actual secondary, you may have
+the majority of the nodes up,
+
+9
+00:00:24,150 --> 00:00:26,540
+but you won't be able to connect
+just because you
+
+10
+00:00:26,540 --> 00:00:29,880
+haven't given any nodes that
+happen to be up at the time.
+
+11
+00:00:29,880 --> 00:00:34,080
+So it's probably best to add all
+the members, but it will
+
+12
+00:00:34,080 --> 00:00:36,650
+automatically discover them, if
+you happen to accidentally
+
+13
+00:00:36,650 --> 00:00:38,380
+leave some out.

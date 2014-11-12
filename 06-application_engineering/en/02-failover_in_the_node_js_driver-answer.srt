@@ -1,0 +1,58 @@
+1
+00:00:00,000 --> 00:00:00,340
+
+2
+00:00:00,340 --> 00:00:03,110
+So the answer to this quiz is
+the insert will be buffered
+
+3
+00:00:03,110 --> 00:00:04,830
+until the election completes.
+
+4
+00:00:04,830 --> 00:00:07,220
+Then the callback will be called
+after the operation to
+
+5
+00:00:07,220 --> 00:00:09,650
+sent and a response
+is received.
+
+6
+00:00:09,650 --> 00:00:12,590
+So basically, this insert will
+just take longer than you
+
+7
+00:00:12,590 --> 00:00:16,340
+might expect, but the callback
+will be called normally, once
+
+8
+00:00:16,340 --> 00:00:18,510
+the driver is able
+to successfully
+
+9
+00:00:18,510 --> 00:00:20,230
+complete the operation.
+
+10
+00:00:20,230 --> 00:00:23,620
+So basically, the driver will
+buffer this for you until it
+
+11
+00:00:23,620 --> 00:00:26,440
+can successfully complete the
+operation and then call the
+
+12
+00:00:26,440 --> 00:00:28,920
+callback with the result,
+as it normally would.
+
+13
+00:00:28,920 --> 00:00:30,170
