@@ -1,0 +1,458 @@
+1
+00:00:00,000 --> 00:00:01,710
+All right, so right now we're
+going to talk about an
+
+2
+00:00:01,710 --> 00:00:03,620
+application from 20,000 feet.
+
+3
+00:00:03,620 --> 00:00:07,530
+So this is going to be a very
+high level overview of all of
+
+4
+00:00:07,530 --> 00:00:10,860
+the pieces of an application
+that uses MongoDB, and how
+
+5
+00:00:10,860 --> 00:00:14,770
+they interact, and briefly talk
+about the Mongo Shell,
+
+6
+00:00:14,770 --> 00:00:17,790
+and how it fits into
+all of this.
+
+7
+00:00:17,790 --> 00:00:21,290
+All right, so the very
+beginning, you have some
+
+8
+00:00:21,290 --> 00:00:22,240
+application.
+
+9
+00:00:22,240 --> 00:00:26,090
+So, this is your app, and it
+provides some service.
+
+10
+00:00:26,090 --> 00:00:29,570
+Over here you have some clients,
+and these clients are
+
+11
+00:00:29,570 --> 00:00:31,720
+making a request to
+your application.
+
+12
+00:00:31,720 --> 00:00:35,220
+They may be web browsers, they
+may be various other
+
+13
+00:00:35,220 --> 00:00:36,090
+applications.
+
+14
+00:00:36,090 --> 00:00:37,900
+They don't necessarily have
+to be web browsers.
+
+15
+00:00:37,900 --> 00:00:41,080
+They could be anything that
+needs some service from your
+
+16
+00:00:41,080 --> 00:00:41,740
+application.
+
+17
+00:00:41,740 --> 00:00:44,360
+They could be consuming
+a REST API.
+
+18
+00:00:44,360 --> 00:00:46,670
+Basically, you'll have
+clients, and
+
+19
+00:00:46,670 --> 00:00:47,830
+you'll have your server.
+
+20
+00:00:47,830 --> 00:00:50,330
+So that's kind of the model
+we're dealing with right here.
+
+21
+00:00:50,330 --> 00:00:54,840
+So, this server will be running
+Node.js in this class,
+
+22
+00:00:54,840 --> 00:00:58,120
+and basically at a high level,
+what Node.js is, it's
+
+23
+00:00:58,120 --> 00:01:03,130
+basically a C++ program that
+you control using V8
+
+24
+00:01:03,130 --> 00:01:04,060
+JavaScript.
+
+25
+00:01:04,060 --> 00:01:07,700
+So any applications you write
+using Node.js will be written
+
+26
+00:01:07,700 --> 00:01:11,860
+in JavaScript, and it'll just
+control this C++ application,
+
+27
+00:01:11,860 --> 00:01:13,890
+and you'll be able to say
+something like, they made a
+
+28
+00:01:13,890 --> 00:01:17,670
+request for this resource, and
+your application actually in
+
+29
+00:01:17,670 --> 00:01:20,010
+JavaScript will say, OK, if they
+made a request for this
+
+30
+00:01:20,010 --> 00:01:22,440
+resource, I know how to respond
+to that, and I'll
+
+31
+00:01:22,440 --> 00:01:24,690
+respond accordingly.
+
+32
+00:01:24,690 --> 00:01:27,290
+So, that's basically the
+application part.
+
+33
+00:01:27,290 --> 00:01:30,740
+But if your application needs to
+store persistent data now,
+
+34
+00:01:30,740 --> 00:01:33,200
+that's where MongoDB
+would come in.
+
+35
+00:01:33,200 --> 00:01:35,940
+So here, the way this will work
+is that your application
+
+36
+00:01:35,940 --> 00:01:38,230
+will actually make a
+request to MongoDB.
+
+37
+00:01:38,230 --> 00:01:40,990
+It'll either be trying to store
+data, it'll be trying to
+
+38
+00:01:40,990 --> 00:01:44,790
+retrieve data, update data, and
+it'll make a request to
+
+39
+00:01:44,790 --> 00:01:48,780
+MongoDB to perform this
+operation, and MongoDB will
+
+40
+00:01:48,780 --> 00:01:53,950
+reply with the return status, or
+if you actually specify the
+
+41
+00:01:53,950 --> 00:01:55,710
+write concern, which we'll
+talk about later, it'll
+
+42
+00:01:55,710 --> 00:01:59,470
+respond when the appropriate
+persistence is reached.
+
+43
+00:01:59,470 --> 00:02:02,650
+Where you can say write concern
+of my entire replica
+
+44
+00:02:02,650 --> 00:02:05,830
+set, and it will only respond
+when your entire replica set
+
+45
+00:02:05,830 --> 00:02:07,210
+has been written to.
+
+46
+00:02:07,210 --> 00:02:09,919
+Also, the core server of
+MongoDb, if you're curious, is
+
+47
+00:02:09,919 --> 00:02:12,040
+written in C++ as well.
+
+48
+00:02:12,040 --> 00:02:15,010
+So, that's how the components
+work together.
+
+49
+00:02:15,010 --> 00:02:18,590
+We basically have this
+application server interacting
+
+50
+00:02:18,590 --> 00:02:21,890
+directly with clients, and when
+the application server
+
+51
+00:02:21,890 --> 00:02:25,430
+needs to store data
+persistently, it actually acts
+
+52
+00:02:25,430 --> 00:02:28,250
+as the client communicating
+with MongoDB, which is
+
+53
+00:02:28,250 --> 00:02:31,590
+listening for incoming requests,
+and will actually
+
+54
+00:02:31,590 --> 00:02:34,730
+respond when the request
+has been completed.
+
+55
+00:02:34,730 --> 00:02:37,740
+So, the other part of this is
+that we actually have an
+
+56
+00:02:37,740 --> 00:02:38,970
+administrative shell.
+
+57
+00:02:38,970 --> 00:02:42,220
+So this is the Mongo Shell,
+and it's a useful tool for
+
+58
+00:02:42,220 --> 00:02:44,240
+performing various
+administrative tasks.
+
+59
+00:02:44,240 --> 00:02:46,540
+If you just want to take a quick
+look at what's in your
+
+60
+00:02:46,540 --> 00:02:49,080
+database, this is a
+very useful tool.
+
+61
+00:02:49,080 --> 00:02:51,310
+So, what is the Mongo
+Shell exactly?
+
+62
+00:02:51,310 --> 00:02:54,750
+So, the Mongo Shell actually has
+a lot of similarities with
+
+63
+00:02:54,750 --> 00:02:59,310
+Node.js itself, in that it's
+also just a C++ program that
+
+64
+00:02:59,310 --> 00:03:02,000
+you control using V8.
+
+65
+00:03:02,000 --> 00:03:04,170
+So actually, when you open up
+the mother shall you get a
+
+66
+00:03:04,170 --> 00:03:06,690
+prompt, and you can type various
+commands into this
+
+67
+00:03:06,690 --> 00:03:09,690
+prompt, and the Mongo Shell
+will then interpret these
+
+68
+00:03:09,690 --> 00:03:14,260
+commands using its own V8
+bindings, and make requests to
+
+69
+00:03:14,260 --> 00:03:15,990
+MongoDB, and MongoDB
+will respond.
+
+70
+00:03:15,990 --> 00:03:18,680
+And you can see the immediate
+response in the shell.
+
+71
+00:03:18,680 --> 00:03:22,370
+So, this is useful for doing
+things like asking various
+
+72
+00:03:22,370 --> 00:03:26,110
+questions about your
+configuration, or even seeing
+
+73
+00:03:26,110 --> 00:03:29,080
+a bit of what you actually have
+stored in your database,
+
+74
+00:03:29,080 --> 00:03:31,340
+or debugging of your
+application.
+
+75
+00:03:31,340 --> 00:03:33,920
+So there's a sort of, you can
+just think of this whole part
+
+76
+00:03:33,920 --> 00:03:36,180
+as the administrative
+interface.
+
+77
+00:03:36,180 --> 00:03:38,340
+And this part is the
+actual production
+
+78
+00:03:38,340 --> 00:03:39,900
+interface for your clients.
+
+79
+00:03:39,900 --> 00:03:43,500
+So, one last part of this
+that'll be important just for
+
+80
+00:03:43,500 --> 00:03:45,500
+understanding this once you
+actually start writing
+
+81
+00:03:45,500 --> 00:03:48,390
+applications, Node.js
+applications, which is what
+
+82
+00:03:48,390 --> 00:03:51,620
+we'll be focusing on for this
+course, is the way that
+
+83
+00:03:51,620 --> 00:03:54,970
+Node.js actually communicates
+to MongoDB
+
+84
+00:03:54,970 --> 00:03:56,400
+is through the driver.
+
+85
+00:03:56,400 --> 00:04:00,040
+So, there's actually a library
+that is available that you can
+
+86
+00:04:00,040 --> 00:04:03,220
+install, and use in your Node.js
+application that
+
+87
+00:04:03,220 --> 00:04:06,610
+actually handles all the
+connections to MongoDB, all of
+
+88
+00:04:06,610 --> 00:04:09,570
+the failover, all of
+the wire protocol.
+
+89
+00:04:09,570 --> 00:04:12,330
+And basically in your
+application, all you have to
+
+90
+00:04:12,330 --> 00:04:16,290
+do is use this API provided by
+the driver, and it'll handle
+
+91
+00:04:16,290 --> 00:04:18,600
+the communication to
+MongoDB for you.
+
+92
+00:04:18,600 --> 00:04:22,580
+So you can use this API to
+insert documents, find
+
+93
+00:04:22,580 --> 00:04:25,730
+documents, or move documents,
+and that'll all be handled by
+
+94
+00:04:25,730 --> 00:04:26,980
+the driver.
+
+95
+00:04:26,980 --> 00:04:27,380

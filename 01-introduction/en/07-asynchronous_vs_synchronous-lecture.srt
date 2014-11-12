@@ -1,0 +1,472 @@
+1
+00:00:00,000 --> 00:00:00,160
+
+2
+00:00:00,160 --> 00:00:02,660
+All right, so right now we're
+going to talk about
+
+3
+00:00:02,660 --> 00:00:05,580
+asynchronous model versus
+the synchronous model.
+
+4
+00:00:05,580 --> 00:00:10,040
+So, these are both names for
+ways of handling operations
+
+5
+00:00:10,040 --> 00:00:13,200
+that don't require active work
+on the part of the currently
+
+6
+00:00:13,200 --> 00:00:15,720
+running thread, or process.
+
+7
+00:00:15,720 --> 00:00:18,000
+So, usually when people talk
+about these, they're
+
+8
+00:00:18,000 --> 00:00:19,360
+talking about IO.
+
+9
+00:00:19,360 --> 00:00:22,490
+So usually you hear asynchronous
+IO versus
+
+10
+00:00:22,490 --> 00:00:24,080
+synchronous IO.
+
+11
+00:00:24,080 --> 00:00:28,000
+So now let's look at a real code
+example of how this would
+
+12
+00:00:28,000 --> 00:00:31,940
+work in the Mongo Shell,
+and in Node.js.
+
+13
+00:00:31,940 --> 00:00:34,910
+So, what I didn't mention before
+is that the Mongo Shell
+
+14
+00:00:34,910 --> 00:00:38,360
+is actually synchronous, while
+Node.js is actually
+
+15
+00:00:38,360 --> 00:00:39,570
+asynchronous.
+
+16
+00:00:39,570 --> 00:00:45,050
+So first, let's take a look at
+a script for the Mongo Shell.
+
+17
+00:00:45,050 --> 00:00:47,660
+So, this is the synchronous
+model that you probably are
+
+18
+00:00:47,660 --> 00:00:48,920
+more familiar with.
+
+19
+00:00:48,920 --> 00:00:51,410
+So, notice that what
+we do here is
+
+20
+00:00:51,410 --> 00:00:52,970
+we're calling a fine0ne.
+
+21
+00:00:52,970 --> 00:00:55,680
+So you don't have to worry
+about this right now, but
+
+22
+00:00:55,680 --> 00:00:59,220
+basically what fine0ne does is
+just returns one document in
+
+23
+00:00:59,220 --> 00:01:00,560
+the collection call.
+
+24
+00:01:00,560 --> 00:01:05,310
+So, notice that we say var doc
+equals db.coll.find0ne, just
+
+25
+00:01:05,310 --> 00:01:09,720
+like any other function call,
+and the result is returned by
+
+26
+00:01:09,720 --> 00:01:11,130
+the call to fine0ne.
+
+27
+00:01:11,130 --> 00:01:15,130
+And after this function call
+returns, we're free to print
+
+28
+00:01:15,130 --> 00:01:16,360
+the result.
+
+29
+00:01:16,360 --> 00:01:18,060
+So now let's take a
+look at the same
+
+30
+00:01:18,060 --> 00:01:21,300
+script, but in Node.js.
+
+31
+00:01:21,300 --> 00:01:23,690
+So, we have some overhead
+code to connect.
+
+32
+00:01:23,690 --> 00:01:26,330
+This is actually handled
+automatically in the shell,
+
+33
+00:01:26,330 --> 00:01:28,490
+based on functions we pass
+on the command line.
+
+34
+00:01:28,490 --> 00:01:31,570
+But here it's actually handled
+as part of the application, so
+
+35
+00:01:31,570 --> 00:01:34,020
+you don't have to worry about
+this part right now.
+
+36
+00:01:34,020 --> 00:01:36,410
+The main body of the
+code is right here
+
+37
+00:01:36,410 --> 00:01:38,810
+after the call to fine0ne.
+
+38
+00:01:38,810 --> 00:01:42,070
+So, notice that what we do here
+is we're also doing a
+
+39
+00:01:42,070 --> 00:01:46,350
+fine0ne, just like we were in
+our synchronous Mongo Shell,
+
+40
+00:01:46,350 --> 00:01:49,430
+on the collection call, but
+one difference you might
+
+41
+00:01:49,430 --> 00:01:52,090
+notice is that we're actually
+not even bothering to check
+
+42
+00:01:52,090 --> 00:01:55,180
+the return value of
+this call here.
+
+43
+00:01:55,180 --> 00:01:57,720
+What we're doing instead is
+we're actually passing this
+
+44
+00:01:57,720 --> 00:01:58,920
+callback function.
+
+45
+00:01:58,920 --> 00:02:02,180
+And a common convention in
+Node.js is for the callback
+
+46
+00:02:02,180 --> 00:02:05,260
+function to take an error as
+the first parameter, and
+
+47
+00:02:05,260 --> 00:02:07,930
+return values as later
+parameters.
+
+48
+00:02:07,930 --> 00:02:10,590
+In this case, we're kind of
+ignoring the error and just
+
+49
+00:02:10,590 --> 00:02:13,700
+assuming it worked out, and
+we're just printing the doc.
+
+50
+00:02:13,700 --> 00:02:14,880
+Printing our result.
+
+51
+00:02:14,880 --> 00:02:16,510
+And then this is
+just more code.
+
+52
+00:02:16,510 --> 00:02:18,550
+You have to worry about
+it right now.
+
+53
+00:02:18,550 --> 00:02:20,430
+Just closing the database.
+
+54
+00:02:20,430 --> 00:02:23,860
+So, what would actually happen
+here is that we would call
+
+55
+00:02:23,860 --> 00:02:27,700
+db.collection.find0ne, and
+this function would
+
+56
+00:02:27,700 --> 00:02:31,460
+immediately return, and we would
+then get here, and print
+
+57
+00:02:31,460 --> 00:02:33,050
+out call to fine0ne.
+
+58
+00:02:33,050 --> 00:02:35,900
+And then after we actually make
+the complete round trip
+
+59
+00:02:35,900 --> 00:02:39,290
+to our database and get a
+response from MongoDB, we'll
+
+60
+00:02:39,290 --> 00:02:42,380
+print the result and close
+our database connection.
+
+61
+00:02:42,380 --> 00:02:46,020
+So this callback gets called
+only after our operation is
+
+62
+00:02:46,020 --> 00:02:47,620
+completely finished.
+
+63
+00:02:47,620 --> 00:02:49,950
+Now, this does look more
+complicated than our script in
+
+64
+00:02:49,950 --> 00:02:52,230
+the Mongo Shell, and part of
+that is just because we have
+
+65
+00:02:52,230 --> 00:02:55,170
+to have this extra code here
+to connect to MongoDB, and
+
+66
+00:02:55,170 --> 00:02:57,270
+this extra code to close the
+database, which is handled
+
+67
+00:02:57,270 --> 00:02:58,030
+automatically.
+
+68
+00:02:58,030 --> 00:03:01,190
+But part of it is that this
+asynchronous model may be a
+
+69
+00:03:01,190 --> 00:03:04,640
+little strange at first, but the
+advantage of this is that
+
+70
+00:03:04,640 --> 00:03:08,670
+this code can actually handle
+many concurrent operations.
+
+71
+00:03:08,670 --> 00:03:12,480
+For example, if instead we put
+this in a handler for our web
+
+72
+00:03:12,480 --> 00:03:15,190
+server and tried to get a
+document each time a user
+
+73
+00:03:15,190 --> 00:03:17,890
+connected, we would be able to
+handle a large number of users
+
+74
+00:03:17,890 --> 00:03:19,930
+without changing this code.
+
+75
+00:03:19,930 --> 00:03:22,730
+In contrast, the shell
+would actually block.
+
+76
+00:03:22,730 --> 00:03:25,580
+What it calls fine0ne, it would
+actually wait for the
+
+77
+00:03:25,580 --> 00:03:29,406
+result to come back, and all
+other users would to wait.
+
+78
+00:03:29,406 --> 00:03:32,990
+So this case, we can just say
+register our operation, keep
+
+79
+00:03:32,990 --> 00:03:36,300
+going, register more operations
+for other users,
+
+80
+00:03:36,300 --> 00:03:39,990
+and handle all of those, and do
+all of their IO operations
+
+81
+00:03:39,990 --> 00:03:42,960
+in parallel, whereas in the
+Mongo Shell, we actually have
+
+82
+00:03:42,960 --> 00:03:45,530
+to do them completely
+sequentially.
+
+83
+00:03:45,530 --> 00:03:49,110
+So, let's just do a quick
+example of running this.
+
+84
+00:03:49,110 --> 00:03:50,970
+So to run the script,
+all you have to do
+
+85
+00:03:50,970 --> 00:03:53,350
+is say mongo script.js.
+
+86
+00:03:53,350 --> 00:03:57,750
+This will connect to the test
+database by default, and I put
+
+87
+00:03:57,750 --> 00:03:59,020
+in this document earlier.
+
+88
+00:03:59,020 --> 00:04:01,280
+The name, MongoDB.
+
+89
+00:04:01,280 --> 00:04:03,710
+Now, to run the node
+application, all you have to
+
+90
+00:04:03,710 --> 00:04:07,612
+do is say node app.js, and that
+will connect to MongoDB
+
+91
+00:04:07,612 --> 00:04:10,980
+in the test database as we
+put in our application.
+
+92
+00:04:10,980 --> 00:04:14,500
+And we see we get the same
+document back, but after we
+
+93
+00:04:14,500 --> 00:04:16,920
+see call to fine0ne.
+
+94
+00:04:16,920 --> 00:04:19,250
+All right, so that's the
+difference between
+
+95
+00:04:19,250 --> 00:04:21,750
+asynchronous model and the
+synchronous model, and I think
+
+96
+00:04:21,750 --> 00:04:24,540
+the Mongo Shell environment and
+the Node.js environment,
+
+97
+00:04:24,540 --> 00:04:27,970
+and the differences between them
+are a good example of the
+
+98
+00:04:27,970 --> 00:04:30,410
+differences between the
+synchronous model and the
+
+99
+00:04:30,410 --> 00:04:31,660
+asynchronous model.
+
+100
+00:04:31,660 --> 00:04:32,530

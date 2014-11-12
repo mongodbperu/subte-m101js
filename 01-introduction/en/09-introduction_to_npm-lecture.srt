@@ -1,0 +1,296 @@
+1
+00:00:00,000 --> 00:00:03,770
+All right, so this is an
+introduction to NPM.
+
+2
+00:00:03,770 --> 00:00:08,060
+NPM is the package manager
+for node.js.
+
+3
+00:00:08,060 --> 00:00:10,780
+So we're going to talk a little
+bit about packages, how
+
+4
+00:00:10,780 --> 00:00:13,120
+to use them, and how
+to install them.
+
+5
+00:00:13,120 --> 00:00:16,430
+If you look in this directory,
+we have two files-- we have
+
+6
+00:00:16,430 --> 00:00:20,400
+our app and we have this file
+called package.json.
+
+7
+00:00:20,400 --> 00:00:24,320
+So let's just get started and
+let's just run our app.
+
+8
+00:00:24,320 --> 00:00:24,670
+All right.
+
+9
+00:00:24,670 --> 00:00:25,730
+So we have a problem--
+
+10
+00:00:25,730 --> 00:00:28,210
+cannot find module express.
+
+11
+00:00:28,210 --> 00:00:29,820
+So let's look at our app
+and try to figure out
+
+12
+00:00:29,820 --> 00:00:31,560
+what's going on.
+
+13
+00:00:31,560 --> 00:00:33,900
+So we have these require
+statements.
+
+14
+00:00:33,900 --> 00:00:37,130
+These require statements are
+actually how we include
+
+15
+00:00:37,130 --> 00:00:41,030
+external libraries in a
+node.js application.
+
+16
+00:00:41,030 --> 00:00:43,950
+So here we're actually requiring
+express, requiring
+
+17
+00:00:43,950 --> 00:00:46,980
+consolidate, and requiring
+MongoDB.
+
+18
+00:00:46,980 --> 00:00:50,260
+So we actually depend on
+all of these libraries.
+
+19
+00:00:50,260 --> 00:00:52,780
+So even though our application
+doesn't do anything, we're
+
+20
+00:00:52,780 --> 00:00:56,040
+depending on all these libraries
+for this example.
+
+21
+00:00:56,040 --> 00:00:59,690
+So the first thing we can do to
+solve this problem is use
+
+22
+00:00:59,690 --> 00:01:02,120
+NPM install express.
+
+23
+00:01:02,120 --> 00:01:04,680
+So we saw that the error message
+was "cannot find
+
+24
+00:01:04,680 --> 00:01:06,980
+module express", so let's
+just install that
+
+25
+00:01:06,980 --> 00:01:09,540
+and see if it works.
+
+26
+00:01:09,540 --> 00:01:11,720
+All right, so we just
+installed express.
+
+27
+00:01:11,720 --> 00:01:13,830
+Now, let's try to run
+our application.
+
+28
+00:01:13,830 --> 00:01:15,620
+So we have another issue--
+
+29
+00:01:15,620 --> 00:01:19,190
+"cannot find module
+consolidate." So if we go back
+
+30
+00:01:19,190 --> 00:01:22,520
+to our app, see, we don't just
+include express, we require
+
+31
+00:01:22,520 --> 00:01:25,170
+consolidate and MongoDB.
+
+32
+00:01:25,170 --> 00:01:28,510
+So we could actually install
+each of those individually, or
+
+33
+00:01:28,510 --> 00:01:31,270
+we could use our package.json
+file.
+
+34
+00:01:31,270 --> 00:01:34,120
+So a lot of node.js applications
+come with
+
+35
+00:01:34,120 --> 00:01:37,025
+package.json file, which
+basically has some metadata
+
+36
+00:01:37,025 --> 00:01:40,750
+about the package, including
+its dependencies.
+
+37
+00:01:40,750 --> 00:01:44,890
+So if we look in here, we can
+see the name-- intro_to_npm--
+
+38
+00:01:44,890 --> 00:01:48,710
+we can see the version, and we
+can see the description of the
+
+39
+00:01:48,710 --> 00:01:53,540
+package, and the entry point of
+our application, and a list
+
+40
+00:01:53,540 --> 00:01:55,880
+of dependencies with
+their versions.
+
+41
+00:01:55,880 --> 00:01:58,400
+So let's see what we can
+do with this file.
+
+42
+00:01:58,400 --> 00:02:02,010
+So NPM actually knows about
+this package.json file.
+
+43
+00:02:02,010 --> 00:02:05,880
+Se of we just type npm install,
+NPM will actually
+
+44
+00:02:05,880 --> 00:02:07,690
+install automatically.
+
+45
+00:02:07,690 --> 00:02:10,639
+The packages in the
+package.json file.
+
+46
+00:02:10,639 --> 00:02:13,400
+So now, if we try to run our
+application, it runs
+
+47
+00:02:13,400 --> 00:02:14,770
+successfully.
+
+48
+00:02:14,770 --> 00:02:18,100
+One more thing that I want to
+note about NPM is that it
+
+49
+00:02:18,100 --> 00:02:22,060
+installs local modules in the
+node modules directory.
+
+50
+00:02:22,060 --> 00:02:25,040
+So you'll have to install the
+dependencies locally for all
+
+51
+00:02:25,040 --> 00:02:28,490
+of our examples and stencil code
+that we provide, even if
+
+52
+00:02:28,490 --> 00:02:30,950
+we don't show that step
+in every video.
+
+53
+00:02:30,950 --> 00:02:33,780
+You could actually install them
+globally, but for now,
+
+54
+00:02:33,780 --> 00:02:35,970
+we'll just cover installing
+them in the node modules
+
+55
+00:02:35,970 --> 00:02:39,520
+directory for each application
+that you write.
+
+56
+00:02:39,520 --> 00:02:42,200
+So we could take a look, just
+to verify, that we've
+
+57
+00:02:42,200 --> 00:02:44,380
+installed the modules
+that we expect.
+
+58
+00:02:44,380 --> 00:02:48,040
+We can see consolidate,
+express and MongoDB.
+
+59
+00:02:48,040 --> 00:02:49,720
+So that's a basic introduction
+to the
+
+60
+00:02:49,720 --> 00:02:51,620
+node.js package manager.
+
+61
+00:02:51,620 --> 00:02:53,920
+And that should be all you need
+to complete this course.
+
+62
+00:02:53,920 --> 00:02:55,170
