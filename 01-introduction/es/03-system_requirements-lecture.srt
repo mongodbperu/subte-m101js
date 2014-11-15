@@ -8,7 +8,7 @@ los requisitos del sistema para
 
 3
 00:00:02,210 --> 00:00:03,250
-este curso.
+este curso. 
 
 4
 00:00:03,250 --> 00:00:05,540
