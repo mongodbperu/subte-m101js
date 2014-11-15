@@ -1,0 +1,728 @@
+1
+00:00:00,000 --> 00:00:00,480
+
+2
+00:00:00,480 --> 00:00:03,020
+So let's talk a little bit more
+about building a blog on
+
+3
+00:00:03,020 --> 00:00:06,930
+Node.js, and a little bit about
+some of the stencil code
+
+4
+00:00:06,930 --> 00:00:08,580
+that we're going to
+provide to you.
+
+5
+00:00:08,580 --> 00:00:10,790
+And hopefully by the end of
+this, you'll understand
+
+6
+00:00:10,790 --> 00:00:13,820
+exactly which parts of it you'll
+need to fill in, which
+
+7
+00:00:13,820 --> 00:00:16,920
+parts are just there as
+part of the example.
+
+8
+00:00:16,920 --> 00:00:20,950
+So basic overview of the
+application is that there's an
+
+9
+00:00:20,950 --> 00:00:25,930
+app.js file which is basically
+our main, connects to MongoDB.
+
+10
+00:00:25,930 --> 00:00:28,550
+And it actually includes
+everything
+
+11
+00:00:28,550 --> 00:00:30,280
+in the routes folder.
+
+12
+00:00:30,280 --> 00:00:32,780
+So in the routes folder, we
+actually have the routes for
+
+13
+00:00:32,780 --> 00:00:36,290
+express that we register, and
+describe what we do when the
+
+14
+00:00:36,290 --> 00:00:39,360
+user navigates to
+a certain URL.
+
+15
+00:00:39,360 --> 00:00:42,670
+So for example, if the user
+navigates to login, in the
+
+16
+00:00:42,670 --> 00:00:45,180
+routes folder, that's where we
+have the code to actually
+
+17
+00:00:45,180 --> 00:00:48,240
+handle what to do when
+the user connects
+
+18
+00:00:48,240 --> 00:00:50,030
+to the login route.
+
+19
+00:00:50,030 --> 00:00:53,010
+Now, at certain points, the
+routes actually need to access
+
+20
+00:00:53,010 --> 00:00:54,860
+data from MongoDB.
+
+21
+00:00:54,860 --> 00:00:59,140
+And the code for that is
+contained in sessions.js,
+
+22
+00:00:59,140 --> 00:01:02,720
+posts.js, and users.js.
+
+23
+00:01:02,720 --> 00:01:05,680
+So down here, these are the
+three files that actually have
+
+24
+00:01:05,680 --> 00:01:09,690
+the code for interacting with
+MongoDB, and they correspond
+
+25
+00:01:09,690 --> 00:01:12,420
+to the sessions collection, the
+posts collection, and the
+
+26
+00:01:12,420 --> 00:01:14,840
+users collection respectively.
+
+27
+00:01:14,840 --> 00:01:16,850
+So that's the basic layout
+of our application.
+
+28
+00:01:16,850 --> 00:01:19,340
+So let's actually take
+a look at the code.
+
+29
+00:01:19,340 --> 00:01:19,950
+All right.
+
+30
+00:01:19,950 --> 00:01:22,550
+So if we look at all the files
+we have here, we have our
+
+31
+00:01:22,550 --> 00:01:25,260
+app.js, we have our
+routes, post.js,
+
+32
+00:01:25,260 --> 00:01:27,800
+sessions.js, users.js.
+
+33
+00:01:27,800 --> 00:01:30,930
+And then our views, which
+contain our HTML files which
+
+34
+00:01:30,930 --> 00:01:33,900
+are just swig templates that
+we render to the user.
+
+35
+00:01:33,900 --> 00:01:38,130
+So let's start with app.js, just
+to start with our main
+
+36
+00:01:38,130 --> 00:01:39,540
+entry point.
+
+37
+00:01:39,540 --> 00:01:39,890
+All right.
+
+38
+00:01:39,890 --> 00:01:41,790
+So this is app.js.
+
+39
+00:01:41,790 --> 00:01:44,370
+Notice that we require
+express, we require
+
+40
+00:01:44,370 --> 00:01:48,550
+consolidate, MongoDB,
+and ./routes.
+
+41
+00:01:48,550 --> 00:01:50,990
+So I'll talk a little bit
+about this after I get
+
+42
+00:01:50,990 --> 00:01:52,170
+through this file.
+
+43
+00:01:52,170 --> 00:01:55,060
+This is the way I'm specifying
+a subdirectory.
+
+44
+00:01:55,060 --> 00:01:57,000
+And we'll look a little
+bit more at how
+
+45
+00:01:57,000 --> 00:01:58,660
+this works in a second.
+
+46
+00:01:58,660 --> 00:02:01,980
+If we go down to the main body
+of our code, basically, this
+
+47
+00:02:01,980 --> 00:02:03,440
+is our whole application.
+
+48
+00:02:03,440 --> 00:02:06,180
+So we connect to MongoDB.
+
+49
+00:02:06,180 --> 00:02:07,780
+We register our templating
+engine
+
+50
+00:02:07,780 --> 00:02:09,560
+just like we did before.
+
+51
+00:02:09,560 --> 00:02:13,480
+We have some middleware for
+express, because we need to
+
+52
+00:02:13,480 --> 00:02:17,120
+access cookies and post
+variables in our blog.
+
+53
+00:02:17,120 --> 00:02:20,680
+And then we delegate, actually,
+to our routes.
+
+54
+00:02:20,680 --> 00:02:23,320
+So we pass in the app
+and a connection
+
+55
+00:02:23,320 --> 00:02:25,500
+to this routes object.
+
+56
+00:02:25,500 --> 00:02:27,810
+And then we just listen
+on port 3000,
+
+57
+00:02:27,810 --> 00:02:29,790
+print out a nice message.
+
+58
+00:02:29,790 --> 00:02:32,950
+So if we go back up here to the
+top of the file, we see
+
+59
+00:02:32,950 --> 00:02:37,740
+that we have routes equals
+require ./routes.
+
+60
+00:02:37,740 --> 00:02:39,080
+So what's going on here?
+
+61
+00:02:39,080 --> 00:02:42,295
+So what this is doing is it's
+telling Node.js that we want
+
+62
+00:02:42,295 --> 00:02:43,560
+to include a local file.
+
+63
+00:02:43,560 --> 00:02:46,330
+This isn't actually a module
+because if we didn't have the
+
+64
+00:02:46,330 --> 00:02:48,640
+dot slash, it would actually
+look for a module named
+
+65
+00:02:48,640 --> 00:02:52,160
+routes, just give an error
+message saying, module routes
+
+66
+00:02:52,160 --> 00:02:54,560
+not found, unless we happen
+to have a module
+
+67
+00:02:54,560 --> 00:02:55,770
+installed for that.
+
+68
+00:02:55,770 --> 00:02:59,510
+So let's actually look more into
+this directory and see
+
+69
+00:02:59,510 --> 00:03:00,800
+what we can find.
+
+70
+00:03:00,800 --> 00:03:03,780
+So notice that routes is
+actually a directory.
+
+71
+00:03:03,780 --> 00:03:07,850
+So when we get that require
+statement for ./routes, we're
+
+72
+00:03:07,850 --> 00:03:10,700
+actually saying to include
+this directory.
+
+73
+00:03:10,700 --> 00:03:13,960
+What that's doing is it's
+actually including this
+
+74
+00:03:13,960 --> 00:03:15,640
+index.js file.
+
+75
+00:03:15,640 --> 00:03:18,340
+So there are more details
+about how the require
+
+76
+00:03:18,340 --> 00:03:21,800
+statement works, and how it
+looks up different files, but
+
+77
+00:03:21,800 --> 00:03:24,670
+this is just an example of what
+happens when you use a
+
+78
+00:03:24,670 --> 00:03:27,550
+local path and include
+a directory.
+
+79
+00:03:27,550 --> 00:03:30,340
+So let's just take a look
+index.js before we look at the
+
+80
+00:03:30,340 --> 00:03:32,420
+rest of our routes.
+
+81
+00:03:32,420 --> 00:03:34,340
+So this is index.js.
+
+82
+00:03:34,340 --> 00:03:37,660
+And this is the function that's
+getting called when we
+
+83
+00:03:37,660 --> 00:03:38,890
+call the routes function.
+
+84
+00:03:38,890 --> 00:03:42,380
+Because at the top of our app
+we had routes equals require
+
+85
+00:03:42,380 --> 00:03:46,350
+./routes, and then we were just
+calling that function.
+
+86
+00:03:46,350 --> 00:03:50,090
+So here we're saying
+module.exports = exports =
+
+87
+00:03:50,090 --> 00:03:54,350
+function, that takes an app
+and connect to database.
+
+88
+00:03:54,350 --> 00:03:58,220
+And here we have some helpers
+that I'll show in a bit that
+
+89
+00:03:58,220 --> 00:04:01,360
+actually have the content of the
+code that we use to deal
+
+90
+00:04:01,360 --> 00:04:02,640
+with the routes.
+
+91
+00:04:02,640 --> 00:04:06,470
+So if we look down here, we can
+see that we're registering
+
+92
+00:04:06,470 --> 00:04:07,390
+all our routes.
+
+93
+00:04:07,390 --> 00:04:11,390
+We do app.get/ and we
+actually pass in
+
+94
+00:04:11,390 --> 00:04:12,680
+what's actually a function.
+
+95
+00:04:12,680 --> 00:04:15,410
+So our contentHandler has
+a function called
+
+96
+00:04:15,410 --> 00:04:17,060
+displayMainPage.
+
+97
+00:04:17,060 --> 00:04:21,149
+We're passing that to slash
+route for express to use when
+
+98
+00:04:21,149 --> 00:04:23,130
+a user request slash.
+
+99
+00:04:23,130 --> 00:04:24,450
+You see something
+similar here.
+
+100
+00:04:24,450 --> 00:04:28,210
+We have contentHandler.d
+isplayMainPageByTag,
+
+101
+00:04:28,210 --> 00:04:29,460
+contentHandler.d
+isplayPostByPermaLink.
+
+102
+00:04:29,460 --> 00:04:31,210
+
+103
+00:04:31,210 --> 00:04:34,080
+Just all sorts of helper
+functions that we register
+
+104
+00:04:34,080 --> 00:04:35,020
+with the routes.
+
+105
+00:04:35,020 --> 00:04:38,400
+So this is basically our top
+level of the routes file where
+
+106
+00:04:38,400 --> 00:04:40,740
+we're just matching routes
+with the work
+
+107
+00:04:40,740 --> 00:04:42,150
+that we need to do.
+
+108
+00:04:42,150 --> 00:04:45,410
+So now if we look down here,
+we can see that we have all
+
+109
+00:04:45,410 --> 00:04:47,070
+these things to handle
+our session.
+
+110
+00:04:47,070 --> 00:04:50,840
+So here we have get for the
+login form, we have the post
+
+111
+00:04:50,840 --> 00:04:54,480
+for the login form, the get for
+the signup form, the post
+
+112
+00:04:54,480 --> 00:04:56,800
+for the signup form, when the
+user actually submits the
+
+113
+00:04:56,800 --> 00:04:58,180
+signup form.
+
+114
+00:04:58,180 --> 00:05:00,340
+We have the Welcome page,
+we have the Logout page.
+
+115
+00:05:00,340 --> 00:05:03,250
+That's all managed by
+the sessionHandler.
+
+116
+00:05:03,250 --> 00:05:05,600
+And then we just register
+some error handling
+
+117
+00:05:05,600 --> 00:05:07,040
+middleware down here.
+
+118
+00:05:07,040 --> 00:05:09,890
+As one last small thing I want
+to mention, we actually have
+
+119
+00:05:09,890 --> 00:05:11,540
+our own middleware here.
+
+120
+00:05:11,540 --> 00:05:12,410
+So we're saying,
+app.use(sessionH
+
+121
+00:05:12,410 --> 00:05:12,570
+andler.isLoggedInMiddleware).
+
+122
+00:05:12,570 --> 00:05:17,780
+I use session So this is
+actually to keep the code a
+
+123
+00:05:17,780 --> 00:05:21,590
+little bit nicer because every
+page basically needs to know
+
+124
+00:05:21,590 --> 00:05:24,370
+whether the user's logged in,
+because the content of the
+
+125
+00:05:24,370 --> 00:05:25,940
+page may be different.
+
+126
+00:05:25,940 --> 00:05:29,870
+So this just contains that
+duplicate code as middleware,
+
+127
+00:05:29,870 --> 00:05:32,920
+and it gets called every single
+time no matter what
+
+128
+00:05:32,920 --> 00:05:34,150
+route we're going to match.
+
+129
+00:05:34,150 --> 00:05:36,860
+So this middleware will get
+called, and because we
+
+130
+00:05:36,860 --> 00:05:40,310
+register all our routes
+afterwards, it'll get called
+
+131
+00:05:40,310 --> 00:05:42,150
+before our routes.
+
+132
+00:05:42,150 --> 00:05:42,510
+All right.
+
+133
+00:05:42,510 --> 00:05:44,960
+So we've looked a little bit
+about how we match the routes
+
+134
+00:05:44,960 --> 00:05:46,610
+to the work that
+we need to do.
+
+135
+00:05:46,610 --> 00:05:49,690
+Let's actually look at the
+content of that work, and soon
+
+136
+00:05:49,690 --> 00:05:52,750
+we'll get to the actual database
+operations and the
+
+137
+00:05:52,750 --> 00:05:53,540
+point of this homework.
+
+138
+00:05:53,540 --> 00:05:57,350
+But I just wanted to really give
+a good overview of what
+
+139
+00:05:57,350 --> 00:06:00,050
+this application is doing so
+you don't feel like there's
+
+140
+00:06:00,050 --> 00:06:02,280
+magic happening under
+the covers.
+
+141
+00:06:02,280 --> 00:06:05,020
+And the good news is that for
+the part you have to write,
+
+142
+00:06:05,020 --> 00:06:07,560
+you don't have to really
+use this stencil code.
+
+143
+00:06:07,560 --> 00:06:09,830
+You just have to use MongoDB.
+
+144
+00:06:09,830 --> 00:06:12,870
+And so you don't really have to
+know how this works, it's
+
+145
+00:06:12,870 --> 00:06:15,270
+just going to call
+your functions.
+
+146
+00:06:15,270 --> 00:06:19,270
+So if we go all the way back up
+to the top, we can see that
+
+147
+00:06:19,270 --> 00:06:22,800
+we have our SessionHandler,
+ContentHandler, ErrorHandler.
+
+148
+00:06:22,800 --> 00:06:26,910
+That's ./session, ./content,
+and ./error.
+
+149
+00:06:26,910 --> 00:06:30,250
+So let's look again in
+our routes directory.
+
+150
+00:06:30,250 --> 00:06:34,660
+We see we have content.js,
+session.js, and error.js.
+
+151
+00:06:34,660 --> 00:06:39,040
+So notice we did include the
+.js, but no js actually tries
+
+152
+00:06:39,040 --> 00:06:43,070
+to append .js extension and
+see if the file exists.
+
+153
+00:06:43,070 --> 00:06:46,320
+So notice that this behavior is
+different for a directory,
+
+154
+00:06:46,320 --> 00:06:50,160
+where it actually looks in
+routes/index.js because it
+
+155
+00:06:50,160 --> 00:06:53,800
+didn't find a routes.js
+in the top level.

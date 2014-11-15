@@ -1,0 +1,188 @@
+1
+00:00:00,000 --> 00:00:00,150
+
+2
+00:00:00,150 --> 00:00:00,530
+All right.
+
+3
+00:00:00,530 --> 00:00:03,610
+So here's the answer to the
+homework assignment.
+
+4
+00:00:03,610 --> 00:00:06,340
+This is the answer
+to homework 2-3.
+
+5
+00:00:06,340 --> 00:00:09,850
+So just to recap, your
+assignment was to fill in the
+
+6
+00:00:09,850 --> 00:00:12,490
+user's data access objects
+so that sign-up and
+
+7
+00:00:12,490 --> 00:00:14,960
+login work in our blog.
+
+8
+00:00:14,960 --> 00:00:17,930
+So let's take a look at
+the finished code.
+
+9
+00:00:17,930 --> 00:00:18,230
+All right.
+
+10
+00:00:18,230 --> 00:00:20,005
+So the first function we
+had to implement was
+
+11
+00:00:20,005 --> 00:00:21,540
+the add user function.
+
+12
+00:00:21,540 --> 00:00:24,650
+This is actually called from
+the sign-up formula blog.
+
+13
+00:00:24,650 --> 00:00:26,960
+So we get a user name, password
+and email from the
+
+14
+00:00:26,960 --> 00:00:28,580
+user that wants to sign up.
+
+15
+00:00:28,580 --> 00:00:31,800
+So if we look down here, we can
+see our to-do for homework
+
+16
+00:00:31,800 --> 00:00:34,760
+2-3 and the finished result.
+
+17
+00:00:34,760 --> 00:00:38,290
+So your job was to insert the
+user document into the
+
+18
+00:00:38,290 --> 00:00:41,800
+collection, effectively adding
+the new user because all our
+
+19
+00:00:41,800 --> 00:00:45,030
+other validation functions
+depend on this user document
+
+20
+00:00:45,030 --> 00:00:47,050
+and check the result.
+
+21
+00:00:47,050 --> 00:00:49,990
+If there is no error, you
+just can log that you've
+
+22
+00:00:49,990 --> 00:00:51,370
+inserted a new user.
+
+23
+00:00:51,370 --> 00:00:55,090
+You call back with null and the
+result's actually an array
+
+24
+00:00:55,090 --> 00:00:56,420
+of documents that
+we've inserted.
+
+25
+00:00:56,420 --> 00:00:59,550
+So we call back here
+with result zero.
+
+26
+00:00:59,550 --> 00:01:03,140
+And if there was an error, we'd
+call back the error and a
+
+27
+00:01:03,140 --> 00:01:04,270
+null result.
+
+28
+00:01:04,270 --> 00:01:05,030
+All right.
+
+29
+00:01:05,030 --> 00:01:08,280
+So the next function
+was validate login.
+
+30
+00:01:08,280 --> 00:01:10,130
+So this is the one
+with this giant
+
+31
+00:01:10,130 --> 00:01:12,200
+validate user dock function.
+
+32
+00:01:12,200 --> 00:01:16,050
+But if we go down here, you can
+see that the code that you
+
+33
+00:01:16,050 --> 00:01:18,500
+actually need to implement
+this is just one line.
+
+34
+00:01:18,500 --> 00:01:23,140
+So we just do users.findOne, the
+ID of user name and just
+
+35
+00:01:23,140 --> 00:01:25,780
+pass it the validate
+user dock function.
+
+36
+00:01:25,780 --> 00:01:30,220
+So this will handle all the
+validation for us and call our
+
+37
+00:01:30,220 --> 00:01:33,430
+original call back that was
+passed in to this overall
+
+38
+00:01:33,430 --> 00:01:37,580
+function with whatever error
+occurred or the user document,
+
+39
+00:01:37,580 --> 00:01:38,790
+if we found it.
+
+40
+00:01:38,790 --> 00:01:40,165
+So that's the answer
+to homework 2-3.
+
+41
+00:01:40,165 --> 00:01:41,415

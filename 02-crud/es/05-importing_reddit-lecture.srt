@@ -1,0 +1,514 @@
+1
+00:00:00,000 --> 00:00:00,130
+
+2
+00:00:00,130 --> 00:00:00,650
+All right.
+
+3
+00:00:00,650 --> 00:00:03,970
+So in this lesson, we'll
+actually be importing data
+
+4
+00:00:03,970 --> 00:00:04,730
+from Reddit.
+
+5
+00:00:04,730 --> 00:00:06,830
+We're doing this both because
+we want to have a more
+
+6
+00:00:06,830 --> 00:00:10,110
+interesting data set for future
+lessons and because we
+
+7
+00:00:10,110 --> 00:00:13,570
+want to give an example of how
+we can use MongoDB to import
+
+8
+00:00:13,570 --> 00:00:16,410
+and analyze data without
+necessarily knowing the full
+
+9
+00:00:16,410 --> 00:00:17,930
+structure beforehand.
+
+10
+00:00:17,930 --> 00:00:21,100
+So as a part of this, we'll go
+over an example of how to
+
+11
+00:00:21,100 --> 00:00:24,540
+import data into MongoDB from
+an external source using
+
+12
+00:00:24,540 --> 00:00:28,060
+NodeJS and the NodeJS
+driver for MongoDB.
+
+13
+00:00:28,060 --> 00:00:31,250
+So this is Reddit's
+technology page.
+
+14
+00:00:31,250 --> 00:00:33,980
+And Reddit actually has the
+feature where if you
+
+15
+00:00:33,980 --> 00:00:38,350
+append.JSON at the end, it will
+return a JSON object.
+
+16
+00:00:38,350 --> 00:00:41,050
+So this is what we're going to
+be importing into MongoDB.
+
+17
+00:00:41,050 --> 00:00:41,810
+Okay.
+
+18
+00:00:41,810 --> 00:00:43,625
+So first we're going curl
+this to a file.
+
+19
+00:00:43,625 --> 00:00:45,240
+Just call it Reddit.JSON.
+
+20
+00:00:45,240 --> 00:00:49,010
+Let's open Reddit.JSON and we
+can actually look a little bit
+
+21
+00:00:49,010 --> 00:00:49,780
+at the structure.
+
+22
+00:00:49,780 --> 00:00:52,060
+So I was looking
+at this before.
+
+23
+00:00:52,060 --> 00:00:56,570
+So you can see here that this
+one giant JSON object.
+
+24
+00:00:56,570 --> 00:00:59,590
+And it has a field kind
+and it has data.
+
+25
+00:00:59,590 --> 00:01:03,930
+So actually it looks like data
+and children inside the data
+
+26
+00:01:03,930 --> 00:01:07,130
+subject actually has the list
+of the stories we want.
+
+27
+00:01:07,130 --> 00:01:10,850
+And it looks like for each
+story, the data is actually
+
+28
+00:01:10,850 --> 00:01:12,910
+all the information about
+the story itself.
+
+29
+00:01:12,910 --> 00:01:14,970
+So the way we're going
+to actually import
+
+30
+00:01:14,970 --> 00:01:16,750
+this is using NodeJS.
+
+31
+00:01:16,750 --> 00:01:19,280
+So let's take a look at that.
+
+32
+00:01:19,280 --> 00:01:23,040
+So this is an example of how
+to import data from an
+
+33
+00:01:23,040 --> 00:01:26,610
+external source into MongoDB
+using NodeJS.
+
+34
+00:01:26,610 --> 00:01:29,940
+So here we actually have the
+Mongo client right here.
+
+35
+00:01:29,940 --> 00:01:32,430
+Just like before, we
+connect to MongoDB.
+
+36
+00:01:32,430 --> 00:01:33,885
+We also have this
+other library.
+
+37
+00:01:33,885 --> 00:01:37,070
+It's a NodeJS library
+for making
+
+38
+00:01:37,070 --> 00:01:39,890
+requests to other sites.
+
+39
+00:01:39,890 --> 00:01:43,670
+So here, after we've connected
+to MongoDB we then just say
+
+40
+00:01:43,670 --> 00:01:48,610
+request and give it the Reddit
+URL and a callback for when we
+
+41
+00:01:48,610 --> 00:01:50,390
+receive a response.
+
+42
+00:01:50,390 --> 00:01:53,070
+So once we get a response from
+Reddit, we say okay is it in
+
+43
+00:01:53,070 --> 00:01:55,830
+error, is it a good
+return code.
+
+44
+00:01:55,830 --> 00:01:58,400
+And if so, we can actually
+parse the
+
+45
+00:01:58,400 --> 00:02:00,610
+body as a JSON object.
+
+46
+00:02:00,610 --> 00:02:04,450
+So this is basically parsing
+our JSON string into the
+
+47
+00:02:04,450 --> 00:02:07,190
+native JavaScript object.
+
+48
+00:02:07,190 --> 00:02:10,330
+So after we parse it, the first
+thing we do is we say
+
+49
+00:02:10,330 --> 00:02:13,370
+ojb.data.children, which
+we found out was
+
+50
+00:02:13,370 --> 00:02:15,130
+the list of our stories.
+
+51
+00:02:15,130 --> 00:02:18,470
+And then just to clean it up a
+little bit, we actually map
+
+52
+00:02:18,470 --> 00:02:19,400
+this array.
+
+53
+00:02:19,400 --> 00:02:21,240
+So this is an array
+of our stories and
+
+54
+00:02:21,240 --> 00:02:23,450
+arrays have a map function.
+
+55
+00:02:23,450 --> 00:02:27,840
+And basically what this does is
+it applies this function to
+
+56
+00:02:27,840 --> 00:02:31,910
+every element of the array and
+replaces that element with
+
+57
+00:02:31,910 --> 00:02:33,570
+whatever this function
+returns.
+
+58
+00:02:33,570 --> 00:02:37,150
+So we saw earlier that in our
+JSON object for each story,
+
+59
+00:02:37,150 --> 00:02:41,290
+story.data was actually the
+interesting information.
+
+60
+00:02:41,290 --> 00:02:43,260
+So we just do this
+to clean it up.
+
+61
+00:02:43,260 --> 00:02:46,090
+So we just get an array
+of all the stories.
+
+62
+00:02:46,090 --> 00:02:48,610
+So after that, we have our array
+of stories and we can
+
+63
+00:02:48,610 --> 00:02:50,980
+actually insert the
+entire array.
+
+64
+00:02:50,980 --> 00:02:53,670
+So here we'd just get our
+collection that's stored in
+
+65
+00:02:53,670 --> 00:02:56,480
+the Reddit collection,
+insert our stories.
+
+66
+00:02:56,480 --> 00:02:59,210
+And this function will actually
+tell us whether we've
+
+67
+00:02:59,210 --> 00:03:02,770
+successfully inserted our
+stories and actually return
+
+68
+00:03:02,770 --> 00:03:04,530
+what we inserted it.
+
+69
+00:03:04,530 --> 00:03:06,400
+So we just log that here.
+
+70
+00:03:06,400 --> 00:03:08,590
+So we then know that
+it succeeded.
+
+71
+00:03:08,590 --> 00:03:11,020
+So now let's run this.
+
+72
+00:03:11,020 --> 00:03:11,400
+All right.
+
+73
+00:03:11,400 --> 00:03:13,970
+So it looked like it completed
+successfully.
+
+74
+00:03:13,970 --> 00:03:18,950
+So just check and actually see
+our new Reddit data, let's go
+
+75
+00:03:18,950 --> 00:03:22,800
+to Mongo and use course and
+do db.reddit.find.pretty.
+
+76
+00:03:22,800 --> 00:03:28,300
+
+77
+00:03:28,300 --> 00:03:31,780
+So we can see here, all these
+stories are the same as the
+
+78
+00:03:31,780 --> 00:03:34,100
+ones on our technology homepage
+except now that
+
+79
+00:03:34,100 --> 00:03:36,990
+they're in MongoDB, we can
+actually do some interesting
+
+80
+00:03:36,990 --> 00:03:40,940
+queries on them and ask some
+more interesting questions
+
+81
+00:03:40,940 --> 00:03:42,890
+than we could when they were
+just on the front page.
+
+82
+00:03:42,890 --> 00:03:45,890
+So we could say things like,
+which author is posting the
+
+83
+00:03:45,890 --> 00:03:50,140
+most, how many comments are
+there on average, and things
+
+84
+00:03:50,140 --> 00:03:52,830
+that we couldn't do very easily
+when it was just in the
+
+85
+00:03:52,830 --> 00:03:54,000
+web interface.
+
+86
+00:03:54,000 --> 00:03:56,920
+So for later examples, we'll
+actually use this more
+
+87
+00:03:56,920 --> 00:03:59,580
+interesting data set rather than
+the grades collection we
+
+88
+00:03:59,580 --> 00:04:00,810
+were using before.
+
+89
+00:04:00,810 --> 00:04:03,600
+And so the thing to note here
+is that we could actually
+
+90
+00:04:03,600 --> 00:04:06,960
+import this data knowing
+very little about the
+
+91
+00:04:06,960 --> 00:04:07,950
+format of the data.
+
+92
+00:04:07,950 --> 00:04:11,050
+All we really needed to know is
+that the children were in
+
+93
+00:04:11,050 --> 00:04:13,840
+an array and where to find
+that array so we could
+
+94
+00:04:13,840 --> 00:04:16,360
+actually insert the documents
+individually.
+
+95
+00:04:16,360 --> 00:04:18,790
+and just a little bit
+extra for that extra
+
+96
+00:04:18,790 --> 00:04:19,649
+cleanup that we did.
+
+97
+00:04:19,649 --> 00:04:22,800
+But other than that, we had
+really no idea when we
+
+98
+00:04:22,800 --> 00:04:25,380
+inserted this what the
+structure would be.
+
+99
+00:04:25,380 --> 00:04:28,610
+We had no idea it would have a
+URL, we had no idea it would
+
+100
+00:04:28,610 --> 00:04:31,710
+have a name field, we had no
+idea it would have a numb
+
+101
+00:04:31,710 --> 00:04:32,910
+comments field.
+
+102
+00:04:32,910 --> 00:04:36,340
+We just sort of inserted this
+into MongoDB and these
+
+103
+00:04:36,340 --> 00:04:38,850
+documents may be just different
+structures, they may
+
+104
+00:04:38,850 --> 00:04:40,850
+be different sizes,
+but it's fine.
+
+105
+00:04:40,850 --> 00:04:42,890
+So now that they're in MongoDB,
+we can ask these
+
+106
+00:04:42,890 --> 00:04:45,800
+questions, we can make queries
+and learn a little bit more
+
+107
+00:04:45,800 --> 00:04:47,260
+about the structure
+of our documents.
+
+108
+00:04:47,260 --> 00:04:49,770
+So that's what the rest of our
+examples will be using.
+
+109
+00:04:49,770 --> 00:04:51,020

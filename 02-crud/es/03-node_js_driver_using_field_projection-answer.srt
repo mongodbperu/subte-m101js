@@ -1,0 +1,53 @@
+1
+00:00:00,000 --> 00:00:00,130
+
+2
+00:00:00,130 --> 00:00:03,240
+And the answer is this line
+here, because we're passing an
+
+3
+00:00:03,240 --> 00:00:06,720
+empty query selector and
+actually passing in the
+
+4
+00:00:06,720 --> 00:00:10,250
+projection selector correctly
+as the second argument.
+
+5
+00:00:10,250 --> 00:00:12,880
+And we're also making sure to
+explicitly turn off the
+
+6
+00:00:12,880 --> 00:00:14,730
+underscore ID field.
+
+7
+00:00:14,730 --> 00:00:17,200
+These won't work, because the
+protection operator is in the
+
+8
+00:00:17,200 --> 00:00:18,580
+wrong place.
+
+9
+00:00:18,580 --> 00:00:21,220
+And this one will not work
+because we're not actually
+
+10
+00:00:21,220 --> 00:00:24,790
+explicitly removing the
+underscore ID field, which is
+
+11
+00:00:24,790 --> 00:00:27,660
+included by default even
+if we say grade 1 here.
+
+12
+00:00:27,660 --> 00:00:28,910

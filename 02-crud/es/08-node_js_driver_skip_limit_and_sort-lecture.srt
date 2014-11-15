@@ -1,0 +1,605 @@
+1
+00:00:00,000 --> 00:00:00,150
+
+2
+00:00:00,150 --> 00:00:03,860
+All right, so we're actually
+going to talk now about skip,
+
+3
+00:00:03,860 --> 00:00:05,350
+limit, and sort.
+
+4
+00:00:05,350 --> 00:00:08,870
+So, the first thing I want to
+mention is that these happen
+
+5
+00:00:08,870 --> 00:00:10,550
+in a very specific order.
+
+6
+00:00:10,550 --> 00:00:16,090
+So, first we sort, then we
+skip, and then we limit.
+
+7
+00:00:16,090 --> 00:00:19,270
+So, it's important that it
+happens in this order, because
+
+8
+00:00:19,270 --> 00:00:22,170
+if we sorted afterwards, we
+might be skipping documents
+
+9
+00:00:22,170 --> 00:00:24,050
+that we didn't actually
+intend to skip.
+
+10
+00:00:24,050 --> 00:00:26,970
+And through our limit, we might
+not get to documents
+
+11
+00:00:26,970 --> 00:00:28,280
+that we would have otherwise.
+
+12
+00:00:28,280 --> 00:00:31,210
+So, it's important that
+we sort first.
+
+13
+00:00:31,210 --> 00:00:34,700
+All right, so this is an example
+of using skip, limit,
+
+14
+00:00:34,700 --> 00:00:36,960
+and sort in the Node.js
+driver.
+
+15
+00:00:36,960 --> 00:00:38,630
+So right here, we're
+actually using the
+
+16
+00:00:38,630 --> 00:00:39,940
+grades collection again.
+
+17
+00:00:39,940 --> 00:00:41,690
+We'll just store that reference
+here to make the
+
+18
+00:00:41,690 --> 00:00:43,710
+code below a little simpler.
+
+19
+00:00:43,710 --> 00:00:49,070
+And here we get a cursor by
+doing grades.find, and we're
+
+20
+00:00:49,070 --> 00:00:52,110
+actually not being selective,
+so this will give us all the
+
+21
+00:00:52,110 --> 00:00:54,600
+documents in the grades
+collection.
+
+22
+00:00:54,600 --> 00:00:57,820
+So, the first thing we
+do is do cursor.skip.
+
+23
+00:00:57,820 --> 00:01:01,180
+So we skip document,
+cursor.limit, and then the
+
+24
+00:01:01,180 --> 00:01:04,530
+cursor.sort, with the first
+argument of the key that we're
+
+25
+00:01:04,530 --> 00:01:07,480
+sorting on, and the second
+argument of the
+
+26
+00:01:07,480 --> 00:01:08,820
+direction to sort.
+
+27
+00:01:08,820 --> 00:01:10,690
+So, let's run this.
+
+28
+00:01:10,690 --> 00:01:13,540
+All right, so we got these
+students back.
+
+29
+00:01:13,540 --> 00:01:17,860
+We've sorted based on the exam
+scores, and we see that we
+
+30
+00:01:17,860 --> 00:01:19,920
+have three 80s and an 85.
+
+31
+00:01:19,920 --> 00:01:23,100
+So, ascending based on
+the exam scores.
+
+32
+00:01:23,100 --> 00:01:26,830
+So, all the hundreds we saw
+are further down the list.
+
+33
+00:01:26,830 --> 00:01:30,000
+All right, so now let's change
+things up a little bit.
+
+34
+00:01:30,000 --> 00:01:33,780
+So, let's move this limit up
+here, and the sort up here,
+
+35
+00:01:33,780 --> 00:01:36,550
+and do all of these in
+different order.
+
+36
+00:01:36,550 --> 00:01:40,310
+So if we run it again, we see
+that we have exactly the same
+
+37
+00:01:40,310 --> 00:01:42,230
+result that we had before.
+
+38
+00:01:42,230 --> 00:01:45,450
+So, the reason for this is that
+no matter what order you
+
+39
+00:01:45,450 --> 00:01:47,840
+do the sort, limit, and skip
+in, the driver actually
+
+40
+00:01:47,840 --> 00:01:50,620
+reorders them to make sure they
+happen in the correct
+
+41
+00:01:50,620 --> 00:01:53,760
+order, with the sort first,
+the skip second,
+
+42
+00:01:53,760 --> 00:01:55,430
+and the limit third.
+
+43
+00:01:55,430 --> 00:01:58,400
+All right, so let's try a
+more complicated sort.
+
+44
+00:01:58,400 --> 00:02:01,680
+So let's comment this
+out, uncomment this.
+
+45
+00:02:01,680 --> 00:02:05,470
+So, what we're trying to do here
+is we're trying to sort
+
+46
+00:02:05,470 --> 00:02:09,259
+on grade first, and then sort
+the students alphabetically in
+
+47
+00:02:09,259 --> 00:02:11,030
+reverse, second.
+
+48
+00:02:11,030 --> 00:02:13,550
+So, when you have the one here,
+it shows that we're in
+
+49
+00:02:13,550 --> 00:02:16,560
+ascending, which means we're
+starting at the low grades,
+
+50
+00:02:16,560 --> 00:02:18,470
+and increasing.
+
+51
+00:02:18,470 --> 00:02:20,730
+And here we're sorting in
+descending order, so we're
+
+52
+00:02:20,730 --> 00:02:24,780
+starting actually at the last
+names in the alphabet, and
+
+53
+00:02:24,780 --> 00:02:26,360
+going up from there.
+
+54
+00:02:26,360 --> 00:02:28,660
+So, let's see how that looks.
+
+55
+00:02:28,660 --> 00:02:32,850
+All right so the results look
+similar, but you can see here
+
+56
+00:02:32,850 --> 00:02:35,580
+that we're sorting on the grade,
+but within all of these
+
+57
+00:02:35,580 --> 00:02:38,840
+students that got 80, we have
+Steve, Jill, Amanda.
+
+58
+00:02:38,840 --> 00:02:42,360
+So, we're sorting the names in
+reverse descending order.
+
+59
+00:02:42,360 --> 00:02:44,210
+So, one thing I want to note
+here is that we sorted the
+
+60
+00:02:44,210 --> 00:02:46,770
+grades first, and the
+names second.
+
+61
+00:02:46,770 --> 00:02:48,900
+So we didn't sort
+alphabetically, and then sort
+
+62
+00:02:48,900 --> 00:02:50,840
+by the grades inside
+those categories.
+
+63
+00:02:50,840 --> 00:02:53,420
+We actually sorted by the
+grades, and then within
+
+64
+00:02:53,420 --> 00:02:56,520
+documents that had the same
+grade, we then sorted by name.
+
+65
+00:02:56,520 --> 00:03:00,390
+So, the way we determine the
+order in which we sort and
+
+66
+00:03:00,390 --> 00:03:03,340
+which one takes priority
+is the order that
+
+67
+00:03:03,340 --> 00:03:04,880
+they're in this array.
+
+68
+00:03:04,880 --> 00:03:07,840
+So you notice that grade is
+first, which means we sort on
+
+69
+00:03:07,840 --> 00:03:10,930
+the grade, and then we have
+student, which means that
+
+70
+00:03:10,930 --> 00:03:13,000
+amongst documents that
+had the same
+
+71
+00:03:13,000 --> 00:03:15,690
+grade, we sort by student.
+
+72
+00:03:15,690 --> 00:03:19,340
+And that's actually why this
+here is an array, and not
+
+73
+00:03:19,340 --> 00:03:22,750
+object, because in the Node.js
+driver, if you have an object
+
+74
+00:03:22,750 --> 00:03:26,020
+here with keys and values, the
+fields can actually be
+
+75
+00:03:26,020 --> 00:03:28,270
+reordered within that
+object before they
+
+76
+00:03:28,270 --> 00:03:30,160
+make it to the database.
+
+77
+00:03:30,160 --> 00:03:33,700
+For a sort, that would be bad,
+because if your object got
+
+78
+00:03:33,700 --> 00:03:35,710
+reordered without you realizing
+it, you may have a
+
+79
+00:03:35,710 --> 00:03:37,260
+completely different
+sort order.
+
+80
+00:03:37,260 --> 00:03:39,980
+You may be sorting by student
+first, and then by grade, just
+
+81
+00:03:39,980 --> 00:03:43,300
+because your fields got
+reordered, whereas arrays
+
+82
+00:03:43,300 --> 00:03:45,090
+actually do not get reordered.
+
+83
+00:03:45,090 --> 00:03:48,500
+So we use an array here to make
+sure that grade comes
+
+84
+00:03:48,500 --> 00:03:52,670
+first, and then student comes
+second, to tell MongoDB that
+
+85
+00:03:52,670 --> 00:03:55,620
+we want to sort on grade, then
+we wanted to sort on student
+
+86
+00:03:55,620 --> 00:03:58,140
+amongst grades that
+at the same.
+
+87
+00:03:58,140 --> 00:04:01,230
+All right, so let's look at
+one more way to do this.
+
+88
+00:04:01,230 --> 00:04:04,560
+So, here we actually made a
+cursor, and we called the
+
+89
+00:04:04,560 --> 00:04:07,790
+limit, skip, and sort functions,
+but it turns out
+
+90
+00:04:07,790 --> 00:04:10,520
+that you can actually just
+make the cursor with some
+
+91
+00:04:10,520 --> 00:04:13,620
+starting options when you
+do the find query.
+
+92
+00:04:13,620 --> 00:04:17,350
+So, the first argument to
+find is the selector.
+
+93
+00:04:17,350 --> 00:04:20,480
+The second argument is
+the projection, as we
+
+94
+00:04:20,480 --> 00:04:22,060
+talked about before.
+
+95
+00:04:22,060 --> 00:04:25,180
+And the third argument can
+be an option structure.
+
+96
+00:04:25,180 --> 00:04:29,030
+So in this option structure, we
+have skip of one, which is
+
+97
+00:04:29,030 --> 00:04:32,050
+equivalent to calling
+dot skip of one.
+
+98
+00:04:32,050 --> 00:04:34,620
+We have limit of four, which is
+equivalent to calling limit
+
+99
+00:04:34,620 --> 00:04:41,050
+of four, and we have sort with
+this array here, specifying
+
+100
+00:04:41,050 --> 00:04:43,550
+how we're sorting based
+on grade and student.
+
+101
+00:04:43,550 --> 00:04:47,210
+If we just wanted to sort on
+one key ascending, all we
+
+102
+00:04:47,210 --> 00:04:49,610
+would need to do is put
+a string here with
+
+103
+00:04:49,610 --> 00:04:50,610
+the name of the key.
+
+104
+00:04:50,610 --> 00:04:54,600
+And hopefully this makes it even
+more clear that the order
+
+105
+00:04:54,600 --> 00:04:56,650
+in which we call these
+doesn't matter.
+
+106
+00:04:56,650 --> 00:04:59,240
+We're just passing in an object
+here, and internally,
+
+107
+00:04:59,240 --> 00:05:03,100
+MongoDB makes sure that these
+happen in the right order.
+
+108
+00:05:03,100 --> 00:05:06,570
+So let's run that just to make
+sure that they're the same.
+
+109
+00:05:06,570 --> 00:05:10,900
+All right, so here we see
+creates are sorted first, and
+
+110
+00:05:10,900 --> 00:05:12,550
+we've limited to four.
+
+111
+00:05:12,550 --> 00:05:15,250
+And it looks like exactly the
+same result set as we had when
+
+112
+00:05:15,250 --> 00:05:17,620
+we called the functions
+on the cursor.
+
+113
+00:05:17,620 --> 00:05:20,510
+So, that's how to do skip,
+limit, and sort using the
+
+114
+00:05:20,510 --> 00:05:22,000
+Node.js driver.
+
+115
+00:05:22,000 --> 00:05:26,410
+All right, so this is the quiz
+about skip, limit, and sort.
+
+116
+00:05:26,410 --> 00:05:29,680
+So, the question is, what are
+some ways we can use skip,
+
+117
+00:05:29,680 --> 00:05:32,280
+limit, and sort in the MongoDB
+Node.js driver?
+
+118
+00:05:32,280 --> 00:05:33,700
+Check all that apply.
+
+119
+00:05:33,700 --> 00:05:37,040
+So can we include skip, limit,
+and sort options in the option
+
+120
+00:05:37,040 --> 00:05:38,540
+object for find0ne?
+
+121
+00:05:38,540 --> 00:05:42,190
+Can we pass a sort order as an
+argument to find and modify?
+
+122
+00:05:42,190 --> 00:05:45,140
+Can we call the skip, limit,
+and sort of functions on a
+
+123
+00:05:45,140 --> 00:05:47,770
+cursor before retrieving
+any documents?
+
+124
+00:05:47,770 --> 00:05:50,530
+And can we call the skip, limit,
+and sort of functions
+
+125
+00:05:50,530 --> 00:05:52,950
+on a cursor after retrieving
+some documents?
+
+126
+00:05:52,950 --> 00:05:54,200
+Check all that apply.
+
+127
+00:05:54,200 --> 00:05:55,030

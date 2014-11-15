@@ -1,0 +1,54 @@
+1
+00:00:00,000 --> 00:00:00,090
+
+2
+00:00:00,090 --> 00:00:03,550
+All right, so this is the
+solution for homework 3.2.
+
+3
+00:00:03,550 --> 00:00:06,440
+You would just do posts.insert
+and give
+
+4
+00:00:06,440 --> 00:00:08,210
+our post as an argument.
+
+5
+00:00:08,210 --> 00:00:11,160
+And then we give it a call back
+to call when the post has
+
+6
+00:00:11,160 --> 00:00:12,890
+been successfully inserted.
+
+7
+00:00:12,890 --> 00:00:14,720
+So if we have an error,
+we return an
+
+8
+00:00:14,720 --> 00:00:16,290
+error in our call back.
+
+9
+00:00:16,290 --> 00:00:19,340
+Otherwise, we'd log that we've
+entered a new post and call
+
+10
+00:00:19,340 --> 00:00:21,120
+back with a permalink,
+actually.
+
+11
+00:00:21,120 --> 00:00:24,230
+We don't actually call back with
+the result of the insert.
+
+12
+00:00:24,230 --> 00:00:27,480
+So this is the solution
+for homework 3.2.

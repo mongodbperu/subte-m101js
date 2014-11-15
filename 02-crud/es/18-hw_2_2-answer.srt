@@ -1,0 +1,517 @@
+1
+00:00:00,000 --> 00:00:00,190
+
+2
+00:00:00,190 --> 00:00:04,680
+All right, so this is the answer
+video for homework 2-2.
+
+3
+00:00:04,680 --> 00:00:08,029
+And if you remember, the way
+we recommended that you do
+
+4
+00:00:08,029 --> 00:00:11,940
+this assignment is by sorting
+first by state, and then by
+
+5
+00:00:11,940 --> 00:00:13,070
+temperature.
+
+6
+00:00:13,070 --> 00:00:15,840
+So this means that we can
+actually just look at the
+
+7
+00:00:15,840 --> 00:00:18,190
+first document for each
+state and know that
+
+8
+00:00:18,190 --> 00:00:19,880
+is the month high.
+
+9
+00:00:19,880 --> 00:00:23,490
+So the assignment for homework
+2-2 was to set the month high
+
+10
+00:00:23,490 --> 00:00:28,220
+field to true in the document
+with the highest temperature
+
+11
+00:00:28,220 --> 00:00:31,170
+and do that for each
+state individually.
+
+12
+00:00:31,170 --> 00:00:33,109
+So let's take a look
+at the solution.
+
+13
+00:00:33,109 --> 00:00:37,300
+All right, so this is our
+solution for homework 2-2.
+
+14
+00:00:37,300 --> 00:00:39,230
+And our goal is to find the
+highest temperature for each
+
+15
+00:00:39,230 --> 00:00:41,490
+state and set a month high
+field to true in the
+
+16
+00:00:41,490 --> 00:00:43,080
+corresponding document.
+
+17
+00:00:43,080 --> 00:00:44,790
+So what we're doing here
+is, we are just
+
+18
+00:00:44,790 --> 00:00:46,010
+connecting to MongoDB.
+
+19
+00:00:46,010 --> 00:00:50,200
+And we're doing a find with an
+empty query selector and then
+
+20
+00:00:50,200 --> 00:00:53,200
+sorting on state, ascending,
+doesn't matter whether it's a
+
+21
+00:00:53,200 --> 00:00:57,020
+ascending or descending, and
+temperature descending.
+
+22
+00:00:57,020 --> 00:01:00,730
+So this is going to give us a
+cursor with this sort order.
+
+23
+00:01:00,730 --> 00:01:04,280
+And we're calling toArray on
+that cursor to get all the
+
+24
+00:01:04,280 --> 00:01:07,070
+documents back in one big
+array all at once.
+
+25
+00:01:07,070 --> 00:01:09,480
+And then, down here, we're
+iterating our documents array.
+
+26
+00:01:09,480 --> 00:01:12,360
+And we're actually looking
+for these month highs.
+
+27
+00:01:12,360 --> 00:01:16,050
+So the way we do that is, we
+set state originally to an
+
+28
+00:01:16,050 --> 00:01:16,780
+empty string.
+
+29
+00:01:16,780 --> 00:01:19,220
+And then we start iterating
+our documents.
+
+30
+00:01:19,220 --> 00:01:24,090
+And when we see that state is
+not equal to docs i state, we
+
+31
+00:01:24,090 --> 00:01:26,610
+push our months i, and
+then we set state
+
+32
+00:01:26,610 --> 00:01:28,550
+equal to docs i state.
+
+33
+00:01:28,550 --> 00:01:30,970
+So this will only get triggered
+when we're where
+
+34
+00:01:30,970 --> 00:01:35,120
+either at the beginning of our
+iteration and state was empty,
+
+35
+00:01:35,120 --> 00:01:37,650
+or we're transitioning
+to a new state.
+
+36
+00:01:37,650 --> 00:01:41,040
+So we're actually adding to this
+month highs array all the
+
+37
+00:01:41,040 --> 00:01:43,880
+documents that are at the
+beginning of a transition to a
+
+38
+00:01:43,880 --> 00:01:46,650
+new state, which happened to
+be the documents with the
+
+39
+00:01:46,650 --> 00:01:49,210
+highest temperature because
+we're sorting on temperature
+
+40
+00:01:49,210 --> 00:01:51,350
+decreasing within each state.
+
+41
+00:01:51,350 --> 00:01:53,150
+So that's how we get
+the month highs.
+
+42
+00:01:53,150 --> 00:01:55,640
+But let's take a look at how
+we actually update these
+
+43
+00:01:55,640 --> 00:01:59,200
+documents that correspond to
+our month highs with the
+
+44
+00:01:59,200 --> 00:02:01,180
+months highs fields,
+which was the
+
+45
+00:02:01,180 --> 00:02:03,050
+assignment for this homework.
+
+46
+00:02:03,050 --> 00:02:06,690
+All right, so down here we have
+the loop that's updating
+
+47
+00:02:06,690 --> 00:02:08,610
+our month high documents.
+
+48
+00:02:08,610 --> 00:02:11,690
+So note that we actually could
+have used a multi update for
+
+49
+00:02:11,690 --> 00:02:14,950
+this example because we could
+have actually constructed a
+
+50
+00:02:14,950 --> 00:02:17,580
+query with the dollar
+sign in operator.
+
+51
+00:02:17,580 --> 00:02:20,470
+But I wanted to show an
+example of how the
+
+52
+00:02:20,470 --> 00:02:22,410
+asynchronous model
+is different from
+
+53
+00:02:22,410 --> 00:02:24,300
+the synchronous model.
+
+54
+00:02:24,300 --> 00:02:27,420
+So in this case, we have our
+array of month highs.
+
+55
+00:02:27,420 --> 00:02:29,850
+And it's going to be an array
+of four documents because we
+
+56
+00:02:29,850 --> 00:02:31,275
+have four different states.
+
+57
+00:02:31,275 --> 00:02:34,315
+We're actually just iterating
+through this loop and calling
+
+58
+00:02:34,315 --> 00:02:37,380
+.update on every month high.
+
+59
+00:02:37,380 --> 00:02:40,650
+And for every month high, we
+pass the dollar sign set with
+
+60
+00:02:40,650 --> 00:02:43,770
+month high to true as
+the update operator.
+
+61
+00:02:43,770 --> 00:02:46,600
+And you may notice that we're
+doing a little bit of extra
+
+62
+00:02:46,600 --> 00:02:48,660
+work here because we're actually
+counting the number
+
+63
+00:02:48,660 --> 00:02:50,710
+of times this callback
+has been called.
+
+64
+00:02:50,710 --> 00:02:52,980
+And the reason we're doing that
+is because we shouldn't
+
+65
+00:02:52,980 --> 00:02:55,640
+actually close the database
+connection until we have a
+
+66
+00:02:55,640 --> 00:02:58,230
+response from all
+of our updates.
+
+67
+00:02:58,230 --> 00:03:00,560
+So what we're doing here is,
+we're setting the number of
+
+68
+00:03:00,560 --> 00:03:01,650
+callbacks to zero.
+
+69
+00:03:01,650 --> 00:03:04,860
+And we're making sure that the
+number of callbacks we've had
+
+70
+00:03:04,860 --> 00:03:08,390
+so far is not yet equal
+to month_highs.length.
+
+71
+00:03:08,390 --> 00:03:10,920
+And then once it is equal to
+month_highs.length, we can
+
+72
+00:03:10,920 --> 00:03:13,520
+safely close the database
+connection, knowing that we
+
+73
+00:03:13,520 --> 00:03:17,640
+received responses for all the
+updates that we sent out.
+
+74
+00:03:17,640 --> 00:03:20,500
+So this may seem like we're
+doing some extra work here
+
+75
+00:03:20,500 --> 00:03:22,730
+because of the asynchronous
+model.
+
+76
+00:03:22,730 --> 00:03:24,560
+And in some ways, that's
+actually true.
+
+77
+00:03:24,560 --> 00:03:27,220
+If we were doing this
+synchronously, we could just
+
+78
+00:03:27,220 --> 00:03:30,470
+say db.collection.update,
+db.collection.update,
+
+79
+00:03:30,470 --> 00:03:37,220
+db.collection.update, and then
+db.close at the end, knowing
+
+80
+00:03:37,220 --> 00:03:39,840
+that, by the time we got that
+line of code, all of our
+
+81
+00:03:39,840 --> 00:03:41,280
+updates had returned.
+
+82
+00:03:41,280 --> 00:03:44,050
+But the problem with that is,
+that means we have to wait for
+
+83
+00:03:44,050 --> 00:03:46,230
+a response from each update
+before we can
+
+84
+00:03:46,230 --> 00:03:47,580
+send the next one.
+
+85
+00:03:47,580 --> 00:03:50,080
+So we're doing each update
+synchronously and waiting for
+
+86
+00:03:50,080 --> 00:03:53,160
+the full round trip, whereas
+here, what we're doing,
+
+87
+00:03:53,160 --> 00:03:56,540
+actually, is we're actually
+just sending this update,
+
+88
+00:03:56,540 --> 00:03:59,170
+returning immediately, and
+continuing the next iteration
+
+89
+00:03:59,170 --> 00:04:00,420
+of our loop.
+
+90
+00:04:00,420 --> 00:04:03,430
+So in each iteration, all we do
+is really send the update.
+
+91
+00:04:03,430 --> 00:04:05,820
+And we don't actually have to
+wait for the full round trip
+
+92
+00:04:05,820 --> 00:04:06,920
+to the server.
+
+93
+00:04:06,920 --> 00:04:10,090
+So this allows us to fire off
+the four updates and get the
+
+94
+00:04:10,090 --> 00:04:13,090
+responses as they come back,
+rather than waiting for each
+
+95
+00:04:13,090 --> 00:04:15,640
+update to complete before
+sending the next one.
+
+96
+00:04:15,640 --> 00:04:18,250
+So that's one of the advantages
+of the asynchronous
+
+97
+00:04:18,250 --> 00:04:21,040
+model, is that we could
+dispatch a lot of I/O
+
+98
+00:04:21,040 --> 00:04:24,600
+operations in parallel without
+having to wait for the results
+
+99
+00:04:24,600 --> 00:04:27,290
+of each one to dispatch
+the next one.
+
+100
+00:04:27,290 --> 00:04:30,020
+So for this little bit of extra
+work, and little bit of
+
+101
+00:04:30,020 --> 00:04:33,400
+extra overhead, we actually have
+a lot of parallelism in
+
+102
+00:04:33,400 --> 00:04:37,430
+terms of our I/O operations
+in a single thread.
+
+103
+00:04:37,430 --> 00:04:40,540
+All right so that's the answer
+to homework 2-2.
+
+104
+00:04:40,540 --> 00:04:42,030
+So we're finding the
+month highs by
+
+105
+00:04:42,030 --> 00:04:43,690
+iterating through our documents.
+
+106
+00:04:43,690 --> 00:04:46,270
+And then we're updating all of
+our documents with the month
+
+107
+00:04:46,270 --> 00:04:49,460
+high field using the $set
+update operator.
+
+108
+00:04:49,460 --> 00:04:50,710

@@ -1,0 +1,90 @@
+1
+00:00:00,000 --> 00:00:00,370
+
+2
+00:00:00,370 --> 00:00:02,940
+If you want to learn more about
+GridFS a good place to
+
+3
+00:00:02,940 --> 00:00:05,730
+start is api.mongodb.org.
+
+4
+00:00:05,730 --> 00:00:09,480
+If you go there and you click
+on the Java driver and you
+
+5
+00:00:09,480 --> 00:00:12,320
+click on the most recent driver
+right there, you can
+
+6
+00:00:12,320 --> 00:00:14,490
+see that the specification
+for GridFS, the
+
+7
+00:00:14,490 --> 00:00:16,309
+API, is right there.
+
+8
+00:00:16,309 --> 00:00:18,570
+And you can see the three
+different classes that I used
+
+9
+00:00:18,570 --> 00:00:22,300
+to work with GridFS, right,
+which is this GridFS object
+
+10
+00:00:22,300 --> 00:00:25,120
+right here, this GridFS db
+file which is used for
+
+11
+00:00:25,120 --> 00:00:29,020
+retrieving objects, and this
+GridFS input file which is
+
+12
+00:00:29,020 --> 00:00:32,549
+used for writing GridFS files
+into the database and taking
+
+13
+00:00:32,549 --> 00:00:34,400
+an output stream from a disk.
+
+14
+00:00:34,400 --> 00:00:36,790
+And then I didn't actually use
+this GridFS file, which is
+
+15
+00:00:36,790 --> 00:00:38,980
+abstract class or the CLI.
+
+16
+00:00:38,980 --> 00:00:40,390
+You can go through these
+and you can see a
+
+17
+00:00:40,390 --> 00:00:41,890
+lot of the same methods.
+
+18
+00:00:41,890 --> 00:00:43,530
+So this is a good place to look
+if you're looking for
+
+19
+00:00:43,530 --> 00:00:44,780
+more information.
+
+20
+00:00:44,780 --> 00:00:45,260
+

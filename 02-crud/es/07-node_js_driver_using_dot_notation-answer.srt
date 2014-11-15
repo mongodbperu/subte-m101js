@@ -1,0 +1,44 @@
+1
+00:00:00,000 --> 00:00:00,270
+
+2
+00:00:00,270 --> 00:00:04,570
+Alright, so your task was to
+match the name Steve in the
+
+3
+00:00:04,570 --> 00:00:08,630
+name field of the nested
+students array.
+
+4
+00:00:08,630 --> 00:00:12,260
+So the way we do this is we
+select for students.name, and
+
+5
+00:00:12,260 --> 00:00:14,180
+look for the value of Steve.
+
+6
+00:00:14,180 --> 00:00:16,340
+So what this will do is it
+will look in the students
+
+7
+00:00:16,340 --> 00:00:20,130
+array, it'll look in a nested
+object, and it'll look in the
+
+8
+00:00:20,130 --> 00:00:23,760
+name field of that object and
+then compare it to Steve.
+
+9
+00:00:23,760 --> 00:00:25,790
+So that's why it will match
+this document here.
+
+10
+00:00:25,790 --> 00:00:27,040

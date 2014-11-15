@@ -1,0 +1,199 @@
+1
+00:00:00,000 --> 00:00:02,960
+All right, so this is the
+answer to homework 2-1.
+
+2
+00:00:02,960 --> 00:00:06,870
+So if you remember, we just
+looked at our weather_data.csv
+
+3
+00:00:06,870 --> 00:00:09,230
+file, saw that it had
+a header line.
+
+4
+00:00:09,230 --> 00:00:15,630
+So when we type "mongoimport,"
+we want to pass --type csv
+
+5
+00:00:15,630 --> 00:00:18,110
+--headerline.
+
+6
+00:00:18,110 --> 00:00:22,290
+And now we actually have to
+specify what database and what
+
+7
+00:00:22,290 --> 00:00:24,320
+collection that we're
+importing our
+
+8
+00:00:24,320 --> 00:00:25,770
+weather data into.
+
+9
+00:00:25,770 --> 00:00:28,140
+Now here we specify the file.
+
+10
+00:00:28,140 --> 00:00:31,260
+We run this command, connect
+to the local host.
+
+11
+00:00:31,260 --> 00:00:35,440
+And we imported almost 3,000
+objects from this
+
+12
+00:00:35,440 --> 00:00:37,250
+weather_data CSV file.
+
+13
+00:00:37,250 --> 00:00:40,450
+So now if we enter the Mongo
+shell and use the weather
+
+14
+00:00:40,450 --> 00:00:46,560
+database, and we type
+db.data.findOne, because
+
+15
+00:00:46,560 --> 00:00:49,720
+that's collection we actually
+put this in, you can see we
+
+16
+00:00:49,720 --> 00:00:51,840
+have our weather document.
+
+17
+00:00:51,840 --> 00:00:54,300
+So this is part one, so
+we've successfully
+
+18
+00:00:54,300 --> 00:00:55,960
+imported our data.
+
+19
+00:00:55,960 --> 00:00:57,560
+So now let's talk
+about part two.
+
+20
+00:00:57,560 --> 00:00:59,600
+So that's the analysis
+portion.
+
+21
+00:00:59,600 --> 00:01:03,420
+So the assignment was to figure
+out the state that had
+
+22
+00:01:03,420 --> 00:01:06,330
+the lowest temperature recorded
+when the wind
+
+23
+00:01:06,330 --> 00:01:09,670
+direction was coming from the
+West, meaning that the wind
+
+24
+00:01:09,670 --> 00:01:14,760
+direction was between
+180 and 360.
+
+25
+00:01:14,760 --> 00:01:16,160
+So let's talk that through.
+
+26
+00:01:16,160 --> 00:01:17,410
+So we can do db.data.find.
+
+27
+00:01:17,410 --> 00:01:19,840
+
+28
+00:01:19,840 --> 00:01:26,820
+And we want our wind direction
+to be greater than 180 and
+
+29
+00:01:26,820 --> 00:01:29,410
+less than 360.
+
+30
+00:01:29,410 --> 00:01:33,250
+And then we want to sort
+on temperature.
+
+31
+00:01:33,250 --> 00:01:35,910
+And we want to sort increasing
+so that the document we get
+
+32
+00:01:35,910 --> 00:01:38,710
+back is going to be the
+lowest temperature.
+
+33
+00:01:38,710 --> 00:01:42,190
+And let's limit that to one
+for simplicity, and let's
+
+34
+00:01:42,190 --> 00:01:44,350
+pretty print it.
+
+35
+00:01:44,350 --> 00:01:46,850
+All right, so this
+is our document.
+
+36
+00:01:46,850 --> 00:01:48,920
+It's New Mexico.
+
+37
+00:01:48,920 --> 00:01:51,570
+And we have a wind
+direction of 260.
+
+38
+00:01:51,570 --> 00:01:55,730
+That's coming from the West
+between 180 and 360.
+
+39
+00:01:55,730 --> 00:01:58,210
+And we have a temperature
+is zero.
+
+40
+00:01:58,210 --> 00:02:01,120
+So this is the lowest recorded
+temperature for that month
+
+41
+00:02:01,120 --> 00:02:03,430
+when the wind was coming
+from the West.
+
+42
+00:02:03,430 --> 00:02:05,136
+So that's the answer
+to homework 2-1.
+
+43
+00:02:05,136 --> 00:02:06,432

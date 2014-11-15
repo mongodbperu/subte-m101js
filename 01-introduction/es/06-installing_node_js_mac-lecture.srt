@@ -1,0 +1,118 @@
+1
+00:00:00,000 --> 00:00:00,140
+
+2
+00:00:00,140 --> 00:00:04,800
+All right, so let's talk about
+how to install Node.js on Mac
+
+3
+00:00:04,800 --> 00:00:08,510
+OS X. So, the first thing we
+want to do is we want to open
+
+4
+00:00:08,510 --> 00:00:12,400
+our browser, and enter
+nodejs.org.
+
+5
+00:00:12,400 --> 00:00:14,900
+So this will bring us to the
+node.js site, and at this
+
+6
+00:00:14,900 --> 00:00:17,700
+point, all we have to do is
+click Install, and it will try
+
+7
+00:00:17,700 --> 00:00:20,390
+to download the installer
+for Node.js.
+
+8
+00:00:20,390 --> 00:00:24,540
+Here we say keep, and after it's
+done downloading, we can
+
+9
+00:00:24,540 --> 00:00:25,840
+open it, and it brings
+us straight
+
+10
+00:00:25,840 --> 00:00:28,270
+into the Node.js installer.
+
+11
+00:00:28,270 --> 00:00:31,370
+So here we just click
+Continue, Continue.
+
+12
+00:00:31,370 --> 00:00:34,370
+Agree with the license
+agreement, and click Install.
+
+13
+00:00:34,370 --> 00:00:36,930
+So, this requires the
+administrator password to
+
+14
+00:00:36,930 --> 00:00:39,395
+install software, so
+let's do that.
+
+15
+00:00:39,395 --> 00:00:40,735
+Click Install.
+
+16
+00:00:40,735 --> 00:00:44,190
+And we see that node was
+successfully installed.
+
+17
+00:00:44,190 --> 00:00:47,290
+So here we have the two
+binaries for our node
+
+18
+00:00:47,290 --> 00:00:49,980
+installation, and we have
+to make sure that
+
+19
+00:00:49,980 --> 00:00:51,690
+this is in our path.
+
+20
+00:00:51,690 --> 00:00:54,120
+So the way you can check that
+and verify that Node.js is
+
+21
+00:00:54,120 --> 00:00:58,640
+actually installed is just go
+to a terminal and type node.
+
+22
+00:00:58,640 --> 00:01:01,040
+So at this point, it'll bring
+us into the Node.js
+
+23
+00:01:01,040 --> 00:01:03,360
+interactive prompt, and
+we can just say
+
+24
+00:01:03,360 --> 00:01:07,720
+console.log Hello, World.
+
+25
+00:01:07,720 --> 00:01:11,880
+So that's how you install
+Node.js on Mac OS X.

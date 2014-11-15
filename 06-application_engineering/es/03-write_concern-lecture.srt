@@ -1,0 +1,568 @@
+1
+00:00:00,000 --> 00:00:00,090
+
+2
+00:00:00,090 --> 00:00:00,550
+All right.
+
+3
+00:00:00,550 --> 00:00:03,370
+So now let's talk about
+Write Concern
+
+4
+00:00:03,370 --> 00:00:05,250
+and the node.js driver.
+
+5
+00:00:05,250 --> 00:00:08,860
+So, basically, Write Concern
+is a way we can specify the
+
+6
+00:00:08,860 --> 00:00:11,430
+behavior of writes in MongoDB.
+
+7
+00:00:11,430 --> 00:00:14,300
+So, for example, the default
+Write Concern is one--
+
+8
+00:00:14,300 --> 00:00:19,420
+so this would be represented as
+W:1 is to send a write to
+
+9
+00:00:19,420 --> 00:00:23,435
+the primary and return success
+to the user once the primary
+
+10
+00:00:23,435 --> 00:00:25,070
+acknowledges the write.
+
+11
+00:00:25,070 --> 00:00:28,150
+In other situations we may not
+care about an acknowledgement,
+
+12
+00:00:28,150 --> 00:00:30,160
+so we do a Write Concern
+of zero.
+
+13
+00:00:30,160 --> 00:00:33,440
+And in that case, the driver
+immediately returns success
+
+14
+00:00:33,440 --> 00:00:36,630
+after it sends out the operation
+and returns to the
+
+15
+00:00:36,630 --> 00:00:39,430
+application without receiving
+a response.
+
+16
+00:00:39,430 --> 00:00:42,960
+Use case for this maybe if
+you're just streaming tons of
+
+17
+00:00:42,960 --> 00:00:47,560
+click data or some data where
+it's so massive that if you
+
+18
+00:00:47,560 --> 00:00:50,850
+lost a write it wouldn't be a
+big deal, and throughput is
+
+19
+00:00:50,850 --> 00:00:52,790
+the most important factor.
+
+20
+00:00:52,790 --> 00:00:57,040
+You can also specify a Write
+Concern of two to say, only
+
+21
+00:00:57,040 --> 00:01:00,600
+return success if the primary
+and a secondary--
+
+22
+00:01:00,600 --> 00:01:03,310
+at least one secondary
+acknowledges the write.
+
+23
+00:01:03,310 --> 00:01:07,230
+So the driver will not return
+success to the application
+
+24
+00:01:07,230 --> 00:01:09,270
+until two nodes have
+been written to.
+
+25
+00:01:09,270 --> 00:01:10,645
+Same thing applies for three.
+
+26
+00:01:10,645 --> 00:01:12,480
+Three nodes have to acknowledge
+that they've
+
+27
+00:01:12,480 --> 00:01:14,540
+received the write
+before the driver
+
+28
+00:01:14,540 --> 00:01:16,480
+returns with the success.
+
+29
+00:01:16,480 --> 00:01:20,110
+And so on and so on for other
+numbers, depending on the
+
+30
+00:01:20,110 --> 00:01:22,430
+number of nodes you have in
+your set, and how many you
+
+31
+00:01:22,430 --> 00:01:25,030
+want to make sure they've
+received the write.
+
+32
+00:01:25,030 --> 00:01:27,930
+You can also do a Write
+Concern of j.
+
+33
+00:01:27,930 --> 00:01:31,460
+And what this does is it says,
+write to the primary's journal
+
+34
+00:01:31,460 --> 00:01:33,300
+before you return success.
+
+35
+00:01:33,300 --> 00:01:37,280
+So this ensures that the data
+will be persisted because we
+
+36
+00:01:37,280 --> 00:01:39,460
+have a write head journal
+in MongoDB.
+
+37
+00:01:39,460 --> 00:01:42,190
+So if we've written to the
+journal, we know that no
+
+38
+00:01:42,190 --> 00:01:43,080
+matter what happens--
+
+39
+00:01:43,080 --> 00:01:43,950
+if we crash--
+
+40
+00:01:43,950 --> 00:01:47,350
+we can replay the journal and
+bring it back to the point
+
+41
+00:01:47,350 --> 00:01:48,880
+where the write had
+been applied.
+
+42
+00:01:48,880 --> 00:01:53,490
+So W:j ensures that it has been
+persisted to disk before
+
+43
+00:01:53,490 --> 00:01:55,710
+the driver would return
+success to the user
+
+44
+00:01:55,710 --> 00:01:57,330
+application.
+
+45
+00:01:57,330 --> 00:01:59,270
+Finally, we have W majority.
+
+46
+00:01:59,270 --> 00:02:01,790
+Basically this makes sure that
+we've written to a majority of
+
+47
+00:02:01,790 --> 00:02:06,220
+the nodes in our set before we
+return success to the user.
+
+48
+00:02:06,220 --> 00:02:07,630
+So these are some
+of the different
+
+49
+00:02:07,630 --> 00:02:08,870
+levels of Write Concern.
+
+50
+00:02:08,870 --> 00:02:11,200
+There's also the idea of tagged
+Write Concern where you
+
+51
+00:02:11,200 --> 00:02:15,820
+can specify a custom Write
+Concern that involves writing
+
+52
+00:02:15,820 --> 00:02:18,610
+to two different data
+centers or a certain
+
+53
+00:02:18,610 --> 00:02:20,230
+subset of the nodes.
+
+54
+00:02:20,230 --> 00:02:22,780
+But that's a more advanced
+topic so we'll just be
+
+55
+00:02:22,780 --> 00:02:26,680
+covering these basic Write
+Concerns and how to use them
+
+56
+00:02:26,680 --> 00:02:28,540
+in the Node.js driver.
+
+57
+00:02:28,540 --> 00:02:31,466
+So let's just take a look
+at a quick example.
+
+58
+00:02:31,466 --> 00:02:32,160
+All right.
+
+59
+00:02:32,160 --> 00:02:34,910
+So this is our example of using
+Write Concern in the
+
+60
+00:02:34,910 --> 00:02:36,150
+Node.js driver.
+
+61
+00:02:36,150 --> 00:02:37,860
+Note that most of this
+is the same.
+
+62
+00:02:37,860 --> 00:02:39,880
+We still have the same
+connection stream, we still
+
+63
+00:02:39,880 --> 00:02:42,540
+are calling the same collection
+functions, but we
+
+64
+00:02:42,540 --> 00:02:44,230
+have this extra thing
+at the end.
+
+65
+00:02:44,230 --> 00:02:47,100
+So we have this question
+mark, w=1.
+
+66
+00:02:47,100 --> 00:02:50,130
+And this looks a lot like the
+syntax we use for putting get
+
+67
+00:02:50,130 --> 00:02:53,560
+variables in a URL, and it
+happens to be the same syntax
+
+68
+00:02:53,560 --> 00:02:57,920
+we use in a MongoDB connection
+string to specify additional
+
+69
+00:02:57,920 --> 00:03:00,190
+parameters for our connection.
+
+70
+00:03:00,190 --> 00:03:03,810
+So in this case, we're saying,
+connect to MongoDB and set the
+
+71
+00:03:03,810 --> 00:03:06,030
+Write Concern for all
+operations on this
+
+72
+00:03:06,030 --> 00:03:07,640
+connection to one.
+
+73
+00:03:07,640 --> 00:03:10,880
+And what that means is, for
+operations where we don't
+
+74
+00:03:10,880 --> 00:03:14,230
+specify an explicit Write
+Concern, it'll take the Write
+
+75
+00:03:14,230 --> 00:03:17,410
+Concern of our connection
+and do the write
+
+76
+00:03:17,410 --> 00:03:19,160
+using that Write Concern.
+
+77
+00:03:19,160 --> 00:03:21,380
+So this insert will do a Write
+Concern of 1, because we
+
+78
+00:03:21,380 --> 00:03:23,580
+didn't explicitly specify it.
+
+79
+00:03:23,580 --> 00:03:26,840
+And this insert, because we
+actually pass in this options
+
+80
+00:03:26,840 --> 00:03:30,630
+object with w of 2, we'll have
+a Write Concern of 2,
+
+81
+00:03:30,630 --> 00:03:34,440
+overriding the Write Concern
+for the overall connection.
+
+82
+00:03:34,440 --> 00:03:36,880
+So this is the basic idea
+of Write Concern.
+
+83
+00:03:36,880 --> 00:03:39,500
+You can do it here for the whole
+connection, or you can
+
+84
+00:03:39,500 --> 00:03:42,650
+do it in individual operations
+if you pass in the right
+
+85
+00:03:42,650 --> 00:03:44,150
+options object.
+
+86
+00:03:44,150 --> 00:03:47,690
+You can also pass a j here
+or a majority string.
+
+87
+00:03:47,690 --> 00:03:48,840
+Same thing here.
+
+88
+00:03:48,840 --> 00:03:51,300
+And this is where you would also
+pass in tags if you're
+
+89
+00:03:51,300 --> 00:03:53,570
+doing a tagged Write Concern.
+
+90
+00:03:53,570 --> 00:03:55,110
+So let's just run
+this example.
+
+91
+00:03:55,110 --> 00:03:58,560
+What we expect is to see
+inserting this document then
+
+92
+00:03:58,560 --> 00:04:02,240
+this document and logging them
+both to the console.
+
+93
+00:04:02,240 --> 00:04:02,650
+All right.
+
+94
+00:04:02,650 --> 00:04:05,040
+So this is our example,
+the Write Concern.
+
+95
+00:04:05,040 --> 00:04:07,720
+This was the document that we
+inserted that had a Write
+
+96
+00:04:07,720 --> 00:04:09,780
+Concern of 1 in the
+insert call.
+
+97
+00:04:09,780 --> 00:04:11,590
+This is the document we inserted
+that had a Write
+
+98
+00:04:11,590 --> 00:04:13,740
+Concern of 2 in the
+insert call.
+
+99
+00:04:13,740 --> 00:04:17,019
+Since all three nodes of our
+replica set are up, we had no
+
+100
+00:04:17,019 --> 00:04:21,010
+problems getting responses from
+two of the nodes, or even
+
+101
+00:04:21,010 --> 00:04:24,460
+the primary just to make these
+two writes succeed.
+
+102
+00:04:24,460 --> 00:04:26,650
+So that's an example of
+using Write Concern
+
+103
+00:04:26,650 --> 00:04:28,716
+in the Node.js driver.
+
+104
+00:04:28,716 --> 00:04:29,130
+All right.
+
+105
+00:04:29,130 --> 00:04:32,990
+So let's take a quiz about
+using Write Concern.
+
+106
+00:04:32,990 --> 00:04:33,320
+All right.
+
+107
+00:04:33,320 --> 00:04:37,010
+So this quiz is about the Write
+Concern in a Node.js
+
+108
+00:04:37,010 --> 00:04:38,350
+application.
+
+109
+00:04:38,350 --> 00:04:40,740
+And I recommend you try this
+out in the driver.
+
+110
+00:04:40,740 --> 00:04:43,300
+It's a good way to experiment
+with a Write Concern and
+
+111
+00:04:43,300 --> 00:04:46,520
+verify that it's actually
+working as you expect.
+
+112
+00:04:46,520 --> 00:04:49,130
+So the question is, what happens
+if we specify a Write
+
+113
+00:04:49,130 --> 00:04:51,060
+Concern larger than the
+number of nodes we
+
+114
+00:04:51,060 --> 00:04:52,600
+currently have out?
+
+115
+00:04:52,600 --> 00:04:54,890
+Is it, the write
+waits forever?
+
+116
+00:04:54,890 --> 00:04:56,740
+Is it, the driver
+throws an error?
+
+117
+00:04:56,740 --> 00:04:58,740
+Is it, the server
+throws an error?
+
+118
+00:04:58,740 --> 00:05:01,340
+Or is it, the write goes to as
+many nodes as possible, then
+
+119
+00:05:01,340 --> 00:05:03,230
+the driver returns success?
+
+120
+00:05:03,230 --> 00:05:04,480
+So check the correct answer.
+
+121
+00:05:04,480 --> 00:05:05,570

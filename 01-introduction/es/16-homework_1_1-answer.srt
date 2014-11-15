@@ -1,0 +1,146 @@
+1
+00:00:00,000 --> 00:00:00,160
+
+2
+00:00:00,160 --> 00:00:00,600
+All right.
+
+3
+00:00:00,600 --> 00:00:04,110
+So, this is the homework
+1-1 answer video.
+
+4
+00:00:04,110 --> 00:00:07,300
+So, your assignment for this
+homework was to, using the
+
+5
+00:00:07,300 --> 00:00:11,270
+Mongo shell go into the m101
+database and figure out what's
+
+6
+00:00:11,270 --> 00:00:14,300
+in the homework 1_1
+collection.
+
+7
+00:00:14,300 --> 00:00:17,130
+So, the first thing
+you need to do is
+
+8
+00:00:17,130 --> 00:00:18,820
+start the Mongo shell.
+
+9
+00:00:18,820 --> 00:00:21,290
+And we actually don't need to
+give it any arguments at this
+
+10
+00:00:21,290 --> 00:00:25,340
+point, because we've started the
+server on the default port
+
+11
+00:00:25,340 --> 00:00:27,990
+on local host, which is the
+default that the Mongo shell
+
+12
+00:00:27,990 --> 00:00:29,490
+tries to connect to.
+
+13
+00:00:29,490 --> 00:00:32,540
+So, we run the shell and we can
+see MongoDB shell version
+
+14
+00:00:32,540 --> 00:00:34,930
+2.4.3 connecting to test.
+
+15
+00:00:34,930 --> 00:00:38,590
+So, we're now connected to the
+test database, and we really
+
+16
+00:00:38,590 --> 00:00:41,770
+want to be connected to
+the m101 database.
+
+17
+00:00:41,770 --> 00:00:46,120
+So, the first thing we do is,
+we type use m101, and we see
+
+18
+00:00:46,120 --> 00:00:48,620
+switch to db m101.
+
+19
+00:00:48,620 --> 00:00:53,250
+And the next thing we can
+do is type show tables.
+
+20
+00:00:53,250 --> 00:00:55,790
+So, now we see all the
+collections in this database.
+
+21
+00:00:55,790 --> 00:00:58,840
+Homework 1_1, homework 1_2,
+homework 1_3, and
+
+22
+00:00:58,840 --> 00:01:00,590
+system.indexes.
+
+23
+00:01:00,590 --> 00:01:03,310
+So, the assignment for this part
+was to see what's in the
+
+24
+00:01:03,310 --> 00:01:05,440
+homework 1_1 collection.
+
+25
+00:01:05,440 --> 00:01:09,540
+So, we can do that by doing a
+find against this collection.
+
+26
+00:01:09,540 --> 00:01:15,060
+Here we have db.hw1_1.find,
+and this will do a query
+
+27
+00:01:15,060 --> 00:01:16,750
+against our collection.
+
+28
+00:01:16,750 --> 00:01:20,660
+And if we run that, we can see
+that we get one document back.
+
+29
+00:01:20,660 --> 00:01:25,380
+It had an ID, and it has an
+answer field which says, hello
+
+30
+00:01:25,380 --> 00:01:26,600
+from MongoDB.
+
+31
+00:01:26,600 --> 00:01:29,170
+So, that's the answer
+to homework 1-1/
+
+32
+00:01:29,170 --> 00:01:29,210

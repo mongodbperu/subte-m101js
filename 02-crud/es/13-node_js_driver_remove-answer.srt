@@ -1,0 +1,129 @@
+1
+00:00:00,000 --> 00:00:00,130
+
+2
+00:00:00,130 --> 00:00:03,050
+All right, so this is the answer
+to the quiz about using
+
+3
+00:00:03,050 --> 00:00:05,020
+remove in the Node.js driver.
+
+4
+00:00:05,020 --> 00:00:08,430
+So first of all, this last one
+wouldn't be guaranteed to
+
+5
+00:00:08,430 --> 00:00:11,010
+remove all the documents because
+there may be some
+
+6
+00:00:11,010 --> 00:00:13,850
+documents for which the x
+field does not exist.
+
+7
+00:00:13,850 --> 00:00:17,300
+And those documents would not
+match this query specifier and
+
+8
+00:00:17,300 --> 00:00:19,590
+therefore not be removed.
+
+9
+00:00:19,590 --> 00:00:21,800
+This next one would remove all
+the documents because we're
+
+10
+00:00:21,800 --> 00:00:24,290
+passing an empty query
+specifier.
+
+11
+00:00:24,290 --> 00:00:26,080
+This one's a little bit
+trickier because we're
+
+12
+00:00:26,080 --> 00:00:29,760
+actually passing a specifier
+for x not in, and then this
+
+13
+00:00:29,760 --> 00:00:30,930
+empty array.
+
+14
+00:00:30,930 --> 00:00:33,420
+This is a little bit of a subtle
+point, but it turns out
+
+15
+00:00:33,420 --> 00:00:36,350
+that every document would
+match the query selector
+
+16
+00:00:36,350 --> 00:00:40,580
+because documents that have an
+x field are guaranteed to not
+
+17
+00:00:40,580 --> 00:00:43,690
+be in the survey, as well
+as documents that do
+
+18
+00:00:43,690 --> 00:00:45,880
+not have an x field.
+
+19
+00:00:45,880 --> 00:00:48,240
+Now, this top one may seem a
+little strange because we're
+
+20
+00:00:48,240 --> 00:00:50,840
+not actually passing a query
+specifier at all.
+
+21
+00:00:50,840 --> 00:00:54,130
+That's actually supported
+by the driver.
+
+22
+00:00:54,130 --> 00:00:56,660
+So what the driver actually
+does is, it will check the
+
+23
+00:00:56,660 --> 00:00:59,110
+types of its arguments to figure
+out what you actually
+
+24
+00:00:59,110 --> 00:01:01,470
+passed in and act accordingly.
+
+25
+00:01:01,470 --> 00:01:04,050
+And in this case, passing just
+a call back and no query
+
+26
+00:01:04,050 --> 00:01:07,950
+selector is the same as passing
+a query selector that
+
+27
+00:01:07,950 --> 00:01:09,200
+matches every document.
+
+28
+00:01:09,200 --> 00:01:10,130

@@ -1,0 +1,913 @@
+1
+00:00:00,000 --> 00:00:00,120
+
+2
+00:00:00,120 --> 00:00:02,140
+All right, so now let's
+talk about the
+
+3
+00:00:02,140 --> 00:00:05,340
+node.js driver and updates.
+
+4
+00:00:05,340 --> 00:00:07,400
+So we're going to talk about
+a few different kinds of
+
+5
+00:00:07,400 --> 00:00:08,540
+updates right now.
+
+6
+00:00:08,540 --> 00:00:11,950
+So first we'll talk about
+replacement updates, where we
+
+7
+00:00:11,950 --> 00:00:14,080
+actually replace the
+entire document.
+
+8
+00:00:14,080 --> 00:00:17,670
+We'll talk about in place
+updates, where you can use
+
+9
+00:00:17,670 --> 00:00:21,270
+update operators to actually
+modify the document without
+
+10
+00:00:21,270 --> 00:00:22,900
+completely replacing it.
+
+11
+00:00:22,900 --> 00:00:25,070
+And then we'll talk about
+multi-updates, where you can
+
+12
+00:00:25,070 --> 00:00:28,530
+actually apply these in place
+updates to a large number of
+
+13
+00:00:28,530 --> 00:00:31,180
+documents using a single
+operation.
+
+14
+00:00:31,180 --> 00:00:33,660
+So let's get started.
+
+15
+00:00:33,660 --> 00:00:37,120
+All right, so here's our example
+of updates using
+
+16
+00:00:37,120 --> 00:00:37,900
+replacement.
+
+17
+00:00:37,900 --> 00:00:39,940
+So all this up here
+is the same.
+
+18
+00:00:39,940 --> 00:00:42,360
+We connect just like before.
+
+19
+00:00:42,360 --> 00:00:44,660
+And we have our query
+for an assignment.
+
+20
+00:00:44,660 --> 00:00:46,920
+And here we're doing a find
+one just to get the first
+
+21
+00:00:46,920 --> 00:00:51,080
+document that has homework one
+as the value of assignment.
+
+22
+00:00:51,080 --> 00:00:53,630
+That's 'cause if we're doing a
+replacement down here, we need
+
+23
+00:00:53,630 --> 00:00:56,530
+to actually have our
+original document.
+
+24
+00:00:56,530 --> 00:00:58,280
+So if there's an error,
+we throw an error.
+
+25
+00:00:58,280 --> 00:01:01,070
+If we don't get anything back,
+we don't really have anything
+
+26
+00:01:01,070 --> 00:01:02,440
+to work with for our update.
+
+27
+00:01:02,440 --> 00:01:05,740
+So we return the error to the
+user, close the connection at
+
+28
+00:01:05,740 --> 00:01:09,650
+the database, and return so
+that we don't execute this
+
+29
+00:01:09,650 --> 00:01:12,960
+code down here with
+our no document.
+
+30
+00:01:12,960 --> 00:01:15,700
+So we'll talk about this
+in a little bit.
+
+31
+00:01:15,700 --> 00:01:19,010
+But coming down here, we
+actually have db.collection
+
+32
+00:01:19,010 --> 00:01:21,550
+grades just like before.
+
+33
+00:01:21,550 --> 00:01:23,920
+Except now we do .update.
+
+34
+00:01:23,920 --> 00:01:27,490
+We give it our query, and we
+give it the document that we
+
+35
+00:01:27,490 --> 00:01:31,130
+want to replace the first match
+for our query with.
+
+36
+00:01:31,130 --> 00:01:34,210
+And then down here, we
+have a call back.
+
+37
+00:01:34,210 --> 00:01:35,950
+We can throw an error.
+
+38
+00:01:35,950 --> 00:01:40,890
+And updated here is the number
+of documents that we updated.
+
+39
+00:01:40,890 --> 00:01:42,270
+So we just print out
+a message saying we
+
+40
+00:01:42,270 --> 00:01:43,740
+successfully updated.
+
+41
+00:01:43,740 --> 00:01:46,000
+Hopefully, this is going
+to be one document.
+
+42
+00:01:46,000 --> 00:01:49,000
+And then we just close the
+connection at the database.
+
+43
+00:01:49,000 --> 00:01:51,970
+So up here, this is where we
+actually are making the
+
+44
+00:01:51,970 --> 00:01:52,900
+modification.
+
+45
+00:01:52,900 --> 00:01:57,040
+So we get our document back, and
+down here we want to set
+
+46
+00:01:57,040 --> 00:01:58,150
+the date returned.
+
+47
+00:01:58,150 --> 00:02:00,350
+So this is just when
+we returned the
+
+48
+00:02:00,350 --> 00:02:01,630
+assignment to the student.
+
+49
+00:02:01,630 --> 00:02:06,600
+So we set doc date returned
+equals new date, all just in
+
+50
+00:02:06,600 --> 00:02:07,510
+JavaScript.
+
+51
+00:02:07,510 --> 00:02:09,759
+Nothing MongoDB related here.
+
+52
+00:02:09,759 --> 00:02:12,710
+And then down here when we do
+the update, we pass document
+
+53
+00:02:12,710 --> 00:02:14,920
+as our replacement.
+
+54
+00:02:14,920 --> 00:02:17,750
+So it's actually going to be the
+same document we got from
+
+55
+00:02:17,750 --> 00:02:22,050
+the find one, plus the
+date returned.
+
+56
+00:02:22,050 --> 00:02:25,390
+So I want to talk a little
+bit about this line here.
+
+57
+00:02:25,390 --> 00:02:29,710
+So notice that we're actually
+doing two separate queries.
+
+58
+00:02:29,710 --> 00:02:32,490
+So we're doing a query for the
+find one, and we're doing a
+
+59
+00:02:32,490 --> 00:02:33,780
+query for the update.
+
+60
+00:02:33,780 --> 00:02:36,090
+So we actually may
+have other people
+
+61
+00:02:36,090 --> 00:02:37,820
+connected to our database.
+
+62
+00:02:37,820 --> 00:02:40,820
+We may have other operations
+going on besides just the ones
+
+63
+00:02:40,820 --> 00:02:42,120
+you see here.
+
+64
+00:02:42,120 --> 00:02:46,360
+So between these two queries,
+things might have changed.
+
+65
+00:02:46,360 --> 00:02:48,860
+And notice that there's nothing
+about find one that
+
+66
+00:02:48,860 --> 00:02:53,690
+says which document that has
+a value of homework one for
+
+67
+00:02:53,690 --> 00:02:55,530
+assignment we're getting back.
+
+68
+00:02:55,530 --> 00:02:59,250
+It could be any student for
+the document we get back.
+
+69
+00:02:59,250 --> 00:03:01,500
+But all we really are
+selecting on is the
+
+70
+00:03:01,500 --> 00:03:02,660
+assignment.
+
+71
+00:03:02,660 --> 00:03:06,400
+So we don't actually have any
+guarantee that the document we
+
+72
+00:03:06,400 --> 00:03:10,170
+get back here is the same
+document we update here if we
+
+73
+00:03:10,170 --> 00:03:13,380
+just use this query
+right here.
+
+74
+00:03:13,380 --> 00:03:16,540
+So what we're doing is we're
+saying OK, underscore ID is
+
+75
+00:03:16,540 --> 00:03:20,010
+unique in the document
+that we got back.
+
+76
+00:03:20,010 --> 00:03:23,170
+So let's just add that to our
+query to make sure that the
+
+77
+00:03:23,170 --> 00:03:26,370
+document that we update is
+exactly the same document that
+
+78
+00:03:26,370 --> 00:03:28,820
+we got back in our find one.
+
+79
+00:03:28,820 --> 00:03:31,330
+This is important because in our
+query we might have gotten
+
+80
+00:03:31,330 --> 00:03:34,390
+a document with a different
+student and then down here
+
+81
+00:03:34,390 --> 00:03:37,060
+when we update, we're doing a
+complete replacement without
+
+82
+00:03:37,060 --> 00:03:38,110
+checking the old field.
+
+83
+00:03:38,110 --> 00:03:42,810
+So we might have actually just
+updated it and replaced the
+
+84
+00:03:42,810 --> 00:03:46,950
+old student in a document that
+we didn't intend to replace.
+
+85
+00:03:46,950 --> 00:03:50,210
+All right, so let's run that.
+
+86
+00:03:50,210 --> 00:03:52,960
+So we see successfully
+updated one document.
+
+87
+00:03:52,960 --> 00:03:54,590
+So now let's take a look.
+
+88
+00:03:54,590 --> 00:03:57,810
+So I'm going to do
+db.grades.find assignment of
+
+89
+00:03:57,810 --> 00:03:59,080
+homework one.
+
+90
+00:03:59,080 --> 00:04:01,175
+So notice we get all
+our documents back.
+
+91
+00:04:01,175 --> 00:04:05,750
+And one of them actually has the
+date returned set to our
+
+92
+00:04:05,750 --> 00:04:07,320
+current date.
+
+93
+00:04:07,320 --> 00:04:10,170
+So that's how to do an update
+with replacement.
+
+94
+00:04:10,170 --> 00:04:13,410
+But notice that we only really
+added one field, and we
+
+95
+00:04:13,410 --> 00:04:16,079
+actually replaced this
+entire document.
+
+96
+00:04:16,079 --> 00:04:19,519
+All the fields happen to be the
+same, but maybe it's not
+
+97
+00:04:19,519 --> 00:04:21,230
+quite as efficient
+as we could be.
+
+98
+00:04:21,230 --> 00:04:25,090
+So let's take a look at
+in place updates.
+
+99
+00:04:25,090 --> 00:04:29,130
+All right, so this is an example
+of an in place update.
+
+100
+00:04:29,130 --> 00:04:31,890
+And note that it's a little bit
+simpler just because it
+
+101
+00:04:31,890 --> 00:04:34,400
+matches more what we're trying
+to do right now.
+
+102
+00:04:34,400 --> 00:04:36,270
+We actually don't need
+to do a find one.
+
+103
+00:04:36,270 --> 00:04:38,010
+We just go straight
+to the update.
+
+104
+00:04:38,010 --> 00:04:41,060
+And as our second argument, this
+operator, instead of a
+
+105
+00:04:41,060 --> 00:04:43,640
+document that we're going to
+use to replace our original
+
+106
+00:04:43,640 --> 00:04:46,670
+document, we actually have
+this dollar sign
+
+107
+00:04:46,670 --> 00:04:48,370
+set operator here.
+
+108
+00:04:48,370 --> 00:04:51,380
+So what this says is that
+we actually query for an
+
+109
+00:04:51,380 --> 00:04:52,680
+assignment of homework one.
+
+110
+00:04:52,680 --> 00:04:56,230
+And for the first one we get
+back, we actually apply this
+
+111
+00:04:56,230 --> 00:04:57,920
+operator to that document.
+
+112
+00:04:57,920 --> 00:05:00,620
+So the result of this will be
+that we have our original
+
+113
+00:05:00,620 --> 00:05:04,500
+document with this additional
+field set.
+
+114
+00:05:04,500 --> 00:05:08,210
+And actually the set operator
+will set date returned to the
+
+115
+00:05:08,210 --> 00:05:11,870
+current date, regardless of
+whether it existed in the
+
+116
+00:05:11,870 --> 00:05:13,210
+original document.
+
+117
+00:05:13,210 --> 00:05:15,930
+So we just run the update and
+we have the call back and we
+
+118
+00:05:15,930 --> 00:05:18,310
+log a message just
+like before.
+
+119
+00:05:18,310 --> 00:05:20,970
+Updated it as the number of
+documents that we updated, so
+
+120
+00:05:20,970 --> 00:05:22,700
+we hope that says one.
+
+121
+00:05:22,700 --> 00:05:25,320
+So let's run that.
+
+122
+00:05:25,320 --> 00:05:28,420
+So we see successfully
+updated one document.
+
+123
+00:05:28,420 --> 00:05:32,130
+So let's actually go into the
+course database again and run
+
+124
+00:05:32,130 --> 00:05:35,710
+db.grades.find assignment
+homework one.
+
+125
+00:05:35,710 --> 00:05:39,260
+So we look here and we see
+that we have a list of
+
+126
+00:05:39,260 --> 00:05:42,470
+documents for homework one, and
+now we actually have two
+
+127
+00:05:42,470 --> 00:05:45,700
+documents with date returned.
+
+128
+00:05:45,700 --> 00:05:50,000
+So this was the one we updated
+before and this is the one we
+
+129
+00:05:50,000 --> 00:05:52,640
+updated using the
+in place update.
+
+130
+00:05:52,640 --> 00:05:56,770
+And notice that in one case, we
+reordered the fields and in
+
+131
+00:05:56,770 --> 00:05:57,900
+the other case we didn't.
+
+132
+00:05:57,900 --> 00:05:59,740
+So this demonstrates
+that this is
+
+133
+00:05:59,740 --> 00:06:01,560
+really a different operation.
+
+134
+00:06:01,560 --> 00:06:03,910
+This one we just saved the
+original document.
+
+135
+00:06:03,910 --> 00:06:06,560
+And this one, we did an in place
+update which actually
+
+136
+00:06:06,560 --> 00:06:10,130
+resulted in the fields coming
+back in a different order.
+
+137
+00:06:10,130 --> 00:06:12,940
+All right, so one issue with
+this is that we've only
+
+138
+00:06:12,940 --> 00:06:14,400
+updated two fields.
+
+139
+00:06:14,400 --> 00:06:17,510
+And we don't want to have to run
+an update for every single
+
+140
+00:06:17,510 --> 00:06:20,550
+document that we want to
+set date returned on.
+
+141
+00:06:20,550 --> 00:06:23,340
+So let's talk about
+multi-updates.
+
+142
+00:06:23,340 --> 00:06:26,350
+All right, so this is an example
+of doing an update on
+
+143
+00:06:26,350 --> 00:06:28,090
+multiple documents.
+
+144
+00:06:28,090 --> 00:06:31,500
+So for this example, I'm
+actually going to query with
+
+145
+00:06:31,500 --> 00:06:34,590
+no selector, just select all
+the documents in our grades
+
+146
+00:06:34,590 --> 00:06:35,870
+collection.
+
+147
+00:06:35,870 --> 00:06:40,120
+And I'm actually just going to
+use unset on data returned.
+
+148
+00:06:40,120 --> 00:06:43,180
+So maybe I made a mistake and I
+actually didn't want to set
+
+149
+00:06:43,180 --> 00:06:45,360
+date returned on any
+of these documents.
+
+150
+00:06:45,360 --> 00:06:48,870
+So this will actually query all
+the documents and unset
+
+151
+00:06:48,870 --> 00:06:50,520
+date returned.
+
+152
+00:06:50,520 --> 00:06:53,150
+And so what actually makes this
+a multi-update is this
+
+153
+00:06:53,150 --> 00:06:54,840
+options argument.
+
+154
+00:06:54,840 --> 00:06:58,220
+So the first argument here is
+a query, second argument is
+
+155
+00:06:58,220 --> 00:07:01,870
+what operation to apply, and
+the third argument is an
+
+156
+00:07:01,870 --> 00:07:04,200
+options structure that
+specifies what kind
+
+157
+00:07:04,200 --> 00:07:05,420
+of update it is.
+
+158
+00:07:05,420 --> 00:07:08,830
+So in this case, it's a
+multi-document update.
+
+159
+00:07:08,830 --> 00:07:11,170
+So just like before, we're
+actually printing the number
+
+160
+00:07:11,170 --> 00:07:13,000
+of documents that we updated.
+
+161
+00:07:13,000 --> 00:07:15,150
+But we're hoping that
+we updated more
+
+162
+00:07:15,150 --> 00:07:16,040
+than one in this case.
+
+163
+00:07:16,040 --> 00:07:18,890
+Because we're actually matching
+all 16 documents in
+
+164
+00:07:18,890 --> 00:07:20,520
+the grades collection.
+
+165
+00:07:20,520 --> 00:07:21,830
+So let's run that.
+
+166
+00:07:21,830 --> 00:07:22,810
+All right, so we got
+
+167
+00:07:22,810 --> 00:07:25,910
+successfully updated 16 documents.
+
+168
+00:07:25,910 --> 00:07:28,066
+So let's take a look.
+
+169
+00:07:28,066 --> 00:07:31,040
+All right, so we look here and
+we actually see all our
+
+170
+00:07:31,040 --> 00:07:32,890
+documents for homework one.
+
+171
+00:07:32,890 --> 00:07:37,090
+And notice that none of them
+have a date returned field.
+
+172
+00:07:37,090 --> 00:07:40,360
+And in fact, two of them have
+had their fields reordered.
+
+173
+00:07:40,360 --> 00:07:43,910
+Which shows that MongoDB didn't
+actually modify these
+
+174
+00:07:43,910 --> 00:07:46,940
+documents because it realized
+that it was being called with
+
+175
+00:07:46,940 --> 00:07:51,000
+the unset operator and these
+documents actually didn't have
+
+176
+00:07:51,000 --> 00:07:53,070
+a date returned field
+at all, so they
+
+177
+00:07:53,070 --> 00:07:54,860
+didn't need to be modified.
+
+178
+00:07:54,860 --> 00:07:57,960
+All right, so that was an
+example of updating by
+
+179
+00:07:57,960 --> 00:08:02,380
+replacing a document, updating
+in place using update
+
+180
+00:08:02,380 --> 00:08:06,740
+operators, and updating
+multiple documents.
+
+181
+00:08:06,740 --> 00:08:09,370
+All right, so here's our quiz.
+
+182
+00:08:09,370 --> 00:08:11,530
+So this is a little code snippet
+very similar to the
+
+183
+00:08:11,530 --> 00:08:15,110
+ones that we were looking
+at in the lectures.
+
+184
+00:08:15,110 --> 00:08:18,890
+And here we have a query and the
+update operator that we're
+
+185
+00:08:18,890 --> 00:08:20,650
+trying to apply.
+
+186
+00:08:20,650 --> 00:08:23,650
+So the question is, what happens
+when you run the above
+
+187
+00:08:23,650 --> 00:08:26,510
+code with the given
+update operator?
+
+188
+00:08:26,510 --> 00:08:29,060
+Does it change assignment to
+homework two and change date
+
+189
+00:08:29,060 --> 00:08:30,730
+graded to the current date?
+
+190
+00:08:30,730 --> 00:08:33,140
+Does it change date graded to
+the current state, ignoring
+
+191
+00:08:33,140 --> 00:08:34,200
+assignment?
+
+192
+00:08:34,200 --> 00:08:37,010
+Does it replace the document
+with a document with only the
+
+193
+00:08:37,010 --> 00:08:39,140
+date graded and assignment
+fields?
+
+194
+00:08:39,140 --> 00:08:40,530
+Or does it return an error?
+
+195
+00:08:40,530 --> 00:08:41,780

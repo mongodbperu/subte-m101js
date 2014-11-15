@@ -1,0 +1,45 @@
+1
+00:00:00,000 --> 00:00:00,415
+
+2
+00:00:00,415 --> 00:00:00,830
+All right.
+
+3
+00:00:00,830 --> 00:00:04,980
+The answer is that this line of
+code will upsert to insert
+
+4
+00:00:04,980 --> 00:00:06,930
+or replace the document.
+
+5
+00:00:06,930 --> 00:00:09,680
+So the reason for this is that
+the save function actually
+
+6
+00:00:09,680 --> 00:00:12,250
+checks for the _id.
+
+7
+00:00:12,250 --> 00:00:14,590
+And if an _id is
+found, it calls
+
+8
+00:00:14,590 --> 00:00:17,220
+upsert rather than insert.
+
+9
+00:00:17,220 --> 00:00:19,450
+So this is a more of a question
+about the behavior of
+
+10
+00:00:19,450 --> 00:00:21,420
+save than upserts in general.
+
+11
+00:00:21,420 --> 00:00:22,670

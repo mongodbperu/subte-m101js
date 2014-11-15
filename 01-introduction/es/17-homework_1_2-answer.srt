@@ -1,0 +1,57 @@
+1
+00:00:00,000 --> 00:00:00,130
+
+2
+00:00:00,130 --> 00:00:00,500
+All right.
+
+3
+00:00:00,500 --> 00:00:03,690
+So this is the answer video
+for homework 1-2.
+
+4
+00:00:03,690 --> 00:00:08,080
+So the assignment for this was
+to run our first application.
+
+5
+00:00:08,080 --> 00:00:12,920
+So we look in here, and we see
+we have application app.js.
+
+6
+00:00:12,920 --> 00:00:17,470
+And you remember that we try to
+run it, and we cannot find
+
+7
+00:00:17,470 --> 00:00:22,460
+module mongodb so the solution
+to that was to install the
+
+8
+00:00:22,460 --> 00:00:24,730
+mongodb module.
+
+9
+00:00:24,730 --> 00:00:27,990
+All right, so once we have our
+module installed, we can run
+
+10
+00:00:27,990 --> 00:00:29,340
+our application.
+
+11
+00:00:29,340 --> 00:00:32,430
+We see answer is
+I like kittens.
+
+12
+00:00:32,430 --> 00:00:34,260
+So that's the answer
+to homework 1-2.
+
+13
+00:00:34,260 --> 00:00:35,510

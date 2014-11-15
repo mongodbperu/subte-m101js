@@ -1,0 +1,441 @@
+1
+00:00:00,000 --> 00:00:00,140
+
+2
+00:00:00,140 --> 00:00:00,560
+All right.
+
+3
+00:00:00,560 --> 00:00:03,730
+So now we're going to get to our
+course project, "Building
+
+4
+00:00:03,730 --> 00:00:07,230
+a Blog on Node.js." We'll
+have most of the
+
+5
+00:00:07,230 --> 00:00:08,540
+blog written for you.
+
+6
+00:00:08,540 --> 00:00:13,020
+And your job will be to fill in
+specific queries to MongoDB
+
+7
+00:00:13,020 --> 00:00:16,900
+that update the necessary
+collections or read data from
+
+8
+00:00:16,900 --> 00:00:18,680
+the collections that we
+use to populate the
+
+9
+00:00:18,680 --> 00:00:20,570
+pages on the blog.
+
+10
+00:00:20,570 --> 00:00:23,270
+Right now, I'll just show you
+the user interface so you get
+
+11
+00:00:23,270 --> 00:00:26,600
+a sense of what the finished
+product is going to look like.
+
+12
+00:00:26,600 --> 00:00:29,970
+We'll go to a terminal just
+to show you to do this.
+
+13
+00:00:29,970 --> 00:00:32,370
+If you look in here, we have
+our blog project files.
+
+14
+00:00:32,370 --> 00:00:33,606
+This is our main application.
+
+15
+00:00:33,606 --> 00:00:36,530
+This is the application we're
+actually going to run.
+
+16
+00:00:36,530 --> 00:00:39,190
+And here we have a "routes"
+directory.
+
+17
+00:00:39,190 --> 00:00:42,240
+And this actually has all
+our routes for express.
+
+18
+00:00:42,240 --> 00:00:46,100
+Down here, we have sessions,
+users, and posts.
+
+19
+00:00:46,100 --> 00:00:48,020
+These actually correspond
+to our three
+
+20
+00:00:48,020 --> 00:00:49,810
+collections for the blog.
+
+21
+00:00:49,810 --> 00:00:51,710
+These contain the code that
+you're actually going to be
+
+22
+00:00:51,710 --> 00:00:54,190
+modifying to complete
+this project.
+
+23
+00:00:54,190 --> 00:00:57,660
+The first thing we want
+to do is run our app.
+
+24
+00:00:57,660 --> 00:01:00,610
+And you notice, we actually are
+looking for a module that
+
+25
+00:01:00,610 --> 00:01:01,750
+we don't have installed.
+
+26
+00:01:01,750 --> 00:01:04,340
+If you notice up here, we
+actually don't have a node
+
+27
+00:01:04,340 --> 00:01:05,760
+modules folder.
+
+28
+00:01:05,760 --> 00:01:07,990
+But we do have a package.json
+folder.
+
+29
+00:01:07,990 --> 00:01:11,100
+So let's just type
+"NPM install" to
+
+30
+00:01:11,100 --> 00:01:13,270
+install all of our modules.
+
+31
+00:01:13,270 --> 00:01:13,670
+All right.
+
+32
+00:01:13,670 --> 00:01:15,920
+So we installed all
+our dependencies.
+
+33
+00:01:15,920 --> 00:01:18,100
+Let's just run our
+application.
+
+34
+00:01:18,100 --> 00:01:18,450
+All right.
+
+35
+00:01:18,450 --> 00:01:20,820
+Express server listening
+on port 3,000.
+
+36
+00:01:20,820 --> 00:01:22,780
+So let's take a look at
+what our finished
+
+37
+00:01:22,780 --> 00:01:24,110
+blog should look like.
+
+38
+00:01:24,110 --> 00:01:26,750
+Let's go to local host 3,000.
+
+39
+00:01:26,750 --> 00:01:29,520
+And we're at our blog.
+
+40
+00:01:29,520 --> 00:01:30,900
+This is our home page.
+
+41
+00:01:30,900 --> 00:01:33,010
+There's nothing on
+it right now.
+
+42
+00:01:33,010 --> 00:01:35,530
+Let's actually log in so we
+can create a new post.
+
+43
+00:01:35,530 --> 00:01:40,060
+Let's create a username "test,"
+password "test." And
+
+44
+00:01:40,060 --> 00:01:42,180
+we have no such user.
+
+45
+00:01:42,180 --> 00:01:46,270
+So let's hit the back button
+here and actually sign up.
+
+46
+00:01:46,270 --> 00:01:47,315
+Here's our sign up page.
+
+47
+00:01:47,315 --> 00:01:52,240
+Let's create a username "test"
+with a password of "test," and
+
+48
+00:01:52,240 --> 00:01:59,410
+verify test with test
+example.com as our email.
+
+49
+00:01:59,410 --> 00:02:00,050
+All right.
+
+50
+00:02:00,050 --> 00:02:02,100
+So now we're logged in.
+
+51
+00:02:02,100 --> 00:02:04,300
+We can actually go to
+our blog homepage.
+
+52
+00:02:04,300 --> 00:02:06,640
+It's not very interesting
+because it doesn't really have
+
+53
+00:02:06,640 --> 00:02:08,020
+any posts on it.
+
+54
+00:02:08,020 --> 00:02:11,240
+So let's go create a new post.
+
+55
+00:02:11,240 --> 00:02:17,080
+Let's call it "first." This
+is the first post.
+
+56
+00:02:17,080 --> 00:02:18,820
+Now down here we
+have our tags.
+
+57
+00:02:18,820 --> 00:02:23,640
+And we can say first, comma,
+post, comma, blog.
+
+58
+00:02:23,640 --> 00:02:25,360
+So now let's submit that.
+
+59
+00:02:25,360 --> 00:02:28,600
+And we are actually
+specifically
+
+60
+00:02:28,600 --> 00:02:30,620
+at our first post.
+
+61
+00:02:30,620 --> 00:02:33,190
+And we can go to
+the blog home.
+
+62
+00:02:33,190 --> 00:02:34,830
+This shows all the posts.
+
+63
+00:02:34,830 --> 00:02:36,690
+We just have one right now.
+
+64
+00:02:36,690 --> 00:02:40,140
+And notice we actually have
+zero comments on the post.
+
+65
+00:02:40,140 --> 00:02:42,920
+So let's add a comment
+to our post--
+
+66
+00:02:42,920 --> 00:02:47,410
+first comment on first post.
+
+67
+00:02:47,410 --> 00:02:48,660
+So we submit.
+
+68
+00:02:48,660 --> 00:02:50,500
+Now our post has a comment.
+
+69
+00:02:50,500 --> 00:02:52,780
+Let's create another post.
+
+70
+00:02:52,780 --> 00:02:55,180
+And let's give it some
+of the same tags.
+
+71
+00:02:55,180 --> 00:02:59,630
+Let's give it post, blog
+tags, and submit that.
+
+72
+00:02:59,630 --> 00:03:02,430
+Now we just see second, because
+we're specifically on
+
+73
+00:03:02,430 --> 00:03:05,890
+the page to view the
+second post.
+
+74
+00:03:05,890 --> 00:03:07,590
+So let's go back to our home.
+
+75
+00:03:07,590 --> 00:03:11,890
+And now we can see we have both
+our first, second post.
+
+76
+00:03:11,890 --> 00:03:13,720
+First post has one comment.
+
+77
+00:03:13,720 --> 00:03:15,840
+Second post has zero comments.
+
+78
+00:03:15,840 --> 00:03:18,220
+And they have some
+tags in common.
+
+79
+00:03:18,220 --> 00:03:22,520
+The next thing we can do is
+actually see all posts for a
+
+80
+00:03:22,520 --> 00:03:24,350
+specific tag.
+
+81
+00:03:24,350 --> 00:03:27,210
+Right now we just have two, so
+it's not terribly interesting.
+
+82
+00:03:27,210 --> 00:03:32,200
+But basically what this is
+showing is all the posts with
+
+83
+00:03:32,200 --> 00:03:36,980
+the tag "post." Actually if we
+click here on "first," we just
+
+84
+00:03:36,980 --> 00:03:38,720
+see all the post with the
+tag "first," which
+
+85
+00:03:38,720 --> 00:03:40,500
+is just this one.
+
+86
+00:03:40,500 --> 00:03:43,120
+And finally, we have
+a log-out page.
+
+87
+00:03:43,120 --> 00:03:45,920
+And once we log out, we can
+still see our posts.
+
+88
+00:03:45,920 --> 00:03:49,570
+So this is actually visible to
+people not logged in, but we
+
+89
+00:03:49,570 --> 00:03:51,960
+actually can't create
+a new post.
+
+90
+00:03:51,960 --> 00:03:54,830
+So that's the basic
+functionality of our blog.
+
+91
+00:03:54,830 --> 00:03:57,270
+This is just so you get a sense
+of the finished product
+
+92
+00:03:57,270 --> 00:04:00,940
+would look like when you're
+working on your application.
+
+93
+00:04:00,940 --> 00:04:03,590
+Hopefully that's enough of an
+introduction so that you know
+
+94
+00:04:03,590 --> 00:04:05,650
+what the blog should do
+and how it should
+
+95
+00:04:05,650 --> 00:04:06,910
+work when it's finished.
+
+96
+00:04:06,910 --> 00:04:08,160

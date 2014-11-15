@@ -1,0 +1,59 @@
+1
+00:00:00,000 --> 00:00:00,130
+
+2
+00:00:00,130 --> 00:00:02,460
+The answer is that both
+documents will be inserted
+
+3
+00:00:02,460 --> 00:00:03,660
+successfully.
+
+4
+00:00:03,660 --> 00:00:05,340
+So if we go back to
+the example in the
+
+5
+00:00:05,340 --> 00:00:07,180
+quiz, we can see why.
+
+6
+00:00:07,180 --> 00:00:11,100
+So in MongoDB, uniqueness is
+case-sensitive, which means
+
+7
+00:00:11,100 --> 00:00:14,180
+that even though both of these
+strings say George, the fact
+
+8
+00:00:14,180 --> 00:00:17,550
+this is an uppercase G and this
+is a lowercase g means
+
+9
+00:00:17,550 --> 00:00:18,780
+that these are actually
+different
+
+10
+00:00:18,780 --> 00:00:21,350
+keys for the _id field.
+
+11
+00:00:21,350 --> 00:00:24,290
+So the result of calling insert
+with an array, which is
+
+12
+00:00:24,290 --> 00:00:28,090
+valid in the nojs driver, will
+be to insert both of these
+
+13
+00:00:28,090 --> 00:00:31,460
+documents without returning
+a duplicate key error.

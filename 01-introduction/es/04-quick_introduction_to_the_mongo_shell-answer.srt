@@ -1,0 +1,12 @@
+1
+00:00:00,000 --> 00:00:03,340
+All right, so only this one here
+is a valid JSON document.
+
+2
+00:00:03,340 --> 00:00:06,670
+All the other ones have syntax
+errors and invalid tokens.
+
+3
+00:00:06,670 --> 00:00:07,920

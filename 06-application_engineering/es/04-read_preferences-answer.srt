@@ -1,0 +1,73 @@
+1
+00:00:00,000 --> 00:00:00,140
+
+2
+00:00:00,140 --> 00:00:03,400
+All right, so the answer to the
+quiz is these first three.
+
+3
+00:00:03,400 --> 00:00:07,010
+So this one and this one are
+basically saying that reading
+
+4
+00:00:07,010 --> 00:00:09,810
+from the secondary, adds more
+load to the secondary.
+
+5
+00:00:09,810 --> 00:00:12,640
+And you have to be aware of the
+consequences that may have
+
+6
+00:00:12,640 --> 00:00:14,460
+to your entire system.
+
+7
+00:00:14,460 --> 00:00:18,460
+If your secondary becomes
+overloaded, it may lag behind
+
+8
+00:00:18,460 --> 00:00:21,520
+the primary, because it can't
+actually keep up and replicate
+
+9
+00:00:21,520 --> 00:00:24,670
+the data while also servicing
+other reads.
+
+10
+00:00:24,670 --> 00:00:27,740
+Another issue is you may not
+read what you just wrote,
+
+11
+00:00:27,740 --> 00:00:30,790
+because the secondary may not
+have the time to catch up.
+
+12
+00:00:30,790 --> 00:00:33,940
+And then last one, which is
+similar to the first answer,
+
+13
+00:00:33,940 --> 00:00:37,390
+is just that it may slow down
+the secondary, if the
+
+14
+00:00:37,390 --> 00:00:39,480
+secondary isn't powerful
+enough to keep up
+
+15
+00:00:39,480 --> 00:00:40,730
+with all the reads.
+
+16
+00:00:40,730 --> 00:00:41,600

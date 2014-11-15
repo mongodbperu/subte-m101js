@@ -1,0 +1,730 @@
+1
+00:00:00,000 --> 00:00:00,140
+
+2
+00:00:00,140 --> 00:00:02,870
+All right, so let's talk next
+about find and modify in the
+
+3
+00:00:02,870 --> 00:00:04,820
+Node.js driver.
+
+4
+00:00:04,820 --> 00:00:07,660
+So first, let's talk a little
+bit about what the purpose is
+
+5
+00:00:07,660 --> 00:00:09,210
+of this function.
+
+6
+00:00:09,210 --> 00:00:10,400
+So let's look at the
+two different ways
+
+7
+00:00:10,400 --> 00:00:11,750
+you can do an update.
+
+8
+00:00:11,750 --> 00:00:15,940
+So, one is you do a query, then
+you do your update by
+
+9
+00:00:15,940 --> 00:00:19,120
+replacing the document with
+the result of your query.
+
+10
+00:00:19,120 --> 00:00:22,030
+Now, the problem here, as we saw
+before when I was talking
+
+11
+00:00:22,030 --> 00:00:25,560
+about adding the underscore ID
+field to our query, is that
+
+12
+00:00:25,560 --> 00:00:29,040
+you may do a query, something
+may change about the document
+
+13
+00:00:29,040 --> 00:00:31,970
+we care about, and then by the
+time we do the update, the
+
+14
+00:00:31,970 --> 00:00:33,560
+document is completely
+different
+
+15
+00:00:33,560 --> 00:00:35,480
+from what we saw earlier.
+
+16
+00:00:35,480 --> 00:00:38,180
+On the other hand, if you do
+an in place update and you
+
+17
+00:00:38,180 --> 00:00:41,440
+want the resulting document
+back, you may do an update,
+
+18
+00:00:41,440 --> 00:00:45,560
+and then a query to get the
+resulting document, and just
+
+19
+00:00:45,560 --> 00:00:49,140
+like before, anything can happen
+in this space of time.
+
+20
+00:00:49,140 --> 00:00:51,890
+You may do the update, the
+document may change to be
+
+21
+00:00:51,890 --> 00:00:55,330
+unrecognizable by the time you
+can do a query to take a look
+
+22
+00:00:55,330 --> 00:00:57,030
+at the document's contents.
+
+23
+00:00:57,030 --> 00:00:59,440
+So that's the reason for
+find and modify.
+
+24
+00:00:59,440 --> 00:01:02,380
+Find and modify atomically
+updates
+
+25
+00:01:02,380 --> 00:01:04,400
+and returns the document.
+
+26
+00:01:04,400 --> 00:01:06,790
+In fact, we can actually specify
+whether we want to
+
+27
+00:01:06,790 --> 00:01:10,070
+return the new document
+or the old document.
+
+28
+00:01:10,070 --> 00:01:11,960
+So, let's look at an example.
+
+29
+00:01:11,960 --> 00:01:15,040
+All right, so this is an example
+of when find and
+
+30
+00:01:15,040 --> 00:01:16,670
+modify would be useful.
+
+31
+00:01:16,670 --> 00:01:19,360
+So, at a high level, what we're
+trying to do here is
+
+32
+00:01:19,360 --> 00:01:23,430
+we're trying to increment to
+counter and get the value of
+
+33
+00:01:23,430 --> 00:01:26,520
+the counter immediately after we
+increment it, before anyone
+
+34
+00:01:26,520 --> 00:01:30,390
+had a chance to also increment
+the value or change its value.
+
+35
+00:01:30,390 --> 00:01:33,950
+And so for this, we really do
+need find and modify, because
+
+36
+00:01:33,950 --> 00:01:36,790
+if we tried to do an update
+and then a find to get new
+
+37
+00:01:36,790 --> 00:01:40,070
+value of the counter, other
+clients could've also called
+
+38
+00:01:40,070 --> 00:01:42,400
+update and incremented
+our counter.
+
+39
+00:01:42,400 --> 00:01:45,720
+So by the time we find it, we
+don't actually get the value
+
+40
+00:01:45,720 --> 00:01:48,650
+that it had immediately
+after we updated it.
+
+41
+00:01:48,650 --> 00:01:52,800
+So, this is an example of when
+we would need find and modify.
+
+42
+00:01:52,800 --> 00:01:55,970
+So, let's go over the pieces
+of this example.
+
+43
+00:01:55,970 --> 00:01:58,150
+So first, we connect, just
+like in all our other
+
+44
+00:01:58,150 --> 00:02:03,110
+examples, and once we have our
+database connection, we call
+
+45
+00:02:03,110 --> 00:02:07,330
+db.collection, and then get
+the counters collection.
+
+46
+00:02:07,330 --> 00:02:09,500
+Then once we have a reference to
+the counters collection, we
+
+47
+00:02:09,500 --> 00:02:11,080
+call find and modify.
+
+48
+00:02:11,080 --> 00:02:13,440
+So, this takes four arguments.
+
+49
+00:02:13,440 --> 00:02:15,550
+So let's go through
+them one by one.
+
+50
+00:02:15,550 --> 00:02:19,380
+So, first there's our query,
+and this is very similar to
+
+51
+00:02:19,380 --> 00:02:21,820
+the query selector
+in an update.
+
+52
+00:02:21,820 --> 00:02:23,830
+It just tells us
+which documents
+
+53
+00:02:23,830 --> 00:02:25,580
+we're looking to modify.
+
+54
+00:02:25,580 --> 00:02:29,070
+So in this case, we're looking
+for documents that have a name
+
+55
+00:02:29,070 --> 00:02:30,770
+of comments.
+
+56
+00:02:30,770 --> 00:02:33,370
+Now, the next argument
+is sort.
+
+57
+00:02:33,370 --> 00:02:35,460
+So it may seem a little strange
+that we're doing a
+
+58
+00:02:35,460 --> 00:02:38,970
+sort here, because find and
+modify actually only modifies
+
+59
+00:02:38,970 --> 00:02:41,600
+and returns a single document,
+so why would
+
+60
+00:02:41,600 --> 00:02:43,180
+we need a sort here?
+
+61
+00:02:43,180 --> 00:02:46,640
+So, the reason we need a sort
+is, consider the situation
+
+62
+00:02:46,640 --> 00:02:49,130
+where this query is not
+specific enough.
+
+63
+00:02:49,130 --> 00:02:52,750
+So, in this example, maybe we
+have two documents that have
+
+64
+00:02:52,750 --> 00:02:55,620
+the name field with the
+value of comments.
+
+65
+00:02:55,620 --> 00:02:57,760
+So in that case, we don't really
+know which document
+
+66
+00:02:57,760 --> 00:03:00,250
+we're going to update, because
+find and modify will only
+
+67
+00:03:00,250 --> 00:03:03,860
+update the first document that
+it finds, and then return that
+
+68
+00:03:03,860 --> 00:03:05,110
+in our result.
+
+69
+00:03:05,110 --> 00:03:08,650
+So the sort order gives us a way
+to get more control over
+
+70
+00:03:08,650 --> 00:03:10,740
+which document we're updating.
+
+71
+00:03:10,740 --> 00:03:14,210
+So in this example, if two
+documents had a name of
+
+72
+00:03:14,210 --> 00:03:17,210
+comments, we could sort by some
+other field, and that
+
+73
+00:03:17,210 --> 00:03:20,180
+would give us more control
+over which document that
+
+74
+00:03:20,180 --> 00:03:24,530
+matched name comments
+would get updated.
+
+75
+00:03:24,530 --> 00:03:27,290
+In this case, I'm just assuming
+only one document has
+
+76
+00:03:27,290 --> 00:03:30,400
+a name of comments, so I'm not
+even passing in the sort,
+
+77
+00:03:30,400 --> 00:03:32,940
+because I'm not worried
+about this happening.
+
+78
+00:03:32,940 --> 00:03:36,550
+Next argument is our operator,
+and this is actually exactly
+
+79
+00:03:36,550 --> 00:03:38,070
+the same as an update
+operator.
+
+80
+00:03:38,070 --> 00:03:41,170
+It just specifies what operation
+we're trying to do
+
+81
+00:03:41,170 --> 00:03:42,250
+on the document.
+
+82
+00:03:42,250 --> 00:03:43,760
+So in this case, we're
+trying to increment
+
+83
+00:03:43,760 --> 00:03:46,030
+our counter by one.
+
+84
+00:03:46,030 --> 00:03:49,970
+Now, the next argument is the
+options argument, and the
+
+85
+00:03:49,970 --> 00:03:53,820
+option that we're passing
+in is new colon true.
+
+86
+00:03:53,820 --> 00:03:57,070
+And what that's saying is that
+we want the new document to be
+
+87
+00:03:57,070 --> 00:03:59,500
+returned from find and modify.
+
+88
+00:03:59,500 --> 00:04:02,730
+So find and modify can return
+either the document before we
+
+89
+00:04:02,730 --> 00:04:05,160
+perform this update, or
+the document after
+
+90
+00:04:05,160 --> 00:04:06,300
+we perform the update.
+
+91
+00:04:06,300 --> 00:04:09,590
+And so we actually want the new
+value of the counter, so
+
+92
+00:04:09,590 --> 00:04:11,600
+we're passing new true.
+
+93
+00:04:11,600 --> 00:04:14,410
+So after find and modify
+completes, the driver will
+
+94
+00:04:14,410 --> 00:04:17,640
+call our call back with the
+resulting document.
+
+95
+00:04:17,640 --> 00:04:20,600
+So, because we've passed new
+true here, the resulting
+
+96
+00:04:20,600 --> 00:04:23,160
+document will be the new
+document after we've
+
+97
+00:04:23,160 --> 00:04:24,760
+incremented our counter.
+
+98
+00:04:24,760 --> 00:04:26,860
+So, we're checking for
+an error here.
+
+99
+00:04:26,860 --> 00:04:29,320
+We're making sure that we
+actually found a document, and
+
+100
+00:04:29,320 --> 00:04:31,780
+if not, we log a message here.
+
+101
+00:04:31,780 --> 00:04:35,120
+And if we did find a document,
+we log number of comments, and
+
+102
+00:04:35,120 --> 00:04:37,620
+then the number of comments
+in our counter.
+
+103
+00:04:37,620 --> 00:04:40,350
+Then after that, we close
+the database connection.
+
+104
+00:04:40,350 --> 00:04:43,055
+So, let's actually run this
+and see what happens.
+
+105
+00:04:43,055 --> 00:04:46,130
+All right, so this is our
+find and modify example.
+
+106
+00:04:46,130 --> 00:04:47,190
+So, we ran it.
+
+107
+00:04:47,190 --> 00:04:49,920
+We see no counter found
+for comments.
+
+108
+00:04:49,920 --> 00:04:52,940
+So in our example, we actually
+checked to see if document was
+
+109
+00:04:52,940 --> 00:04:56,230
+null, and if it is null, it
+means that there was no
+
+110
+00:04:56,230 --> 00:04:58,850
+document that matched
+our query selector.
+
+111
+00:04:58,850 --> 00:05:01,870
+So let's actually add a counter
+for comments, so that
+
+112
+00:05:01,870 --> 00:05:04,440
+when we run our app, it actually
+finds something,
+
+113
+00:05:04,440 --> 00:05:06,910
+updates it, and we can
+see the result.
+
+114
+00:05:06,910 --> 00:05:10,000
+All right, so connect to the
+course database, and let's do
+
+115
+00:05:10,000 --> 00:05:11,250
+db.counters.insert.
+
+116
+00:05:11,250 --> 00:05:12,820
+
+117
+00:05:12,820 --> 00:05:16,240
+And let's do name of comments.
+
+118
+00:05:16,240 --> 00:05:17,790
+I'm just not putting quotes
+around the name.
+
+119
+00:05:17,790 --> 00:05:21,070
+That's legal JavaScript,
+but not strict JSON.
+
+120
+00:05:21,070 --> 00:05:23,290
+All right, so now we've inserted
+a new counter.
+
+121
+00:05:23,290 --> 00:05:25,900
+Notice that we didn't give it
+a counter field, and the
+
+122
+00:05:25,900 --> 00:05:29,220
+reason for that is because,
+similar to the dollar sign set
+
+123
+00:05:29,220 --> 00:05:32,720
+operator, if the field doesn't
+exist, increment will actually
+
+124
+00:05:32,720 --> 00:05:35,420
+create it, and assume that
+the value was zero.
+
+125
+00:05:35,420 --> 00:05:37,810
+So let's run our application
+again.
+
+126
+00:05:37,810 --> 00:05:39,860
+Now we see number of
+comments, one.
+
+127
+00:05:39,860 --> 00:05:42,410
+We run again, we see number
+of comments, two.
+
+128
+00:05:42,410 --> 00:05:45,510
+If we run it again, we see
+number of comments, three.
+
+129
+00:05:45,510 --> 00:05:47,750
+All right, so that's an example
+of using find and
+
+130
+00:05:47,750 --> 00:05:51,240
+modify in Node.js, and the
+important thing about this is
+
+131
+00:05:51,240 --> 00:05:54,930
+that no two applications running
+at the same time would
+
+132
+00:05:54,930 --> 00:05:58,390
+have a conflict here, because
+find and modify atomically
+
+133
+00:05:58,390 --> 00:06:01,570
+finds, modifies, and returns
+the document.
+
+134
+00:06:01,570 --> 00:06:03,950
+So you couldn't have two
+applications that both get the
+
+135
+00:06:03,950 --> 00:06:07,390
+same value for this counter,
+because the counter is
+
+136
+00:06:07,390 --> 00:06:09,740
+incremented and returned
+atomically.
+
+137
+00:06:09,740 --> 00:06:12,800
+All right, so this is the quiz
+on find and modify in the
+
+138
+00:06:12,800 --> 00:06:14,570
+Node.js driver.
+
+139
+00:06:14,570 --> 00:06:17,710
+So the question is, which of
+the following calls to find
+
+140
+00:06:17,710 --> 00:06:20,550
+and modify will add the dropped
+field to the homework
+
+141
+00:06:20,550 --> 00:06:23,000
+document with the lowest grade,
+and call the given call
+
+142
+00:06:23,000 --> 00:06:25,770
+back with the resulting
+document?
+
+143
+00:06:25,770 --> 00:06:28,470
+So note that there are three
+parts to this question.
+
+144
+00:06:28,470 --> 00:06:32,240
+The first part is is our call
+to find and modify actually
+
+145
+00:06:32,240 --> 00:06:35,060
+matching the homework document
+with the lowest grade?
+
+146
+00:06:35,060 --> 00:06:38,000
+The second part is is it
+successfully adding the
+
+147
+00:06:38,000 --> 00:06:39,720
+dropped field to the homework?
+
+148
+00:06:39,720 --> 00:06:43,120
+And the third part is will it
+actually call the call back
+
+149
+00:06:43,120 --> 00:06:45,820
+with the resulting document, or
+will it call the call back
+
+150
+00:06:45,820 --> 00:06:47,810
+with the old version
+of the document?
+
+151
+00:06:47,810 --> 00:06:51,310
+So your task is to select the
+correct answer out of these
+
+152
+00:06:51,310 --> 00:06:52,560
+options provided.
+
+153
+00:06:52,560 --> 00:06:53,370
