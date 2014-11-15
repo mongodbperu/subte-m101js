@@ -114,7 +114,7 @@ Por lo que podemos bajar
 
 26
 00:01:12,480 --> 00:01:16,153
-Y decir que var server es igual a
+y decir que var server es igual a
 http.createServer.
 
 27
