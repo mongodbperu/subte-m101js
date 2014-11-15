@@ -3,119 +3,119 @@
 
 2
 00:00:00,170 --> 00:00:03,070
-All right, so now let's write a
-simple Hello, World program
+Perfecto, pues vamos a escribir un
+sencillo Hola Mundo
 
 3
 00:00:03,070 --> 00:00:04,890
-using node.js.
+usando Node.js.
 
 4
 00:00:04,890 --> 00:00:08,450
-So the first thing we want to
-do is make a new directory.
+La primera cosa que queremos hacer
+es crear un nuevo directorio.
 
 5
 00:00:08,450 --> 00:00:10,960
-Let's call it hello_world.
+Vamos a llamarlo hello_world.
 
 6
 00:00:10,960 --> 00:00:14,310
-Now, let's just start writing
-our first node.js application.
+Ahora, vamos a empesar a escribir
+nuestra primera aplicación Node.js.
 
 7
 00:00:14,310 --> 00:00:16,840
-So I'm just going to use vim
-to write this, but you can
+Así que solo voy a usar vim
+para escribirlo pero tu puedes
 
 8
 00:00:16,840 --> 00:00:20,350
-actually use any text editor
-that you're comfortable with.
+usar cualquier otro editor de texto
+con el que te sientas confortable.
 
 9
 00:00:20,350 --> 00:00:24,000
-So let's open a new file,
-call it app.js.
+Vamos a abrir una nuevo fichero,
+llamado app.js.
 
 10
 00:00:24,000 --> 00:00:26,880
-And our first application
-will be really simple.
+Y nuestra primera aplicación
+será realmente simple.
 
 11
 00:00:26,880 --> 00:00:31,380
-We'll just log the console
+Sólo vamos a escribir por consola
 Hello, World.
 
 12
 00:00:31,380 --> 00:00:35,340
-So now the way we run this is
-we say node and give it the
+Por lo que ahora la forma de ejecutarlo es
+invocar a node y pasarle el
 
 13
 00:00:35,340 --> 00:00:37,520
-name of our application.
+nombre de nuestra aplicación.
 
 14
 00:00:37,520 --> 00:00:39,360
-And it prints out
+E imprime
 Hello, World!
 
 15
 00:00:39,360 --> 00:00:40,800
-OK, so this is looking good.
+Ok, esto tiene buena pinta.
 
 16
 00:00:40,800 --> 00:00:42,650
-It's our first application.
+Ésta es nuestra primera aplicación.
 
 17
 00:00:42,650 --> 00:00:46,410
-But now let's make an actual
-web server with this.
+Pero ahora vamos a creaun un
+servidor web con ello.
 
 18
 00:00:46,410 --> 00:00:49,530
-So in order to make this into
-a web server, let's delete
+Por lo que para convertirlo en un
+servidor web, vamos a borrar
 
 19
 00:00:49,530 --> 00:00:57,380
-this line and now let's say var
-http equals require http.
+ésta línea y ahora vamos a poner var
+http igual a require http.
 
 20
 00:00:57,380 --> 00:01:00,310
-So HTTP is actually built-in
-in node.js.
+De este modo HTTP está incorporado
+a node.
 
 21
 00:01:00,310 --> 00:01:01,250
-And it's a library.
+Y se trata de una librería.
 
 22
 00:01:01,250 --> 00:01:03,360
-And what we're doing up here
-is we're saying, we need to
+Y lo que estamos diciéndo ahí
+arriba es que necesitamos 
 
 23
 00:01:03,360 --> 00:01:08,090
-use this library, require HTTP
-And store a reference to this
+usar esa librería, requerir HTTP
+y almancenar una referencia a esta
 
 24
 00:01:08,090 --> 00:01:11,180
-library and the variable HTTP.
+librería y la variable HTTP.
 
 25
 00:01:11,180 --> 00:01:12,480
-So we go down here.
+Por lo que podemos bajar
 
 26
 00:01:12,480 --> 00:01:16,153
-Now we can say var server equals
+Y decir que var server es igual a
 http.createServer.
 
 27
@@ -123,17 +123,16 @@ http.createServer.
 
 28
 00:01:18,900 --> 00:01:22,360
-And pass it a function for what
-to do when the server
+Y pasarle una función que determine
+qué hacer cuando el servidor
 
 29
 00:01:22,360 --> 00:01:24,160
-receives the request.
+reciba una solicitud.
 
 30
 00:01:24,160 --> 00:01:26,180
-And we get a response
-object as well.
+Y también obtendremos un objeto respuesta.
 
 31
 00:01:26,180 --> 00:01:29,640
