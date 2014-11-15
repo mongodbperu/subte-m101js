@@ -136,140 +136,141 @@ Y también obtendremos un objeto respuesta.
 
 31
 00:01:26,180 --> 00:01:29,640
-So when our server receives a
-request, the request will be
+Por lo que cuando nuestro servidor recibe
+una solicitud, la solicitud estará
 
 32
 00:01:29,640 --> 00:01:33,010
-in the first argument, and the
-object for handling the
+en el primer argumento y el
+objeto para manejar la
 
 33
 00:01:33,010 --> 00:01:35,060
-response will be in the
-second argument.
+respuesta estará en el
+segundo parámetro.
 
 34
 00:01:35,060 --> 00:01:38,150
-So what we can do is when we
-get any request, we say
+Así que lo que podemos hacer cuando
+recibimos una respuesta es
 
 35
 00:01:38,150 --> 00:01:44,690
 response.writeHead status
-200, content.
+200, en el contenido.
 
 36
 00:01:44,690 --> 00:01:47,080
-OK, so first we set
-this to set some
+OK, por lo que primero pusimos
+esto para establecer algunos
 
 37
 00:01:47,080 --> 00:01:49,120
-metadata about a response.
+metadatos sobre la respuesta.
 
 38
 00:01:49,120 --> 00:01:52,620
-Then after we've done that, we
-actually send the response by
+Ahora, una vez que hemos hecho esto,
+enviamos la respuesta
 
 39
 00:01:52,620 --> 00:01:57,170
-calling response.end and
-send Hello, World!
+llamando response.end
+y enviando Hello, World!
 
 40
 00:01:57,170 --> 00:02:00,100
-What this does is it specifies
-what to do when our server
+Lo que hace esto es especificar
+qué hacer cuando nuestro servidor
 
 41
 00:02:00,100 --> 00:02:01,520
-receives a request.
+recibe una solicitud.
 
 42
 00:02:01,520 --> 00:02:04,850
-But the one part missing here
-is telling our server to
+Pero la parte que falta aquí es
+decirle a nuestro servidor que 
 
 43
 00:02:04,850 --> 00:02:07,140
-listen for incoming
-connections.
+permanezca escuchando
+conexiones entrantes.
 
 44
 00:02:07,140 --> 00:02:10,949
-So now let's listen
-on port 8000 and
+Por lo que vamos a escuchar
+en el puerto 8000 y
 
 45
 00:02:10,949 --> 00:02:12,650
-let's log to the console.
+vamos a escribir por consola.
 
 46
 00:02:12,650 --> 00:02:14,820
-A friendly message telling the
-user that the server has
+Un amistoso mensaje diciéndole al
+usuario que el servidor
 
 47
 00:02:14,820 --> 00:02:16,500
-successfully started.
+se ha iniciado satisfactoriamente.
 
 48
 00:02:16,500 --> 00:02:20,470
-So now that we'll actually run
-this by calling node.app.js.
+Por lo que ahora, lo ejecutamos
+llamando a node.app.js.
 
 49
 00:02:20,470 --> 00:02:24,280
-You can see our servers running
-on local host 8000.
+Puedes ver nuestro servidor
+ejecutándose en local host 8000
 
 50
 00:02:24,280 --> 00:02:26,730
-So what we can do now is we can
-go to our browser and we
+POr lo que podemos hacer ahora es
+ir al explorador y 
 
 51
 00:02:26,730 --> 00:02:29,830
-can type localhost8000.
+podemos escribir localhost:8000
 
 52
 00:02:29,830 --> 00:02:31,890
-And we get Hello, World!
+Y obtener hello, World!
 
 53
 00:02:31,890 --> 00:02:35,680
-So that is the first example
-of using node.js to write a
+Pues, este es el primer ejemplo
+de como usar Node.js para escribir
 
 54
 00:02:35,680 --> 00:02:36,990
-simple server.
+un servidor simple.
 
 55
 00:02:36,990 --> 00:02:40,810
-Notice, we used the HTTP
-library, but actually node.js
+
+Ten en cuenta que usamos la librería
+HTTP, pero Node.js actualmente
 
 56
 00:02:40,810 --> 00:02:44,690
-allows you to interact with
-the client on a number of
+permite interactuar con el
+cliente a numerosos
 
 57
 00:02:44,690 --> 00:02:46,100
-different levels.
+niveles diferentes
 
 58
 00:02:46,100 --> 00:02:49,370
-And if you wanted to, you could
-actually just open a raw
+Y si queires, puedes
+sólamente abrir una conexión
 
 59
 00:02:49,370 --> 00:02:52,660
-TCP connection and interact
-that way.
+raw TCP e interactuar
+en ese sentido.
 
 60
 00:02:52,660 --> 00:02:54,360
