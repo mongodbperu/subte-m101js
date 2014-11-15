@@ -3,58 +3,57 @@
 
 2
 00:00:00,140 --> 00:00:00,460
-All right.
+Muy bien.
 
 3
 00:00:00,460 --> 00:00:04,360
-And the answer is that homework
-and the final exam
+Y la respuesta es que las
+tareas y el examen final
 
 4
 00:00:04,360 --> 00:00:05,470
-count in your grade.
+cuentan para tu nota.
 
 5
 00:00:05,470 --> 00:00:06,820
-Quizzes don't count.
+Los cuestionarios no cuentan.
 
 6
 00:00:06,820 --> 00:00:08,750
-Class participation--
+Y en cuanto a la participación en clase,
 
 7
 00:00:08,750 --> 00:00:10,090
-we don't really count that.
+la verdad es que no la contamos.
 
 8
 00:00:10,090 --> 00:00:12,420
-But that does bring up a good
-point, which is that if you
+Pero sí nos presenta un buen
+punto. Si quieres obtener
 
 9
 00:00:12,420 --> 00:00:15,500
-want to get answers to your
-questions, there are forums.
+respuestas a alguna pregunta
+que tengas, hay foros en los
 
 10
 00:00:15,500 --> 00:00:17,060
-And you can ask questions.
+cuales puedes hacer preguntas.
 
 11
 00:00:17,060 --> 00:00:19,850
-And there is 10gen staff
-monitoring those forums, as
+Hay personal de 10gen [MongoDB]
+que monitorean estos foros
 
 12
 00:00:19,850 --> 00:00:22,700
-well as your fellow students
-are in the forums.
+y tus compañeros de clase
+también estarán en los foros.
 
 13
 00:00:22,700 --> 00:00:23,950
-And they may answer
-your questions.
+Puede ser que ellos puedan
+responder tus preguntas.
 
 14
 00:00:23,950 --> 00:00:25,040
-
