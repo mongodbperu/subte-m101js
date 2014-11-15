@@ -3,285 +3,275 @@
 
 2
 00:00:00,120 --> 00:00:05,000
-Welcome to M101JS, MongoDB
-for Node.js developers.
+Bienvenido a M101JS, MongoDB
+para desarrolladores Node.js.
 
 3
 00:00:05,000 --> 00:00:08,210
-My name is Andrew Erlichson,
-and I'll be teaching this
+Mi nombre es Andrew Erlichson
+y voy a enseñar este curso
 
 4
 00:00:08,210 --> 00:00:12,380
-course along with Shaun Verch
-and Richard Kreuter.
+junto con Shaun Verch y Richard Kreuter.
 
 5
 00:00:12,380 --> 00:00:15,950
-I'm going to be teaching the
-more general MongoDB parts,
+Yo voy a enseñar las partes
+más generales de MongoDB y
 
 6
 00:00:15,950 --> 00:00:20,510
-and Shaun is to be teaching the
-Node.js parts, and Richard
+Shaun va a enseñar las partes
+de Node.js. Richard estará
 
 7
 00:00:20,510 --> 00:00:23,570
-mostly shows up in the second
-week, where he goes through
+con nostros en la segunda
+semana, donde cubrirá
 
 8
 00:00:23,570 --> 00:00:26,680
-all the ins and outs of
-the MongoDB shell
+todo sobre el shell de MongoDB
 
 9
 00:00:26,680 --> 00:00:28,480
-and the query language.
+y el lenguaje de consulta.
 
 10
 00:00:28,480 --> 00:00:32,460
-I'm VP of education here at
-10gen, Shaun is a software
+Yo soy Vice Presidente de Educación
+acá en 10gen [MongoDB]. Shaun es
 
 11
 00:00:32,460 --> 00:00:37,480
-engineer, and Richard Kreuter
-is a consulting engineer.
+ingeniero de software y Richard
+Kreuter es ingeniero consultor.
 
 12
 00:00:37,480 --> 00:00:41,530
-So, let's go through the
-logistics for the course.
+Veamos un poco la logística del curso.
 
 13
 00:00:41,530 --> 00:00:44,780
-All right, this is going to be
-a seven week online course,
+Muy bien. Éste va a ser un curso
+en línea de siete semanas y
+
 
 14
 00:00:44,780 --> 00:00:47,950
-and it is made up of several
-different parts.
+consiste de varias partes diferentes.
 
 15
 00:00:47,950 --> 00:00:52,010
-One part is the video lectures,
-much like you are
+Primeramente tenemos los videos
+con las lecciones, similares al
 
 16
 00:00:52,010 --> 00:00:53,590
-watching right now.
+que estás viendo ahora.
 
 17
 00:00:53,590 --> 00:00:56,230
-And then at the end of
-many of the video
+Luego, al final de
+muchos de los videos
 
 18
 00:00:56,230 --> 00:00:58,200
-lecture, there are quizzes.
+hay cuestionarios.
 
 19
 00:00:58,200 --> 00:01:00,850
-And these video lectures are
-short segments, typically
+Estas lecciones son segmentos
+cortos, típicamente de tres
 
 20
 00:01:00,850 --> 00:01:04,190
-three to five minutes long,
-and the quizzes are little
+a cinco minutos de duración
+y los cuestionarios son pequeños
 
 21
 00:01:04,190 --> 00:01:06,990
-learning checks at the very
-end of each video lecture.
+controles de aprendizaje al
+final de cada lección.
 
 22
 00:01:06,990 --> 00:01:09,260
-Not everyone has one,
-but many do.
+No todos tienen uno, pero muchos sí.
 
 23
 00:01:09,260 --> 00:01:11,710
-At the end of each week,
-you're going to have a
+Al final de cada semana
+tendrás una tarea
 
 24
 00:01:11,710 --> 00:01:16,000
-homework assignment, and then at
-the end, there is going to
+y al final del curso habrá un
 
 25
 00:01:16,000 --> 00:01:18,850
-be a final exam.
+examen final.
 
 26
 00:01:18,850 --> 00:01:20,820
-Now, the video lectures,
-in terms of your
+Ahora, las lecciones en
+los videos, en cuanto a tu
 
 27
 00:01:20,820 --> 00:01:22,830
-grade, they do not count.
+nota, no cuentan.
 
 28
 00:01:22,830 --> 00:01:24,370
-So they count for 0%
-of your grade.
+Cuentan un 0% de tu nota.
 
 29
 00:01:24,370 --> 00:01:27,100
-You can watch them or not, but
-we recommend it, because
+Puedes verlos o no, pero
+recomendamos que lo hagas
 
 30
 00:01:27,100 --> 00:01:29,090
-that's really the meat
-of the class.
+porque eso es en verdad lo
+más importante del curso.
 
 31
 00:01:29,090 --> 00:01:30,860
-The quizzes count for 0%.
+Los cuestionarios
+cuentan también un 0%.
 
 32
 00:01:30,860 --> 00:01:32,780
-They're meant as little learning
-checks to make sure
+Están diseñados como pequeños
+controles de aprendizaje para
 
 33
 00:01:32,780 --> 00:01:34,870
-that you understand it,
-as I said earlier.
+asegurar que vas entendiendo los
+conceptos, como mencioné anteriormente.
 
 34
 00:01:34,870 --> 00:01:37,580
-And the homeworks count for
-50% of your grade, and the
+Las tareas cuentan un 50%
+de tu nota y el examen
 
 35
 00:01:37,580 --> 00:01:40,290
-final exam counts for
-50% of your grade.
+final cuenta el otro 50%.
 
 36
 00:01:40,290 --> 00:01:42,240
-Now, we're going to drop
-the lowest homework.
+Ahora, vamos a eliminar la tarea
+para la cual tengas el puntaje
 
 37
 00:01:42,240 --> 00:01:44,450
-And by drop lowest homework,
-we mean that at the end of
+más bajo. Significa que al final
 
 38
 00:01:44,450 --> 00:01:47,200
-each week there's homework, and
-then for the week where
+de cada semana hay una serie de
+tareas y eliminaremos la nota
 
 39
 00:01:47,200 --> 00:01:49,660
-you get the lowest overall score
-in the homework, we'll
+para la semana en la que tengas
 
 40
 00:01:49,660 --> 00:01:50,740
-drop that week.
+la nota total más baja,
 
 41
 00:01:50,740 --> 00:01:51,960
-If you have a perfect
-square, we'll drop
+Si obtienes una nota perfecta
 
 42
 00:01:51,960 --> 00:01:53,540
-some arbitrary week.
+eliminaremos una semana
+de manera arbitraria.
 
 43
 00:01:53,540 --> 00:01:56,330
-At the very end of the course
-there's a final exam, and then
+Al final del curso hay un
+examen final y luego si
 
 44
 00:01:56,330 --> 00:02:00,350
-overall, if you get 65% or
-better, then you will get a
+obtuviste un promedio total de
+65% o más, entonces recibirás
 
 45
 00:02:00,350 --> 00:02:01,970
-certificate of completion.
+un certificado de finalización.
 
 46
 00:02:01,970 --> 00:02:04,210
-And the certificate of
-completion will look a little
+El certificado se verá
+un poco mejor que esto,
 
 47
 00:02:04,210 --> 00:02:05,580
-bit better than this,
-obviously.
+obviamente.
 
 48
 00:02:05,580 --> 00:02:08,430
-It's going to be delivered to
-you in PDF form, typically
+Se te enviará en formato
+PDF típicamente un par
 
 49
 00:02:08,430 --> 00:02:11,170
-within a couple weeks of
-finishing the class.
+de semanas después de
+haber finalizado el curso.
 
 50
 00:02:11,170 --> 00:02:14,270
-It will have your name and the
-version of MongoDB that you
+Tendrá tu nombre y la
+versión de MongoDB que
 
 51
 00:02:14,270 --> 00:02:15,620
-used with the course.
+utilizaste en el curso.
 
 52
 00:02:15,620 --> 00:02:18,020
-And it will be signed
-by probably myself
+Probablemente llevará mi firma
 
 53
 00:02:18,020 --> 00:02:19,280
-and somebody else.
+y la de alguna otra persona.
 
 54
 00:02:19,280 --> 00:02:22,220
-And so if you complete the
-course with 65% or better,
+Entonces, si completas el
+curso con un promedio de 65%
 
 55
 00:02:22,220 --> 00:02:23,990
-you'll get a certificate
-of completion
+o más, recibirás un certificado
+de finalización del curso
 
 56
 00:02:23,990 --> 00:02:25,710
-from us for the course.
+de nuestra parte.
 
 57
 00:02:25,710 --> 00:02:29,580
-So, all right, it is now time
-for our first quiz.
+Bueno, es hora de nuestro
+primer cuestionario.
 
 58
 00:02:29,580 --> 00:02:32,250
-What counts toward your final
-grade in this class?
+¿Qué cuenta para tu nota
+final en este curso?
 
 59
 00:02:32,250 --> 00:02:35,900
-Quizzes, homeworks, final exam,
-or class participation?
+¿Cuestionarios, tarea, examen
+final o participación en clase?
 
 60
 00:02:35,900 --> 00:02:37,150
-Check all that apply.
+Marca todas las que apliquen.
 
 61
 00:02:37,150 --> 00:02:37,930
