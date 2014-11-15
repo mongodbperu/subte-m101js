@@ -1,0 +1,181 @@
+1
+00:00:00,000 --> 00:00:00,100
+
+2
+00:00:00,100 --> 00:00:03,450
+All right, so let's talk
+about homework 2-2.
+
+3
+00:00:03,450 --> 00:00:06,880
+So in the last homework, you
+imported a weather data set.
+
+4
+00:00:06,880 --> 00:00:08,850
+And in this homework, we are
+actually going to ask you to
+
+5
+00:00:08,850 --> 00:00:11,190
+do a little bit more complicated
+analysis on this
+
+6
+00:00:11,190 --> 00:00:13,870
+data set using the
+Node.js driver.
+
+7
+00:00:13,870 --> 00:00:16,670
+So let's take a look
+at our assignment.
+
+8
+00:00:16,670 --> 00:00:19,060
+All right, so your assignment
+for this homework is to write
+
+9
+00:00:19,060 --> 00:00:22,090
+a program that finds the
+document with the highest
+
+10
+00:00:22,090 --> 00:00:25,470
+recorded temperature for each
+state, then add a month high
+
+11
+00:00:25,470 --> 00:00:29,020
+field for that document, setting
+its value to true.
+
+12
+00:00:29,020 --> 00:00:32,259
+Use the weather data set that
+you imported in homework 2.1.
+
+13
+00:00:32,259 --> 00:00:35,140
+And a hint, which I'll go over,
+is that if you select
+
+14
+00:00:35,140 --> 00:00:38,930
+all the weather documents, and
+you sort by state and then by
+
+15
+00:00:38,930 --> 00:00:41,810
+temperature, you can iterate the
+documents and know that,
+
+16
+00:00:41,810 --> 00:00:43,920
+when the state changes, you've
+reached the highest
+
+17
+00:00:43,920 --> 00:00:45,700
+temperature for that state.
+
+18
+00:00:45,700 --> 00:00:48,980
+So we have four states that
+we have data for.
+
+19
+00:00:48,980 --> 00:00:52,040
+And we have a month's worth of
+data for each state, which
+
+20
+00:00:52,040 --> 00:00:55,380
+means that you should end up
+setting the month high field
+
+21
+00:00:55,380 --> 00:00:58,100
+on four different documents.
+
+22
+00:00:58,100 --> 00:01:00,880
+All right, so the way we
+recommend you do this homework
+
+23
+00:01:00,880 --> 00:01:04,370
+assignment is to construct
+a query where you
+
+24
+00:01:04,370 --> 00:01:06,230
+first sort by state.
+
+25
+00:01:06,230 --> 00:01:09,590
+And then you sort by
+temperature, decreasing.
+
+26
+00:01:09,590 --> 00:01:13,440
+So what that gives us is a sort
+order such that when we
+
+27
+00:01:13,440 --> 00:01:17,790
+change states, we know that that
+document has the highest
+
+28
+00:01:17,790 --> 00:01:21,530
+temperature for that state
+because within a state the
+
+29
+00:01:21,530 --> 00:01:23,470
+temperature is sort
+of decreasing.
+
+30
+00:01:23,470 --> 00:01:27,620
+So basically, here, we started
+iterating our results set.
+
+31
+00:01:27,620 --> 00:01:30,910
+And we know that this document
+is going to have the highest
+
+32
+00:01:30,910 --> 00:01:33,780
+temperature because we sort it
+by temperature decreasing
+
+33
+00:01:33,780 --> 00:01:35,030
+within this state.
+
+34
+00:01:35,030 --> 00:01:37,460
+As we iterate further, we get
+down, and we see that we've
+
+35
+00:01:37,460 --> 00:01:40,640
+transitioned to state two, which
+means we know that this
+
+36
+00:01:40,640 --> 00:01:44,690
+document now has the highest
+temperature for this state.
+
+37
+00:01:44,690 --> 00:01:47,220
+So that's how we recommend you
+complete homework 2-2.
+
+38
+00:01:47,220 --> 00:01:48,470

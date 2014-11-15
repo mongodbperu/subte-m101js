@@ -1,0 +1,95 @@
+1
+00:00:00,000 --> 00:00:00,140
+
+2
+00:00:00,140 --> 00:00:02,340
+All right, so this is the
+answer to the quiz about
+
+3
+00:00:02,340 --> 00:00:04,700
+findAndModify in the
+Node js Driver.
+
+4
+00:00:04,700 --> 00:00:08,380
+So this line here is the
+answer to our quiz.
+
+5
+00:00:08,380 --> 00:00:10,930
+So first we have an empty
+query selector--
+
+6
+00:00:10,930 --> 00:00:13,430
+this means we're matching
+all documents.
+
+7
+00:00:13,430 --> 00:00:16,120
+The reason we have to do this is
+that we don't actually know
+
+8
+00:00:16,120 --> 00:00:19,370
+which grade is the lowest, so we
+can't actually make a query
+
+9
+00:00:19,370 --> 00:00:22,020
+that eliminates any
+of our documents.
+
+10
+00:00:22,020 --> 00:00:26,220
+Next, we have a sort on grade
+increasing, so this is what
+
+11
+00:00:26,220 --> 00:00:28,920
+allows us to actually match
+the correct document.
+
+12
+00:00:28,920 --> 00:00:31,480
+It means that we're matching
+all documents.
+
+13
+00:00:31,480 --> 00:00:34,230
+But the first document we get
+back will be the lowest,
+
+14
+00:00:34,230 --> 00:00:37,170
+because we're sorting
+on grade increasing.
+
+15
+00:00:37,170 --> 00:00:40,700
+Next, we have this dollar sign
+set operator just like in the
+
+16
+00:00:40,700 --> 00:00:44,060
+update, where we set
+dropped to true.
+
+17
+00:00:44,060 --> 00:00:47,390
+Finally, we pass an options
+object with new set to true to
+
+18
+00:00:47,390 --> 00:00:50,530
+tell findAndModify to call the
+callback with the resulting
+
+19
+00:00:50,530 --> 00:00:52,740
+document rather than with
+the old document.
+
+20
+00:00:52,740 --> 00:00:53,990

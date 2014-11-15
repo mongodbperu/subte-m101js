@@ -1,0 +1,379 @@
+1
+00:00:00,000 --> 00:00:00,110
+
+2
+00:00:00,110 --> 00:00:03,520
+All right, so let's talk
+about blog performance.
+
+3
+00:00:03,520 --> 00:00:05,730
+So for this homework assignment
+you're going to be
+
+4
+00:00:05,730 --> 00:00:09,850
+making the blog fast and adding
+indexes so that the
+
+5
+00:00:09,850 --> 00:00:12,770
+queries that the blog
+uses look at as few
+
+6
+00:00:12,770 --> 00:00:14,710
+documents as possible.
+
+7
+00:00:14,710 --> 00:00:18,620
+So the first page you need to
+make fast is this page.
+
+8
+00:00:18,620 --> 00:00:21,780
+So this is the main page of the
+blog and this is actually
+
+9
+00:00:21,780 --> 00:00:25,750
+loading the 10 most
+recent comments.
+
+10
+00:00:25,750 --> 00:00:27,930
+So we actually provided
+with this homework an
+
+11
+00:00:27,930 --> 00:00:29,500
+example data set.
+
+12
+00:00:29,500 --> 00:00:31,960
+And this is the Gettysburg
+Address, this is the Bill of
+
+13
+00:00:31,960 --> 00:00:35,640
+Rights, Declaration of
+Independence, and a lot of
+
+14
+00:00:35,640 --> 00:00:37,740
+duplicates, and we generated
+a bunch of
+
+15
+00:00:37,740 --> 00:00:39,840
+random tags for these.
+
+16
+00:00:39,840 --> 00:00:42,600
+So Gettysburg Address doesn't
+really have a lot to do with
+
+17
+00:00:42,600 --> 00:00:46,130
+Freon, but we generated a lot of
+random tags so that you can
+
+18
+00:00:46,130 --> 00:00:48,210
+have an example data
+set to play with.
+
+19
+00:00:48,210 --> 00:00:52,380
+And we ask you to import this
+data set so that we can use
+
+20
+00:00:52,380 --> 00:00:55,320
+our validation script to make
+sure that you're not actually
+
+21
+00:00:55,320 --> 00:00:57,430
+looking at too many documents.
+
+22
+00:00:57,430 --> 00:01:00,090
+All right, so for this first
+page we're loading the 10 most
+
+23
+00:01:00,090 --> 00:01:01,700
+recent documents.
+
+24
+00:01:01,700 --> 00:01:05,069
+So that means you have to figure
+out a way to make the
+
+25
+00:01:05,069 --> 00:01:08,400
+query for the 10 most recent
+documents in the post
+
+26
+00:01:08,400 --> 00:01:10,020
+collections fast.
+
+27
+00:01:10,020 --> 00:01:12,530
+And you can reference the code
+or you can just think about
+
+28
+00:01:12,530 --> 00:01:16,120
+what kind of query that would be
+and make an index for that.
+
+29
+00:01:16,120 --> 00:01:20,470
+So the next thing that we want
+to make fast is looking at the
+
+30
+00:01:20,470 --> 00:01:22,820
+posts by a given tag.
+
+31
+00:01:22,820 --> 00:01:26,540
+So in this case we are looking
+for the tag of pasta and we're
+
+32
+00:01:26,540 --> 00:01:29,670
+looking at all the posts that
+are tagged pasta, so it turns
+
+33
+00:01:29,670 --> 00:01:32,970
+out Gettysburg Address has
+a lot to do with pasta.
+
+34
+00:01:32,970 --> 00:01:34,910
+If we click Freon, we get
+all the posts that
+
+35
+00:01:34,910 --> 00:01:36,580
+are tagged with Freon.
+
+36
+00:01:36,580 --> 00:01:39,960
+And your assignment is to make
+this fast, so what this is
+
+37
+00:01:39,960 --> 00:01:43,120
+doing is it's still sorting
+based on the date but it's
+
+38
+00:01:43,120 --> 00:01:45,540
+also filtering by the tag.
+
+39
+00:01:45,540 --> 00:01:47,960
+So it's only returning
+the documents that
+
+40
+00:01:47,960 --> 00:01:49,060
+have a given tag.
+
+41
+00:01:49,060 --> 00:01:52,490
+So your job is to make this page
+fast by adding an index
+
+42
+00:01:52,490 --> 00:01:54,000
+for that query.
+
+43
+00:01:54,000 --> 00:01:57,360
+So finally the last one you need
+to make fast is the page
+
+44
+00:01:57,360 --> 00:01:58,810
+for a specific post.
+
+45
+00:01:58,810 --> 00:02:02,080
+So in this case we have a single
+post, the Gettysburg
+
+46
+00:02:02,080 --> 00:02:04,340
+Address, with the list
+of comments.
+
+47
+00:02:04,340 --> 00:02:07,870
+And we have the permalink up
+here, so this is the URL that
+
+48
+00:02:07,870 --> 00:02:09,344
+we use to access this post.
+
+49
+00:02:09,344 --> 00:02:13,160
+So your job is to make the query
+that finds a single post
+
+50
+00:02:13,160 --> 00:02:15,810
+by given permalink fast.
+
+51
+00:02:15,810 --> 00:02:17,930
+So that's your assignment
+for homework 4.3.
+
+52
+00:02:17,930 --> 00:02:22,720
+It's to make the blog fast by
+adding indexes to these pages.
+
+53
+00:02:22,720 --> 00:02:27,220
+So the front page which looks
+for all posts but only returns
+
+54
+00:02:27,220 --> 00:02:31,310
+the most recent 10, the page
+that filters posts based on
+
+55
+00:02:31,310 --> 00:02:36,490
+tag and also still sorts by the
+most recent date, and then
+
+56
+00:02:36,490 --> 00:02:40,210
+the page to just show
+a single post.
+
+57
+00:02:40,210 --> 00:02:42,420
+So those are the pages that you
+need to make fast in this
+
+58
+00:02:42,420 --> 00:02:43,580
+assignment.
+
+59
+00:02:43,580 --> 00:02:46,960
+So for this assignment you
+can reference posts.js.
+
+60
+00:02:46,960 --> 00:02:49,850
+And posts.js actually
+has all the queries
+
+61
+00:02:49,850 --> 00:02:51,870
+that we need to optimize.
+
+62
+00:02:51,870 --> 00:02:54,470
+So getPosts is the function
+that's called from the front
+
+63
+00:02:54,470 --> 00:02:58,040
+page, and it's doing a find
+for all documents and then
+
+64
+00:02:58,040 --> 00:03:01,020
+sorting on date, and then
+limiting by the number we
+
+65
+00:03:01,020 --> 00:03:03,285
+provide which is actually 10.
+
+66
+00:03:03,285 --> 00:03:05,235
+It's passed in from
+somewhere else.
+
+67
+00:03:05,235 --> 00:03:08,020
+And down here we have
+getPostsByTag, so this is used
+
+68
+00:03:08,020 --> 00:03:10,360
+to display all the posts
+through a given tag.
+
+69
+00:03:10,360 --> 00:03:13,510
+And note we also limit by the
+number and we're also sorting
+
+70
+00:03:13,510 --> 00:03:15,500
+by the date.
+
+71
+00:03:15,500 --> 00:03:17,430
+Finally we have
+getPostByPermalink and this is
+
+72
+00:03:17,430 --> 00:03:19,040
+for getting a single post.
+
+73
+00:03:19,040 --> 00:03:23,100
+And we're just doing a findOne
+here and querying for the
+
+74
+00:03:23,100 --> 00:03:26,350
+permalink which should
+actually be unique.
+
+75
+00:03:26,350 --> 00:03:29,220
+All right, so those are the
+three queries in the code that
+
+76
+00:03:29,220 --> 00:03:30,060
+you need to optimize.
+
+77
+00:03:30,060 --> 00:03:31,700
+You can go back and
+reference those.
+
+78
+00:03:31,700 --> 00:03:34,330
+And are validate script will
+actually basically be running
+
+79
+00:03:34,330 --> 00:03:37,320
+these queries and making
+sure that we don't
+
+80
+00:03:37,320 --> 00:03:38,570
+scan too many documents.
+
+81
+00:03:38,570 --> 00:03:39,410

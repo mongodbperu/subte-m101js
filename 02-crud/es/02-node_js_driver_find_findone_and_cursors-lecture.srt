@@ -1,0 +1,1104 @@
+1
+00:00:00,000 --> 00:00:00,190
+
+2
+00:00:00,190 --> 00:00:00,610
+All right.
+
+3
+00:00:00,610 --> 00:00:03,640
+So now we're going to talk about
+the Node.js driver and
+
+4
+00:00:03,640 --> 00:00:06,370
+CRUD operations using MongoDB.
+
+5
+00:00:06,370 --> 00:00:09,820
+So you've already been using
+the Mongo shell to do these
+
+6
+00:00:09,820 --> 00:00:13,450
+CRUD operations doing create,
+remove, update, delete, having
+
+7
+00:00:13,450 --> 00:00:18,200
+them converted to BSON by the
+shell, and sent to MongoDB.
+
+8
+00:00:18,200 --> 00:00:20,520
+So now what we're going to do
+is we're going to talk about
+
+9
+00:00:20,520 --> 00:00:22,400
+the Node.js driver.
+
+10
+00:00:22,400 --> 00:00:25,000
+And we're actually going to
+write some application code
+
+11
+00:00:25,000 --> 00:00:29,170
+that uses the Node.js MongoDB
+driver, and takes your
+
+12
+00:00:29,170 --> 00:00:32,689
+queries, converts them to BSON,
+uses a wire protocol,
+
+13
+00:00:32,689 --> 00:00:35,260
+communicates with MongoDB.
+
+14
+00:00:35,260 --> 00:00:38,570
+So this section is just going
+to be about how to use the
+
+15
+00:00:38,570 --> 00:00:42,870
+Node.js driver, and what the
+interface is to the driver.
+
+16
+00:00:42,870 --> 00:00:45,960
+So the first thing we need to
+do is actually get some data
+
+17
+00:00:45,960 --> 00:00:47,770
+into the database.
+
+18
+00:00:47,770 --> 00:00:49,140
+So let's go do that.
+
+19
+00:00:49,140 --> 00:00:52,220
+So I actually have this
+file, grades.json.
+
+20
+00:00:52,220 --> 00:00:56,210
+And basically, it has one JSON
+object per line, has a
+
+21
+00:00:56,210 --> 00:00:58,570
+student, assignment, grade.
+
+22
+00:00:58,570 --> 00:01:02,080
+And we want to import
+this into MongoDB.
+
+23
+00:01:02,080 --> 00:01:05,650
+So the way we can do that is we
+actually say, mongoimport,
+
+24
+00:01:05,650 --> 00:01:07,280
+and then we give it
+a database name.
+
+25
+00:01:07,280 --> 00:01:09,120
+We'll use the course database.
+
+26
+00:01:09,120 --> 00:01:11,090
+And we'll use the grades
+collection.
+
+27
+00:01:11,090 --> 00:01:13,690
+And import grades.json.
+
+28
+00:01:13,690 --> 00:01:14,030
+All right.
+
+29
+00:01:14,030 --> 00:01:17,320
+So we just imported the grades
+into the database.
+
+30
+00:01:17,320 --> 00:01:19,020
+Imported 16 objects.
+
+31
+00:01:19,020 --> 00:01:20,900
+So let's just check that.
+
+32
+00:01:20,900 --> 00:01:25,265
+So we can connect using the
+Mongo shell, use course.
+
+33
+00:01:25,265 --> 00:01:27,940
+To get to the course database,
+we can do db.grades.find.
+
+34
+00:01:27,940 --> 00:01:31,250
+
+35
+00:01:31,250 --> 00:01:33,100
+We can see we actually imported
+all these grades
+
+36
+00:01:33,100 --> 00:01:36,160
+documents, so we can use
+these when we're
+
+37
+00:01:36,160 --> 00:01:38,750
+writing our example programs.
+
+38
+00:01:38,750 --> 00:01:41,410
+So this program is an example
+of using findOne with the
+
+39
+00:01:41,410 --> 00:01:42,910
+Node.js driver.
+
+40
+00:01:42,910 --> 00:01:46,330
+So the first thing we have to do
+is require MongoDB to make
+
+41
+00:01:46,330 --> 00:01:48,800
+sure we actually have a
+reference to the driver.
+
+42
+00:01:48,800 --> 00:01:53,190
+So we say for our MongoClient,
+require('mongodb').MongoClient.
+
+43
+00:01:53,190 --> 00:01:54,440
+The next thing we
+do is actually
+
+44
+00:01:54,440 --> 00:01:56,730
+connect to the database.
+
+45
+00:01:56,730 --> 00:01:58,450
+A simple way to do this
+is just to say
+
+46
+00:01:58,450 --> 00:02:01,810
+MongoClient.connect, and then
+give it a connection string.
+
+47
+00:02:01,810 --> 00:02:03,570
+And you can actually look
+through the docs for the
+
+48
+00:02:03,570 --> 00:02:06,730
+format of the string for things
+like a replica set or a
+
+49
+00:02:06,730 --> 00:02:07,869
+sharded cluster.
+
+50
+00:02:07,869 --> 00:02:10,410
+But for now, we're just
+connecting to a single MongoD.
+
+51
+00:02:10,410 --> 00:02:14,060
+So this MongoD is running on the
+host, local host, and the
+
+52
+00:02:14,060 --> 00:02:16,250
+port, 27107.
+
+53
+00:02:16,250 --> 00:02:17,900
+And we're saying that
+we want to connect
+
+54
+00:02:17,900 --> 00:02:19,860
+to the course database.
+
+55
+00:02:19,860 --> 00:02:21,170
+So we give it a callback.
+
+56
+00:02:21,170 --> 00:02:24,800
+So we say once you're connected,
+call this, with the
+
+57
+00:02:24,800 --> 00:02:27,410
+error and a connected
+database.
+
+58
+00:02:27,410 --> 00:02:29,680
+So down here, if there's an
+error, we just throw.
+
+59
+00:02:29,680 --> 00:02:32,390
+And what we're doing here we
+are saying, I want to query
+
+60
+00:02:32,390 --> 00:02:35,730
+for all the students that got
+100 on any assignment.
+
+61
+00:02:35,730 --> 00:02:39,190
+So we say
+db.collection('grades').
+
+62
+00:02:39,190 --> 00:02:41,810
+Take our already connected
+database and just say, this is
+
+63
+00:02:41,810 --> 00:02:43,780
+the collection we care about.
+
+64
+00:02:43,780 --> 00:02:47,720
+And then we do findOne
+with our query.
+
+65
+00:02:47,720 --> 00:02:51,260
+And we get findOne callback with
+an error and a document.
+
+66
+00:02:51,260 --> 00:02:53,740
+So what this does is it will
+perform the findOne query
+
+67
+00:02:53,740 --> 00:02:54,990
+against MongoDB.
+
+68
+00:02:54,990 --> 00:02:57,210
+Call the callback with the
+document that we found.
+
+69
+00:02:57,210 --> 00:02:59,420
+And then we just log
+into the console.
+
+70
+00:02:59,420 --> 00:03:02,660
+So let's just run this
+application, and we see we've
+
+71
+00:03:02,660 --> 00:03:04,950
+logged one document
+to the console.
+
+72
+00:03:04,950 --> 00:03:07,630
+Student 'Joe', assignment
+'exam', grade 100.
+
+73
+00:03:07,630 --> 00:03:10,020
+Underscore ID was automatically
+generated when
+
+74
+00:03:10,020 --> 00:03:11,580
+we ran Mongo import.
+
+75
+00:03:11,580 --> 00:03:14,340
+Now, you may notice that the
+value of the underscore ID
+
+76
+00:03:14,340 --> 00:03:17,550
+field just looks like this giant
+hex string, but it's
+
+77
+00:03:17,550 --> 00:03:19,470
+really an object ID type.
+
+78
+00:03:19,470 --> 00:03:21,910
+If you remember in the shell, it
+looked a little different.
+
+79
+00:03:21,910 --> 00:03:24,690
+But all that really means is
+that the two string method of
+
+80
+00:03:24,690 --> 00:03:27,650
+an object ID, which is the
+function we call when we want
+
+81
+00:03:27,650 --> 00:03:29,850
+to get the string representation
+of the object
+
+82
+00:03:29,850 --> 00:03:33,090
+ID, is different in the Node.js
+driver from the way it
+
+83
+00:03:33,090 --> 00:03:34,500
+is in the Mongo shell.
+
+84
+00:03:34,500 --> 00:03:37,410
+So that's why you see the
+different representation here
+
+85
+00:03:37,410 --> 00:03:39,910
+when we try to print out a JSON
+object that includes an
+
+86
+00:03:39,910 --> 00:03:41,350
+object ID .
+
+87
+00:03:41,350 --> 00:03:41,500
+So
+
+88
+00:03:41,500 --> 00:03:45,420
+That's an example of using
+findOne with MongoDB.
+
+89
+00:03:45,420 --> 00:03:47,940
+What if we want to find more
+than one document?
+
+90
+00:03:47,940 --> 00:03:50,970
+This is an example of using
+find with MongoDB.
+
+91
+00:03:50,970 --> 00:03:52,940
+And it's pretty close,
+but there are a
+
+92
+00:03:52,940 --> 00:03:54,600
+few things to note.
+
+93
+00:03:54,600 --> 00:03:57,120
+So we connect in exactly
+the same way.
+
+94
+00:03:57,120 --> 00:03:59,320
+We're using exactly
+the same query.
+
+95
+00:03:59,320 --> 00:04:01,420
+But here what we're doing is
+we're saying, db.collection('g
+
+96
+00:04:01,420 --> 00:04:02,670
+rades').find(query).
+
+97
+00:04:02,670 --> 00:04:04,310
+
+98
+00:04:04,310 --> 00:04:06,270
+And we actually don't give
+this a callback.
+
+99
+00:04:06,270 --> 00:04:09,030
+And we'll actually talk a little
+bit about that later.
+
+100
+00:04:09,030 --> 00:04:10,430
+But basically, what
+this is doing is
+
+101
+00:04:10,430 --> 00:04:12,270
+making a cursor object.
+
+102
+00:04:12,270 --> 00:04:15,600
+And on the cursor object, we can
+say, .toArray, which tells
+
+103
+00:04:15,600 --> 00:04:19,279
+the cursor we want all our
+documents that result from
+
+104
+00:04:19,279 --> 00:04:22,620
+this query to be returned
+as an array.
+
+105
+00:04:22,620 --> 00:04:26,960
+So this takes a callback,
+has error, documents.
+
+106
+00:04:26,960 --> 00:04:28,850
+If there's an error,
+we want to throw.
+
+107
+00:04:28,850 --> 00:04:32,140
+Otherwise, we just say, log the
+documents to the console.
+
+108
+00:04:32,140 --> 00:04:35,170
+So now we can run this.
+
+109
+00:04:35,170 --> 00:04:38,140
+We see we get back on array
+of all the documents where
+
+110
+00:04:38,140 --> 00:04:41,380
+students got 100 on
+their assignment.
+
+111
+00:04:41,380 --> 00:04:43,930
+So there's something else I want
+to mention about find,
+
+112
+00:04:43,930 --> 00:04:46,390
+and for that we have an example
+that sort of separates
+
+113
+00:04:46,390 --> 00:04:49,270
+the pieces and makes it more
+obvious what's going on.
+
+114
+00:04:49,270 --> 00:04:51,310
+So here we connect in exactly
+the same way.
+
+115
+00:04:51,310 --> 00:04:53,640
+We're using exactly
+the same query.
+
+116
+00:04:53,640 --> 00:04:56,200
+But we're doing something
+a little different here.
+
+117
+00:04:56,200 --> 00:04:59,240
+We're actually assigning cursor
+to db.collection.('
+
+118
+00:04:59,240 --> 00:05:00,490
+grades').find(query).
+
+119
+00:05:00,490 --> 00:05:02,420
+
+120
+00:05:02,420 --> 00:05:05,880
+And the interesting thing about
+this is it means that
+
+121
+00:05:05,880 --> 00:05:07,420
+this call is synchronous.
+
+122
+00:05:07,420 --> 00:05:11,230
+It's actually just returning our
+cursor rather than taking
+
+123
+00:05:11,230 --> 00:05:12,200
+a callback.
+
+124
+00:05:12,200 --> 00:05:15,450
+So this is actually an important
+insight into what's
+
+125
+00:05:15,450 --> 00:05:17,250
+actually happening underneath.
+
+126
+00:05:17,250 --> 00:05:21,740
+So this is actually just
+creating a cursor object.
+
+127
+00:05:21,740 --> 00:05:24,120
+It's not actually
+doing the query.
+
+128
+00:05:24,120 --> 00:05:26,940
+So the point of the cursor is
+just to describe our query,
+
+129
+00:05:26,940 --> 00:05:28,830
+and describe what we're
+looking for.
+
+130
+00:05:28,830 --> 00:05:31,700
+We actually don't perform the
+query until we need some
+
+131
+00:05:31,700 --> 00:05:32,760
+documents back.
+
+132
+00:05:32,760 --> 00:05:35,930
+So in our last example,
+it was toArray.
+
+133
+00:05:35,930 --> 00:05:37,180
+We did db.collection.('
+grades').find.(toArray).
+
+134
+00:05:37,180 --> 00:05:39,790
+
+135
+00:05:39,790 --> 00:05:42,120
+And when we did that toArray
+call, the Node.js
+
+136
+00:05:42,120 --> 00:05:43,340
+driver said, OK.
+
+137
+00:05:43,340 --> 00:05:46,920
+The user actually is looking
+for all the documents, and
+
+138
+00:05:46,920 --> 00:05:48,470
+wants it back in an array.
+
+139
+00:05:48,470 --> 00:05:51,590
+And so we actually have
+to go do the query.
+
+140
+00:05:51,590 --> 00:05:53,400
+In this case, we actually
+haven't asked for anything
+
+141
+00:05:53,400 --> 00:05:57,100
+yet, so it can just make the
+cursor object and not have to
+
+142
+00:05:57,100 --> 00:05:58,290
+do any extra work.
+
+143
+00:05:58,290 --> 00:06:01,010
+But now, on this cursor
+object, we can
+
+144
+00:06:01,010 --> 00:06:04,040
+call the .each method.
+
+145
+00:06:04,040 --> 00:06:06,260
+This method actually
+takes a callback.
+
+146
+00:06:06,260 --> 00:06:09,020
+And this callback is called
+for each document that's
+
+147
+00:06:09,020 --> 00:06:10,510
+returned from the database.
+
+148
+00:06:10,510 --> 00:06:12,720
+So if there's an error,
+we throw error.
+
+149
+00:06:12,720 --> 00:06:16,540
+If doc equals null, that
+actually means our cursor has
+
+150
+00:06:16,540 --> 00:06:17,400
+been exhausted.
+
+151
+00:06:17,400 --> 00:06:19,010
+We're at the end
+of our cursor.
+
+152
+00:06:19,010 --> 00:06:21,540
+This function won't get called
+again, so we can actually
+
+153
+00:06:21,540 --> 00:06:23,790
+safely close the database.
+
+154
+00:06:23,790 --> 00:06:27,730
+And if doc isn't null, we log
+it and we say, this student
+
+155
+00:06:27,730 --> 00:06:28,960
+got a good grade.
+
+156
+00:06:28,960 --> 00:06:33,340
+So this is an example of how
+cursors work in MongoDB.
+
+157
+00:06:33,340 --> 00:06:33,670
+All right.
+
+158
+00:06:33,670 --> 00:06:35,250
+So now let's just run this.
+
+159
+00:06:35,250 --> 00:06:37,940
+And we can actually see a little
+message for all the
+
+160
+00:06:37,940 --> 00:06:40,080
+students that got
+a good grade.
+
+161
+00:06:40,080 --> 00:06:41,640
+So there's one more thing
+that I wanted to
+
+162
+00:06:41,640 --> 00:06:43,220
+mention about cursors.
+
+163
+00:06:43,220 --> 00:06:45,940
+So if you remember, I was
+talking about the fact that
+
+164
+00:06:45,940 --> 00:06:47,880
+when you make the cursor,
+it doesn't
+
+165
+00:06:47,880 --> 00:06:50,070
+actually query the database.
+
+166
+00:06:50,070 --> 00:06:52,140
+When you make the cursor, you're
+actually just creating
+
+167
+00:06:52,140 --> 00:06:55,060
+an object that describes your
+query, and nothing has
+
+168
+00:06:55,060 --> 00:06:58,130
+actually happened to
+retrieve any data.
+
+169
+00:06:58,130 --> 00:07:02,000
+So it's actually only when you
+call a method like .each on
+
+170
+00:07:02,000 --> 00:07:06,650
+the cursor, or .toArray that
+the cursor actually has to
+
+171
+00:07:06,650 --> 00:07:08,400
+perform the query.
+
+172
+00:07:08,400 --> 00:07:11,940
+So when you call .each, the
+cursor realizes, OK, I don't
+
+173
+00:07:11,940 --> 00:07:13,050
+have any data.
+
+174
+00:07:13,050 --> 00:07:15,510
+I actually need to query
+the database.
+
+175
+00:07:15,510 --> 00:07:18,010
+So the cursor sends
+its query over,
+
+176
+00:07:18,010 --> 00:07:20,060
+MongoD sends its response.
+
+177
+00:07:20,060 --> 00:07:22,740
+And the cursor can start
+returning documents, or start
+
+178
+00:07:22,740 --> 00:07:24,170
+building this array.
+
+179
+00:07:24,170 --> 00:07:26,650
+But one thing I want to mention
+is that the response
+
+180
+00:07:26,650 --> 00:07:29,200
+from MongoDB is not
+necessarily the
+
+181
+00:07:29,200 --> 00:07:31,200
+entire results set.
+
+182
+00:07:31,200 --> 00:07:34,860
+So consider a situation where
+you have a massive database
+
+183
+00:07:34,860 --> 00:07:37,490
+with many, many documents, and
+you don't actually want to
+
+184
+00:07:37,490 --> 00:07:40,990
+return the whole set of
+documents all at once.
+
+185
+00:07:40,990 --> 00:07:45,040
+So what actually happens is that
+in this response, MongoDB
+
+186
+00:07:45,040 --> 00:07:48,030
+will return a batch of documents
+up to a certain
+
+187
+00:07:48,030 --> 00:07:49,130
+batch size.
+
+188
+00:07:49,130 --> 00:07:52,620
+So in this first query, in
+response, the cursor gets back
+
+189
+00:07:52,620 --> 00:07:56,070
+the first batch, can actually
+start returning documents
+
+190
+00:07:56,070 --> 00:07:58,280
+until that batch has run out.
+
+191
+00:07:58,280 --> 00:08:00,820
+And then once that batch has run
+out, the cursor can make
+
+192
+00:08:00,820 --> 00:08:02,920
+another request, get
+the next batch.
+
+193
+00:08:02,920 --> 00:08:05,340
+And once that batch runs out,
+the cursor can make another
+
+194
+00:08:05,340 --> 00:08:09,640
+request, get the next batch,
+and so on, until it reaches
+
+195
+00:08:09,640 --> 00:08:12,060
+the end of its results set.
+
+196
+00:08:12,060 --> 00:08:15,430
+So one thing to note here is
+that this works very nicely
+
+197
+00:08:15,430 --> 00:08:18,130
+for a function like .each
+because we can actually
+
+198
+00:08:18,130 --> 00:08:21,820
+process the documents as they
+come in, since .each actually
+
+199
+00:08:21,820 --> 00:08:24,840
+calls its callback for each
+document that is retrieved
+
+200
+00:08:24,840 --> 00:08:26,060
+from the cursor.
+
+201
+00:08:26,060 --> 00:08:28,585
+However, if you have a function
+like toArray, and
+
+202
+00:08:28,585 --> 00:08:31,300
+you're using that on the cursor,
+the callback doesn't
+
+203
+00:08:31,300 --> 00:08:33,919
+actually get called until
+the entire array
+
+204
+00:08:33,919 --> 00:08:35,539
+is completely built.
+
+205
+00:08:35,539 --> 00:08:38,559
+Which means you haven't seen the
+cursors streaming all this
+
+206
+00:08:38,559 --> 00:08:41,539
+data, but you're not actually
+getting any advantage from the
+
+207
+00:08:41,539 --> 00:08:43,830
+fact that it's batching
+like this.
+
+208
+00:08:43,830 --> 00:08:46,450
+So this is really meant to make
+it easier to stream data
+
+209
+00:08:46,450 --> 00:08:48,980
+back from the database, rather
+than have to wait for the
+
+210
+00:08:48,980 --> 00:08:51,540
+entire results set before
+you can do anything.
+
+211
+00:08:51,540 --> 00:08:53,650
+So this is something to keep
+in mind when you're using
+
+212
+00:08:53,650 --> 00:08:55,840
+something like toArray.
+
+213
+00:08:55,840 --> 00:08:56,290
+All right.
+
+214
+00:08:56,290 --> 00:08:59,600
+So now let's go on
+and do our quiz.
+
+215
+00:08:59,600 --> 00:09:01,570
+So for this quiz, we'll actually
+have you complete
+
+216
+00:09:01,570 --> 00:09:03,120
+some example code.
+
+217
+00:09:03,120 --> 00:09:05,210
+So this is our example code.
+
+218
+00:09:05,210 --> 00:09:07,720
+Just like in all our other
+examples, we get a reference
+
+219
+00:09:07,720 --> 00:09:08,220
+to the driver.
+
+220
+00:09:08,220 --> 00:09:09,250
+We connect.
+
+221
+00:09:09,250 --> 00:09:10,850
+We check for an error.
+
+222
+00:09:10,850 --> 00:09:13,400
+And we specify a query
+and a callback.
+
+223
+00:09:13,400 --> 00:09:16,920
+But we're not actually using
+this query or this callback.
+
+224
+00:09:16,920 --> 00:09:20,730
+So your task is to figure out
+what to put here to actually
+
+225
+00:09:20,730 --> 00:09:24,820
+do this query, query for all the
+documents with grade 100.
+
+226
+00:09:24,820 --> 00:09:27,150
+And call this callback.
+
+227
+00:09:27,150 --> 00:09:31,110
+But notice this callback only
+takes a single document and
+
+228
+00:09:31,110 --> 00:09:32,450
+logs that document.
+
+229
+00:09:32,450 --> 00:09:35,300
+So it may not be clear here
+because this could actually be
+
+230
+00:09:35,300 --> 00:09:39,320
+an array, technically, but your
+quiz is to have a single
+
+231
+00:09:39,320 --> 00:09:42,450
+document be returned
+to this callback.
+
+232
+00:09:42,450 --> 00:09:45,350
+So your job is to figure out
+what to put here such that we
+
+233
+00:09:45,350 --> 00:09:47,710
+run this query and call
+this callback
+
+234
+00:09:47,710 --> 00:09:49,100
+with a single document.
+
+235
+00:09:49,100 --> 00:09:51,820
+And once you've figured that
+out, fill the answer in this
+
+236
+00:09:51,820 --> 00:09:53,070
+text box below.
+
+237
+00:09:53,070 --> 00:09:54,040

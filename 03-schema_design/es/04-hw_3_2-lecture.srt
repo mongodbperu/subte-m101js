@@ -1,0 +1,318 @@
+1
+00:00:00,000 --> 00:00:00,050
+
+2
+00:00:00,050 --> 00:00:01,900
+So now let's talk about
+homework number
+
+3
+00:00:01,900 --> 00:00:03,820
+two for week three.
+
+4
+00:00:03,820 --> 00:00:07,430
+So for this homework we'll be
+revisiting the blog project
+
+5
+00:00:07,430 --> 00:00:11,140
+and actually add the ability
+to make new posts.
+
+6
+00:00:11,140 --> 00:00:14,150
+So you actually should have
+already added the ability to
+
+7
+00:00:14,150 --> 00:00:17,840
+Login and Logout and to make
+a new user, but if not--
+
+8
+00:00:17,840 --> 00:00:19,680
+if you had some issues with
+that, we're actually going to
+
+9
+00:00:19,680 --> 00:00:22,820
+give you a new stencil that has
+those sections included so
+
+10
+00:00:22,820 --> 00:00:25,330
+you can go check your work on
+the parts that you filled in
+
+11
+00:00:25,330 --> 00:00:27,760
+last week and the parts that
+you already filled in.
+
+12
+00:00:27,760 --> 00:00:30,240
+So for this homework we're
+actually going to be adding
+
+13
+00:00:30,240 --> 00:00:33,150
+the ability to make new posts.
+
+14
+00:00:33,150 --> 00:00:37,070
+So right now we're logged in as
+the user test, so let's go
+
+15
+00:00:37,070 --> 00:00:39,330
+up here and click on New Post.
+
+16
+00:00:39,330 --> 00:00:41,460
+All right, so far so good.
+
+17
+00:00:41,460 --> 00:00:42,635
+We're on the new post page.
+
+18
+00:00:42,635 --> 00:00:48,220
+Let's make a title of new post
+and entry of entry and let's
+
+19
+00:00:48,220 --> 00:00:51,400
+just go down here and let's
+submit this form.
+
+20
+00:00:51,400 --> 00:00:55,930
+All right, so here we get an
+error insertEntry NYI, so that
+
+21
+00:00:55,930 --> 00:00:59,070
+gives us a hint as to what
+we're actually missing.
+
+22
+00:00:59,070 --> 00:01:01,620
+So it's actually the
+post request.
+
+23
+00:01:01,620 --> 00:01:04,599
+When we try to make a new post
+we need this insert entry
+
+24
+00:01:04,599 --> 00:01:06,470
+function to actually
+insert the post
+
+25
+00:01:06,470 --> 00:01:08,330
+entry into our database.
+
+26
+00:01:08,330 --> 00:01:10,590
+So let's take a look at
+the code for that.
+
+27
+00:01:10,590 --> 00:01:13,620
+So down here we have this stack
+trace because we're
+
+28
+00:01:13,620 --> 00:01:17,690
+missing the insertEntry function
+so let's stop this.
+
+29
+00:01:17,690 --> 00:01:19,650
+So the way you can find out what
+you need to implement for
+
+30
+00:01:19,650 --> 00:01:23,330
+this project is you can just run
+this command and you get
+
+31
+00:01:23,330 --> 00:01:28,400
+back posts.js line 32,
+homework 3.2 TODO.
+
+32
+00:01:28,400 --> 00:01:31,530
+So let's open posts.js.
+
+33
+00:01:31,530 --> 00:01:35,210
+So we look at this file and we
+can see this is the posts data
+
+34
+00:01:35,210 --> 00:01:37,990
+access object and one of the
+things we do here is we say
+
+35
+00:01:37,990 --> 00:01:41,200
+var posts equals
+db.collection.posts.
+
+36
+00:01:41,200 --> 00:01:44,770
+So you can actually use this to
+perform operations against
+
+37
+00:01:44,770 --> 00:01:47,670
+the post collection so you don't
+actually have to use
+
+38
+00:01:47,670 --> 00:01:49,910
+this db object directly.
+
+39
+00:01:49,910 --> 00:01:51,550
+So if we go down here--
+
+40
+00:01:51,550 --> 00:01:54,270
+the getPosts function-- we can
+see an example of using it.
+
+41
+00:01:54,270 --> 00:01:58,450
+We're using posts.find.sort and
+giving it some arguments.
+
+42
+00:01:58,450 --> 00:02:01,180
+And this is just an example of
+using this posts object.
+
+43
+00:02:01,180 --> 00:02:04,760
+It's equivalent to doing
+db.collection posts.find.
+
+44
+00:02:04,760 --> 00:02:06,520
+Just wanted to show
+how you use that.
+
+45
+00:02:06,520 --> 00:02:08,509
+All right, so let's take a
+look at what we have to
+
+46
+00:02:08,509 --> 00:02:11,120
+implement for homework 3.2.
+
+47
+00:02:11,120 --> 00:02:13,020
+So if we look up here
+we can see we have
+
+48
+00:02:13,020 --> 00:02:15,200
+this insertEntry function.
+
+49
+00:02:15,200 --> 00:02:16,490
+So a lot of this is
+done for you.
+
+50
+00:02:16,490 --> 00:02:19,650
+We're making this post, we have
+the permalink, and we've
+
+51
+00:02:19,650 --> 00:02:22,620
+built this entire post object--
+this is complete.
+
+52
+00:02:22,620 --> 00:02:25,130
+Now all you have to do is figure
+out how to insert it
+
+53
+00:02:25,130 --> 00:02:26,850
+into the posts collection.
+
+54
+00:02:26,850 --> 00:02:29,530
+So down here we see our call
+back with the error message
+
+55
+00:02:29,530 --> 00:02:32,810
+that we saw when we tried to
+open this page and tried to do
+
+56
+00:02:32,810 --> 00:02:35,860
+this operation when we were in
+the browser and the stack
+
+57
+00:02:35,860 --> 00:02:37,630
+trace we saw in the shell.
+
+58
+00:02:37,630 --> 00:02:41,120
+So just to take a look at
+surrounding code, this is the
+
+59
+00:02:41,120 --> 00:02:44,140
+insertEntry function and
+basically takes title, body,
+
+60
+00:02:44,140 --> 00:02:46,150
+tags, author, callback.
+
+61
+00:02:46,150 --> 00:02:49,670
+And actually all the code to
+build this post and actually
+
+62
+00:02:49,670 --> 00:02:52,430
+create this post object
+is all done for you.
+
+63
+00:02:52,430 --> 00:02:56,180
+All the processing, all the
+sanitizing input is done for
+
+64
+00:02:56,180 --> 00:02:59,460
+you, so all you really need to
+do is figure out how to insert
+
+65
+00:02:59,460 --> 00:03:02,410
+this post into the
+posts collection.
+
+66
+00:03:02,410 --> 00:03:04,620
+So this will actually give us
+support for creating a new
+
+67
+00:03:04,620 --> 00:03:08,270
+post and this is your assignment
+for homework 3.2.

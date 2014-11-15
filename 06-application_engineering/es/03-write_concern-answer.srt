@@ -1,0 +1,79 @@
+1
+00:00:00,000 --> 00:00:00,120
+
+2
+00:00:00,120 --> 00:00:01,720
+All right so the answer is--
+
+3
+00:00:01,720 --> 00:00:03,200
+The write weights forever.
+
+4
+00:00:03,200 --> 00:00:05,770
+Now this may not be true if
+you have a timeout, but
+
+5
+00:00:05,770 --> 00:00:07,910
+basically, the driver
+keeps waiting for a
+
+6
+00:00:07,910 --> 00:00:09,610
+response from the nodes.
+
+7
+00:00:09,610 --> 00:00:11,930
+Doesn't throw an error and the
+server doesn't throw an error.
+
+8
+00:00:11,930 --> 00:00:14,690
+It's just waiting to meet the
+requirements that you set in
+
+9
+00:00:14,690 --> 00:00:16,129
+the write concern.
+
+10
+00:00:16,129 --> 00:00:18,580
+It does not go to as many nodes
+as possible then return
+
+11
+00:00:18,580 --> 00:00:22,120
+success because that would not
+be meeting the constraints
+
+12
+00:00:22,120 --> 00:00:23,520
+that we specified.
+
+13
+00:00:23,520 --> 00:00:26,070
+It would be writing to fewer
+nodes than we specified in the
+
+14
+00:00:26,070 --> 00:00:28,560
+write concern, which means that
+we would be getting the
+
+15
+00:00:28,560 --> 00:00:31,070
+wrong idea about where
+our data actually is.
+
+16
+00:00:31,070 --> 00:00:33,380
+So that's the answer to the quiz
+about node concern and
+
+17
+00:00:33,380 --> 00:00:34,630
+the node.js driver.
+
+18
+00:00:34,630 --> 00:00:35,470

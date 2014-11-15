@@ -1,0 +1,346 @@
+1
+00:00:00,000 --> 00:00:00,120
+
+2
+00:00:00,120 --> 00:00:00,425
+All right.
+
+3
+00:00:00,425 --> 00:00:02,780
+So now let's do a simple
+Hello World
+
+4
+00:00:02,780 --> 00:00:05,260
+application using Express.
+
+5
+00:00:05,260 --> 00:00:08,490
+So, Express is a library for
+Node.js, which handles a lot
+
+6
+00:00:08,490 --> 00:00:11,220
+of routing, and a lot of
+the details of a web
+
+7
+00:00:11,220 --> 00:00:12,730
+application for us.
+
+8
+00:00:12,730 --> 00:00:15,175
+So to get started, let's
+do what we did before.
+
+9
+00:00:15,175 --> 00:00:18,020
+Let's do mkdir hello_express.
+
+10
+00:00:18,020 --> 00:00:20,920
+
+11
+00:00:20,920 --> 00:00:22,550
+Change into it.
+
+12
+00:00:22,550 --> 00:00:26,250
+And now that we're in here, we
+can say, in any text editor
+
+13
+00:00:26,250 --> 00:00:30,570
+again, we just open app.js.
+
+14
+00:00:30,570 --> 00:00:33,480
+So the first thing we want
+to do is we want to get a
+
+15
+00:00:33,480 --> 00:00:35,890
+reference to our module.
+
+16
+00:00:35,890 --> 00:00:41,200
+So let's just say our express
+equals require express.
+
+17
+00:00:41,200 --> 00:00:43,500
+So this will give us a reference
+to the module, and
+
+18
+00:00:43,500 --> 00:00:48,120
+now let's just create an
+instance of our app.
+
+19
+00:00:48,120 --> 00:00:50,470
+All right, so now the first
+thing we want to do is
+
+20
+00:00:50,470 --> 00:00:52,280
+register handler for route.
+
+21
+00:00:52,280 --> 00:00:58,405
+So now let's do app.get for
+slash, and give it a call back
+
+22
+00:00:58,405 --> 00:01:00,950
+for when this route
+is requested.
+
+23
+00:01:00,950 --> 00:01:04,819
+And give it the request,
+and an object for
+
+24
+00:01:04,819 --> 00:01:06,510
+dealing with the response.
+
+25
+00:01:06,510 --> 00:01:09,270
+All right, so what is this
+actually doing here?
+
+26
+00:01:09,270 --> 00:01:12,430
+The app.get method is a way to
+tell Express how to handle a
+
+27
+00:01:12,430 --> 00:01:15,440
+get request to a
+particular URL.
+
+28
+00:01:15,440 --> 00:01:18,840
+So in this example, we are
+telling Express that all get
+
+29
+00:01:18,840 --> 00:01:22,250
+requests to the resource slash,
+meaning the URL with
+
+30
+00:01:22,250 --> 00:01:25,570
+nothing after it, should be
+handled by this function we're
+
+31
+00:01:25,570 --> 00:01:27,220
+passing in.
+
+32
+00:01:27,220 --> 00:01:29,930
+Notice that the callback
+takes two arguments.
+
+33
+00:01:29,930 --> 00:01:33,130
+These are the request and
+response objects, and our
+
+34
+00:01:33,130 --> 00:01:36,400
+paths do our call back by
+Express, so we can use them in
+
+35
+00:01:36,400 --> 00:01:38,080
+our route handling code.
+
+36
+00:01:38,080 --> 00:01:40,960
+So in the body here, what we
+want to do is actually handle
+
+37
+00:01:40,960 --> 00:01:42,390
+this request.
+
+38
+00:01:42,390 --> 00:01:45,810
+So, we know from the context
+that the request has been made
+
+39
+00:01:45,810 --> 00:01:49,130
+to slash, and at this point we
+don't really care about doing
+
+40
+00:01:49,130 --> 00:01:51,680
+something different, so let's
+just, any time someone
+
+41
+00:01:51,680 --> 00:01:53,930
+requests this resource,
+let's just do
+
+42
+00:01:53,930 --> 00:01:57,520
+result.send, Hello, World.
+
+43
+00:01:57,520 --> 00:02:03,960
+And then down here, let's do
+app.listen on port 8080, then
+
+44
+00:02:03,960 --> 00:02:07,680
+log a nice message, saying that
+our server was started.
+
+45
+00:02:07,680 --> 00:02:12,020
+So what we can do is
+go node, app.js.
+
+46
+00:02:12,020 --> 00:02:14,100
+So now we have an
+issue similar to
+
+47
+00:02:14,100 --> 00:02:15,330
+the one we had before.
+
+48
+00:02:15,330 --> 00:02:17,160
+We need the express module.
+
+49
+00:02:17,160 --> 00:02:22,340
+So what we do is we just type
+npm install express.
+
+50
+00:02:22,340 --> 00:02:25,580
+All, right so our module's
+installed.
+
+51
+00:02:25,580 --> 00:02:29,160
+Now if we do node, app.js,
+we see Express server
+
+52
+00:02:29,160 --> 00:02:30,830
+started on port 8080.
+
+53
+00:02:30,830 --> 00:02:34,800
+Now if we go to our browser,
+we can just go local host,
+
+54
+00:02:34,800 --> 00:02:37,930
+8080, and we get Hello, World.
+
+55
+00:02:37,930 --> 00:02:41,080
+So, one issue with this is that
+now if we go to something
+
+56
+00:02:41,080 --> 00:02:45,670
+other than just slash, so we
+go local host, 8080, not
+
+57
+00:02:45,670 --> 00:02:49,360
+found, we just get this
+message, cannot
+
+58
+00:02:49,360 --> 00:02:50,930
+get slash not found.
+
+59
+00:02:50,930 --> 00:02:54,170
+And that's from Express,
+basically saying there is no
+
+60
+00:02:54,170 --> 00:02:55,850
+route registered here.
+
+61
+00:02:55,850 --> 00:02:57,300
+So let's fix that.
+
+62
+00:02:57,300 --> 00:02:59,460
+Let's go back to our
+application, and we'll
+
+63
+00:02:59,460 --> 00:03:03,360
+register a new route on star.
+
+64
+00:03:03,360 --> 00:03:05,250
+And basically, star
+is wild card.
+
+65
+00:03:05,250 --> 00:03:08,900
+It means any route that was
+not handled by a previous
+
+66
+00:03:08,900 --> 00:03:12,630
+handler falls down, and gets
+handled by this one.
+
+67
+00:03:12,630 --> 00:03:15,910
+So now we basically have a
+handler for any of our routes.
+
+68
+00:03:15,910 --> 00:03:19,340
+So, what we can do here is we
+can just say do result.send,
+
+69
+00:03:19,340 --> 00:03:22,730
+page not found, and
+give a 404.
+
+70
+00:03:22,730 --> 00:03:25,890
+So now if we run our application
+again, we can go
+
+71
+00:03:25,890 --> 00:03:30,720
+back to the browser, try to
+reload the page, and instead
+
+72
+00:03:30,720 --> 00:03:34,620
+of the cannot get, we get
+a page not found.
+
+73
+00:03:34,620 --> 00:03:37,790
+So, that's the basics of setting
+up a simple Hello,
+
+74
+00:03:37,790 --> 00:03:39,340
+World application on Express.
+
+75
+00:03:39,340 --> 00:03:40,590

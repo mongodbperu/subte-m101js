@@ -1,0 +1,768 @@
+1
+00:00:00,000 --> 00:00:00,150
+
+2
+00:00:00,150 --> 00:00:00,670
+All right.
+
+3
+00:00:00,670 --> 00:00:03,310
+So, now we're going to talk
+about building a Hello World
+
+4
+00:00:03,310 --> 00:00:08,990
+application using MongoDB and
+the MongoDB Node.js driver.
+
+5
+00:00:08,990 --> 00:00:10,320
+What is the Node.js driver?
+
+6
+00:00:10,320 --> 00:00:14,430
+What does it mean to be
+a driver for MongoDB?
+
+7
+00:00:14,430 --> 00:00:17,470
+This is a little bit of our
+overall architecture.
+
+8
+00:00:17,470 --> 00:00:20,640
+We have our Mongod server
+listening here for incoming
+
+9
+00:00:20,640 --> 00:00:21,740
+connections.
+
+10
+00:00:21,740 --> 00:00:24,900
+And it actually expects
+BSON protocol.
+
+11
+00:00:24,900 --> 00:00:27,280
+So, this is a binary JSON.
+
+12
+00:00:27,280 --> 00:00:29,990
+And there's a specific protocol
+for communicating
+
+13
+00:00:29,990 --> 00:00:31,280
+with the database.
+
+14
+00:00:31,280 --> 00:00:34,690
+And the idea behind a driver is,
+the driver actually is a
+
+15
+00:00:34,690 --> 00:00:37,370
+library in a specific
+language--
+
+16
+00:00:37,370 --> 00:00:38,880
+in this case, JavaScript--
+
+17
+00:00:38,880 --> 00:00:42,120
+that will actually handle this
+protocol and handle this
+
+18
+00:00:42,120 --> 00:00:45,320
+communication, handle opening
+sockets, handle, handle
+
+19
+00:00:45,320 --> 00:00:48,040
+detecting errors, handle
+connecting to replica sets,
+
+20
+00:00:48,040 --> 00:00:50,580
+handle a lot of things behind
+the scenes that you don't want
+
+21
+00:00:50,580 --> 00:00:52,750
+to have to deal with in
+your application code.
+
+22
+00:00:52,750 --> 00:00:56,610
+So, the idea is that you'll
+actually include the driver
+
+23
+00:00:56,610 --> 00:00:59,870
+for MongoDB, to Node.js driver,
+and you'll use it in
+
+24
+00:00:59,870 --> 00:01:02,640
+your application just like you
+would any other library.
+
+25
+00:01:02,640 --> 00:01:05,010
+And it'll actually deal
+with communicating
+
+26
+00:01:05,010 --> 00:01:07,180
+to MongoDB for you.
+
+27
+00:01:07,180 --> 00:01:08,820
+In this lesson, we'll talk
+about how to install the
+
+28
+00:01:08,820 --> 00:01:12,685
+Node.js driver and how to use
+its API to actually connect to
+
+29
+00:01:12,685 --> 00:01:14,630
+MongoDB and to read
+a document.
+
+30
+00:01:14,630 --> 00:01:16,430
+So, let's take a look.
+
+31
+00:01:16,430 --> 00:01:19,430
+Here we have our app.js file.
+
+32
+00:01:19,430 --> 00:01:21,080
+This is our example application
+that we're going
+
+33
+00:01:21,080 --> 00:01:23,680
+to use to understand
+the Node.js gesture
+
+34
+00:01:23,680 --> 00:01:24,930
+and how to use it.
+
+35
+00:01:24,930 --> 00:01:27,060
+But before we get started, let's
+actually try to run it
+
+36
+00:01:27,060 --> 00:01:30,250
+to make sure our application
+is complete.
+
+37
+00:01:30,250 --> 00:01:30,710
+All right.
+
+38
+00:01:30,710 --> 00:01:33,150
+So, when we try to run our
+application, we notice a
+
+39
+00:01:33,150 --> 00:01:34,280
+problem here.
+
+40
+00:01:34,280 --> 00:01:37,570
+We see that we cannot
+find module MongoDB.
+
+41
+00:01:37,570 --> 00:01:41,380
+The MongoDB driver for Node.js
+is actually a module.
+
+42
+00:01:41,380 --> 00:01:44,230
+So, here we can see that we
+can't find the module, which
+
+43
+00:01:44,230 --> 00:01:46,510
+means we don't have our
+dependency installed.
+
+44
+00:01:46,510 --> 00:01:48,640
+We don't have the MongoDB
+driver installed.
+
+45
+00:01:48,640 --> 00:01:51,430
+So, the way we do that is, we
+use the package manager and
+
+46
+00:01:51,430 --> 00:01:52,680
+just install MongoDB.
+
+47
+00:01:52,680 --> 00:01:55,010
+
+48
+00:01:55,010 --> 00:01:58,560
+All right, so, now we have our
+MongoDB driver installed.
+
+49
+00:01:58,560 --> 00:02:01,160
+If we look in our directory,
+we see app.js and we see a
+
+50
+00:02:01,160 --> 00:02:04,710
+node_modules file where the
+MongoDB driver is installed as
+
+51
+00:02:04,710 --> 00:02:06,320
+a module locally.
+
+52
+00:02:06,320 --> 00:02:10,639
+Now if we do node app.js, run
+our application, we can see we
+
+53
+00:02:10,639 --> 00:02:11,875
+called fineOne.
+
+54
+00:02:11,875 --> 00:02:15,110
+We got back this document with
+the name of MongoDB and this
+
+55
+00:02:15,110 --> 00:02:16,400
+nice message here.
+
+56
+00:02:16,400 --> 00:02:19,170
+So, let's take a look
+at this application.
+
+57
+00:02:19,170 --> 00:02:21,330
+Up here at the top,
+we actually have
+
+58
+00:02:21,330 --> 00:02:22,970
+this require statement.
+
+59
+00:02:22,970 --> 00:02:24,730
+Notice we require MongoDB.
+
+60
+00:02:24,730 --> 00:02:26,160
+It's actually the same
+name that we used
+
+61
+00:02:26,160 --> 00:02:27,320
+to install the module.
+
+62
+00:02:27,320 --> 00:02:30,080
+And from that module, we're
+actually getting this
+
+63
+00:02:30,080 --> 00:02:31,760
+MongoClient object.
+
+64
+00:02:31,760 --> 00:02:35,330
+So, this object is actually our
+interface into the MongoDB
+
+65
+00:02:35,330 --> 00:02:36,570
+driver library.
+
+66
+00:02:36,570 --> 00:02:38,900
+And through this MongoClient
+object, that's how we'll
+
+67
+00:02:38,900 --> 00:02:42,660
+access the API methods to the
+driver, which will then handle
+
+68
+00:02:42,660 --> 00:02:45,560
+whatever operation
+we requested.
+
+69
+00:02:45,560 --> 00:02:47,840
+Now that we have this
+MongoClient object, we can go
+
+70
+00:02:47,840 --> 00:02:50,810
+down here and see that the first
+thing we have to do is
+
+71
+00:02:50,810 --> 00:02:53,260
+actually open the connection
+to the server.
+
+72
+00:02:53,260 --> 00:02:55,710
+So, this line here doesn't
+actually do anything.
+
+73
+00:02:55,710 --> 00:02:59,500
+It's just basically getting us
+this object that we can use to
+
+74
+00:02:59,500 --> 00:03:01,180
+interact with the driver.
+
+75
+00:03:01,180 --> 00:03:04,580
+So, the real work actually
+happens in this connect call.
+
+76
+00:03:04,580 --> 00:03:07,690
+So, right here we have
+MongoClient.connect, and we
+
+77
+00:03:07,690 --> 00:03:09,240
+have this connection
+string here.
+
+78
+00:03:09,240 --> 00:03:11,270
+This is actually a special
+connection string that the
+
+79
+00:03:11,270 --> 00:03:12,520
+driver understands.
+
+80
+00:03:12,520 --> 00:03:16,360
+And it uses this to connect to
+our running Mongod server.
+
+81
+00:03:16,360 --> 00:03:21,050
+So, here we have MongoDB colon
+slash localhost 27017,
+
+82
+00:03:21,050 --> 00:03:23,730
+basically saying that we're
+connecting to a Mongod running
+
+83
+00:03:23,730 --> 00:03:28,300
+on our local machine on the
+default port, which is 27017.
+
+84
+00:03:28,300 --> 00:03:31,550
+So, if you run Mongod with no
+arguments, this is the port
+
+85
+00:03:31,550 --> 00:03:33,990
+that the database will
+be listening on.
+
+86
+00:03:33,990 --> 00:03:36,090
+And at the end of the connection
+string, we have
+
+87
+00:03:36,090 --> 00:03:38,940
+this slash test, which is
+basically saying, connect to
+
+88
+00:03:38,940 --> 00:03:42,960
+the test database within
+this Mongod server.
+
+89
+00:03:42,960 --> 00:03:45,420
+The interesting thing here is
+that we're not actually
+
+90
+00:03:45,420 --> 00:03:46,760
+checking the return value.
+
+91
+00:03:46,760 --> 00:03:50,460
+What we do instead is, we
+pass in a callback here.
+
+92
+00:03:50,460 --> 00:03:53,620
+So, what's happening is that
+we call MongoClient.connect
+
+93
+00:03:53,620 --> 00:03:56,020
+with this connection string
+in this callback.
+
+94
+00:03:56,020 --> 00:03:58,420
+The driver will say, OK, I'm
+going to connect to this
+
+95
+00:03:58,420 --> 00:04:01,830
+Mongod instance, and I'm
+actually going to call this
+
+96
+00:04:01,830 --> 00:04:04,300
+call back when I'm
+done connecting.
+
+97
+00:04:04,300 --> 00:04:07,280
+You notice this call back
+actually has two arguments.
+
+98
+00:04:07,280 --> 00:04:09,740
+So, because we're not checking
+the return value here, we need
+
+99
+00:04:09,740 --> 00:04:12,770
+a way for the driver to be able
+to tell us what happened,
+
+100
+00:04:12,770 --> 00:04:16,740
+give us the results of this
+connection attempt.
+
+101
+00:04:16,740 --> 00:04:21,589
+Here in the standard Node.js
+style, the first argument here
+
+102
+00:04:21,589 --> 00:04:23,770
+is an error object.
+
+103
+00:04:23,770 --> 00:04:26,900
+This will basically be set if
+any kind of error occurred.
+
+104
+00:04:26,900 --> 00:04:29,840
+So, we can actually check that,
+which we do right here,
+
+105
+00:04:29,840 --> 00:04:33,320
+to see if we need to abort
+what we're trying to do.
+
+106
+00:04:33,320 --> 00:04:36,620
+How do these two arguments
+actually get populated?
+
+107
+00:04:36,620 --> 00:04:38,570
+What's really happening here
+is that we're calling this
+
+108
+00:04:38,570 --> 00:04:40,810
+connect call, sending
+in this URL.
+
+109
+00:04:40,810 --> 00:04:44,120
+The driver is connecting to the
+database, and when it's
+
+110
+00:04:44,120 --> 00:04:46,420
+done connecting, it'll actually
+call this callback
+
+111
+00:04:46,420 --> 00:04:48,200
+that we've passed in.
+
+112
+00:04:48,200 --> 00:04:51,800
+So, if there's an error, this
+error object is populated and
+
+113
+00:04:51,800 --> 00:04:52,950
+we throw the error.
+
+114
+00:04:52,950 --> 00:04:55,870
+If the connection was
+successful, the driver will
+
+115
+00:04:55,870 --> 00:04:58,870
+actually call this callback
+that we passed in with the
+
+116
+00:04:58,870 --> 00:05:01,440
+connected database object.
+
+117
+00:05:01,440 --> 00:05:03,670
+This object is also part
+of the driver.
+
+118
+00:05:03,670 --> 00:05:06,620
+You can think of it kind of as
+a handle for our database
+
+119
+00:05:06,620 --> 00:05:07,490
+connection.
+
+120
+00:05:07,490 --> 00:05:10,430
+So, from now on in this function
+in our call back, we
+
+121
+00:05:10,430 --> 00:05:13,720
+can use this database object
+to perform operations using
+
+122
+00:05:13,720 --> 00:05:16,420
+this already connected client.
+
+123
+00:05:16,420 --> 00:05:18,510
+If we look down here, we can
+see that we're taking our
+
+124
+00:05:18,510 --> 00:05:22,420
+connect database object, calling
+db.collection coll to
+
+125
+00:05:22,420 --> 00:05:23,590
+tell the driver which
+collection
+
+126
+00:05:23,590 --> 00:05:24,920
+we're interested in.
+
+127
+00:05:24,920 --> 00:05:27,540
+Then we're doing a findOne
+against that collection with
+
+128
+00:05:27,540 --> 00:05:31,440
+no query selector, and we're
+also giving that a call back.
+
+129
+00:05:31,440 --> 00:05:34,720
+So, again, this call back is
+passed inside the driver and
+
+130
+00:05:34,720 --> 00:05:37,680
+it will get called when the
+operation is complete.
+
+131
+00:05:37,680 --> 00:05:40,330
+And if there was some kind of
+error, the driver will pass in
+
+132
+00:05:40,330 --> 00:05:41,910
+the error object with some
+
+133
+00:05:41,910 --> 00:05:43,440
+information about what happened.
+
+134
+00:05:43,440 --> 00:05:46,540
+And, if the query was performed
+successfully, this
+
+135
+00:05:46,540 --> 00:05:49,850
+second argument, doc, will
+be populated with the
+
+136
+00:05:49,850 --> 00:05:52,020
+result of our query.
+
+137
+00:05:52,020 --> 00:05:54,460
+So, in here, we can check the
+error, we can print the
+
+138
+00:05:54,460 --> 00:05:57,520
+result, and then we just close
+the database connection.
+
+139
+00:05:57,520 --> 00:06:00,840
+So, again, this is our
+connected DB object.
+
+140
+00:06:00,840 --> 00:06:03,560
+We're still referencing the
+one that we got in our
+
+141
+00:06:03,560 --> 00:06:07,110
+original connect call back,
+and we can just close it.
+
+142
+00:06:07,110 --> 00:06:10,170
+Down here, we actually
+say called findOne.
+
+143
+00:06:10,170 --> 00:06:12,150
+Notice that this will different
+first because of our
+
+144
+00:06:12,150 --> 00:06:16,160
+asynchronous model of calling
+this function and not waiting
+
+145
+00:06:16,160 --> 00:06:19,830
+for a return, but instead
+passing a call back to say
+
+146
+00:06:19,830 --> 00:06:22,010
+call this call back
+when you're done.
+
+147
+00:06:22,010 --> 00:06:25,140
+So, it'll actually execute this
+line, then execute this
+
+148
+00:06:25,140 --> 00:06:28,290
+line, then this callback will
+get called after the round
+
+149
+00:06:28,290 --> 00:06:29,930
+trip to the server.
+
+150
+00:06:29,930 --> 00:06:30,290
+All right.
+
+151
+00:06:30,290 --> 00:06:33,450
+So, this is a basic Hello World
+application using the
+
+152
+00:06:33,450 --> 00:06:35,930
+MongoDB Node.js driver.
+
+153
+00:06:35,930 --> 00:06:38,420
+So, let's just run this
+one more time.
+
+154
+00:06:38,420 --> 00:06:40,540
+Node app.js.
+
+155
+00:06:40,540 --> 00:06:43,030
+Now we know that what's actually
+happening here is
+
+156
+00:06:43,030 --> 00:06:44,800
+that we're connecting
+to the database.
+
+157
+00:06:44,800 --> 00:06:46,690
+And then, once we've connected,
+we actually do a
+
+158
+00:06:46,690 --> 00:06:49,860
+find one and print out
+that we called it.
+
+159
+00:06:49,860 --> 00:06:51,400
+And then when we get
+the response,
+
+160
+00:06:51,400 --> 00:06:53,300
+we'll print the document.
+
+161
+00:06:53,300 --> 00:06:56,870
+So, that's the basic Hello World
+application using the
+
+162
+00:06:56,870 --> 00:06:58,120
+MongoDB Node.js driver.
+
+163
+00:06:58,120 --> 00:06:59,110

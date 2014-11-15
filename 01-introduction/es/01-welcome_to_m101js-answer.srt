@@ -1,0 +1,60 @@
+1
+00:00:00,000 --> 00:00:00,140
+
+2
+00:00:00,140 --> 00:00:00,460
+All right.
+
+3
+00:00:00,460 --> 00:00:04,360
+And the answer is that homework
+and the final exam
+
+4
+00:00:04,360 --> 00:00:05,470
+count in your grade.
+
+5
+00:00:05,470 --> 00:00:06,820
+Quizzes don't count.
+
+6
+00:00:06,820 --> 00:00:08,750
+Class participation--
+
+7
+00:00:08,750 --> 00:00:10,090
+we don't really count that.
+
+8
+00:00:10,090 --> 00:00:12,420
+But that does bring up a good
+point, which is that if you
+
+9
+00:00:12,420 --> 00:00:15,500
+want to get answers to your
+questions, there are forums.
+
+10
+00:00:15,500 --> 00:00:17,060
+And you can ask questions.
+
+11
+00:00:17,060 --> 00:00:19,850
+And there is 10gen staff
+monitoring those forums, as
+
+12
+00:00:19,850 --> 00:00:22,700
+well as your fellow students
+are in the forums.
+
+13
+00:00:22,700 --> 00:00:23,950
+And they may answer
+your questions.
+
+14
+00:00:23,950 --> 00:00:25,040
+

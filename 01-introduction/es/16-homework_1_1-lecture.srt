@@ -1,0 +1,189 @@
+1
+00:00:00,000 --> 00:00:00,230
+
+2
+00:00:00,230 --> 00:00:02,560
+So, we have three homework
+assignments for week one.
+
+3
+00:00:02,560 --> 00:00:06,340
+The first one is just to run
+the Mongo Restore command.
+
+4
+00:00:06,340 --> 00:00:08,810
+This is just to get some data
+into MongoDB, so that we can
+
+5
+00:00:08,810 --> 00:00:10,770
+actually play around
+with it and do some
+
+6
+00:00:10,770 --> 00:00:11,860
+interesting things with it.
+
+7
+00:00:11,860 --> 00:00:14,350
+So this is just basic, getting
+started, run the
+
+8
+00:00:14,350 --> 00:00:15,860
+Mongo Restore command.
+
+9
+00:00:15,860 --> 00:00:19,150
+We have a dump provided that we
+generated using Mongo Dump
+
+10
+00:00:19,150 --> 00:00:22,730
+earlier, and that's provided
+as part of the course file.
+
+11
+00:00:22,730 --> 00:00:25,770
+So let's get started and talk
+about homework 1-1-.
+
+12
+00:00:25,770 --> 00:00:28,940
+So, first thing you'll want to
+do is go on the course website
+
+13
+00:00:28,940 --> 00:00:31,300
+and download the files
+for the homework.
+
+14
+00:00:31,300 --> 00:00:34,010
+This will be in a zip file, so
+I'll just show you how to
+
+15
+00:00:34,010 --> 00:00:37,070
+extract those on a Mac, and
+these command should be the
+
+16
+00:00:37,070 --> 00:00:38,790
+same on Linux.
+
+17
+00:00:38,790 --> 00:00:44,460
+So, just say tar xvzf,
+hm1-1.tar.
+
+18
+00:00:44,460 --> 00:00:48,620
+So now we extracted homework
+1-1, and here we just have a
+
+19
+00:00:48,620 --> 00:00:50,810
+single directory dump.
+
+20
+00:00:50,810 --> 00:00:52,950
+So at this stage, you want to
+make sure that you actually
+
+21
+00:00:52,950 --> 00:00:55,470
+have MongoDB running
+on your system.
+
+22
+00:00:55,470 --> 00:00:57,720
+So if you've actually installed
+MongoDB and have the
+
+23
+00:00:57,720 --> 00:01:00,220
+permissions set up correctly,
+you should be able to just
+
+24
+00:01:00,220 --> 00:01:04,562
+type mongod dash dash dbpath
+slash data slash db.
+
+25
+00:01:04,562 --> 00:01:06,410
+And now we have our
+server running.
+
+26
+00:01:06,410 --> 00:01:08,210
+It's waiting for connections
+on the default
+
+27
+00:01:08,210 --> 00:01:10,490
+port on local host.
+
+28
+00:01:10,490 --> 00:01:13,920
+So, once we've made sure that
+mongod is actually running and
+
+29
+00:01:13,920 --> 00:01:18,334
+waiting for connections, we
+can type mongo restore.
+
+30
+00:01:18,334 --> 00:01:19,600
+dump.
+
+31
+00:01:19,600 --> 00:01:22,940
+So what Mongo Restore does is
+it descends into the dump
+
+32
+00:01:22,940 --> 00:01:26,420
+directory, looking for files
+to import, connects to
+
+33
+00:01:26,420 --> 00:01:28,920
+MongoDB, and imports
+these files.
+
+34
+00:01:28,920 --> 00:01:32,420
+So, notice that our directory
+had a single database, n101,
+
+35
+00:01:32,420 --> 00:01:34,110
+with three different
+collections.
+
+36
+00:01:34,110 --> 00:01:38,310
+Homework 1-1, homework 1-2,
+and homework 1-3.
+
+37
+00:01:38,310 --> 00:01:41,960
+So, that's how you run Mongo
+Restore, and your assignment
+
+38
+00:01:41,960 --> 00:01:44,860
+for homework 1-1 is to actually
+use the Mongo shell,
+
+39
+00:01:44,860 --> 00:01:47,390
+and figure out what's in the
+homework 1-1 collection.
+
+40
+00:01:47,390 --> 00:01:48,640

@@ -1,0 +1,314 @@
+1
+00:00:00,000 --> 00:00:00,150
+
+2
+00:00:00,150 --> 00:00:02,740
+All right, so now that we've
+got our new data set, let's
+
+3
+00:00:02,740 --> 00:00:04,760
+try to learn a little
+bit more about it.
+
+4
+00:00:04,760 --> 00:00:06,810
+So for our first example,
+we'll actually
+
+5
+00:00:06,810 --> 00:00:09,820
+use the $regex operator.
+
+6
+00:00:09,820 --> 00:00:13,290
+And what this basically does
+is it allows you to build
+
+7
+00:00:13,290 --> 00:00:16,010
+queries that are regular
+expressions.
+
+8
+00:00:16,010 --> 00:00:17,610
+So let's get right into that.
+
+9
+00:00:17,610 --> 00:00:20,510
+So let's just say in Mongo,
+course, to connect to the
+
+10
+00:00:20,510 --> 00:00:22,500
+course database directly.
+
+11
+00:00:22,500 --> 00:00:25,710
+And now, when I looked on the
+"Our Technology" homepage, I
+
+12
+00:00:25,710 --> 00:00:28,290
+saw a lot of posts that
+mentioned the NSA.
+
+13
+00:00:28,290 --> 00:00:31,800
+So let's find all the posts that
+have NSA in the title.
+
+14
+00:00:31,800 --> 00:00:36,300
+So what this query is doing is
+we're saying db.reddit.find,
+
+15
+00:00:36,300 --> 00:00:40,190
+'title', and instead of an exact
+match, we're actually
+
+16
+00:00:40,190 --> 00:00:43,030
+using the $regex operator.
+
+17
+00:00:43,030 --> 00:00:46,390
+So basically this means that
+MongoDB's going to treat this
+
+18
+00:00:46,390 --> 00:00:50,300
+as a regular expression, and
+search anywhere in the title
+
+19
+00:00:50,300 --> 00:00:51,650
+for the characters 'NSA'.
+
+20
+00:00:51,650 --> 00:00:55,210
+The title doesn't have to be
+this exact string, it just has
+
+21
+00:00:55,210 --> 00:00:56,460
+to be anywhere in the title.
+
+22
+00:00:56,460 --> 00:01:00,080
+So that's going to give us
+all the documents that
+
+23
+00:01:00,080 --> 00:01:01,880
+have NSA in the title.
+
+24
+00:01:01,880 --> 00:01:05,319
+Actually to make this simpler,
+let's project out part of it.
+
+25
+00:01:05,319 --> 00:01:09,240
+So basically here we're going
+to project out the ID field
+
+26
+00:01:09,240 --> 00:01:11,380
+and only include the
+title field to make
+
+27
+00:01:11,380 --> 00:01:12,790
+this easier to read.
+
+28
+00:01:12,790 --> 00:01:15,990
+All right, so these are the
+posts with NSA in the title.
+
+29
+00:01:15,990 --> 00:01:17,930
+So that's how to do this
+from the Mongo show.
+
+30
+00:01:17,930 --> 00:01:21,450
+Now let's look into how to
+do this from node.js.
+
+31
+00:01:21,450 --> 00:01:23,060
+All right, so here's
+our example of
+
+32
+00:01:23,060 --> 00:01:26,200
+using a regex in node.js.
+
+33
+00:01:26,200 --> 00:01:29,050
+So pretty much everything
+is the same as our other
+
+34
+00:01:29,050 --> 00:01:33,410
+examples, except here we're
+using the $regex operator for
+
+35
+00:01:33,410 --> 00:01:38,730
+our title, much like the way
+we are using #.
+
+36
+00:01:38,730 --> 00:01:42,200
+So all we have to do is pass on
+this query to find, and we
+
+37
+00:01:42,200 --> 00:01:44,470
+get all the documents
+that have NSA
+
+38
+00:01:44,470 --> 00:01:45,900
+anywhere in the title.
+
+39
+00:01:45,900 --> 00:01:48,020
+So let's go back here.
+
+40
+00:01:48,020 --> 00:01:50,390
+And so let's run our app.
+
+41
+00:01:50,390 --> 00:01:53,960
+All right, so now we run our
+application and we can see,
+
+42
+00:01:53,960 --> 00:01:57,380
+printed out here, titles
+of all the posts that
+
+43
+00:01:57,380 --> 00:02:00,100
+have NSA in the title.
+
+44
+00:02:00,100 --> 00:02:04,250
+So that's how to use regex in
+MongoDB and we could ask
+
+45
+00:02:04,250 --> 00:02:05,660
+pretty much any question
+we want.
+
+46
+00:02:05,660 --> 00:02:08,860
+We could find all posts with
+Microsoft, all posts with
+
+47
+00:02:08,860 --> 00:02:12,780
+Skype, all posts with
+email, and actually
+
+48
+00:02:12,780 --> 00:02:15,040
+any arbitrary regex.
+
+49
+00:02:15,040 --> 00:02:19,210
+All right, so this is your
+quiz for using the $regex
+
+50
+00:02:19,210 --> 00:02:20,960
+query selector.
+
+51
+00:02:20,960 --> 00:02:24,220
+So the quiz is, which of the
+following query expressions
+
+52
+00:02:24,220 --> 00:02:27,470
+would match a document with
+Microsoft anywhere in the
+
+53
+00:02:27,470 --> 00:02:28,620
+'title' field?
+
+54
+00:02:28,620 --> 00:02:30,550
+Select all that apply.
+
+55
+00:02:30,550 --> 00:02:33,120
+So here we have four
+query selectors.
+
+56
+00:02:33,120 --> 00:02:37,520
+So you would use these in a find
+one query, a find query,
+
+57
+00:02:37,520 --> 00:02:38,630
+or an update.
+
+58
+00:02:38,630 --> 00:02:41,950
+And basically these would
+specify which documents you
+
+59
+00:02:41,950 --> 00:02:43,590
+returned from your query.
+
+60
+00:02:43,590 --> 00:02:47,040
+So your job is to figure out
+which of these documents would
+
+61
+00:02:47,040 --> 00:02:50,290
+actually match a document with
+Microsoft anywhere in the
+
+62
+00:02:50,290 --> 00:02:53,030
+'title' field, meaning that it
+would actually be in our
+
+63
+00:02:53,030 --> 00:02:54,070
+result set.
+
+64
+00:02:54,070 --> 00:02:56,830
+So you can actually test this by
+making some documents with
+
+65
+00:02:56,830 --> 00:02:59,720
+Microsoft in the 'title' field
+and then just putting these
+
+66
+00:02:59,720 --> 00:03:03,540
+into a find one or find, and
+figuring out which ones
+
+67
+00:03:03,540 --> 00:03:04,790
+actually match.
+
+68
+00:03:04,790 --> 00:03:05,460

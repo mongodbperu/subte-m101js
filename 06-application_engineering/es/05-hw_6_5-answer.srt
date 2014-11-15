@@ -1,0 +1,651 @@
+1
+00:00:00,000 --> 00:00:00,500
+
+2
+00:00:00,500 --> 00:00:03,870
+So for this homework, we asked
+you to set up a three-node
+
+3
+00:00:03,870 --> 00:00:04,810
+replica set.
+
+4
+00:00:04,810 --> 00:00:07,340
+And at a high level, basically,
+what you need to do
+
+5
+00:00:07,340 --> 00:00:09,740
+is start three normal MongoDs.
+
+6
+00:00:09,740 --> 00:00:11,780
+But you have to give it the
+replica set command line
+
+7
+00:00:11,780 --> 00:00:15,180
+option, giving it the name
+of the replica set.
+
+8
+00:00:15,180 --> 00:00:17,930
+You give it the data path, just
+like you would a normal
+
+9
+00:00:17,930 --> 00:00:21,480
+MongoD, except each MongoD in
+this replica set needs a
+
+10
+00:00:21,480 --> 00:00:23,000
+different dbpath.
+
+11
+00:00:23,000 --> 00:00:24,990
+And it needs to be on a
+different port, because we're
+
+12
+00:00:24,990 --> 00:00:27,480
+running these all
+on local host.
+
+13
+00:00:27,480 --> 00:00:30,350
+So once you have these three
+nodes up, you actually have to
+
+14
+00:00:30,350 --> 00:00:32,430
+make sure they're all
+connected and
+
+15
+00:00:32,430 --> 00:00:34,160
+all configured properly.
+
+16
+00:00:34,160 --> 00:00:37,950
+So down here, we give you
+instructions on how to set up
+
+17
+00:00:37,950 --> 00:00:39,340
+the configuration for the set.
+
+18
+00:00:39,340 --> 00:00:41,610
+This is our example
+configuration.
+
+19
+00:00:41,610 --> 00:00:44,070
+We have our host name
+and our port.
+
+20
+00:00:44,070 --> 00:00:47,980
+And we have IDs for the members
+and then the ID for
+
+21
+00:00:47,980 --> 00:00:50,360
+the replica set name.
+
+22
+00:00:50,360 --> 00:00:53,020
+So you could also do rs.initiate
+with no arguments
+
+23
+00:00:53,020 --> 00:00:56,460
+to automatically create an empty
+configuration, and then
+
+24
+00:00:56,460 --> 00:00:58,660
+just do rs.add to add
+the other members.
+
+25
+00:00:58,660 --> 00:01:01,600
+But in this case, we set up our
+configuration all up front
+
+26
+00:01:01,600 --> 00:01:05,379
+and call rs.initiate
+with our config.
+
+27
+00:01:05,379 --> 00:01:07,980
+So at this point, you could
+type rs.status to see the
+
+28
+00:01:07,980 --> 00:01:11,850
+state of our replica set and,
+right at the end, run
+
+29
+00:01:11,850 --> 00:01:14,840
+validate.js, just like you did
+in all the other homework
+
+30
+00:01:14,840 --> 00:01:17,180
+assignments that had
+validation scripts.
+
+31
+00:01:17,180 --> 00:01:19,920
+You may have to install the
+dependencies, but this will
+
+32
+00:01:19,920 --> 00:01:20,760
+confirm that it works.
+
+33
+00:01:20,760 --> 00:01:21,890
+So I'll show you
+how to do that.
+
+34
+00:01:21,890 --> 00:01:22,680
+All right.
+
+35
+00:01:22,680 --> 00:01:24,500
+So let's step through
+setting up this
+
+36
+00:01:24,500 --> 00:01:26,570
+three-node replica set.
+
+37
+00:01:26,570 --> 00:01:28,630
+So this is a script that
+I wrote to set
+
+38
+00:01:28,630 --> 00:01:29,430
+up the three nodes.
+
+39
+00:01:29,430 --> 00:01:32,790
+This is the first phase of
+setting up our replica set.
+
+40
+00:01:32,790 --> 00:01:36,050
+First, we're moving the data
+directories, so you need to be
+
+41
+00:01:36,050 --> 00:01:37,110
+careful here.
+
+42
+00:01:37,110 --> 00:01:39,680
+But I know these are all
+basically empty.
+
+43
+00:01:39,680 --> 00:01:41,160
+Here, I make the new
+directories.
+
+44
+00:01:41,160 --> 00:01:45,000
+And here, I'm just starting
+the three MongoDs.
+
+45
+00:01:45,000 --> 00:01:48,090
+So I give it the replica set
+name, different log files and
+
+46
+00:01:48,090 --> 00:01:50,850
+different data paths, different
+ports, small files
+
+47
+00:01:50,850 --> 00:01:54,950
+to not use too much disk space,
+and fork to basically
+
+48
+00:01:54,950 --> 00:01:56,270
+run this in the background.
+
+49
+00:01:56,270 --> 00:02:00,150
+So this command will run, start
+up MongoD, then continue
+
+50
+00:02:00,150 --> 00:02:02,550
+on to the next line, start up
+MongoD, then continue on to
+
+51
+00:02:02,550 --> 00:02:05,210
+the next line, start up MongoD,
+rather than starting a
+
+52
+00:02:05,210 --> 00:02:08,070
+MongoD and running it
+in the foreground.
+
+53
+00:02:08,070 --> 00:02:10,780
+So this is the script to
+set up the three nodes.
+
+54
+00:02:10,780 --> 00:02:13,860
+So first, let's make sure we
+don't accidentally have any
+
+55
+00:02:13,860 --> 00:02:15,970
+nodes running on the system.
+
+56
+00:02:15,970 --> 00:02:16,790
+So I'm going to kill
+all the MongoD.
+
+57
+00:02:16,790 --> 00:02:18,990
+So it looks like it didn't
+have any running.
+
+58
+00:02:18,990 --> 00:02:22,800
+So I can do bash set_up.sh.
+
+59
+00:02:22,800 --> 00:02:24,950
+So this is actually a good
+example of one of the issues
+
+60
+00:02:24,950 --> 00:02:27,280
+you would run into setting
+up a replica set.
+
+61
+00:02:27,280 --> 00:02:29,250
+So I think this is good
+to talk through
+
+62
+00:02:29,250 --> 00:02:30,580
+what's happening here.
+
+63
+00:02:30,580 --> 00:02:33,810
+So you see, we have mkdir:
+/data/rs1: Permission denied.
+
+64
+00:02:33,810 --> 00:02:36,930
+And what that basically means is
+we don't have permission to
+
+65
+00:02:36,930 --> 00:02:38,640
+create those directories.
+
+66
+00:02:38,640 --> 00:02:40,630
+So there are two ways we
+can deal with this.
+
+67
+00:02:40,630 --> 00:02:44,130
+One is we can change the
+permissions on /data.
+
+68
+00:02:44,130 --> 00:02:47,320
+And the other is we can just
+pick a new dbpath, which is
+
+69
+00:02:47,320 --> 00:02:50,190
+what I'll do in this case, just
+so I don't have to change
+
+70
+00:02:50,190 --> 00:02:52,970
+permissions on files
+on my system.
+
+71
+00:02:52,970 --> 00:02:55,210
+But if you wanted to change the
+permissions on this, you
+
+72
+00:02:55,210 --> 00:02:56,520
+would use the chmod command.
+
+73
+00:02:56,520 --> 00:02:59,650
+And you actually have to have
+root permissions to use this
+
+74
+00:02:59,650 --> 00:03:02,620
+to change certain directory
+permissions.
+
+75
+00:03:02,620 --> 00:03:06,300
+But for now, let's just
+edit our script.
+
+76
+00:03:06,300 --> 00:03:11,860
+And instead of running in
+/data/rs1, let's do ./data,
+
+77
+00:03:11,860 --> 00:03:14,000
+just so we're running locally
+in our home directory.
+
+78
+00:03:14,000 --> 00:03:16,580
+We don't have to worry about
+permission issues.
+
+79
+00:03:16,580 --> 00:03:16,790
+All right.
+
+80
+00:03:16,790 --> 00:03:19,360
+So now we have our data
+paths locally.
+
+81
+00:03:19,360 --> 00:03:21,300
+We have permission to edit
+these files and make
+
+82
+00:03:21,300 --> 00:03:23,120
+directories here and do
+whatever we want.
+
+83
+00:03:23,120 --> 00:03:24,915
+So this shouldn't be an issue.
+
+84
+00:03:24,915 --> 00:03:25,530
+All right.
+
+85
+00:03:25,530 --> 00:03:27,790
+So now we run our
+setup script.
+
+86
+00:03:27,790 --> 00:03:30,670
+And we see that all of
+these are forked.
+
+87
+00:03:30,670 --> 00:03:34,510
+So let's actually tail this
+log, see if we started
+
+88
+00:03:34,510 --> 00:03:35,770
+successfully.
+
+89
+00:03:35,770 --> 00:03:37,130
+And we see that it started.
+
+90
+00:03:37,130 --> 00:03:39,500
+And it's waiting for
+connections.
+
+91
+00:03:39,500 --> 00:03:41,960
+But it hasn't yet
+been configured.
+
+92
+00:03:41,960 --> 00:03:44,800
+We see this empty config
+issue right here.
+
+93
+00:03:44,800 --> 00:03:47,520
+So now we have our three nodes
+running, let's try to
+
+94
+00:03:47,520 --> 00:03:48,570
+configure them.
+
+95
+00:03:48,570 --> 00:03:50,380
+So for that, I have a script
+that I'm going to run through
+
+96
+00:03:50,380 --> 00:03:51,360
+the Mongo shell.
+
+97
+00:03:51,360 --> 00:03:53,050
+So let's take a look.
+
+98
+00:03:53,050 --> 00:03:56,270
+So all this is doing is creating
+a JSON object for our
+
+99
+00:03:56,270 --> 00:03:59,430
+config with our replica
+set name and our
+
+100
+00:03:59,430 --> 00:04:01,660
+members, hosts and ports.
+
+101
+00:04:01,660 --> 00:04:03,350
+This is just what was
+in the assignment.
+
+102
+00:04:03,350 --> 00:04:05,320
+And we're just going to run this
+as a script in the Mongo
+
+103
+00:04:05,320 --> 00:04:07,740
+shell and see what happens.
+
+104
+00:04:07,740 --> 00:04:11,640
+So if we do mongo configure.js,
+so the shell
+
+105
+00:04:11,640 --> 00:04:13,190
+just ran our configure script.
+
+106
+00:04:13,190 --> 00:04:15,740
+So now let's actually try to
+connect to our replica set and
+
+107
+00:04:15,740 --> 00:04:17,450
+see how it looks.
+
+108
+00:04:17,450 --> 00:04:19,910
+So we see we're connected
+to a secondary.
+
+109
+00:04:19,910 --> 00:04:23,190
+So if we do rs.status, we
+can actually see the
+
+110
+00:04:23,190 --> 00:04:24,900
+status of all our nodes.
+
+111
+00:04:24,900 --> 00:04:26,870
+We see this one is
+in secondary.
+
+112
+00:04:26,870 --> 00:04:31,080
+This one is still starting
+up, in STARTUP2 phase.
+
+113
+00:04:31,080 --> 00:04:33,160
+This one is in state UNKNOWN.
+
+114
+00:04:33,160 --> 00:04:36,450
+So it looks like it's waiting
+for a primary
+
+115
+00:04:36,450 --> 00:04:37,850
+to do initial sync.
+
+116
+00:04:37,850 --> 00:04:39,260
+So that's kind of interesting.
+
+117
+00:04:39,260 --> 00:04:41,670
+So let's just run in
+this a few times.
+
+118
+00:04:41,670 --> 00:04:44,720
+We see that this is the primary,
+which is a good sign.
+
+119
+00:04:44,720 --> 00:04:46,570
+And we see these other two
+nodes are secondaries.
+
+120
+00:04:46,570 --> 00:04:48,950
+So we have our replica
+set fully set up.
+
+121
+00:04:48,950 --> 00:04:51,310
+So now that everything's
+set up, how do you
+
+122
+00:04:51,310 --> 00:04:53,010
+prove that it's working?
+
+123
+00:04:53,010 --> 00:04:55,430
+So I'm just going to run the
+validation script real quick
+
+124
+00:04:55,430 --> 00:04:58,190
+to show how that works and
+then show you the code.
+
+125
+00:04:58,190 --> 00:05:02,100
+So here we have package.json
+validate.js.
+
+126
+00:05:02,100 --> 00:05:06,230
+So we do npm install, install
+the dependencies for our
+
+127
+00:05:06,230 --> 00:05:08,445
+validation script.
+
+128
+00:05:08,445 --> 00:05:09,190
+All right.
+
+129
+00:05:09,190 --> 00:05:12,100
+So now we can do node
+validate.js.
+
+130
+00:05:12,100 --> 00:05:14,610
+And we see that we validated
+successfully.
+
+131
+00:05:14,610 --> 00:05:16,470
+We have a three-node
+replica set set up.
+
+132
+00:05:16,470 --> 00:05:19,410
+It has the correct output
+and rs.status.
+
+133
+00:05:19,410 --> 00:05:23,400
+And the local.system.replset
+collection has all the nodes
+
+134
+00:05:23,400 --> 00:05:24,830
+that we were looking for.
+
+135
+00:05:24,830 --> 00:05:28,720
+And here, you see the code to
+enter in the assignment.
+
+136
+00:05:28,720 --> 00:05:29,190
+All right.
+
+137
+00:05:29,190 --> 00:05:33,680
+So that's the answer to homework
+6-5 on how to set up
+
+138
+00:05:33,680 --> 00:05:35,090
+a three-node replica set.
+
+139
+00:05:35,090 --> 00:05:36,340

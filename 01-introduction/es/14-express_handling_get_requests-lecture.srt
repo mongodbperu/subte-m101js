@@ -1,0 +1,589 @@
+1
+00:00:00,000 --> 00:00:00,150
+
+2
+00:00:00,150 --> 00:00:00,660
+All right.
+
+3
+00:00:00,660 --> 00:00:03,660
+So we've talked a little bit
+about building an application
+
+4
+00:00:03,660 --> 00:00:07,240
+on Node.js, and the different
+libraries available.
+
+5
+00:00:07,240 --> 00:00:09,800
+Now let's talk a little bit
+more about Express.
+
+6
+00:00:09,800 --> 00:00:13,070
+So, this section's optional, but
+it's for anyone who wants
+
+7
+00:00:13,070 --> 00:00:15,540
+to get a little bit more details
+of how to use Express,
+
+8
+00:00:15,540 --> 00:00:17,390
+but it's not required
+for this course.
+
+9
+00:00:17,390 --> 00:00:19,380
+And you can actually
+complete the course
+
+10
+00:00:19,380 --> 00:00:20,940
+without these two lectures.
+
+11
+00:00:20,940 --> 00:00:23,500
+So this is just for
+any added benefit.
+
+12
+00:00:23,500 --> 00:00:27,110
+So, what we're going to cover
+in this lecture are URL
+
+13
+00:00:27,110 --> 00:00:29,850
+parameters and GET variables.
+
+14
+00:00:29,850 --> 00:00:32,310
+So there are two ways that
+Express could actually get
+
+15
+00:00:32,310 --> 00:00:34,900
+data from the client side
+of an application.
+
+16
+00:00:34,900 --> 00:00:36,870
+So, this is our example
+application that we'll be
+
+17
+00:00:36,870 --> 00:00:40,710
+using in this lesson, and we see
+here that it's running on
+
+18
+00:00:40,710 --> 00:00:43,320
+local host 3,000, but it
+does not have a route
+
+19
+00:00:43,320 --> 00:00:44,930
+registered for slash.
+
+20
+00:00:44,930 --> 00:00:47,670
+So let's actually navigate to
+a specific resource, and see
+
+21
+00:00:47,670 --> 00:00:48,770
+what we get.
+
+22
+00:00:48,770 --> 00:00:51,060
+So I'm going to navigate
+to slash name.
+
+23
+00:00:51,060 --> 00:00:52,180
+Here we get a message.
+
+24
+00:00:52,180 --> 00:00:55,960
+We say, hello, name, here
+you're GET variables.
+
+25
+00:00:55,960 --> 00:00:59,180
+So, what's happening here is
+that this part of the URL is
+
+26
+00:00:59,180 --> 00:01:03,380
+actually being read by our
+application and printed back
+
+27
+00:01:03,380 --> 00:01:04,560
+to us right here.
+
+28
+00:01:04,560 --> 00:01:07,140
+So we see it's printing
+out our GET variables.
+
+29
+00:01:07,140 --> 00:01:09,550
+We don't actually have any
+GET variables, so let's
+
+30
+00:01:09,550 --> 00:01:11,090
+actually add some.
+
+31
+00:01:11,090 --> 00:01:14,990
+So let's add GET var
+1 equals value.
+
+32
+00:01:14,990 --> 00:01:17,710
+So there we see we have our GET
+variable, GET var 1 equals
+
+33
+00:01:17,710 --> 00:01:19,890
+value, after our URL.
+
+34
+00:01:19,890 --> 00:01:23,190
+And down here we see that
+you get our value
+
+35
+00:01:23,190 --> 00:01:24,470
+printed back to us.
+
+36
+00:01:24,470 --> 00:01:26,980
+So, you could add another
+GET variable.
+
+37
+00:01:26,980 --> 00:01:29,510
+And we see that get var
+2 equals value 2.
+
+38
+00:01:29,510 --> 00:01:31,360
+You see that down here.
+
+39
+00:01:31,360 --> 00:01:33,660
+So, note that this is only
+because we actually are
+
+40
+00:01:33,660 --> 00:01:37,380
+looking for GET var 1 and GET
+var 2 in our application.
+
+41
+00:01:37,380 --> 00:01:40,780
+So if we try to enter another
+GET variable, we see that it
+
+42
+00:01:40,780 --> 00:01:43,460
+has no effect, because our
+application is only looking
+
+43
+00:01:43,460 --> 00:01:45,570
+for GET var 1 and GET var 2.
+
+44
+00:01:45,570 --> 00:01:47,940
+It's not actually looking
+for not found.
+
+45
+00:01:47,940 --> 00:01:50,010
+All right, so this is what
+we're trying to do.
+
+46
+00:01:50,010 --> 00:01:54,200
+Let's now take a look at the
+example application code.
+
+47
+00:01:54,200 --> 00:01:55,080
+All right.
+
+48
+00:01:55,080 --> 00:01:56,840
+So this is our example.
+
+49
+00:01:56,840 --> 00:02:00,270
+We have up here our modules
+that we're using.
+
+50
+00:02:00,270 --> 00:02:03,900
+So we're using Express, and
+we're using consolidate just
+
+51
+00:02:03,900 --> 00:02:06,920
+to get our templating library,
+and here we're registering our
+
+52
+00:02:06,920 --> 00:02:09,389
+templating library, registering
+our router,
+
+53
+00:02:09,389 --> 00:02:11,410
+registering some error handling,
+which I'll talk
+
+54
+00:02:11,410 --> 00:02:13,420
+about in a minute.
+
+55
+00:02:13,420 --> 00:02:15,240
+So let's take a look
+at our route.
+
+56
+00:02:15,240 --> 00:02:17,530
+So if we go all the way down
+to the bottom, you can see
+
+57
+00:02:17,530 --> 00:02:21,720
+we're registering just one
+route, app.get, and our route
+
+58
+00:02:21,720 --> 00:02:24,250
+is slash colon name.
+
+59
+00:02:24,250 --> 00:02:28,350
+So, colon here actually has a
+special meaning in a route
+
+60
+00:02:28,350 --> 00:02:30,470
+that you register
+with Express.
+
+61
+00:02:30,470 --> 00:02:34,310
+What the colon is saying is take
+this part of the URL and
+
+62
+00:02:34,310 --> 00:02:36,380
+store it in a variable
+called name.
+
+63
+00:02:36,380 --> 00:02:39,650
+So, any variable captured this
+way is actually put in the
+
+64
+00:02:39,650 --> 00:02:43,050
+request inside the
+params object.
+
+65
+00:02:43,050 --> 00:02:47,400
+So if you want to access name,
+you say request.params to get
+
+66
+00:02:47,400 --> 00:02:50,360
+the params object, which has
+all the parameters that you
+
+67
+00:02:50,360 --> 00:02:54,520
+captured in the URL, and dot
+name to get the name.
+
+68
+00:02:54,520 --> 00:02:56,820
+You could actually capture
+multiple parameters in here,
+
+69
+00:02:56,820 --> 00:03:00,640
+so we could have colon name
+slash colon something else,
+
+70
+00:03:00,640 --> 00:03:02,490
+slash colon something else.
+
+71
+00:03:02,490 --> 00:03:05,280
+They would all be put
+in request.params.
+
+72
+00:03:05,280 --> 00:03:07,210
+So, now what about
+GET variables?
+
+73
+00:03:07,210 --> 00:03:10,410
+So if we look at the next two
+lines, this actually shows how
+
+74
+00:03:10,410 --> 00:03:13,550
+to extract get variables
+in Express.
+
+75
+00:03:13,550 --> 00:03:17,650
+So the GET variables are
+actually put in request.query.
+
+76
+00:03:17,650 --> 00:03:20,370
+So here we're saying we'll
+accept two GET variables,
+
+77
+00:03:20,370 --> 00:03:23,320
+getvar1 and getvar2,
+and just put them
+
+78
+00:03:23,320 --> 00:03:25,170
+in these local variables.
+
+79
+00:03:25,170 --> 00:03:28,610
+Finally, down here we render
+the result using a template
+
+80
+00:03:28,610 --> 00:03:31,790
+that I'll show you in a moment,
+that has name, getvar1
+
+81
+00:03:31,790 --> 00:03:33,710
+and getvar2.
+
+82
+00:03:33,710 --> 00:03:36,290
+So let's take a quick look
+at the template.
+
+83
+00:03:36,290 --> 00:03:37,870
+All right, so this
+is our template.
+
+84
+00:03:37,870 --> 00:03:41,180
+Here we just say hello, name,
+and if you remember, that was
+
+85
+00:03:41,180 --> 00:03:42,830
+our parameter in the URL.
+
+86
+00:03:42,830 --> 00:03:45,490
+And we just say, here are
+your GET variables.
+
+87
+00:03:45,490 --> 00:03:48,130
+And print out all the
+GET variables.
+
+88
+00:03:48,130 --> 00:03:50,060
+So let's go back
+to our example.
+
+89
+00:03:50,060 --> 00:03:52,120
+So, one thing I want to mention
+here is that we can
+
+90
+00:03:52,120 --> 00:03:55,380
+still actually specify other
+GET variables, and they'll
+
+91
+00:03:55,380 --> 00:03:58,370
+still be put in req.query, but
+the only ones we're actually
+
+92
+00:03:58,370 --> 00:04:01,460
+looking at are getvar1
+and getvar2, which
+
+93
+00:04:01,460 --> 00:04:03,380
+may actually be undefined.
+
+94
+00:04:03,380 --> 00:04:06,620
+So, one thing you could do in
+this case, if this is what you
+
+95
+00:04:06,620 --> 00:04:09,610
+were looking for, is just check
+if it's undefined, set
+
+96
+00:04:09,610 --> 00:04:11,330
+it to some default value.
+
+97
+00:04:11,330 --> 00:04:14,680
+You could also iterate the
+req.query object to see all
+
+98
+00:04:14,680 --> 00:04:17,300
+the GET variables that the user
+said, and put them out
+
+99
+00:04:17,300 --> 00:04:19,220
+for debugging purposes.
+
+100
+00:04:19,220 --> 00:04:22,683
+But that's the basic idea
+behind GET variables.
+
+101
+00:04:22,683 --> 00:04:25,830
+All right, so let's run this
+and see how it looks.
+
+102
+00:04:25,830 --> 00:04:28,930
+So, we have our Express server
+listening on port 3,000.
+
+103
+00:04:28,930 --> 00:04:30,770
+So let's go open that
+in the browser.
+
+104
+00:04:30,770 --> 00:04:35,720
+So we go to local is 3,000, and
+we see cannot GET slash.
+
+105
+00:04:35,720 --> 00:04:39,440
+So the reason for that is we
+actually specified colon name
+
+106
+00:04:39,440 --> 00:04:40,920
+after the slash.
+
+107
+00:04:40,920 --> 00:04:43,640
+So, we want to capture the
+result after the slash, and
+
+108
+00:04:43,640 --> 00:04:46,300
+name, which means we actually
+have to specify
+
+109
+00:04:46,300 --> 00:04:47,810
+some kind of path.
+
+110
+00:04:47,810 --> 00:04:52,240
+So if we go back up here and
+do slash Shaun, say hello,
+
+111
+00:04:52,240 --> 00:04:54,350
+Shaun, here are your
+GET variables.
+
+112
+00:04:54,350 --> 00:04:57,040
+So notice we didn't actually
+check if our get variables
+
+113
+00:04:57,040 --> 00:04:59,310
+were undefined, and
+we just sort of
+
+114
+00:04:59,310 --> 00:05:00,810
+put them in our template.
+
+115
+00:05:00,810 --> 00:05:03,130
+So in this case, since they're
+undefined, we just see two
+
+116
+00:05:03,130 --> 00:05:04,600
+empty bullets.
+
+117
+00:05:04,600 --> 00:05:08,180
+So we can go up here and
+add our GET variables.
+
+118
+00:05:08,180 --> 00:05:13,260
+So it was getvar1, and now we
+see we have variable 1 set in
+
+119
+00:05:13,260 --> 00:05:15,230
+our template, and we
+could do the same
+
+120
+00:05:15,230 --> 00:05:19,855
+thing, and say getvar2.
+
+121
+00:05:19,855 --> 00:05:23,610
+All right, so that's how to
+get GET variables and URL
+
+122
+00:05:23,610 --> 00:05:25,690
+parameters using Express.
+
+123
+00:05:25,690 --> 00:05:27,880
+So, here's the URL parameter.
+
+124
+00:05:27,880 --> 00:05:29,130
+Here are the two GET variables.
+
+125
+00:05:29,130 --> 00:05:30,130

@@ -1,0 +1,698 @@
+1
+00:00:00,000 --> 00:00:00,220
+
+2
+00:00:00,220 --> 00:00:03,390
+All right, now let's talk about
+handling post requests
+
+3
+00:00:03,390 --> 00:00:05,160
+in Express.
+
+4
+00:00:05,160 --> 00:00:08,640
+So, what we have here is we have
+an example application
+
+5
+00:00:08,640 --> 00:00:12,270
+with a simple form that allows
+a user to pick their favorite
+
+6
+00:00:12,270 --> 00:00:14,940
+fruit, and then submit the form,
+which will generate a
+
+7
+00:00:14,940 --> 00:00:18,200
+post request to our
+Express app.
+
+8
+00:00:18,200 --> 00:00:22,180
+So if we click here and submit
+it, this will generate a post
+
+9
+00:00:22,180 --> 00:00:25,280
+request to slash favorite
+fruit, and the express
+
+10
+00:00:25,280 --> 00:00:29,750
+application will reply with your
+favorite fruit is apple.
+
+11
+00:00:29,750 --> 00:00:32,390
+So this is the example we'll be
+discussing, and we'll see
+
+12
+00:00:32,390 --> 00:00:33,870
+the code behind this.
+
+13
+00:00:33,870 --> 00:00:36,880
+So let's take a look at
+our example code.
+
+14
+00:00:36,880 --> 00:00:39,100
+All right, so this is our
+example of using post
+
+15
+00:00:39,100 --> 00:00:43,680
+variables with Express, and up
+here we have our modules.
+
+16
+00:00:43,680 --> 00:00:45,470
+We're using the same
+templating engine.
+
+17
+00:00:45,470 --> 00:00:48,160
+We have this extra line here,
+which I'll talk about in a
+
+18
+00:00:48,160 --> 00:00:51,430
+bit, and we have our error
+handler, which I'll actually
+
+19
+00:00:51,430 --> 00:00:53,790
+talk about in this section.
+
+20
+00:00:53,790 --> 00:00:56,230
+So, let's take a look
+at our routes.
+
+21
+00:00:56,230 --> 00:00:58,420
+All right, so we actually
+have two routes here.
+
+22
+00:00:58,420 --> 00:01:01,050
+One is a get, and
+one is a post.
+
+23
+00:01:01,050 --> 00:01:05,090
+So, basically when we get slash,
+we render our fruit
+
+24
+00:01:05,090 --> 00:01:07,050
+picker template, which I'll
+show you in a bit.
+
+25
+00:01:07,050 --> 00:01:08,970
+But basically, this
+is just a form.
+
+26
+00:01:08,970 --> 00:01:12,770
+It allows users to select what
+their favorite food is among
+
+27
+00:01:12,770 --> 00:01:14,490
+the choices given here.
+
+28
+00:01:14,490 --> 00:01:18,270
+So, here we have fruits, which
+is an array, apple, orange,
+
+29
+00:01:18,270 --> 00:01:19,590
+banana, peach.
+
+30
+00:01:19,590 --> 00:01:22,280
+This is going to be posted
+in the fruit picker form.
+
+31
+00:01:22,280 --> 00:01:25,540
+So, when the user submits the
+form, it'll submit a post
+
+32
+00:01:25,540 --> 00:01:28,830
+request to slash
+favorite fruit.
+
+33
+00:01:28,830 --> 00:01:31,670
+So, this is actually where we
+handle the form submission.
+
+34
+00:01:31,670 --> 00:01:35,600
+So, the way we handle post
+requests is by accessing the
+
+35
+00:01:35,600 --> 00:01:38,540
+variables in request.body.
+
+36
+00:01:38,540 --> 00:01:42,520
+So here we say, favorite equals
+request.body.fruit.
+
+37
+00:01:42,520 --> 00:01:44,240
+But there's something you
+actually have to pay
+
+38
+00:01:44,240 --> 00:01:45,740
+attention to here.
+
+39
+00:01:45,740 --> 00:01:49,180
+So, we're looking this
+request.body object, but it's
+
+40
+00:01:49,180 --> 00:01:53,280
+only populated if we register
+the body parser middleware.
+
+41
+00:01:53,280 --> 00:01:56,500
+So if we go up here near the
+top, you notice that I have
+
+42
+00:01:56,500 --> 00:02:01,190
+this extra line, app.use
+express.bodyParser.
+
+43
+00:02:01,190 --> 00:02:03,200
+So what this is doing
+is it's registering
+
+44
+00:02:03,200 --> 00:02:05,070
+middleware with Express.
+
+45
+00:02:05,070 --> 00:02:06,420
+So, what does that mean?
+
+46
+00:02:06,420 --> 00:02:08,630
+So when you register a
+middleware function, you're
+
+47
+00:02:08,630 --> 00:02:11,550
+basically telling Express
+I want to do this extra
+
+48
+00:02:11,550 --> 00:02:13,140
+processing.
+
+49
+00:02:13,140 --> 00:02:17,530
+And since we have this extra
+processing before app.router,
+
+50
+00:02:17,530 --> 00:02:20,930
+the processing in
+express.bodyParser will happen
+
+51
+00:02:20,930 --> 00:02:23,480
+before we hit any
+of our routes.
+
+52
+00:02:23,480 --> 00:02:26,730
+So, app.router is sort of a way
+to specify when you want
+
+53
+00:02:26,730 --> 00:02:28,300
+your routes to be called.
+
+54
+00:02:28,300 --> 00:02:31,770
+So, Express actually has
+different middleware for
+
+55
+00:02:31,770 --> 00:02:33,180
+different purposes.
+
+56
+00:02:33,180 --> 00:02:35,830
+But in this case,
+express.bodyParser, for our
+
+57
+00:02:35,830 --> 00:02:40,050
+purposes, will parse the body
+of the request and populate
+
+58
+00:02:40,050 --> 00:02:44,280
+request.body, so we can access
+it in our route below.
+
+59
+00:02:44,280 --> 00:02:47,860
+All right, so this is kind of a
+small diversion, but I just
+
+60
+00:02:47,860 --> 00:02:50,200
+wanted to show you this
+for reference.
+
+61
+00:02:50,200 --> 00:02:52,390
+If you want to see the different
+kinds of middleware
+
+62
+00:02:52,390 --> 00:02:56,522
+available for Express, you can
+actually go to expressjs.com,
+
+63
+00:02:56,522 --> 00:03:00,860
+which is the home page, look at
+the API reference, and go
+
+64
+00:03:00,860 --> 00:03:03,430
+down to middleware, and
+you can see all
+
+65
+00:03:03,430 --> 00:03:05,210
+the middleware available.
+
+66
+00:03:05,210 --> 00:03:07,340
+So right here we have
+bodyParser, which
+
+67
+00:03:07,340 --> 00:03:08,820
+we were just using.
+
+68
+00:03:08,820 --> 00:03:13,290
+And body parsing middleware
+actually wraps a few other
+
+69
+00:03:13,290 --> 00:03:16,190
+functions, but for our purposes,
+we just care about
+
+70
+00:03:16,190 --> 00:03:19,360
+the fact that it's parsing
+our post variables.
+
+71
+00:03:19,360 --> 00:03:21,870
+All right, so that's where you
+can go for reference, if
+
+72
+00:03:21,870 --> 00:03:25,796
+you're ever wondering what
+middleware to use.
+
+73
+00:03:25,796 --> 00:03:28,720
+All right, so we've registered
+our bodyParser middleware,
+
+74
+00:03:28,720 --> 00:03:32,140
+which means that down here,
+we can just use
+
+75
+00:03:32,140 --> 00:03:34,540
+request.body.fruit.
+
+76
+00:03:34,540 --> 00:03:37,930
+However, if the user didn't
+pick one and submitted the
+
+77
+00:03:37,930 --> 00:03:40,380
+form anyway, fruit will
+be undefined.
+
+78
+00:03:40,380 --> 00:03:42,650
+So we actually have to check
+for that, and we'll talk a
+
+79
+00:03:42,650 --> 00:03:46,400
+little bit about this special
+error handling later.
+
+80
+00:03:46,400 --> 00:03:49,740
+If the user did pick a fruit,
+we say response.send, your
+
+81
+00:03:49,740 --> 00:03:52,970
+favorite fruit is, and then
+whatever the favorite fruit is
+
+82
+00:03:52,970 --> 00:03:53,700
+that they picked.
+
+83
+00:03:53,700 --> 00:03:55,960
+All right, so before we run it,
+let's just take a quick
+
+84
+00:03:55,960 --> 00:03:57,510
+look at our templates.
+
+85
+00:03:57,510 --> 00:04:03,130
+So, here we have fruit
+picker.html, basically just a
+
+86
+00:04:03,130 --> 00:04:06,690
+form, and it's iterating over
+fruits, saying for fruit and
+
+87
+00:04:06,690 --> 00:04:10,040
+fruits, create a new input
+field for each fruit
+
+88
+00:04:10,040 --> 00:04:11,760
+that we passed in.
+
+89
+00:04:11,760 --> 00:04:16,600
+So, this is just our template
+using our fruits array.
+
+90
+00:04:16,600 --> 00:04:17,930
+All right, so we've
+run our app.
+
+91
+00:04:17,930 --> 00:04:21,360
+We have our server listening
+on port 3,000, so let's go
+
+92
+00:04:21,360 --> 00:04:23,350
+open that in a browser.
+
+93
+00:04:23,350 --> 00:04:26,200
+All right, so here we have
+our fruit picker form.
+
+94
+00:04:26,200 --> 00:04:27,600
+What is your favorite fruit?
+
+95
+00:04:27,600 --> 00:04:29,340
+And let's just pick
+the first one.
+
+96
+00:04:29,340 --> 00:04:32,720
+Submit, and it says, your
+favorite fruit is apple.
+
+97
+00:04:32,720 --> 00:04:34,920
+So, let's go back to
+our application.
+
+98
+00:04:34,920 --> 00:04:37,030
+So I want to talk a little
+bit about this
+
+99
+00:04:37,030 --> 00:04:38,630
+error handler function.
+
+100
+00:04:38,630 --> 00:04:40,750
+So in Express, you can
+register functions
+
+101
+00:04:40,750 --> 00:04:43,120
+specifically to deal
+with errors.
+
+102
+00:04:43,120 --> 00:04:47,160
+The way you do that is you
+actually specify a function
+
+103
+00:04:47,160 --> 00:04:48,320
+with four arguments.
+
+104
+00:04:48,320 --> 00:04:51,240
+First the error object, then the
+request object, then the
+
+105
+00:04:51,240 --> 00:04:54,560
+response object, then this next
+call back, which we'll
+
+106
+00:04:54,560 --> 00:04:55,983
+talk about below.
+
+107
+00:04:55,983 --> 00:04:58,910
+All right, s if we go back to
+our route, we can see that we
+
+108
+00:04:58,910 --> 00:05:01,850
+have a request object, the
+response object, and
+
+109
+00:05:01,850 --> 00:05:03,590
+this next call back.
+
+110
+00:05:03,590 --> 00:05:07,760
+So this third argument, next, is
+actually a function passed
+
+111
+00:05:07,760 --> 00:05:11,660
+in by Express, along with the
+request and response objects.
+
+112
+00:05:11,660 --> 00:05:14,450
+And one of the things we can do
+with it is we can actually
+
+113
+00:05:14,450 --> 00:05:17,110
+use it to handle errors.
+
+114
+00:05:17,110 --> 00:05:21,110
+So here we say, if type of
+favorite equals undefined, we
+
+115
+00:05:21,110 --> 00:05:23,890
+say next error, please
+choose a fruit.
+
+116
+00:05:23,890 --> 00:05:27,750
+So, by passing an error object
+to next, we're telling Express
+
+117
+00:05:27,750 --> 00:05:30,050
+that we've had some
+kind of error.
+
+118
+00:05:30,050 --> 00:05:32,460
+And what Express does at
+that point is it tries
+
+119
+00:05:32,460 --> 00:05:33,400
+to handle the error.
+
+120
+00:05:33,400 --> 00:05:36,690
+And the way it does it is by
+looking for any error handling
+
+121
+00:05:36,690 --> 00:05:39,320
+middleware that we may have
+registered earlier.
+
+122
+00:05:39,320 --> 00:05:42,650
+So if we go back up here a
+little bit, we can see this is
+
+123
+00:05:42,650 --> 00:05:45,650
+our error handling middleware,
+and when you call next with an
+
+124
+00:05:45,650 --> 00:05:49,780
+error object, Express will say,
+OK, we've had an error,
+
+125
+00:05:49,780 --> 00:05:52,040
+let's find any error handling
+middleware that's been
+
+126
+00:05:52,040 --> 00:05:54,160
+registered, and call it.
+
+127
+00:05:54,160 --> 00:05:57,700
+So what this will do is it will
+log our error message.
+
+128
+00:05:57,700 --> 00:06:00,100
+It'll log the stack trace
+for our error.
+
+129
+00:06:00,100 --> 00:06:04,080
+It'll return a server error
+status, and it'll render the
+
+130
+00:06:04,080 --> 00:06:06,080
+error template to the user.
+
+131
+00:06:06,080 --> 00:06:08,450
+So, let's try that out.
+
+132
+00:06:08,450 --> 00:06:11,550
+So we have our server listening
+on port 3,000 again.
+
+133
+00:06:11,550 --> 00:06:14,610
+Let's go back to our
+picker page.
+
+134
+00:06:14,610 --> 00:06:16,450
+Now what happens if
+we submit without
+
+135
+00:06:16,450 --> 00:06:18,240
+picking any of our fruit?
+
+136
+00:06:18,240 --> 00:06:21,050
+All right, so here we actually
+have an error logged from the
+
+137
+00:06:21,050 --> 00:06:25,080
+server, because we called next
+with our error object, and
+
+138
+00:06:25,080 --> 00:06:29,020
+express new to call our error
+handling middleware.
+
+139
+00:06:29,020 --> 00:06:33,120
+So if we go back here, we'll
+actually see this huge stack
+
+140
+00:06:33,120 --> 00:06:35,740
+trace, because in our error
+handling middleware, we
+
+141
+00:06:35,740 --> 00:06:38,010
+actually printed out a stack
+trace, in addition to
+
+142
+00:06:38,010 --> 00:06:40,690
+rendering the error page.
+
+143
+00:06:40,690 --> 00:06:44,010
+All right, so that was a quick
+introduction to using post
+
+144
+00:06:44,010 --> 00:06:47,980
+variables in Express, using
+some basic middleware, and
+
+145
+00:06:47,980 --> 00:06:50,300
+registering middleware
+to handle any
+
+146
+00:06:50,300 --> 00:06:51,550
+errors that you have.
+
+147
+00:06:51,550 --> 00:06:52,370

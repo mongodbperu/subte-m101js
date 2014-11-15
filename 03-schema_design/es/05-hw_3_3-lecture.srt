@@ -1,0 +1,163 @@
+1
+00:00:00,000 --> 00:00:00,170
+
+2
+00:00:00,170 --> 00:00:02,870
+So the goal of this homework
+is to allow us
+
+3
+00:00:02,870 --> 00:00:04,780
+to comment on posts.
+
+4
+00:00:04,780 --> 00:00:07,000
+So we already have these
+posts, and we
+
+5
+00:00:07,000 --> 00:00:07,890
+want to add a comment.
+
+6
+00:00:07,890 --> 00:00:09,720
+So let's try to do that.
+
+7
+00:00:09,720 --> 00:00:12,800
+So here on the second post--
+it says "Next post"--
+
+8
+00:00:12,800 --> 00:00:16,034
+we have our name, we have our
+email, and let's add a comment
+
+9
+00:00:16,034 --> 00:00:17,010
+of "foo."
+
+10
+00:00:17,010 --> 00:00:20,900
+We try to submit this, we get
+an error, addComment not yet
+
+11
+00:00:20,900 --> 00:00:21,720
+implemented.
+
+12
+00:00:21,720 --> 00:00:26,020
+So the assignment for homework
+3.3 is to allow users to
+
+13
+00:00:26,020 --> 00:00:28,110
+comment on blog posts.
+
+14
+00:00:28,110 --> 00:00:30,310
+So if we go back to where we run
+our app, we see the stack
+
+15
+00:00:30,310 --> 00:00:32,549
+trace from our error handler.
+
+16
+00:00:32,549 --> 00:00:35,160
+So similar to the way you found
+homework 3.2, you could
+
+17
+00:00:35,160 --> 00:00:38,510
+do a similar search for
+homework 3.3 to do.
+
+18
+00:00:38,510 --> 00:00:39,770
+We see it's in the same file.
+
+19
+00:00:39,770 --> 00:00:41,840
+It's also in posts.js.
+
+20
+00:00:41,840 --> 00:00:44,770
+So that's actually the place
+that has the code for handling
+
+21
+00:00:44,770 --> 00:00:46,810
+comments in a post.
+
+22
+00:00:46,810 --> 00:00:47,440
+All right.
+
+23
+00:00:47,440 --> 00:00:49,590
+So this is the function
+you need to fill out
+
+24
+00:00:49,590 --> 00:00:50,980
+for homework 3.3.
+
+25
+00:00:50,980 --> 00:00:53,480
+So this is the addComment
+function.
+
+26
+00:00:53,480 --> 00:00:57,470
+Here we get a permalink, name,
+email, body, and a callback.
+
+27
+00:00:57,470 --> 00:01:01,125
+So this code here makes our
+comment, fills in the email of
+
+28
+00:01:01,125 --> 00:01:05,300
+the comment, and your job is to
+actually implement adding
+
+29
+00:01:05,300 --> 00:01:07,410
+the callback to a post.
+
+30
+00:01:07,410 --> 00:01:10,910
+Now, if you remember from the
+schema of the blog, the
+
+31
+00:01:10,910 --> 00:01:14,090
+comments are actually in an
+array inside of a post.
+
+32
+00:01:14,090 --> 00:01:17,180
+So you're going to actually have
+to figure out how to add
+
+33
+00:01:17,180 --> 00:01:19,420
+a comment to a single post.
+
+34
+00:01:19,420 --> 00:01:22,660
+And the permalink is actually
+what describes which post
+
+35
+00:01:22,660 --> 00:01:24,850
+you're trying to add
+this comment to.
+
+36
+00:01:24,850 --> 00:01:28,460
+So that's the assignment
+for homework 3.3.

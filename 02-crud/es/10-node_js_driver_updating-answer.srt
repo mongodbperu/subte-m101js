@@ -1,0 +1,41 @@
+1
+00:00:00,000 --> 00:00:02,400
+All right, so here's the
+answer to the quiz.
+
+2
+00:00:02,400 --> 00:00:06,210
+So the answer is that
+it returns an error.
+
+3
+00:00:06,210 --> 00:00:10,150
+So the reason is, you can't
+actually mix these dollar sign
+
+4
+00:00:10,150 --> 00:00:13,030
+operators with normal fields.
+
+5
+00:00:13,030 --> 00:00:16,120
+And the reason for that is
+that MongoDB doesn't know
+
+6
+00:00:16,120 --> 00:00:19,180
+whether to do an in place
+update, as implied by the
+
+7
+00:00:19,180 --> 00:00:23,100
+dollar sign operator, or to
+actually replace the document,
+
+8
+00:00:23,100 --> 00:00:25,910
+as implied by the normal
+field here.
+
+9
+00:00:25,910 --> 00:00:27,160

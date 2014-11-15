@@ -1,0 +1,573 @@
+1
+00:00:00,000 --> 00:00:00,120
+
+2
+00:00:00,120 --> 00:00:00,463
+All right.
+
+3
+00:00:00,463 --> 00:00:04,050
+So now let's talk about
+connecting to a replica set in
+
+4
+00:00:04,050 --> 00:00:05,790
+the Node.js driver.
+
+5
+00:00:05,790 --> 00:00:09,350
+So just to recap, of replica
+set is a collection of
+
+6
+00:00:09,350 --> 00:00:12,880
+multiple MongoD nodes that
+communicate with each other
+
+7
+00:00:12,880 --> 00:00:16,590
+and try to keep a most up to
+date copy of the entire data
+
+8
+00:00:16,590 --> 00:00:18,550
+set as they possibly can.
+
+9
+00:00:18,550 --> 00:00:21,300
+They should be as close to
+duplicates as possible.
+
+10
+00:00:21,300 --> 00:00:24,830
+We went for high availability
+and automatic failover.
+
+11
+00:00:24,830 --> 00:00:28,450
+So the way you deal with this
+in an application is through
+
+12
+00:00:28,450 --> 00:00:29,260
+the driver.
+
+13
+00:00:29,260 --> 00:00:31,420
+And actually, the driver is
+going to do a lot of the work
+
+14
+00:00:31,420 --> 00:00:34,230
+for you in terms of managing
+the connections and keeping
+
+15
+00:00:34,230 --> 00:00:37,260
+track of which nodes are up and
+which node is the primary.
+
+16
+00:00:37,260 --> 00:00:40,870
+So, for this lesson, we'll
+cover how to start a
+
+17
+00:00:40,870 --> 00:00:44,030
+connection to a replica sat
+in the Node.js driver.
+
+18
+00:00:44,030 --> 00:00:46,310
+So the way you start a
+connection is you actually
+
+19
+00:00:46,310 --> 00:00:49,090
+give the driver a connection
+string just like before with
+
+20
+00:00:49,090 --> 00:00:51,950
+the host names and ports of
+the nodes that you want to
+
+21
+00:00:51,950 --> 00:00:52,920
+connect to.
+
+22
+00:00:52,920 --> 00:00:56,530
+So in this case, we could give
+host names and ports of all
+
+23
+00:00:56,530 --> 00:00:57,220
+three nodes.
+
+24
+00:00:57,220 --> 00:01:00,800
+You can actually give them in a
+comma separated list, or you
+
+25
+00:01:00,800 --> 00:01:03,400
+could just give the host name
+and port of a single node and
+
+26
+00:01:03,400 --> 00:01:06,410
+the driver would automatically
+detect that it's a replica set
+
+27
+00:01:06,410 --> 00:01:08,460
+and discover the rest
+of the nodes.
+
+28
+00:01:08,460 --> 00:01:12,040
+So let's just take a quick look
+at an example of how this
+
+29
+00:01:12,040 --> 00:01:15,070
+will work in a real
+application.
+
+30
+00:01:15,070 --> 00:01:17,380
+So before we start, we need
+to start our three
+
+31
+00:01:17,380 --> 00:01:18,680
+node replica set.
+
+32
+00:01:18,680 --> 00:01:22,050
+So here I'm going to start my
+first replica set node.
+
+33
+00:01:22,050 --> 00:01:27,120
+I'm going to give it the port
+30001, dbpath data dbrs1.
+
+34
+00:01:27,120 --> 00:01:28,650
+So that one started.
+
+35
+00:01:28,650 --> 00:01:30,886
+So let's start our next node.
+
+36
+00:01:30,886 --> 00:01:34,010
+I'm going to start this one on
+port 30002, still in local
+
+37
+00:01:34,010 --> 00:01:37,360
+host, give it a different
+data path.
+
+38
+00:01:37,360 --> 00:01:39,690
+And finally, we'll start our
+third node of our replica set,
+
+39
+00:01:39,690 --> 00:01:45,116
+give it port 30003, dbpath
+different from the other two.
+
+40
+00:01:45,116 --> 00:01:46,060
+All right.
+
+41
+00:01:46,060 --> 00:01:48,525
+So before we can actually
+connect we need to configure
+
+42
+00:01:48,525 --> 00:01:50,010
+our replica set.
+
+43
+00:01:50,010 --> 00:01:55,670
+So let's connect to local host
+30001, and you see we aren't
+
+44
+00:01:55,670 --> 00:01:57,490
+actually a replica set yet.
+
+45
+00:01:57,490 --> 00:02:00,670
+I try rs.status we
+get an error.
+
+46
+00:02:00,670 --> 00:02:04,520
+So let's run rs.initiate
+to actually
+
+47
+00:02:04,520 --> 00:02:06,450
+start our replica set.
+
+48
+00:02:06,450 --> 00:02:06,950
+All right.
+
+49
+00:02:06,950 --> 00:02:10,155
+So we're starting up our
+new replica set.
+
+50
+00:02:10,155 --> 00:02:12,230
+The next thing we want
+to do is actually add
+
+51
+00:02:12,230 --> 00:02:13,320
+the other two nodes.
+
+52
+00:02:13,320 --> 00:02:16,580
+This is just sort of a recap
+of the other lessons, but I
+
+53
+00:02:16,580 --> 00:02:18,380
+just want to go over
+it one more time.
+
+54
+00:02:18,380 --> 00:02:22,130
+So I happen to know that the
+host name is education.local,
+
+55
+00:02:22,130 --> 00:02:25,480
+and the port is 30002
+on the first node.
+
+56
+00:02:25,480 --> 00:02:30,180
+And then for the next one, the
+port is 30003, same host name.
+
+57
+00:02:30,180 --> 00:02:33,220
+So now we've added all our
+nodes to our replica set.
+
+58
+00:02:33,220 --> 00:02:38,300
+If we clear this, look at
+rs.status, we can see that we
+
+59
+00:02:38,300 --> 00:02:40,050
+have all of our notes
+connected.
+
+60
+00:02:40,050 --> 00:02:43,710
+We have our primary and we
+have the two secondaries
+
+61
+00:02:43,710 --> 00:02:45,130
+starting up.
+
+62
+00:02:45,130 --> 00:02:45,490
+All right.
+
+63
+00:02:45,490 --> 00:02:47,550
+So we've started our
+replica set.
+
+64
+00:02:47,550 --> 00:02:49,880
+Now let's take a look at the
+application that we're going
+
+65
+00:02:49,880 --> 00:02:52,060
+to use to connect to
+our replica set
+
+66
+00:02:52,060 --> 00:02:54,670
+using the Node.js driver.
+
+67
+00:02:54,670 --> 00:02:56,570
+So this may look familiar.
+
+68
+00:02:56,570 --> 00:02:58,390
+We still use our Mongo
+client, we're still
+
+69
+00:02:58,390 --> 00:03:00,100
+using the same functions.
+
+70
+00:03:00,100 --> 00:03:02,940
+The only real difference here
+is that instead of giving a
+
+71
+00:03:02,940 --> 00:03:05,410
+single host name and port, we're
+actually giving a comma
+
+72
+00:03:05,410 --> 00:03:06,820
+separated list.
+
+73
+00:03:06,820 --> 00:03:10,390
+I'm using this plus operator
+to concatenate the strings
+
+74
+00:03:10,390 --> 00:03:13,300
+just so we don't have one long
+string wrapping around.
+
+75
+00:03:13,300 --> 00:03:15,280
+The window is a little
+too small.
+
+76
+00:03:15,280 --> 00:03:17,820
+But, basically, all I'm doing is
+passing a single connection
+
+77
+00:03:17,820 --> 00:03:20,680
+string to the connect function,
+giving it a call
+
+78
+00:03:20,680 --> 00:03:24,010
+back exactly the same way as
+I did with a single node.
+
+79
+00:03:24,010 --> 00:03:27,270
+And I'm just giving this comma
+separated list of replica set
+
+80
+00:03:27,270 --> 00:03:28,660
+members instead.
+
+81
+00:03:28,660 --> 00:03:32,280
+Note that I could also just give
+one member, and it would
+
+82
+00:03:32,280 --> 00:03:34,860
+still be able to connect
+assuming that member was up.
+
+83
+00:03:34,860 --> 00:03:37,340
+If that member was not up, then
+it would not be able to
+
+84
+00:03:37,340 --> 00:03:38,670
+find the rest.
+
+85
+00:03:38,670 --> 00:03:41,770
+So down here we're using this
+DB object just like we did
+
+86
+00:03:41,770 --> 00:03:44,000
+with the single node,
+connecting the repl
+
+87
+00:03:44,000 --> 00:03:46,250
+connection, inserting
+a document.
+
+88
+00:03:46,250 --> 00:03:49,740
+And down here we're connecting
+to the repl collection and
+
+89
+00:03:49,740 --> 00:03:50,980
+we're finding one document.
+
+90
+00:03:50,980 --> 00:03:52,270
+And we should find the document
+
+91
+00:03:52,270 --> 00:03:53,830
+that we just inserted.
+
+92
+00:03:53,830 --> 00:03:55,120
+Then we're logging the document
+
+93
+00:03:55,120 --> 00:03:56,930
+and closing the database.
+
+94
+00:03:56,930 --> 00:03:59,540
+So let's just run
+this example.
+
+95
+00:03:59,540 --> 00:03:59,850
+All right.
+
+96
+00:03:59,850 --> 00:04:02,570
+So we just ran our example,
+and you can see that we've
+
+97
+00:04:02,570 --> 00:04:05,400
+answered our document and we've
+found it successfully.
+
+98
+00:04:05,400 --> 00:04:08,430
+And this was all connected
+to a replica set.
+
+99
+00:04:08,430 --> 00:04:11,000
+So what actually happened here
+is that we gave it the
+
+100
+00:04:11,000 --> 00:04:13,910
+connection string with the three
+replica set nodes, the
+
+101
+00:04:13,910 --> 00:04:16,490
+driver automatically connected,
+figured out which
+
+102
+00:04:16,490 --> 00:04:19,050
+one is the primary, figured out
+what the secondaries were,
+
+103
+00:04:19,050 --> 00:04:21,779
+got the status of everything,
+figured out exactly where to
+
+104
+00:04:21,779 --> 00:04:23,440
+send our write and our read.
+
+105
+00:04:23,440 --> 00:04:26,170
+And all of that happened behind
+the scenes so that our
+
+106
+00:04:26,170 --> 00:04:28,930
+application didn't have to
+have any of the logic of
+
+107
+00:04:28,930 --> 00:04:31,740
+dealing with all the complexity
+of the added
+
+108
+00:04:31,740 --> 00:04:32,990
+connections.
+
+109
+00:04:32,990 --> 00:04:37,050
+So that's how you connect to
+a replica set in Node.js.
+
+110
+00:04:37,050 --> 00:04:37,330
+All right.
+
+111
+00:04:37,330 --> 00:04:39,980
+So this is the quiz for
+connecting to a replica set
+
+112
+00:04:39,980 --> 00:04:41,850
+from the Node.js driver.
+
+113
+00:04:41,850 --> 00:04:44,720
+The question is, if you leave a
+replica set node out of the
+
+114
+00:04:44,720 --> 00:04:47,910
+seedlist within the driver,
+what will happen?
+
+115
+00:04:47,910 --> 00:04:49,920
+Is it, the missing node will
+not be used by the
+
+116
+00:04:49,920 --> 00:04:50,800
+application?
+
+117
+00:04:50,800 --> 00:04:53,330
+Is it, the missing node will be
+discovered as long as you
+
+118
+00:04:53,330 --> 00:04:55,390
+list at least one valid node?
+
+119
+00:04:55,390 --> 00:04:56,920
+Is it, the missing node
+will be used for
+
+120
+00:04:56,920 --> 00:04:58,650
+reads but not for writes?
+
+121
+00:04:58,650 --> 00:05:01,080
+Or is it, the missing node will
+be used for writes but
+
+122
+00:05:01,080 --> 00:05:02,330
+not for reads?
+
+123
+00:05:02,330 --> 00:05:02,950

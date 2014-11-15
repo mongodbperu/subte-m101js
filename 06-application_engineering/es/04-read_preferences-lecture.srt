@@ -1,0 +1,830 @@
+1
+00:00:00,000 --> 00:00:00,130
+
+2
+00:00:00,130 --> 00:00:02,680
+So now let's talk about
+read preference
+
+3
+00:00:02,680 --> 00:00:04,590
+in the node.js driver.
+
+4
+00:00:04,590 --> 00:00:07,400
+So by default, all reads
+from the driver
+
+5
+00:00:07,400 --> 00:00:09,130
+will go to the primary.
+
+6
+00:00:09,130 --> 00:00:13,050
+But you can actually configure
+the behavior of your reads if
+
+7
+00:00:13,050 --> 00:00:14,370
+it fits your application.
+
+8
+00:00:14,370 --> 00:00:18,480
+So you can configure your reads
+to go to the primary,
+
+9
+00:00:18,480 --> 00:00:19,800
+which is the default.
+
+10
+00:00:19,800 --> 00:00:23,490
+You can configure your reads
+to only go to secondaries.
+
+11
+00:00:23,490 --> 00:00:27,100
+You can configure your reads to
+prefer the primary or the
+
+12
+00:00:27,100 --> 00:00:30,270
+secondary, which means if one or
+the other is not available,
+
+13
+00:00:30,270 --> 00:00:31,490
+it'll try the other.
+
+14
+00:00:31,490 --> 00:00:34,190
+So for example, if it's
+primary-preferred and there's
+
+15
+00:00:34,190 --> 00:00:36,830
+no primary, then it will fall
+back and use the secondary.
+
+16
+00:00:36,830 --> 00:00:39,450
+But it'll use a primary
+if it's present.
+
+17
+00:00:39,450 --> 00:00:43,850
+And you can also specify to
+use the nearest node.
+
+18
+00:00:43,850 --> 00:00:47,000
+You can also use tagged read
+preferences to configure
+
+19
+00:00:47,000 --> 00:00:49,960
+precisely which nodes you
+want the reads to go to.
+
+20
+00:00:49,960 --> 00:00:53,160
+But that's a more advanced topic
+and also outside the
+
+21
+00:00:53,160 --> 00:00:54,760
+scope of this course.
+
+22
+00:00:54,760 --> 00:00:56,530
+So we're just going to talk
+about the basic read
+
+23
+00:00:56,530 --> 00:00:59,540
+preferences, which is primary,
+secondary, primary-preferred,
+
+24
+00:00:59,540 --> 00:01:02,320
+secondary-preferred,
+and nearest.
+
+25
+00:01:02,320 --> 00:01:05,349
+So let's look at an example of
+using read preference in the
+
+26
+00:01:05,349 --> 00:01:06,755
+node.js driver.
+
+27
+00:01:06,755 --> 00:01:07,400
+All right.
+
+28
+00:01:07,400 --> 00:01:11,270
+So what we're doing here is,
+like before, we're specifying
+
+29
+00:01:11,270 --> 00:01:12,460
+a connection string.
+
+30
+00:01:12,460 --> 00:01:15,950
+And just like with the write
+concern, after the connection
+
+31
+00:01:15,950 --> 00:01:18,970
+string, we have these things
+that look like Get variables.
+
+32
+00:01:18,970 --> 00:01:21,910
+And here we have a variable
+readPreference, and we're
+
+33
+00:01:21,910 --> 00:01:23,900
+setting it to be secondary.
+
+34
+00:01:23,900 --> 00:01:26,430
+So that means on this
+connection, all the reads will
+
+35
+00:01:26,430 --> 00:01:29,980
+go to a secondary unless
+we specify otherwise.
+
+36
+00:01:29,980 --> 00:01:32,890
+So the first thing we're doing
+is doing an Insert here just
+
+37
+00:01:32,890 --> 00:01:35,100
+to insert this one document
+in our collection.
+
+38
+00:01:35,100 --> 00:01:38,270
+And then we're doing a Find
+down here in this
+
+39
+00:01:38,270 --> 00:01:40,130
+findDocument function.
+
+40
+00:01:40,130 --> 00:01:42,030
+So if we go down to the
+bottom, we have this
+
+41
+00:01:42,030 --> 00:01:44,855
+findDocument function, which
+we're calling down here.
+
+42
+00:01:44,855 --> 00:01:47,600
+A findDocument function is
+registering itself to be
+
+43
+00:01:47,600 --> 00:01:49,250
+called in one second.
+
+44
+00:01:49,250 --> 00:01:53,130
+So we'll call it, it'll send
+out a Find, and register
+
+45
+00:01:53,130 --> 00:01:55,130
+itself to be called again
+in one second.
+
+46
+00:01:55,130 --> 00:01:58,880
+So the result of this is we'll
+do a findOne every second for
+
+47
+00:01:58,880 --> 00:02:01,830
+a document with the field,
+x, and a value of 1.
+
+48
+00:02:01,830 --> 00:02:04,270
+So in this case, we're actually
+overriding the read
+
+49
+00:02:04,270 --> 00:02:06,380
+preference of the connection.
+
+50
+00:02:06,380 --> 00:02:09,139
+So this is another way to
+specify the read preference.
+
+51
+00:02:09,139 --> 00:02:12,570
+This is in our option
+object to our query.
+
+52
+00:02:12,570 --> 00:02:15,200
+So here we're specifying read
+preference, which we imported
+
+53
+00:02:15,200 --> 00:02:17,160
+above, .PRIMARY.
+
+54
+00:02:17,160 --> 00:02:19,710
+So this is just an enum with
+all of our different read
+
+55
+00:02:19,710 --> 00:02:20,910
+preferences.
+
+56
+00:02:20,910 --> 00:02:22,110
+I can glance at that.
+
+57
+00:02:22,110 --> 00:02:25,240
+So we have read preference
+is just from the
+
+58
+00:02:25,240 --> 00:02:27,250
+MongoDB package again.
+
+59
+00:02:27,250 --> 00:02:30,510
+And we just get that enum out
+so that down here we can use
+
+60
+00:02:30,510 --> 00:02:33,640
+ReadPreference.PRIMARY and
+specify that we actually want
+
+61
+00:02:33,640 --> 00:02:36,330
+this Find to go to a primary,
+which is the default.
+
+62
+00:02:36,330 --> 00:02:39,310
+But we're overriding it for
+this connection because we
+
+63
+00:02:39,310 --> 00:02:40,870
+specified secondary.
+
+64
+00:02:40,870 --> 00:02:42,020
+So I'll show both ways.
+
+65
+00:02:42,020 --> 00:02:44,780
+I'll show with overriding this,
+and then I'll show an
+
+66
+00:02:44,780 --> 00:02:47,850
+example of what happens when
+we just use the read
+
+67
+00:02:47,850 --> 00:02:51,230
+preference of the secondary that
+we set on the connection.
+
+68
+00:02:51,230 --> 00:02:54,310
+So let's run this application
+now and see what happens in a
+
+69
+00:02:54,310 --> 00:02:56,750
+failover scenario.
+
+70
+00:02:56,750 --> 00:02:57,200
+All right.
+
+71
+00:02:57,200 --> 00:02:58,800
+So we're running our
+application.
+
+72
+00:02:58,800 --> 00:03:01,800
+And you can see we're doing a
+Find every second, pretty much
+
+73
+00:03:01,800 --> 00:03:04,420
+returning the same document
+each time.
+
+74
+00:03:04,420 --> 00:03:05,540
+We see different
+documents here,
+
+75
+00:03:05,540 --> 00:03:07,020
+because I ran this before.
+
+76
+00:03:07,020 --> 00:03:09,080
+So now let's cause a failover.
+
+77
+00:03:09,080 --> 00:03:12,630
+We'll connect to local
+host 30,001.
+
+78
+00:03:12,630 --> 00:03:14,650
+And we see that it's
+a secondary.
+
+79
+00:03:14,650 --> 00:03:19,550
+So what we want to do now is
+do rs.status to figure out
+
+80
+00:03:19,550 --> 00:03:22,070
+where our primary is
+so we can kill it.
+
+81
+00:03:22,070 --> 00:03:22,420
+All right.
+
+82
+00:03:22,420 --> 00:03:27,300
+So it turns out our primary is
+on education.local 30,002.
+
+83
+00:03:27,300 --> 00:03:31,260
+So education.local is my actual
+host name but I know
+
+84
+00:03:31,260 --> 00:03:35,316
+it's on my local machine, so
+I can just use local host.
+
+85
+00:03:35,316 --> 00:03:36,390
+Now I connect.
+
+86
+00:03:36,390 --> 00:03:38,120
+I see it's the primary.
+
+87
+00:03:38,120 --> 00:03:40,302
+Use Admin and then
+db.shutdownServer.
+
+88
+00:03:40,302 --> 00:03:42,960
+
+89
+00:03:42,960 --> 00:03:46,060
+So now this primary's been shut
+down, we have a failover.
+
+90
+00:03:46,060 --> 00:03:48,630
+And let's see what our
+application is doing.
+
+91
+00:03:48,630 --> 00:03:51,650
+So we see that the Finds are
+actually not returning any
+
+92
+00:03:51,650 --> 00:03:52,570
+results yet.
+
+93
+00:03:52,570 --> 00:03:54,410
+So they're still dispatching.
+
+94
+00:03:54,410 --> 00:03:56,820
+And now we see all the
+results come back.
+
+95
+00:03:56,820 --> 00:03:59,070
+So if we look at what happened
+here, we see that we were
+
+96
+00:03:59,070 --> 00:04:01,540
+dispatching all these Finds but
+there was no primary to
+
+97
+00:04:01,540 --> 00:04:03,440
+actually take the query.
+
+98
+00:04:03,440 --> 00:04:06,640
+So the driver just buffered
+them as it did before in a
+
+99
+00:04:06,640 --> 00:04:09,090
+normal failover scenario
+with writes.
+
+100
+00:04:09,090 --> 00:04:11,700
+So this is the default behavior,
+and this is because
+
+101
+00:04:11,700 --> 00:04:13,820
+we're setting read preference
+at primary
+
+102
+00:04:13,820 --> 00:04:15,780
+in our option object.
+
+103
+00:04:15,780 --> 00:04:18,149
+So now let's go back and look
+at our application.
+
+104
+00:04:18,149 --> 00:04:20,350
+And let's not override
+the read preference.
+
+105
+00:04:20,350 --> 00:04:22,920
+Let's allow these reads to go
+to a secondary and see what
+
+106
+00:04:22,920 --> 00:04:25,280
+happens in a failover
+situation.
+
+107
+00:04:25,280 --> 00:04:27,640
+This is just to show that this
+is actually changing the
+
+108
+00:04:27,640 --> 00:04:30,120
+behavior, because sometimes
+it's hard to see what's
+
+109
+00:04:30,120 --> 00:04:31,070
+actually happening.
+
+110
+00:04:31,070 --> 00:04:33,430
+You know, you can't really look
+and say, look, the writes
+
+111
+00:04:33,430 --> 00:04:34,690
+are going to the secondary.
+
+112
+00:04:34,690 --> 00:04:37,670
+You actually have to do some
+kind of experiment like this
+
+113
+00:04:37,670 --> 00:04:39,700
+to really get a sense
+of what's going on.
+
+114
+00:04:39,700 --> 00:04:42,380
+So here I've removed
+the option object.
+
+115
+00:04:42,380 --> 00:04:45,340
+So now this findOne will be
+using the read preference that
+
+116
+00:04:45,340 --> 00:04:47,700
+we set for the connection,
+which is read
+
+117
+00:04:47,700 --> 00:04:49,415
+preference of a secondary.
+
+118
+00:04:49,415 --> 00:04:51,450
+So now we've run our
+application.
+
+119
+00:04:51,450 --> 00:04:54,390
+You see it has pretty much the
+same behavior as before.
+
+120
+00:04:54,390 --> 00:04:57,710
+But now let's see what happens
+in a failover situation.
+
+121
+00:04:57,710 --> 00:05:01,560
+So now let's connect to
+local host 30,001.
+
+122
+00:05:01,560 --> 00:05:04,260
+We see that it's the primary,
+so we don't have to check.
+
+123
+00:05:04,260 --> 00:05:05,790
+We see in the prompt
+that it's primary.
+
+124
+00:05:05,790 --> 00:05:07,860
+I don't have to look
+for that primary.
+
+125
+00:05:07,860 --> 00:05:12,580
+So let's use Admin, and let's
+shut down this server.
+
+126
+00:05:12,580 --> 00:05:14,730
+So now we've shut down our
+primary, let's take a look at
+
+127
+00:05:14,730 --> 00:05:16,470
+our application.
+
+128
+00:05:16,470 --> 00:05:19,690
+So from what I can see, it looks
+pretty much unaffected.
+
+129
+00:05:19,690 --> 00:05:22,055
+We're still dispatching
+a Find every second.
+
+130
+00:05:22,055 --> 00:05:24,880
+I highlight it there to
+make it easier to see.
+
+131
+00:05:24,880 --> 00:05:28,480
+Basically, it's unaffected by
+the failover, because we still
+
+132
+00:05:28,480 --> 00:05:31,360
+have secondaries that can
+service our reads even though
+
+133
+00:05:31,360 --> 00:05:34,820
+we've completely shut down
+our primary server.
+
+134
+00:05:34,820 --> 00:05:37,220
+And in fact, because I shut
+down these other two, we
+
+135
+00:05:37,220 --> 00:05:39,270
+actually only have
+one node up.
+
+136
+00:05:39,270 --> 00:05:42,660
+So we definitely do not have
+a primary up, but this
+
+137
+00:05:42,660 --> 00:05:45,780
+application is still happily
+reading from the secondary.
+
+138
+00:05:45,780 --> 00:05:48,800
+So you may ask why don't we
+just do this all the time?
+
+139
+00:05:48,800 --> 00:05:51,040
+Why don't we just always read
+from the secondary?
+
+140
+00:05:51,040 --> 00:05:53,780
+And the answer is that the
+guarantees you get from
+
+141
+00:05:53,780 --> 00:05:55,790
+reading from a secondary aren't
+the same as the ones
+
+142
+00:05:55,790 --> 00:05:57,830
+you get from reading
+from a primary.
+
+143
+00:05:57,830 --> 00:05:59,860
+So if we go back to
+our picture--
+
+144
+00:05:59,860 --> 00:06:02,300
+because the writes are going to
+the primary, it takes some
+
+145
+00:06:02,300 --> 00:06:06,470
+time for them to propagate to
+the secondaries, which means
+
+146
+00:06:06,470 --> 00:06:09,750
+if your reads are coming from
+the secondaries, you may not
+
+147
+00:06:09,750 --> 00:06:12,610
+have the most up-to-date
+copy of the data.
+
+148
+00:06:12,610 --> 00:06:14,900
+So the same application may have
+just done a write, and
+
+149
+00:06:14,900 --> 00:06:18,140
+they read a different result
+that's out of date.
+
+150
+00:06:18,140 --> 00:06:20,710
+So that's the danger of
+doing secondary reads.
+
+151
+00:06:20,710 --> 00:06:23,840
+It does have some benefits, but
+you have to really think
+
+152
+00:06:23,840 --> 00:06:26,690
+carefully about whether it's
+OK for your application to
+
+153
+00:06:26,690 --> 00:06:29,520
+have that kind of eventual
+consistency.
+
+154
+00:06:29,520 --> 00:06:29,970
+All right.
+
+155
+00:06:29,970 --> 00:06:31,940
+So that's how you deal
+with read preference
+
+156
+00:06:31,940 --> 00:06:33,860
+in the node.js driver.
+
+157
+00:06:33,860 --> 00:06:35,960
+So let's take a look
+at a quiz.
+
+158
+00:06:35,960 --> 00:06:36,880
+All right.
+
+159
+00:06:36,880 --> 00:06:40,600
+So the quiz is, you can
+configure your application via
+
+160
+00:06:40,600 --> 00:06:42,510
+the drivers to read from
+secondary nodes within a
+
+161
+00:06:42,510 --> 00:06:43,720
+replica set.
+
+162
+00:06:43,720 --> 00:06:46,620
+What are the reasons that you
+might not want to do that?
+
+163
+00:06:46,620 --> 00:06:48,500
+Check all that apply.
+
+164
+00:06:48,500 --> 00:06:51,640
+Is it, if your write traffic is
+significantly greater than
+
+165
+00:06:51,640 --> 00:06:54,210
+your read traffic, you may
+overwhelm the secondary, which
+
+166
+00:06:54,210 --> 00:06:56,960
+must process all the writes
+as well as the reads?
+
+167
+00:06:56,960 --> 00:06:59,070
+Replication lag can result.
+
+168
+00:06:59,070 --> 00:07:00,840
+Is it, you may not
+read what you
+
+169
+00:07:00,840 --> 00:07:03,150
+previously wrote to MongoDB?
+
+170
+00:07:03,150 --> 00:07:05,560
+Is it, if the secondary hardware
+has insufficient
+
+171
+00:07:05,560 --> 00:07:08,020
+memory to keep the read
+working set in memory,
+
+172
+00:07:08,020 --> 00:07:11,070
+directing reads to it will
+likely slow it down?
+
+173
+00:07:11,070 --> 00:07:13,270
+Or is it, reading from a
+secondary prevents it from
+
+174
+00:07:13,270 --> 00:07:15,050
+being promoted to primary?
+
+175
+00:07:15,050 --> 00:07:16,300
+So check all that apply.
+
+176
+00:07:16,300 --> 00:07:17,500

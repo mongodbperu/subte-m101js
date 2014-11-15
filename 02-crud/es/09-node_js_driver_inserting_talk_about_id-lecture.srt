@@ -1,0 +1,608 @@
+1
+00:00:00,000 --> 00:00:00,110
+
+2
+00:00:00,110 --> 00:00:00,440
+All right.
+
+3
+00:00:00,440 --> 00:00:03,130
+So we've talked a lot about
+querying and how to actually
+
+4
+00:00:03,130 --> 00:00:06,150
+get information out of Mongo
+DB, but we haven't really
+
+5
+00:00:06,150 --> 00:00:08,240
+talked much about how
+to manipulate data.
+
+6
+00:00:08,240 --> 00:00:10,770
+And then we haven't really
+talked about write operations.
+
+7
+00:00:10,770 --> 00:00:13,380
+So as far as those was go, we
+have three basic operations.
+
+8
+00:00:13,380 --> 00:00:16,379
+We have insert, update,
+and remove.
+
+9
+00:00:16,379 --> 00:00:18,460
+So first, we'll talk
+about insert.
+
+10
+00:00:18,460 --> 00:00:21,470
+I think that's the most logical
+thing to start with.
+
+11
+00:00:21,470 --> 00:00:23,944
+Then we'll talk later about
+updating and remove.
+
+12
+00:00:23,944 --> 00:00:24,700
+All right.
+
+13
+00:00:24,700 --> 00:00:26,520
+So here's another example.
+
+14
+00:00:26,520 --> 00:00:30,880
+And this is basically showing
+inserting a single document
+
+15
+00:00:30,880 --> 00:00:32,950
+using the Node js driver.
+
+16
+00:00:32,950 --> 00:00:34,980
+So here we have a
+single document,
+
+17
+00:00:34,980 --> 00:00:37,390
+student Calvin, age six.
+
+18
+00:00:37,390 --> 00:00:39,710
+And we're looking in the
+students collection.
+
+19
+00:00:39,710 --> 00:00:43,380
+So we have
+db.collection.students.insert.
+
+20
+00:00:43,380 --> 00:00:46,570
+And just insert the document as
+the first argument and give
+
+21
+00:00:46,570 --> 00:00:47,910
+it a call back.
+
+22
+00:00:47,910 --> 00:00:51,630
+And in our call back, the first
+argument is an error.
+
+23
+00:00:51,630 --> 00:00:54,840
+Second argument is whatever
+was inserted.
+
+24
+00:00:54,840 --> 00:00:58,940
+So we just throw an error if we
+found one, otherwise we log
+
+25
+00:00:58,940 --> 00:01:00,930
+the document that we inserted.
+
+26
+00:01:00,930 --> 00:01:04,769
+So this is actually going to
+be a JavaScript object.
+
+27
+00:01:04,769 --> 00:01:08,630
+So we call JSON.stringify
+to actually get the JSON
+
+28
+00:01:08,630 --> 00:01:11,940
+representation of this
+JavaScript object.
+
+29
+00:01:11,940 --> 00:01:13,500
+Then we just close
+the database.
+
+30
+00:01:13,500 --> 00:01:15,860
+So this is inserting
+a single document.
+
+31
+00:01:15,860 --> 00:01:17,910
+So let's run that.
+
+32
+00:01:17,910 --> 00:01:20,270
+So we see successfully
+inserted,
+
+33
+00:01:20,270 --> 00:01:23,300
+student Calvin, age six.
+
+34
+00:01:23,300 --> 00:01:26,660
+And we see actually this extra
+underscore ID field.
+
+35
+00:01:26,660 --> 00:01:28,270
+So this was automatically
+generated
+
+36
+00:01:28,270 --> 00:01:30,050
+for us by the driver.
+
+37
+00:01:30,050 --> 00:01:33,630
+And it's actually a unique
+key for the document.
+
+38
+00:01:33,630 --> 00:01:36,000
+So we can actually try
+running this again
+
+39
+00:01:36,000 --> 00:01:37,990
+just to see what happens.
+
+40
+00:01:37,990 --> 00:01:41,440
+And notice that we insert a
+new document, same student
+
+41
+00:01:41,440 --> 00:01:45,240
+same age, but we actually
+generated a new underscore ID
+
+42
+00:01:45,240 --> 00:01:47,920
+field for the new document
+we inserted.
+
+43
+00:01:47,920 --> 00:01:51,310
+So just to make sure, we can
+connect to course database
+
+44
+00:01:51,310 --> 00:01:52,570
+again, do db. students. find.
+
+45
+00:01:52,570 --> 00:01:56,995
+
+46
+00:01:56,995 --> 00:02:00,390
+And we can actually see the
+two documents we inserted.
+
+47
+00:02:00,390 --> 00:02:02,260
+So let's look at another
+example.
+
+48
+00:02:02,260 --> 00:02:05,350
+So this is another example
+of inserting a document.
+
+49
+00:02:05,350 --> 00:02:09,360
+So the difference here is that
+we're actually giving it our
+
+50
+00:02:09,360 --> 00:02:11,600
+own underscore ID field.
+
+51
+00:02:11,600 --> 00:02:14,250
+So before we saw that it was
+generated but in this case, we
+
+52
+00:02:14,250 --> 00:02:16,430
+actually are storing meaningful
+data there.
+
+53
+00:02:16,430 --> 00:02:18,150
+We're storing the name
+of the student in our
+
+54
+00:02:18,150 --> 00:02:20,020
+underscore ID field.
+
+55
+00:02:20,020 --> 00:02:22,020
+So that's really the only
+difference here.
+
+56
+00:02:22,020 --> 00:02:25,860
+But let's actually see what
+happens when we run this.
+
+57
+00:02:25,860 --> 00:02:27,460
+All right, so that worked.
+
+58
+00:02:27,460 --> 00:02:29,100
+We actually inserted
+a document with
+
+59
+00:02:29,100 --> 00:02:31,100
+ID Calvin, age six.
+
+60
+00:02:31,100 --> 00:02:33,750
+And notice that the driver
+didn't actually generate a new
+
+61
+00:02:33,750 --> 00:02:34,890
+underscore ID field.
+
+62
+00:02:34,890 --> 00:02:37,070
+It actually kept the
+one we gave it.
+
+63
+00:02:37,070 --> 00:02:40,030
+So what happens if we try
+to insert another one?
+
+64
+00:02:40,030 --> 00:02:42,890
+So here we get a huge error
+actually, because we're
+
+65
+00:02:42,890 --> 00:02:44,930
+throwing an exception
+when we get an error
+
+66
+00:02:44,930 --> 00:02:46,770
+back from the database.
+
+67
+00:02:46,770 --> 00:02:49,130
+In this case, we're getting
+a Mongo error.
+
+68
+00:02:49,130 --> 00:02:54,570
+And the message is E11000
+duplicate key course.students.
+
+69
+00:02:54,570 --> 00:02:57,140
+And the duplicate
+key is Calvin.
+
+70
+00:02:57,140 --> 00:02:59,010
+So let's actually go
+back into this.
+
+71
+00:02:59,010 --> 00:03:01,690
+And instead of throwing the
+error, we'll just do
+
+72
+00:03:01,690 --> 00:03:07,600
+console.log error.message
+and return db.close.
+
+73
+00:03:07,600 --> 00:03:10,660
+Now, if we run this, we get a
+much nicer error message.
+
+74
+00:03:10,660 --> 00:03:13,150
+We just get the error instead
+of the stack trace.
+
+75
+00:03:13,150 --> 00:03:15,570
+So it just depends on what
+you're looking for.
+
+76
+00:03:15,570 --> 00:03:17,890
+The error is actually
+a built in
+
+77
+00:03:17,890 --> 00:03:20,620
+JavaScript and Node js object.
+
+78
+00:03:20,620 --> 00:03:24,260
+So you can actually look in the
+documentation for Node js,
+
+79
+00:03:24,260 --> 00:03:27,900
+and actually some general
+JavaScript documentation, to
+
+80
+00:03:27,900 --> 00:03:30,830
+figure out more about
+the error object.
+
+81
+00:03:30,830 --> 00:03:31,230
+All right.
+
+82
+00:03:31,230 --> 00:03:34,700
+So those are two examples of
+inserting a single document.
+
+83
+00:03:34,700 --> 00:03:37,980
+But you can actually insert
+multiple documents using the
+
+84
+00:03:37,980 --> 00:03:40,050
+Node js driver.
+
+85
+00:03:40,050 --> 00:03:40,460
+All right.
+
+86
+00:03:40,460 --> 00:03:42,370
+So this is an example
+of inserting
+
+87
+00:03:42,370 --> 00:03:43,980
+more than one document.
+
+88
+00:03:43,980 --> 00:03:47,890
+So here we have four
+docs is an array.
+
+89
+00:03:47,890 --> 00:03:51,130
+And we have a student named
+Calvin, age is 16, student
+
+90
+00:03:51,130 --> 00:03:53,260
+named Susie, age seven.
+
+91
+00:03:53,260 --> 00:03:56,800
+And we're doing exactly the same
+thing, except instead of
+
+92
+00:03:56,800 --> 00:04:00,250
+inserting a single document here
+we're actually inserting
+
+93
+00:04:00,250 --> 00:04:02,240
+the whole array of documents.
+
+94
+00:04:02,240 --> 00:04:05,230
+Everything else is completely
+identical we're printing out
+
+95
+00:04:05,230 --> 00:04:08,380
+what be inserted and then
+closing the database.
+
+96
+00:04:08,380 --> 00:04:10,630
+So let's run this.
+
+97
+00:04:10,630 --> 00:04:11,060
+All right.
+
+98
+00:04:11,060 --> 00:04:15,330
+So we inserted this array
+student Calvin age six,
+
+99
+00:04:15,330 --> 00:04:17,380
+student Susie age seven.
+
+100
+00:04:17,380 --> 00:04:21,740
+And actually both documents
+had an underscore ID and a
+
+101
+00:04:21,740 --> 00:04:24,220
+unique underscore ID
+generated for them.
+
+102
+00:04:24,220 --> 00:04:28,260
+So those are some examples of
+how to do inserts using the
+
+103
+00:04:28,260 --> 00:04:30,770
+Mongo DB Node js driver.
+
+104
+00:04:30,770 --> 00:04:31,220
+All right.
+
+105
+00:04:31,220 --> 00:04:35,040
+So this is the quiz about
+inserting and underscore ID in
+
+106
+00:04:35,040 --> 00:04:36,730
+the Node js driver.
+
+107
+00:04:36,730 --> 00:04:39,660
+So we have a section of example
+code here, and I'm
+
+108
+00:04:39,660 --> 00:04:41,180
+just walk through it.
+
+109
+00:04:41,180 --> 00:04:44,230
+So just like most of our other
+examples, we actually open a
+
+110
+00:04:44,230 --> 00:04:45,460
+database connection.
+
+111
+00:04:45,460 --> 00:04:48,000
+And what we're doing here is
+we're trying to insert these
+
+112
+00:04:48,000 --> 00:04:50,110
+documents into our collection.
+
+113
+00:04:50,110 --> 00:04:52,790
+Now, notice we have an
+array of documents.
+
+114
+00:04:52,790 --> 00:04:54,530
+We have two documents here.
+
+115
+00:04:54,530 --> 00:04:58,110
+And they actually both have an
+underscore ID field of George.
+
+116
+00:04:58,110 --> 00:05:01,430
+Now, this one is uppercase G,
+this one is lowercase g,
+
+117
+00:05:01,430 --> 00:05:02,930
+different ages.
+
+118
+00:05:02,930 --> 00:05:05,460
+And your task is to figure
+out what happens
+
+119
+00:05:05,460 --> 00:05:06,840
+when we run this code.
+
+120
+00:05:06,840 --> 00:05:09,050
+And you could actually just copy
+and paste this and run it
+
+121
+00:05:09,050 --> 00:05:11,960
+yourself to verify the answer.
+
+122
+00:05:11,960 --> 00:05:14,120
+This is actually a multiple
+choice question, and we have
+
+123
+00:05:14,120 --> 00:05:16,160
+the options down here.
+
+124
+00:05:16,160 --> 00:05:18,740
+So the question is, what
+will happen when we
+
+125
+00:05:18,740 --> 00:05:20,610
+run the above code?
+
+126
+00:05:20,610 --> 00:05:23,440
+Only one document in the
+array will be inserted.
+
+127
+00:05:23,440 --> 00:05:25,580
+We will get an error because
+we are trying to insert an
+
+128
+00:05:25,580 --> 00:05:28,630
+array of documents instead
+of a single document.
+
+129
+00:05:28,630 --> 00:05:30,650
+We will get a duplicate
+key error.
+
+130
+00:05:30,650 --> 00:05:32,720
+Or both documents will be
+inserted successfully.
+
+131
+00:05:32,720 --> 00:05:33,970

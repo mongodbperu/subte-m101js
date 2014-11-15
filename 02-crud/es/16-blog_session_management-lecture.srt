@@ -1,0 +1,383 @@
+1
+00:00:00,000 --> 00:00:00,120
+
+2
+00:00:00,120 --> 00:00:03,360
+So now, let's take a
+look at session.js.
+
+3
+00:00:03,360 --> 00:00:03,710
+All right.
+
+4
+00:00:03,710 --> 00:00:07,730
+So notice at the top here, we
+actually include these helpers
+
+5
+00:00:07,730 --> 00:00:11,820
+and dot dot slash users and
+dot dot slash sessions.
+
+6
+00:00:11,820 --> 00:00:13,880
+So we'll talk about that
+in a little bit.
+
+7
+00:00:13,880 --> 00:00:16,710
+But basically, these are
+our objects that we
+
+8
+00:00:16,710 --> 00:00:18,790
+use to access MongoDB.
+
+9
+00:00:18,790 --> 00:00:22,980
+So it's a users data access
+object and a sessions data
+
+10
+00:00:22,980 --> 00:00:24,780
+access object.
+
+11
+00:00:24,780 --> 00:00:27,810
+So this kind of tells us that
+the session handler really
+
+12
+00:00:27,810 --> 00:00:30,880
+needs access to the users
+collection and the sessions
+
+13
+00:00:30,880 --> 00:00:32,140
+collection.
+
+14
+00:00:32,140 --> 00:00:34,410
+So let's take a look at a little
+bit about how it's
+
+15
+00:00:34,410 --> 00:00:35,640
+using this.
+
+16
+00:00:35,640 --> 00:00:38,320
+So I'm going to skip over a lot
+of this because it's not
+
+17
+00:00:38,320 --> 00:00:40,390
+as important for the homework.
+
+18
+00:00:40,390 --> 00:00:43,460
+But I just want to sort of
+cover how this fits in.
+
+19
+00:00:43,460 --> 00:00:47,710
+So down here we'll say users
+and sessions as our data
+
+20
+00:00:47,710 --> 00:00:49,510
+access objects.
+
+21
+00:00:49,510 --> 00:00:50,940
+And all of our functions are
+
+22
+00:00:50,940 --> 00:00:53,290
+implemented using these objects.
+
+23
+00:00:53,290 --> 00:00:57,300
+So we actually have, this is
+logged in malware uses the
+
+24
+00:00:57,300 --> 00:01:00,780
+sessions object and calls the
+get username function, which
+
+25
+00:01:00,780 --> 00:01:04,769
+I'll show you when we actually
+look at the sessions.js file.
+
+26
+00:01:04,769 --> 00:01:06,810
+So if we look down here we
+have this other function,
+
+27
+00:01:06,810 --> 00:01:11,170
+handle login request, takes a
+username and a password as
+
+28
+00:01:11,170 --> 00:01:14,760
+post variables, so request dot
+body because we registered the
+
+29
+00:01:14,760 --> 00:01:16,210
+body parser.
+
+30
+00:01:16,210 --> 00:01:18,680
+It will be populated with
+post variables.
+
+31
+00:01:18,680 --> 00:01:22,000
+So we have request dot body dot
+username, request dot body
+
+32
+00:01:22,000 --> 00:01:23,310
+dot password.
+
+33
+00:01:23,310 --> 00:01:26,560
+These are post variables that
+we registered in our form.
+
+34
+00:01:26,560 --> 00:01:29,980
+So here we just call users
+dot validate login.
+
+35
+00:01:29,980 --> 00:01:34,930
+So just like with the sessions
+object, users is a data access
+
+36
+00:01:34,930 --> 00:01:38,400
+object with methods that
+interact with MongoDB.
+
+37
+00:01:38,400 --> 00:01:41,750
+So here we have a validate
+login function takes the
+
+38
+00:01:41,750 --> 00:01:45,500
+username and password and
+returns our user.
+
+39
+00:01:45,500 --> 00:01:47,920
+So you don't really need to
+know how this works, but I
+
+40
+00:01:47,920 --> 00:01:51,970
+just wanted to show you how
+these pieces fit together.
+
+41
+00:01:51,970 --> 00:01:54,210
+So this is our sessions
+data access object.
+
+42
+00:01:54,210 --> 00:01:57,850
+It takes a connected
+database object.
+
+43
+00:01:57,850 --> 00:02:00,820
+Down here it uses it to connect
+to the sessions
+
+44
+00:02:00,820 --> 00:02:02,190
+collection.
+
+45
+00:02:02,190 --> 00:02:06,640
+And we have this.startSession
+and other functions attached
+
+46
+00:02:06,640 --> 00:02:10,210
+to this, so that what this will
+return is an object that
+
+47
+00:02:10,210 --> 00:02:14,000
+actually has all of these
+helper functions.
+
+48
+00:02:14,000 --> 00:02:16,890
+So let's take a look at how some
+of these are implemented.
+
+49
+00:02:16,890 --> 00:02:18,930
+So this is the sessions
+data access
+
+50
+00:02:18,930 --> 00:02:20,870
+object on start session.
+
+51
+00:02:20,870 --> 00:02:24,470
+And it's a function that takes
+a username and a callback.
+
+52
+00:02:24,470 --> 00:02:26,440
+So notice this isn't doing
+any validation.
+
+53
+00:02:26,440 --> 00:02:29,820
+The job of the sessions
+collection is actually just to
+
+54
+00:02:29,820 --> 00:02:32,200
+keep track of users so they
+don't have to login on every
+
+55
+00:02:32,200 --> 00:02:33,320
+single page.
+
+56
+00:02:33,320 --> 00:02:37,050
+So we do a bunch of stuff here
+to generate the session ID.
+
+57
+00:02:37,050 --> 00:02:40,210
+We create a session document,
+and we just insert it.
+
+58
+00:02:40,210 --> 00:02:45,050
+So now, if we go down here we
+see the end session function.
+
+59
+00:02:45,050 --> 00:02:49,240
+So all this does is finds, based
+on the session ID, which
+
+60
+00:02:49,240 --> 00:02:50,100
+is stored in the cookie--
+
+61
+00:02:50,100 --> 00:02:51,210
+I didn't cover that.
+
+62
+00:02:51,210 --> 00:02:53,630
+But that's how this function
+gets called.
+
+63
+00:02:53,630 --> 00:02:55,880
+--and we just remove the
+session document.
+
+64
+00:02:55,880 --> 00:02:58,930
+So this is basically when
+a user logs out, we call
+
+65
+00:02:58,930 --> 00:03:02,920
+sessions data access object
+dot end session.
+
+66
+00:03:02,920 --> 00:03:03,270
+All right.
+
+67
+00:03:03,270 --> 00:03:05,790
+So now, this is the sessions
+data access
+
+68
+00:03:05,790 --> 00:03:07,830
+object dot get username.
+
+69
+00:03:07,830 --> 00:03:10,710
+So this takes a session ID,
+which we've also got from the
+
+70
+00:03:10,710 --> 00:03:13,030
+cookie, and a callback.
+
+71
+00:03:13,030 --> 00:03:16,440
+So if we look down here, we
+actually do sessions dot find
+
+72
+00:03:16,440 --> 00:03:18,840
+one, ID, session ID.
+
+73
+00:03:18,840 --> 00:03:21,750
+And we check to see if we've
+gotten a session.
+
+74
+00:03:21,750 --> 00:03:26,290
+So if we do get a session, we
+return session.username.
+
+75
+00:03:26,290 --> 00:03:28,560
+And this will call back
+into the code
+
+76
+00:03:28,560 --> 00:03:30,700
+that's using this function.
+
+77
+00:03:30,700 --> 00:03:33,150
+So I haven't talked about this
+much, but notice the way we
+
+78
+00:03:33,150 --> 00:03:35,820
+implement this function is
+also with a callback.
+
+79
+00:03:35,820 --> 00:03:38,380
+So just like a lot of the other
+functions we use, like
+
+80
+00:03:38,380 --> 00:03:42,120
+find one, this one is going to
+be used with a callback and is
+
+81
+00:03:42,120 --> 00:03:43,370
+asynchronous.
+
+82
+00:03:43,370 --> 00:03:43,670

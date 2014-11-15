@@ -1,0 +1,316 @@
+1
+00:00:00,000 --> 00:00:00,150
+
+2
+00:00:00,150 --> 00:00:04,200
+All right, so now we've done
+'find', 'find one', and talked
+
+3
+00:00:04,200 --> 00:00:06,350
+a little bit about how
+these queries work.
+
+4
+00:00:06,350 --> 00:00:08,660
+We've had a basic
+introduction.
+
+5
+00:00:08,660 --> 00:00:11,080
+Let's talk about field
+projection.
+
+6
+00:00:11,080 --> 00:00:16,510
+So, this is an example of find
+using field projection.
+
+7
+00:00:16,510 --> 00:00:20,100
+So the idea behind field
+projection is that sometimes
+
+8
+00:00:20,100 --> 00:00:22,750
+when we're doing a query, we may
+be querying on one field.
+
+9
+00:00:22,750 --> 00:00:26,160
+We may care about certain fields
+in the document, like
+
+10
+00:00:26,160 --> 00:00:28,950
+for example doc.student, but
+maybe there are other fields
+
+11
+00:00:28,950 --> 00:00:31,870
+in the document that we don't
+actually care about.
+
+12
+00:00:31,870 --> 00:00:35,140
+So here what we're doing is the
+same query we did before.
+
+13
+00:00:35,140 --> 00:00:38,620
+Grade, see all the students
+with grade equal to 100.
+
+14
+00:00:38,620 --> 00:00:40,760
+But we also have this
+extra thing here.
+
+15
+00:00:40,760 --> 00:00:42,860
+So this is the projection.
+
+16
+00:00:42,860 --> 00:00:45,820
+So what we're doing is we're
+saying, we want the 'student'
+
+17
+00:00:45,820 --> 00:00:49,990
+field, so we say 'student' of
+one, and we also say we don't
+
+18
+00:00:49,990 --> 00:00:51,850
+want the _id field.
+
+19
+00:00:51,850 --> 00:00:55,700
+So if you just have 'student':1
+here, then what
+
+20
+00:00:55,700 --> 00:00:58,200
+that would do it is it would
+give you the 'student' field
+
+21
+00:00:58,200 --> 00:01:00,110
+and the _id field.
+
+22
+00:01:00,110 --> 00:01:02,570
+The _id field is a
+little special.
+
+23
+00:01:02,570 --> 00:01:04,769
+It doesn't get projected
+out by default.
+
+24
+00:01:04,769 --> 00:01:08,410
+So you actually have to
+explicitly say, don't return
+
+25
+00:01:08,410 --> 00:01:09,880
+the _id field.
+
+26
+00:01:09,880 --> 00:01:14,025
+So just like before, we do
+db.collection('grades').find,
+
+27
+00:01:14,025 --> 00:01:15,380
+we pass in the query.
+
+28
+00:01:15,380 --> 00:01:19,500
+We actually pass in the second
+argument, the projection.
+
+29
+00:01:19,500 --> 00:01:23,550
+And just like before we say
+toArray(function(err,docs).
+
+30
+00:01:23,550 --> 00:01:26,490
+So, what I'm doing here
+is I'm just iterating
+
+31
+00:01:26,490 --> 00:01:27,610
+over all the documents.
+
+32
+00:01:27,610 --> 00:01:30,090
+So this is just a normal
+JavaScript array.
+
+33
+00:01:30,090 --> 00:01:33,080
+JavaScript arrays have
+the forEach method.
+
+34
+00:01:33,080 --> 00:01:36,590
+And I'm passing in a callback,
+so this will get called for
+
+35
+00:01:36,590 --> 00:01:38,300
+each element of the array.
+
+36
+00:01:38,300 --> 00:01:40,910
+For each element of the array
+I'm logging doc, just so we
+
+37
+00:01:40,910 --> 00:01:43,100
+can see that it's actually
+projected.
+
+38
+00:01:43,100 --> 00:01:46,080
+And doc.student because that's
+one of the fields
+
+39
+00:01:46,080 --> 00:01:47,240
+that we care about--
+
+40
+00:01:47,240 --> 00:01:49,180
+or actually, the only
+field that we care
+
+41
+00:01:49,180 --> 00:01:50,500
+about in this case.
+
+42
+00:01:50,500 --> 00:01:53,590
+And we actually don't even need
+to have the grade there,
+
+43
+00:01:53,590 --> 00:01:57,040
+because we know from context
+that the student got a good
+
+44
+00:01:57,040 --> 00:02:00,950
+grade because that was our
+query in the first place.
+
+45
+00:02:00,950 --> 00:02:03,660
+All right, so let's
+actually run this.
+
+46
+00:02:03,660 --> 00:02:06,580
+So we see just like before, Joe
+got a good grade, Steve
+
+47
+00:02:06,580 --> 00:02:08,009
+got a good grade.
+
+48
+00:02:08,009 --> 00:02:10,870
+But notice here now that when
+we log the whole document,
+
+49
+00:02:10,870 --> 00:02:14,780
+we're only getting a document
+back that has student: 'Joe'.
+
+50
+00:02:14,780 --> 00:02:18,160
+So this is nice because we're
+only sending over the wire,
+
+51
+00:02:18,160 --> 00:02:20,800
+and using the network for things
+that we actually care
+
+52
+00:02:20,800 --> 00:02:24,500
+about, and actually avoiding
+sending all that data that we
+
+53
+00:02:24,500 --> 00:02:26,620
+didn't care about in
+the first place.
+
+54
+00:02:26,620 --> 00:02:28,410
+So that's how you
+do projections
+
+55
+00:02:28,410 --> 00:02:30,920
+using the Node.js driver.
+
+56
+00:02:30,920 --> 00:02:34,710
+All right, so this is a quiz on
+using field projection in
+
+57
+00:02:34,710 --> 00:02:36,340
+the node.js driver.
+
+58
+00:02:36,340 --> 00:02:38,800
+So the question is, which of
+the following queries will
+
+59
+00:02:38,800 --> 00:02:41,680
+cause only the 'grade'
+field to be returned?
+
+60
+00:02:41,680 --> 00:02:44,445
+So imagine that in our
+collection, 'grades', we have
+
+61
+00:02:44,445 --> 00:02:47,340
+a bunch of documents they each
+have a 'grade' field as well
+
+62
+00:02:47,340 --> 00:02:49,280
+as an _id field.
+
+63
+00:02:49,280 --> 00:02:51,970
+So the question is, which of
+these lines will cause our
+
+64
+00:02:51,970 --> 00:02:55,100
+callback to be returned with a
+document that only contains a
+
+65
+00:02:55,100 --> 00:02:57,570
+'grade' field, regardless
+of what other
+
+66
+00:02:57,570 --> 00:02:58,820
+fields were in the document?
+
+67
+00:02:58,820 --> 00:02:59,770

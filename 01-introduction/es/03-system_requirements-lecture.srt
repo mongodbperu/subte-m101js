@@ -1,0 +1,98 @@
+1
+00:00:00,000 --> 00:00:00,360
+
+2
+00:00:00,360 --> 00:00:02,210
+All right, so let's talk about
+the system requirements for
+
+3
+00:00:02,210 --> 00:00:03,250
+this course.
+
+4
+00:00:03,250 --> 00:00:05,540
+So first there's the
+operating system.
+
+5
+00:00:05,540 --> 00:00:09,660
+So we'll make sure everything in
+the course works on Mac OSX
+
+6
+00:00:09,660 --> 00:00:11,570
+and Windows 7.
+
+7
+00:00:11,570 --> 00:00:15,160
+So you can also run it on Linux,
+and everything should
+
+8
+00:00:15,160 --> 00:00:17,010
+work there as well.
+
+9
+00:00:17,010 --> 00:00:18,950
+And let us know, actually, if
+you're running this on Linux
+
+10
+00:00:18,950 --> 00:00:22,270
+and run into issues, and we'll
+help you get through them.
+
+11
+00:00:22,270 --> 00:00:25,480
+Now, as far as Node.js, you
+should be fine just using the
+
+12
+00:00:25,480 --> 00:00:28,520
+latest version of Node.js, and
+actually, if you look on their
+
+13
+00:00:28,520 --> 00:00:31,040
+page, you can see the
+system requirements
+
+14
+00:00:31,040 --> 00:00:32,780
+for installing Node.js.
+
+15
+00:00:32,780 --> 00:00:35,190
+So let's take a quick
+look at that.
+
+16
+00:00:35,190 --> 00:00:38,050
+So here we're on the Node.js
+site, and what you can do is
+
+17
+00:00:38,050 --> 00:00:39,810
+you can click on Downloads.
+
+18
+00:00:39,810 --> 00:00:42,340
+And here we can actually
+see all the
+
+19
+00:00:42,340 --> 00:00:43,600
+different options available.
+
+20
+00:00:43,600 --> 00:00:44,915
+So all of these should work.
+
+21
+00:00:44,915 --> 00:00:47,830
+Just find your system here and
+download the right installer.
+
+22
+00:00:47,830 --> 00:00:49,080

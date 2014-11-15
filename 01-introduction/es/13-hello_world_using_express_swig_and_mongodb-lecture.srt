@@ -1,0 +1,542 @@
+1
+00:00:00,000 --> 00:00:02,240
+All right, so, we covered
+writing a Hello World
+
+2
+00:00:02,240 --> 00:00:05,430
+application using express, and
+we covered writing a Hello
+
+3
+00:00:05,430 --> 00:00:08,620
+World application using express
+and swig, and we
+
+4
+00:00:08,620 --> 00:00:10,720
+covered writing a simple
+Hello World
+
+5
+00:00:10,720 --> 00:00:13,390
+application using MongoDB.
+
+6
+00:00:13,390 --> 00:00:16,090
+So now let's combine
+that all together.
+
+7
+00:00:16,090 --> 00:00:19,790
+As a starting point, we'll use
+the app from our last lecture,
+
+8
+00:00:19,790 --> 00:00:23,300
+which includes express and swig,
+and we'll just be adding
+
+9
+00:00:23,300 --> 00:00:26,470
+calls to MongoDB to
+this application.
+
+10
+00:00:26,470 --> 00:00:27,820
+First thing we want
+to do is add our
+
+11
+00:00:27,820 --> 00:00:30,060
+dependencies to MongoDB.
+
+12
+00:00:30,060 --> 00:00:33,470
+So, we'll get the MongoClient
+first and say MongoClient
+
+13
+00:00:33,470 --> 00:00:38,350
+equals require MongoDB dot
+MongoClient, and then we'll
+
+14
+00:00:38,350 --> 00:00:44,680
+say server equals require
+MongoDB dor server.
+
+15
+00:00:44,680 --> 00:00:47,050
+You'll see why I do this
+a little bit later.
+
+16
+00:00:47,050 --> 00:00:51,320
+But the server is also from
+our MongoDB driver module.
+
+17
+00:00:51,320 --> 00:00:54,250
+So, now down here we'll actually
+create our object
+
+18
+00:00:54,250 --> 00:00:57,060
+describing our MongoDB
+connection.
+
+19
+00:00:57,060 --> 00:01:03,470
+So, we'll go var mongoclient
+equals new MongoClient, new
+
+20
+00:01:03,470 --> 00:01:08,940
+server localhost 27017, and
+let's tell it to use the
+
+21
+00:01:08,940 --> 00:01:11,070
+native BSON parser.
+
+22
+00:01:11,070 --> 00:01:14,220
+All right, so one thing to note
+is that, after this line,
+
+23
+00:01:14,220 --> 00:01:16,290
+we actually have not
+established a
+
+24
+00:01:16,290 --> 00:01:17,100
+connection to MongoDB.
+
+25
+00:01:17,100 --> 00:01:22,260
+So, this line is just setting up
+our connection information.
+
+26
+00:01:22,260 --> 00:01:24,870
+This is creating an object that
+describes how we want to
+
+27
+00:01:24,870 --> 00:01:25,580
+connect to MongoDB.
+
+28
+00:01:25,580 --> 00:01:28,620
+So, this call is synchronous.
+
+29
+00:01:28,620 --> 00:01:31,850
+This call immediately returns
+at, we're not actually
+
+30
+00:01:31,850 --> 00:01:33,470
+registering a call back.
+
+31
+00:01:33,470 --> 00:01:38,070
+So, first thing we'll do we'll
+just say var db equals
+
+32
+00:01:38,070 --> 00:01:42,880
+mongoclient.db, and let's
+use the course database.
+
+33
+00:01:42,880 --> 00:01:44,640
+So, it's the same thing here.
+
+34
+00:01:44,640 --> 00:01:47,610
+We're actually doing
+mongoclient.db, and it's just
+
+35
+00:01:47,610 --> 00:01:50,800
+giving us a reference to a
+database, but it's not a
+
+36
+00:01:50,800 --> 00:01:52,150
+database that's connected yet.
+
+37
+00:01:52,150 --> 00:01:55,720
+There's actually no connection
+to MongoDB at this point.
+
+38
+00:01:55,720 --> 00:01:57,270
+So, we're going to do something
+that seems a little
+
+39
+00:01:57,270 --> 00:02:01,460
+bit strange, but hopefully later
+it will make more sense.
+
+40
+00:02:01,460 --> 00:02:04,850
+So, we're actually going to use
+db, even though it doesn't
+
+41
+00:02:04,850 --> 00:02:07,160
+look like it's connected
+at this point, and go
+
+42
+00:02:07,160 --> 00:02:14,060
+db.collection hello mongo
+express dot findOne function
+
+43
+00:02:14,060 --> 00:02:16,420
+error and then return
+document.
+
+44
+00:02:16,420 --> 00:02:18,510
+And then in the body of
+this call back, we'll
+
+45
+00:02:18,510 --> 00:02:20,295
+actually do this here.
+
+46
+00:02:20,295 --> 00:02:24,050
+We'll render our page, but
+instead of passing in this
+
+47
+00:02:24,050 --> 00:02:27,370
+document, we'll actually pass
+in the document that was
+
+48
+00:02:27,370 --> 00:02:29,120
+returned from MongoDB.
+
+49
+00:02:29,120 --> 00:02:31,800
+And note that this document
+actually must have a name
+
+50
+00:02:31,800 --> 00:02:35,410
+field just like the literal
+document we had before, so the
+
+51
+00:02:35,410 --> 00:02:39,400
+documents in hello mongo express
+must have a name field
+
+52
+00:02:39,400 --> 00:02:42,230
+for it to show properly
+in our swig template.
+
+53
+00:02:42,230 --> 00:02:43,660
+So, this may seem a
+little strange.
+
+54
+00:02:43,660 --> 00:02:46,200
+It looks like we're using our
+database reference before it's
+
+55
+00:02:46,200 --> 00:02:49,330
+actually connected, but now if
+we go down here, you notice
+
+56
+00:02:49,330 --> 00:02:52,380
+that none of these functions can
+actually get called until
+
+57
+00:02:52,380 --> 00:02:54,100
+we actually start listening.
+
+58
+00:02:54,100 --> 00:02:56,750
+So, what we do is, we actually
+open our database
+
+59
+00:02:56,750 --> 00:02:58,920
+connection down here.
+
+60
+00:02:58,920 --> 00:03:02,450
+We actually say mongoclient.open
+and pass in
+
+61
+00:03:02,450 --> 00:03:04,460
+the call back to call when
+we have actually
+
+62
+00:03:04,460 --> 00:03:05,930
+connected to the database.
+
+63
+00:03:05,930 --> 00:03:10,000
+And inside the call back,
+we'll start listening.
+
+64
+00:03:10,000 --> 00:03:12,490
+What this means is that we
+actually start listening as
+
+65
+00:03:12,490 --> 00:03:15,470
+soon as the connection to
+the database is open.
+
+66
+00:03:15,470 --> 00:03:18,090
+But, since we're not listening
+before that point, these
+
+67
+00:03:18,090 --> 00:03:21,020
+actually don't get called until
+we've actually opened
+
+68
+00:03:21,020 --> 00:03:22,330
+our connection.
+
+69
+00:03:22,330 --> 00:03:25,060
+Notice that each of these
+callbacks also takes an error.
+
+70
+00:03:25,060 --> 00:03:26,710
+Right now I'm just
+not handling it.
+
+71
+00:03:26,710 --> 00:03:29,240
+But in a real application, you'd
+want to check the error
+
+72
+00:03:29,240 --> 00:03:31,050
+and stop at that point.
+
+73
+00:03:31,050 --> 00:03:33,890
+So, right here we could
+actually say,
+
+74
+00:03:33,890 --> 00:03:37,670
+if error throw error.
+
+75
+00:03:37,670 --> 00:03:39,360
+This is very simple
+error handling.
+
+76
+00:03:39,360 --> 00:03:42,900
+It just throws an exception
+if we fail to connect the
+
+77
+00:03:42,900 --> 00:03:46,270
+database, rather than starting
+to listen on our app server.
+
+78
+00:03:46,270 --> 00:03:48,270
+All right, so let's
+try this out.
+
+79
+00:03:48,270 --> 00:03:50,895
+Let's try node app.js.
+
+80
+00:03:50,895 --> 00:03:53,240
+So now we see we have
+our express server
+
+81
+00:03:53,240 --> 00:03:55,450
+listening on port 8080.
+
+82
+00:03:55,450 --> 00:03:59,090
+We can go back to our browser,
+and we still have hello, Swig
+
+83
+00:03:59,090 --> 00:03:59,660
+sitting there.
+
+84
+00:03:59,660 --> 00:04:02,310
+But we go back, now let's
+connect again
+
+85
+00:04:02,310 --> 00:04:04,950
+to local host 8080.
+
+86
+00:04:04,950 --> 00:04:06,830
+And we see hello, MongoDB.
+
+87
+00:04:06,830 --> 00:04:09,270
+So, I actually inserted
+a document before
+
+88
+00:04:09,270 --> 00:04:10,820
+with the name MongoDB.
+
+89
+00:04:10,820 --> 00:04:14,540
+So, you can go back to our
+shell and stop this.
+
+90
+00:04:14,540 --> 00:04:19,550
+We go mongo, and use course,
+which is the database were
+
+91
+00:04:19,550 --> 00:04:20,899
+connecting to.
+
+92
+00:04:20,899 --> 00:04:22,149
+db.hello_mongo_express.find.
+
+93
+00:04:22,149 --> 00:04:27,540
+
+94
+00:04:27,540 --> 00:04:30,090
+And we see that there's one
+document with the name
+
+95
+00:04:30,090 --> 00:04:34,810
+MongoDB, and what happens is
+that in our application, we
+
+96
+00:04:34,810 --> 00:04:37,920
+got the document from the
+database, and we render it
+
+97
+00:04:37,920 --> 00:04:41,830
+using the same template we used
+before, and what we're
+
+98
+00:04:41,830 --> 00:04:46,230
+seeing here, our browser is
+hello.html, populated with the
+
+99
+00:04:46,230 --> 00:04:49,650
+contents of the document we
+had stored in MongoDB.
+
+100
+00:04:49,650 --> 00:04:53,160
+So overall, the reason we see
+MongoDB here is because our
+
+101
+00:04:53,160 --> 00:04:56,630
+templating engine is looking
+for a name field in the
+
+102
+00:04:56,630 --> 00:04:58,800
+document we passed
+in, and printing
+
+103
+00:04:58,800 --> 00:05:00,770
+whatever value it finds.
+
+104
+00:05:00,770 --> 00:05:03,200
+And the document we got from the
+database and passed to our
+
+105
+00:05:03,200 --> 00:05:05,970
+template engine happened to
+have a name field with a
+
+106
+00:05:05,970 --> 00:05:08,770
+string value of MongoDB.
+
+107
+00:05:08,770 --> 00:05:12,140
+So, that's why we see MongoDB
+on the page here.
+
+108
+00:05:12,140 --> 00:05:14,720
+All right, so that's an example
+of putting all of
+
+109
+00:05:14,720 --> 00:05:18,460
+these together with MongoDB
+Express and Swig.
+
+110
+00:05:18,460 --> 00:05:20,820
+And those are actually all the
+libraries that you need to
+
+111
+00:05:20,820 --> 00:05:24,130
+know about to understand how the
+blog application for this
+
+112
+00:05:24,130 --> 00:05:25,410
+course actually works.
+
+113
+00:05:25,410 --> 00:05:28,665
+The blog application uses Swig
+as a template engine, Express
+
+114
+00:05:28,665 --> 00:05:31,580
+is the router, and MongoDB is
+the back end data store.
+
+115
+00:05:31,580 --> 00:05:32,830
