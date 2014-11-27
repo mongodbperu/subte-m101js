@@ -3,119 +3,118 @@
 
 2
 00:00:00,170 --> 00:00:03,070
-All right, so now let's write a
-simple Hello, World program
+Perfecto, pues vamos a escribir un
+sencillo programa "Hola Mundo"
 
 3
 00:00:03,070 --> 00:00:04,890
-using node.js.
+usando Node.js.
 
 4
 00:00:04,890 --> 00:00:08,450
-So the first thing we want to
-do is make a new directory.
+La primera cosa que queremos hacer
+es crear un nuevo directorio.
 
 5
 00:00:08,450 --> 00:00:10,960
-Let's call it hello_world.
+Vamos a llamarlo "hello_world".
 
 6
 00:00:10,960 --> 00:00:14,310
-Now, let's just start writing
-our first node.js application.
+Ahora, vamos a empezar a escribir
+nuestra primera aplicación Node.js.
 
 7
 00:00:14,310 --> 00:00:16,840
-So I'm just going to use vim
-to write this, but you can
+Sólo voy a usar vim
+para escribirlo, pero tú puedes
 
 8
 00:00:16,840 --> 00:00:20,350
-actually use any text editor
-that you're comfortable with.
+usar cualquier otro editor de texto
+con el que te sientas cómodo.
 
 9
 00:00:20,350 --> 00:00:24,000
-So let's open a new file,
-call it app.js.
+Vamos a abrir un nuevo fichero,
+llamado "app.js".
 
 10
 00:00:24,000 --> 00:00:26,880
-And our first application
-will be really simple.
+Y nuestra primera aplicación
+será realmente simple.
 
 11
 00:00:26,880 --> 00:00:31,380
-We'll just log the console
-Hello, World.
+Sólo vamos a escribir por consola
+"Hello, World".
 
 12
 00:00:31,380 --> 00:00:35,340
-So now the way we run this is
-we say node and give it the
+Ahora la forma de ejecutarlo es
+invocar a node y pasarle el
 
 13
 00:00:35,340 --> 00:00:37,520
-name of our application.
+nombre de nuestra aplicación.
 
 14
 00:00:37,520 --> 00:00:39,360
-And it prints out
-Hello, World!
+¡E imprime "Hello, World"!
 
 15
 00:00:39,360 --> 00:00:40,800
-OK, so this is looking good.
+OK, esto tiene buena pinta.
 
 16
 00:00:40,800 --> 00:00:42,650
-It's our first application.
+Ésta es nuestra primera aplicación.
 
 17
 00:00:42,650 --> 00:00:46,410
-But now let's make an actual
-web server with this.
+Pero ahora vamos a crea un un
+servidor web con ella.
 
 18
 00:00:46,410 --> 00:00:49,530
-So in order to make this into
-a web server, let's delete
+Por lo que para convertirlo en un
+servidor web, vamos a borrar
 
 19
 00:00:49,530 --> 00:00:57,380
-this line and now let's say var
-http equals require http.
+esta línea y ahora vamos a poner var
+"http" igual a "require http"
 
 20
 00:00:57,380 --> 00:01:00,310
-So HTTP is actually built-in
-in node.js.
+De este modo HTTP está incorporado
+a node.
 
 21
 00:01:00,310 --> 00:01:01,250
-And it's a library.
+Se trata de una librería.
 
 22
 00:01:01,250 --> 00:01:03,360
-And what we're doing up here
-is we're saying, we need to
+Y lo que estamos diciendo ahí
+arriba es que necesitamos 
 
 23
 00:01:03,360 --> 00:01:08,090
-use this library, require HTTP
-And store a reference to this
+usar esa librería, requerir HTTP
+y almancenar una referencia a esta
 
 24
 00:01:08,090 --> 00:01:11,180
-library and the variable HTTP.
+librería y la variable HTTP.
 
 25
 00:01:11,180 --> 00:01:12,480
-So we go down here.
+Por lo que podemos bajar
 
 26
 00:01:12,480 --> 00:01:16,153
-Now we can say var server equals
+y decir que var server es igual a
 http.createServer.
 
 27
@@ -123,182 +122,180 @@ http.createServer.
 
 28
 00:01:18,900 --> 00:01:22,360
-And pass it a function for what
-to do when the server
+Y pasarle una función que determine
+qué hacer cuando el servidor
 
 29
 00:01:22,360 --> 00:01:24,160
-receives the request.
+reciba una solicitud.
 
 30
 00:01:24,160 --> 00:01:26,180
-And we get a response
-object as well.
+También obtendremos un objeto respuesta.
 
 31
 00:01:26,180 --> 00:01:29,640
-So when our server receives a
-request, the request will be
+Por lo que cuando nuestro servidor recibe
+una solicitud, la solicitud estará
 
 32
 00:01:29,640 --> 00:01:33,010
-in the first argument, and the
-object for handling the
+en el primer argumento y el
+objeto para manejar la
 
 33
 00:01:33,010 --> 00:01:35,060
-response will be in the
-second argument.
+respuesta estará en el
+segundo parámetro.
 
 34
 00:01:35,060 --> 00:01:38,150
-So what we can do is when we
-get any request, we say
+Así que lo que podemos hacer cuando
+recibimos una respuesta es
 
 35
 00:01:38,150 --> 00:01:44,690
-response.writeHead status
-200, content.
+response.writeHead estado 200.
 
 36
 00:01:44,690 --> 00:01:47,080
-OK, so first we set
-this to set some
+OK, por lo que primero pusimos
+esto para establecer algunos
 
 37
 00:01:47,080 --> 00:01:49,120
-metadata about a response.
+metadatos sobre la respuesta.
 
 38
 00:01:49,120 --> 00:01:52,620
-Then after we've done that, we
-actually send the response by
+Ahora, una vez que hemos hecho esto,
+enviamos la respuesta
 
 39
 00:01:52,620 --> 00:01:57,170
-calling response.end and
-send Hello, World!
+llamando "response.end"
+y enviando "Hello, World"!
 
 40
 00:01:57,170 --> 00:02:00,100
-What this does is it specifies
-what to do when our server
+Lo que hace esto es especificar
+qué hacer cuando nuestro servidor
 
 41
 00:02:00,100 --> 00:02:01,520
-receives a request.
+recibe una solicitud.
 
 42
 00:02:01,520 --> 00:02:04,850
-But the one part missing here
-is telling our server to
+Pero la parte que falta aquí es
+decirle a nuestro servidor que 
 
 43
 00:02:04,850 --> 00:02:07,140
-listen for incoming
-connections.
+permanezca escuchando
+conexiones entrantes.
 
 44
 00:02:07,140 --> 00:02:10,949
-So now let's listen
-on port 8000 and
+Por lo que vamos a escuchar
+en el puerto 8000 y
 
 45
 00:02:10,949 --> 00:02:12,650
-let's log to the console.
+vamos a escribir por consola
 
 46
 00:02:12,650 --> 00:02:14,820
-A friendly message telling the
-user that the server has
+un amistoso mensaje diciéndole al
+usuario que el servidor
 
 47
 00:02:14,820 --> 00:02:16,500
-successfully started.
+se ha iniciado satisfactoriamente.
 
 48
 00:02:16,500 --> 00:02:20,470
-So now that we'll actually run
-this by calling node.app.js.
+Por lo que ahora, lo ejecutamos
+llamando a node app.js.
 
 49
 00:02:20,470 --> 00:02:24,280
-You can see our servers running
-on local host 8000.
+Puedes ver nuestro servidor
+ejecutándose en localhost:8000
 
 50
 00:02:24,280 --> 00:02:26,730
-So what we can do now is we can
-go to our browser and we
+Lo que podemos hacer ahora es
+ir al navegador web y 
 
 51
 00:02:26,730 --> 00:02:29,830
-can type localhost8000.
+podemos escribir localhost:8000
 
 52
 00:02:29,830 --> 00:02:31,890
-And we get Hello, World!
+y obtener "Hello, World"!
 
 53
 00:02:31,890 --> 00:02:35,680
-So that is the first example
-of using node.js to write a
+Pues, este es el primer ejemplo
+de cómo usar Node.js para escribir
 
 54
 00:02:35,680 --> 00:02:36,990
-simple server.
+un servidor simple.
 
 55
 00:02:36,990 --> 00:02:40,810
-Notice, we used the HTTP
-library, but actually node.js
+Ten en cuenta que usamos la librería
+HTTP, pero Node.js en realidad
 
 56
 00:02:40,810 --> 00:02:44,690
-allows you to interact with
-the client on a number of
+permite interactuar con el
+cliente a numerosos
 
 57
 00:02:44,690 --> 00:02:46,100
-different levels.
+niveles diferentes
 
 58
 00:02:46,100 --> 00:02:49,370
-And if you wanted to, you could
-actually just open a raw
+y si quieres, puedes
+solamente abrir una
 
 59
 00:02:49,370 --> 00:02:52,660
-TCP connection and interact
-that way.
+conexión TCP e interactuar
+en ese sentido.
 
 60
 00:02:52,660 --> 00:02:54,360
-For this course we'll
-actually be using a
+Para este curso
+vamos a usar
 
 61
 00:02:54,360 --> 00:02:56,300
-framework called Express.
+un fremework llamado Express
 
 62
 00:02:56,300 --> 00:03:00,190
-So that's one level above HTTP
-and actually handles a lot of
+que supone un nivel por encima de HTTP
+y maneja gran parte del
 
 63
 00:03:00,190 --> 00:03:04,690
-the routing and details
-of HTTP for us.
+enrutamiento y detalles de
+HTTP por nosotros.
 
 64
 00:03:04,690 --> 00:03:07,290
-Right, so those are the basics
-of setting up a simple server
+Bien, pues esos son los aspectos básicos
+de cómo configurar un servidor sencillo
 
 65
 00:03:07,290 --> 00:03:08,540
-running on node.js.
+sobre Node.js
 
 66
 00:03:08,540 --> 00:03:09,100
