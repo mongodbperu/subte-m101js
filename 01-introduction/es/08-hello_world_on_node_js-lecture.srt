@@ -4,7 +4,7 @@
 2
 00:00:00,170 --> 00:00:03,070
 Perfecto, pues vamos a escribir un
-sencillo Hola Mundo
+sencillo programa "Hola Mundo"
 
 3
 00:00:03,070 --> 00:00:04,890
@@ -17,7 +17,7 @@ es crear un nuevo directorio.
 
 5
 00:00:08,450 --> 00:00:10,960
-Vamos a llamarlo hello_world.
+Vamos a llamarlo "hello_world".
 
 6
 00:00:10,960 --> 00:00:14,310
@@ -27,17 +27,17 @@ nuestra primera aplicación Node.js.
 7
 00:00:14,310 --> 00:00:16,840
 Sólo voy a usar vim
-para escribirlo, pero tu puedes
+para escribirlo, pero tú puedes
 
 8
 00:00:16,840 --> 00:00:20,350
 usar cualquier otro editor de texto
-con el que te sientas confortable.
+con el que te sientas cómodo.
 
 9
 00:00:20,350 --> 00:00:24,000
 Vamos a abrir un nuevo fichero,
-llamado app.js.
+llamado "app.js".
 
 10
 00:00:24,000 --> 00:00:26,880
@@ -47,7 +47,7 @@ será realmente simple.
 11
 00:00:26,880 --> 00:00:31,380
 Sólo vamos a escribir por consola
-Hello, World.
+"Hello, World".
 
 12
 00:00:31,380 --> 00:00:35,340
@@ -60,11 +60,11 @@ nombre de nuestra aplicación.
 
 14
 00:00:37,520 --> 00:00:39,360
-E imprime Hello, World!
+¡E imprime "Hello, World"!
 
 15
 00:00:39,360 --> 00:00:40,800
-Ok, esto tiene buena pinta.
+OK, esto tiene buena pinta.
 
 16
 00:00:40,800 --> 00:00:42,650
@@ -72,7 +72,7 @@ Ok, esto tiene buena pinta.
 
 17
 00:00:42,650 --> 00:00:46,410
-Pero ahora vamos a creaun un
+Pero ahora vamos a crea un un
 servidor web con ella.
 
 18
@@ -82,8 +82,8 @@ servidor web, vamos a borrar
 
 19
 00:00:49,530 --> 00:00:57,380
-ésta línea y ahora vamos a poner var
-http igual a require http.
+esta línea y ahora vamos a poner var
+"http" igual a "require http"
 
 20
 00:00:57,380 --> 00:01:00,310
@@ -96,7 +96,7 @@ Se trata de una librería.
 
 22
 00:01:01,250 --> 00:01:03,360
-Y lo que estamos diciéndo ahí
+Y lo que estamos diciendo ahí
 arriba es que necesitamos 
 
 23
@@ -155,7 +155,7 @@ recibimos una respuesta es
 
 35
 00:01:38,150 --> 00:01:44,690
-response.writeHead status 200.
+response.writeHead estado 200.
 
 36
 00:01:44,690 --> 00:01:47,080
@@ -173,8 +173,8 @@ enviamos la respuesta
 
 39
 00:01:52,620 --> 00:01:57,170
-llamando response.end
-y enviando Hello, World!
+llamando "response.end"
+y enviando "Hello, World"!
 
 40
 00:01:57,170 --> 00:02:00,100
@@ -202,11 +202,11 @@ en el puerto 8000 y
 
 45
 00:02:10,949 --> 00:02:12,650
-vamos a escribir por consola.
+vamos a escribir por consola
 
 46
 00:02:12,650 --> 00:02:14,820
-Un amistoso mensaje diciéndole al
+un amistoso mensaje diciéndole al
 usuario que el servidor
 
 47
@@ -216,17 +216,17 @@ se ha iniciado satisfactoriamente.
 48
 00:02:16,500 --> 00:02:20,470
 Por lo que ahora, lo ejecutamos
-llamando a node.app.js.
+llamando a node app.js.
 
 49
 00:02:20,470 --> 00:02:24,280
 Puedes ver nuestro servidor
-ejecutándose en local host 8000
+ejecutándose en localhost:8000
 
 50
 00:02:24,280 --> 00:02:26,730
 Lo que podemos hacer ahora es
-ir al explorador y 
+ir al navegador web y 
 
 51
 00:02:26,730 --> 00:02:29,830
@@ -234,12 +234,12 @@ podemos escribir localhost:8000
 
 52
 00:02:29,830 --> 00:02:31,890
-Y obtener Hello, World!
+y obtener "Hello, World"!
 
 53
 00:02:31,890 --> 00:02:35,680
 Pues, este es el primer ejemplo
-de como usar Node.js para escribir
+de cómo usar Node.js para escribir
 
 54
 00:02:35,680 --> 00:02:36,990
@@ -248,7 +248,7 @@ un servidor simple.
 55
 00:02:36,990 --> 00:02:40,810
 Ten en cuenta que usamos la librería
-HTTP, pero Node.js actualmente
+HTTP, pero Node.js en realidad
 
 56
 00:02:40,810 --> 00:02:44,690
@@ -261,12 +261,12 @@ niveles diferentes
 
 58
 00:02:46,100 --> 00:02:49,370
-Y si queires, puedes
-sólamente abrir una conexión
+y si quieres, puedes
+solamente abrir una
 
 59
 00:02:49,370 --> 00:02:52,660
-raw TCP e interactuar
+conexión TCP e interactuar
 en ese sentido.
 
 60
@@ -276,22 +276,22 @@ vamos a usar
 
 61
 00:02:54,360 --> 00:02:56,300
-un fremework llamado Express.
+un fremework llamado Express
 
 62
 00:02:56,300 --> 00:03:00,190
-Que supone un nivel por encima de HTTP
+que supone un nivel por encima de HTTP
 y maneja gran parte del
 
 63
 00:03:00,190 --> 00:03:04,690
-routing y detalles del
+enrutamiento y detalles de
 HTTP por nosotros.
 
 64
 00:03:04,690 --> 00:03:07,290
 Bien, pues esos son los aspectos básicos
-de como configurar un servidor sencillo
+de cómo configurar un servidor sencillo
 
 65
 00:03:07,290 --> 00:03:08,540
